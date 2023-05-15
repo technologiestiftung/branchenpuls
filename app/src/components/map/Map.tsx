@@ -42,45 +42,43 @@ function huhu(d) {
 export interface MapType {}
 
 export const MapComponent: FC<MapType> = ({ dataPoints }) => {
-  console.log("dataPoints", dataPoints);
-  // const [selectedPoint, setSelectedPoint] = useState(null);
-  // const [filteredData, setFilteredData] = useState(dataPoints);
-  // const [layerType, setLayerType] = useState("scatterplot");
-  // const switchLayer = () => {
-  //   setLayerType(layerType === "scatterplot" ? "geojson" : "scatterplot");
-  // };
-  // const layers = [
-  //   layerType === "scatterplot"
-  //     ? new ScatterplotLayer({
-  //         id: "scatterplot-layer",
-  //         data: dataPoints,
-  //         pickable: true,
-  //         getRadius: 10,
-  //         getPosition: (d) => [Number(d.p[0]), Number(d.p[1])],
-  //         getFillColor: [255, 0, 0],
-  //         // onHover: (info) => huhu(info.object),
-  //       })
-  //     : new HeatmapLayer({
-  //         id: "heatmapLayer",
-  //         data: dataPoints,
-  //         getPosition: (d) => [Number(d.p[0]), Number(d.p[1])],
-  //         getWeight: 5,
-  //         aggregation: "SUM",
-  //       }),
-  // ];
-  // const filterData = () => {
-  //   // Add your filter logic here
-  //   // For example, filter out points with a radius less than 500
-  //   const newData = dataPoints.filter((d) => d.postcode === "'10713'");
-  //   setFilteredData(newData);
-  // };
-  // const resetFilterData = () => {
-  //   setFilteredData(dataPoints);
-  // };
+  const [selectedPoint, setSelectedPoint] = useState(null);
+  const [filteredData, setFilteredData] = useState(dataPoints);
+  const [layerType, setLayerType] = useState("scatterplot");
+  const switchLayer = () => {
+    setLayerType(layerType === "scatterplot" ? "geojson" : "scatterplot");
+  };
+  const layers = [
+    layerType === "scatterplot"
+      ? new ScatterplotLayer({
+          id: "scatterplot-layer",
+          data: dataPoints,
+          pickable: true,
+          getRadius: 10,
+          getPosition: (d) => [Number(d.p[0]), Number(d.p[1])],
+          getFillColor: [255, 0, 0],
+          // onHover: (info) => huhu(info.object),
+        })
+      : new HeatmapLayer({
+          id: "heatmapLayer",
+          data: dataPoints,
+          getPosition: (d) => [Number(d.p[0]), Number(d.p[1])],
+          getWeight: 5,
+          aggregation: "SUM",
+        }),
+  ];
+  const filterData = () => {
+    // Add your filter logic here
+    // For example, filter out points with a radius less than 500
+    const newData = dataPoints.filter((d) => d.postcode === "'10713'");
+    setFilteredData(newData);
+  };
+  const resetFilterData = () => {
+    setFilteredData(dataPoints);
+  };
   return (
     <>
-      HI
-      {/* <button onClick={filterData} className="fixed top-0 left-2 z-40 bg-white">
+      <button onClick={filterData} className="fixed top-0 left-2 z-40 bg-white">
         Filter Points
       </button>
       <button
@@ -121,7 +119,7 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
             </Popup>
           )}
         </DeckGL>
-      </div> */}
+      </div>
     </>
   );
 
