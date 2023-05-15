@@ -2,7 +2,10 @@ import { MapComponent } from "@components/map/Map";
 import path from "path";
 
 async function getPoints() {
-  const filePath = "http://localhost:3000/data.json";
+  const filePath =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/data.json"
+      : "https://ihk-vis.netlify.app/data.json";
   const res = await fetch(filePath, { cache: "no-store" });
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -12,6 +15,8 @@ async function getPoints() {
 }
 
 export default async function Home() {
+  // console.log("ÄÄÄÄÄ", req);
+
   const points = await getPoints();
 
   return (
