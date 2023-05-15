@@ -2,12 +2,10 @@ import { MapComponent } from "@components/map/Map";
 import path from "path";
 
 async function getPoints() {
-  // const filePath =
-  //   process.env.NODE_ENV === "development"
-  //     ? "http://localhost:3000/data.json"
-  //     : "./data.json";
   const filePath =
-    "https://raw.githubusercontent.com/technologiestiftung/energiekarte/main/public/pointData.json";
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/data.json"
+      : "https://ihk-vis.netlify.app/data.json";
   const res = await fetch(filePath);
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -20,16 +18,10 @@ export default async function Home() {
   // console.log("ÄÄÄÄÄ", req);
 
   const points = await getPoints();
-  console.log("öööö", points);
-
-  const newData = [];
-  const ff = points.features.forEach((d) => {
-    newData.push({ p: d.geometry.coordinates });
-  });
 
   return (
     <main className="">
-      <MapComponent dataPoints={newData}></MapComponent>
+      <MapComponent dataPoints={points}></MapComponent>
     </main>
   );
 }
