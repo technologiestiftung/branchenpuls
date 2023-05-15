@@ -42,6 +42,7 @@ function huhu(d) {
 export interface MapType {}
 
 export const MapComponent: FC<MapType> = ({ dataPoints }) => {
+  console.log("dataPoints", dataPoints);
   // const [selectedPoint, setSelectedPoint] = useState(null);
   // const [filteredData, setFilteredData] = useState(dataPoints);
   // const [layerType, setLayerType] = useState("scatterplot");
