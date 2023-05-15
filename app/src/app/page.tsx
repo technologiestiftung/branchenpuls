@@ -5,7 +5,7 @@ async function getPoints() {
   const filePath =
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000/data.json"
-      : "https://ihk-vis.netlify.app/data.json";
+      : "./data.json";
   const res = await fetch(filePath, { cache: "no-store" });
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
