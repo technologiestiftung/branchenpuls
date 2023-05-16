@@ -71,7 +71,13 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
 
   async function getDataNow(siteId: string) {
     try {
-      const res = await fetch(`/api/getIds/?business_age=${20}?domain=s`);
+      const path = `/api/getIds/?business_age=${20}?domain=s`;
+      let res;
+      if (process.env.NODE_ENV === "development") {
+        res = await fetch(path, { cache: "no-store" });
+      } else {
+        res = await fetch(path);
+      }
 
       if (res.ok) {
         const data = await res.json();
@@ -88,7 +94,13 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
   async function getSinglePointData(pointId: number, position: number[]) {
     let data;
     try {
-      const res = await fetch(`/api/getsinglepointdata/?pointid=${pointId}`);
+      const path = `/api/getsinglepointdata/?pointid=${pointId}`;
+      let res;
+      if (process.env.NODE_ENV === "development") {
+        res = await fetch(path, { cache: "no-store" });
+      } else {
+        res = await fetch(path);
+      }
       if (res.ok) {
         data = await res.json();
       }
