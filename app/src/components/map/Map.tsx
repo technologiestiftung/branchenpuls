@@ -76,11 +76,46 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
   const resetFilterData = () => {
     setFilteredData(dataPoints);
   };
+
+  // async function getData() {
+  //   const res = await fetch(`/api/hello/?domain=${"TETSTSTS"}`);
+  //   return res.json();
+  // }
+
+  // async function getDataNow() {
+  //   await fetch(`/api/hello/?domain=${"TETSTSTS"}`).then((res) => {
+  //     if (res.ok) {
+  //       const data = res.json();
+  //       console.log("ÄÄÄÄÄ", data);
+  //     } else {
+  //       alert("There was an error requesting data");
+  //     }
+  //   });
+  // }
+
+  async function getDataNow(siteId: string) {
+    try {
+      const res = await fetch(`/api/getIds/?domain=${"TETSTSTS"}`);
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log("ÄÄÄÄÄ", data);
+        // router.push(`/post/${data.postId}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
-      <button onClick={filterData} className="fixed top-0 left-2 z-40 bg-white">
+      <button
+        onClick={filterData}
+        className="btn btn-primary fixed top-0 left-2 z-40 "
+      >
         Filter Points
       </button>
+
       <button
         onClick={resetFilterData}
         className="fixed top-8 left-2 z-40 bg-white"
@@ -93,6 +128,14 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
       >
         Switch Layer
       </button>
+
+      <button
+        onClick={getDataNow}
+        className="btn btn-primary fixed top-80 left-2 z-40 "
+      >
+        DATA
+      </button>
+
       <div className="h-screen w-screen">
         <DeckGL
           initialViewState={initialViewState}
