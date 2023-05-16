@@ -3,13 +3,15 @@ path = require("path");
 dirName = __dirname;
 
 const { downloadData } = require("./downloadData");
-const { parseData } = require("./parseData");
+const { parseDataForBackend } = require("./parseDataForBackend");
+const { parseDataForMap } = require("./parseDataForMap");
 
 // run these functions in order
 async.waterfall(
   [
     // downloadData,
-    parseData,
+    parseDataForBackend,
+    parseDataForMap,
   ],
   function (err, result) {
     console.log("aaaaall done");

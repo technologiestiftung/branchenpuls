@@ -1,12 +1,13 @@
 "use client";
 
-import { FC, useState, useMemo } from "react";
+import { FC, useState, useMemo, useEffect } from "react";
 import { Map, Popup } from "react-map-gl";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import DeckGL from "@deck.gl/react";
 import { ScatterplotLayer } from "@deck.gl/layers";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers";
+import { log } from "console";
 
 const MAP_STYLE =
   "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
@@ -18,33 +19,28 @@ const initialViewState = {
   pitch: 0,
   bearing: 0,
 };
-// Data to be used by the ScatterplotLayer
-// const data = [];
-// for (let index = 0; index < 400000; index++) {
-//   const randomNum1 = Math.floor(Math.random() * 900) + 100;
-//   const decimalNum1 = 13 + randomNum1 / 1000;
-//   const randomNum2 = Math.floor(Math.random() * 900) + 100;
-//   const decimalNum2 = 52 + randomNum2 / 1000;
-
-//   data.push({
-//     p: [decimalNum1, decimalNum2],
-//     // color: [255, 0, 0],
-//     // radius: 10,
-//     info: "Point 1",
-//   });
-// }
 
 function huhu(d) {
+  document.body.style.cursor = "pointer !important";
   console.log(d);
   // setSelectedPoint(d.object),
 }
 
-export interface MapType {}
+export interface PointData {
+  info: any;
+  position: number[];
+}
+
+export interface MapType {
+  dataPoints: any;
+}
 
 export const MapComponent: FC<MapType> = ({ dataPoints }) => {
-  const [selectedPoint, setSelectedPoint] = useState(null);
+  const [selectedPoint, setSelectedPoint] = useState<PointData | null>(null);
   const [filteredData, setFilteredData] = useState(dataPoints);
   const [layerType, setLayerType] = useState("scatterplot");
+  const [popupPosition, setPopupPosition] = useState<number[] | null>(null);
+
   const switchLayer = () => {
     setLayerType(layerType === "scatterplot" ? "geojson" : "scatterplot");
   };
@@ -52,88 +48,90 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
     layerType === "scatterplot"
       ? new ScatterplotLayer({
           id: "scatterplot-layer",
-          data: dataPoints,
+          data: filteredData,
           pickable: true,
-          getRadius: 10,
+          getRadius: 50,
           getPosition: (d) => [Number(d.p[0]), Number(d.p[1])],
           getFillColor: [255, 0, 0],
           // onHover: (info) => huhu(info.object),
+          onClick: (info) => getSinglePointData(info.object.id, info.object.p),
         })
       : new HeatmapLayer({
           id: "heatmapLayer",
-          data: dataPoints,
+          data: filteredData,
           getPosition: (d) => [Number(d.p[0]), Number(d.p[1])],
           getWeight: 5,
           aggregation: "SUM",
         }),
   ];
-  const filterData = () => {
-    // Add your filter logic here
-    // For example, filter out points with a radius less than 500
-    const newData = dataPoints.filter((d) => d.postcode === "'10713'");
-    setFilteredData(newData);
-  };
+
   const resetFilterData = () => {
     setFilteredData(dataPoints);
   };
 
-  // async function getData() {
-  //   const res = await fetch(`/api/hello/?domain=${"TETSTSTS"}`);
-  //   return res.json();
-  // }
-
-  // async function getDataNow() {
-  //   await fetch(`/api/hello/?domain=${"TETSTSTS"}`).then((res) => {
-  //     if (res.ok) {
-  //       const data = res.json();
-  //       console.log("ÄÄÄÄÄ", data);
-  //     } else {
-  //       alert("There was an error requesting data");
-  //     }
-  //   });
-  // }
-
   async function getDataNow(siteId: string) {
     try {
-      const res = await fetch(`/api/getIds/?domain=${"TETSTSTS"}`);
+      const res = await fetch(`/api/getIds/?business_age=${20}?domain=s`);
 
       if (res.ok) {
         const data = await res.json();
-        console.log("ÄÄÄÄÄ", data);
-        // router.push(`/post/${data.postId}`);
+        console.log(data);
+
+        const newData = dataPoints.filter((d: any) => data.ids.includes(d.id));
+        setFilteredData(newData);
       }
     } catch (error) {
       console.error(error);
     }
   }
 
+  async function getSinglePointData(pointId: number, position: number[]) {
+    let data;
+    try {
+      const res = await fetch(`/api/getsinglepointdata/?pointid=${pointId}`);
+      if (res.ok) {
+        data = await res.json();
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      const popupData = {
+        position: position,
+        info: data.data,
+      };
+      alert(JSON.stringify(popupData));
+      setSelectedPoint(popupData);
+    }
+  }
+
+  // useEffect(() => {
+  //   if (selectedPoint?.position) {
+  //     console.log(selectedPoint.position);
+
+  //     setPopupPosition(selectedPoint.position);
+  //   }
+  // }, [selectedPoint]);
+
   return (
     <>
       <button
-        onClick={filterData}
-        className="btn btn-primary fixed top-0 left-2 z-40 "
-      >
-        Filter Points
-      </button>
-
-      <button
         onClick={resetFilterData}
-        className="fixed top-8 left-2 z-40 bg-white"
+        className="btn btn-primary fixed top-12 left-2 z-40"
       >
         Reset Filter Points
       </button>
       <button
         onClick={switchLayer}
-        className="fixed top-16 left-2 z-40 bg-white"
+        className="btn btn-primary fixed top-24 left-2 z-40"
       >
         Switch Layer
       </button>
 
       <button
         onClick={getDataNow}
-        className="btn btn-primary fixed top-80 left-2 z-40 "
+        className="btn btn-primary fixed top-0 left-2 z-40 "
       >
-        DATA
+        Filter Data
       </button>
 
       <div className="h-screen w-screen">
@@ -147,18 +145,18 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
             reuseMaps
             mapLib={maplibregl}
             mapStyle={MAP_STYLE}
-            preventStyleDiffing={true}
+            // preventStyleDiffing={true}
           />
-          {selectedPoint && (
+          {/* {popupPosition && (
             <Popup
-              latitude={selectedPoint.position[1]}
-              longitude={selectedPoint.position[0]}
+              longitude={popupPosition[1]}
+              latitude={popupPosition[0]}
               closeOnClick={true}
               onClose={() => setSelectedPoint(null)}
             >
-              <div>{selectedPoint.info}</div>
+              {selectedPoint.info.id}
             </Popup>
-          )}
+          )} */}
         </DeckGL>
       </div>
     </>

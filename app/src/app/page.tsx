@@ -1,5 +1,5 @@
 import { MapComponent } from "@components/map/Map";
-import path from "path";
+// import path from "path";
 
 async function getPoints() {
   const filePath =
@@ -15,8 +15,6 @@ async function getPoints() {
 }
 
 export default async function Home() {
-  // console.log("ÄÄÄÄÄ", req);
-
   const points = await getPoints();
 
   return (
