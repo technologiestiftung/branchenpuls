@@ -98,9 +98,7 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
           initialViewState={initialViewState}
           controller={true}
           layers={layers}
-          getTooltip={({ object }) =>
-            object && `${object.ihk_branch_id}\n${object.ihk_branch_id}`
-          }
+          getTooltip={({ object }) => object && `${object.id}\n${object.id}`}
         >
           <Map
             reuseMaps
