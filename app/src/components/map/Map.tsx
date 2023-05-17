@@ -1,5 +1,3 @@
-"use client";
-
 import { FC, useState, useMemo, useEffect } from "react";
 import { Map, Popup } from "react-map-gl";
 import maplibregl from "maplibre-gl";
@@ -35,10 +33,13 @@ export interface MapType {
 }
 
 export const MapComponent: FC<MapType> = ({ dataPoints }) => {
-  const [selectedPoint, setSelectedPoint] = useState<PointData | null>(null);
+  // const [selectedPoint, setSelectedPoint] = useState<PointData | null>(null);
   const [filteredData, setFilteredData] = useState(dataPoints);
   const [layerType, setLayerType] = useState("scatterplot");
   const [popupPosition, setPopupPosition] = useState<number[] | null>(null);
+
+  const [selectedOption, setSelectedOption] = useState(0);
+
   // const [isHovering, setIsHovering] = useState<boolean>(false);
 
   const switchLayer = () => {
@@ -71,9 +72,9 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
     setFilteredData(dataPoints);
   };
 
-  async function getDataNow(siteId: string) {
+  async function getDataNow(age) {
     try {
-      const path = `/api/getIds/?business_age=${20}?domain=s`;
+      const path = `/api/getIds/?age=${age}&domain=s`;
       let res;
       if (process.env.NODE_ENV === "development") {
         res = await fetch(path, { cache: "no-store" });
@@ -86,6 +87,8 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
         console.log(data);
 
         const newData = dataPoints.filter((d: any) => data.ids.includes(d.id));
+        console.log("DODODO");
+
         setFilteredData(newData);
       }
     } catch (error) {
@@ -114,17 +117,14 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
         info: data.data,
       };
       alert(JSON.stringify(popupData));
-      setSelectedPoint(popupData);
+      // setSelectedPoint(popupData);
     }
   }
 
-  // useEffect(() => {
-  //   if (selectedPoint?.position) {
-  //     console.log(selectedPoint.position);
-
-  //     setPopupPosition(selectedPoint.position);
-  //   }
-  // }, [selectedPoint]);
+  function setAge(val) {
+    setSelectedOption(val);
+    getDataNow(val);
+  }
 
   return (
     <>
@@ -147,6 +147,21 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
       >
         Filter Data
       </button>
+
+      <select
+        className="select w-full max-w-xs fixed top-2 right-2 z-40 "
+        value={selectedOption}
+        onChange={(e) => setAge(e.target.value)}
+      >
+        <option disabled selected>
+          Pick AGE
+        </option>
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>10</option>
+        <option>100</option>
+      </select>
 
       <div className="h-screen w-screen">
         <DeckGL

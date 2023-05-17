@@ -5,12 +5,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { domain, business_age } = req.query;
+  const { domain, age } = req.query;
+
+  console.log("AGAGAGAGAGA", typeof age, age);
 
   const idsWant = [];
 
   data.forEach((d) => {
-    if (d.b_id === 47430) {
+    if (Number(age) === d.age) {
       idsWant.push(d.id);
     }
     // if (business_age && business_age == d.business_age) {

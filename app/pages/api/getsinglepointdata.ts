@@ -11,5 +11,13 @@ export default async function handler(
 ) {
   const { pointid } = req.query;
 
+  // let pointData = undefined;
+
+  // data.forEach((d) => {
+  //   if (Number(d.id) == pointid) {
+  //     pointData = d;
+  //   }
+  // });
+
   res.status(200).json({ data: dataIndexed[pointid] });
 }
