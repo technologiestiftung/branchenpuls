@@ -4,7 +4,9 @@ import { HeatmapLayer } from "@deck.gl/aggregation-layers";
 import { getSinglePointData } from "@lib/getSinglePointData";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
 import { RangeSlider } from "@components/RangeSlider";
+import Select from "react-select";
 import uiKeys from "@lib/uiKeys.json";
+import { log } from "console";
 
 export interface FilterType {
   dataPoints: any;
@@ -23,8 +25,11 @@ export const Filter: FC<FilterType> = ({
   const [layerType, setLayerType] = useState("scatterplot");
   const [filterValAge, setFilterValAge] = useState<number[]>([0, 100]);
   const [filterValEmployees, setFilterValEmployees] = useState<string>("-");
+  const [filterValBranchLevelThree, setFilterValBranchLevelThree] = useState<
+    object | null
+  >(null);
 
-  console.log("uiKeys", uiKeys);
+  console.log(filterValBranchLevelThree);
 
   useEffect(() => {
     if (filteredData) {
@@ -73,13 +78,28 @@ export const Filter: FC<FilterType> = ({
   //   }
 
   async function runFilter() {
+    const l3 = filterValBranchLevelThree?.value
+      ? filterValBranchLevelThree.value
+      : null;
     const ids = await getIdsByFilter(
       dataPointsIndexed,
       filterValAge,
-      filterValEmployees
+      filterValEmployees,
+      l3
     );
     setFilteredData(ids);
   }
+
+  const optionsBranchLevelThree = [];
+
+  for (const key in uiKeys.branchLevelThree) {
+    optionsBranchLevelThree.push({
+      value: key,
+      label: uiKeys.branchLevelThree[key],
+    });
+  }
+
+  uiKeys.branchLevelThree;
 
   return (
     <div className="fixed top-2 left-2 bg-white z-40 p-4 rounded-lg ml-4">
@@ -127,6 +147,18 @@ export const Filter: FC<FilterType> = ({
           ))}
         </select>
       </div>
+      <div className="mt-4">
+        <Select
+          value={filterValBranchLevelThree}
+          onChange={setFilterValBranchLevelThree}
+          // select select-primary
+          className={""}
+          isClearable={true}
+          isSearchable={true}
+          options={optionsBranchLevelThree}
+        />
+      </div>
+
       <button onClick={runFilter} className="btn btn-primary mt-4">
         Run Filter
       </button>

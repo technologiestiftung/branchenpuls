@@ -1,4 +1,5 @@
 "use strict";
+// opendata_id,city,postcode,latitude,longitude,ihk_branch_id,nace_id,branch_top_level_id,employees_range,ihk_branch_desc,nace_desc,branch_top_level_desc,business_age,business_type,Bezirk,planungsraum_id,Planungsraum,Bezirksregion,Prognoseraum,Ortsteil
 
 // opendata_id,
 //   -latitude,
@@ -14,6 +15,7 @@ const Papa = require("papaparse");
 
 const uiKeys = {};
 uiKeys.nr_e = {};
+uiKeys.branchLevelThree = {};
 
 const areNumbers = [
   "postcode",
@@ -50,7 +52,8 @@ function parseDataForBackend(mainCallback) {
       ihk_branch_id = false,
       employees_range = false,
       business_age = false,
-      business_type = false;
+      business_type = false,
+      ihk_branch_desc = false;
     async.forEachOf(d, function (dd, ii, cb) {
       const name = headers[ii];
       if (dd.charAt(0) === "'" && dd.charAt(dd.length - 1) === "'") {
@@ -86,6 +89,9 @@ function parseDataForBackend(mainCallback) {
       if (name === "ihk_branch_id") {
         ihk_branch_id = dd;
       }
+      if (name === "ihk_branch_desc") {
+        ihk_branch_desc = dd;
+      }
 
       if (name === "employees_range") {
         employees_range = dd;
@@ -102,6 +108,8 @@ function parseDataForBackend(mainCallback) {
 
       cb();
     });
+
+    uiKeys.branchLevelThree[ihk_branch_id] = ihk_branch_desc;
 
     if (lat && lng) {
       if (i !== 0) {

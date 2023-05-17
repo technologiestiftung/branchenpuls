@@ -5,11 +5,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  let { employees, age } = req.query;
-
+  let { employees, age, l3 } = req.query;
+  console.log("l3---", l3, req.query);
   age = age.split(",").map(Number);
+  l3 = Number(l3) ? Number(l3) : null;
 
-  console.log(employees === "-", employees);
+  console.log("l3", l3);
 
   const idsWant: number[] = [];
 
@@ -26,7 +27,13 @@ export default async function handler(
     } else {
       correctEmployees = employees === d.nr_e;
     }
-    if (correctAge && correctEmployees) {
+    let correctL3;
+    if (l3 === null) {
+      correctL3 = true;
+    } else {
+      correctL3 = l3 === d.b_id;
+    }
+    if (correctAge && correctEmployees && correctL3) {
       idsWant.push(d.id);
     }
   });
