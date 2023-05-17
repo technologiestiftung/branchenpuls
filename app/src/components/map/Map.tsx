@@ -40,6 +40,7 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
   const [filteredData, setFilteredData] = useState(dataPoints);
   const [layerType, setLayerType] = useState("scatterplot");
   const [popupPosition, setPopupPosition] = useState<number[] | null>(null);
+  // const [isHovering, setIsHovering] = useState<boolean>(false);
 
   const switchLayer = () => {
     setLayerType(layerType === "scatterplot" ? "geojson" : "scatterplot");
@@ -54,6 +55,8 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
           getPosition: (d) => [Number(d.p[0]), Number(d.p[1])],
           getFillColor: [255, 0, 0],
           // onHover: (info) => huhu(info.object),
+          // onHover: ({ object }) => setIsHovering(Boolean(object)),
+          // getCursor: ({ isDragging }) => "pointer" : "grab",
           onClick: (info) => getSinglePointData(info.object.id, info.object.p),
         })
       : new HeatmapLayer({
@@ -173,10 +176,4 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
       </div>
     </>
   );
-
-  //   return (
-  //     <>
-  //       <p>ggggg</p>
-  //     </>
-  //   );
 };

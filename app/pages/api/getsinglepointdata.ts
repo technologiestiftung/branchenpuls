@@ -9,7 +9,7 @@ export default async function handler(
 
   console.log("-----------   ", pointid);
 
-  let pointData = false;
+  let pointData = undefined;
 
   data.forEach((d) => {
     if (Number(d.id) == pointid) {

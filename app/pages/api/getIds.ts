@@ -10,7 +10,7 @@ export default async function handler(
   const idsWant = [];
 
   data.forEach((d) => {
-    if (d.ihk_branch_id === "47430") {
+    if (d.b_id === 47430) {
       idsWant.push(d.id);
     }
     // if (business_age && business_age == d.business_age) {

@@ -1,9 +1,16 @@
 "use strict";
 
+// opendata_id,
+//   -latitude,
+//   -longitude,
+//   -ihk_branch_id,
+//   -employees_range,
+//   -business_age,
+//   business_type,
+
 module.exports = { parseDataForBackend };
 const fs = require("fs");
 const Papa = require("papaparse");
-// const JSONStream = require("JSONStream");
 
 const areNumbers = [
   "postcode",
@@ -13,6 +20,7 @@ const areNumbers = [
   "nace_id",
   "branch_top_level_id",
   "planungsraum_id",
+  "business_age",
 ];
 
 function parseDataForBackend(mainCallback) {
@@ -31,10 +39,25 @@ function parseDataForBackend(mainCallback) {
   async.forEachOf(data.data, function (d, i, callbackEach) {
     let lat = false,
       lng = false,
-      id = false,
-      ihk_branch_id = false;
+      opendata_id = false,
+      ihk_branch_id = false,
+      employees_range = false,
+      business_age = false,
+      business_type = false;
     async.forEachOf(d, function (dd, ii, cb) {
       const name = headers[ii];
+      if (dd.charAt(0) === "'" && dd.charAt(dd.length - 1) === "'") {
+        dd = dd.slice(1, -1);
+      }
+      if (dd.length === 0) {
+        dd = null;
+      }
+      if (dd === "NULL") {
+        dd = null;
+      }
+      if (dd === "000000") {
+        dd = null;
+      }
       if (areNumbers.includes(name)) {
         if (Number(dd)) {
           dd = Number(dd);
@@ -42,33 +65,43 @@ function parseDataForBackend(mainCallback) {
       }
       // 4 decimal places will give a precision up to ~10 m
       // 5 decimal places will give a precision up to ~1 m
-      if (name === "latitude" && dd !== "NULL") {
+      if (name === "latitude" && dd !== null) {
         lat = dd.toFixed(5);
       }
-      if (name === "longitude" && dd !== "NULL") {
+      if (name === "longitude" && dd !== null) {
         lng = dd.toFixed(5);
       }
 
       if (name === "opendata_id") {
-        id = dd;
+        opendata_id = dd;
       }
 
       if (name === "ihk_branch_id") {
         ihk_branch_id = dd;
       }
 
+      if (name === "employees_range") {
+        employees_range = dd;
+      }
+
+      if (name === "business_age") {
+        business_age = dd;
+      }
+
+      if (name === "business_type") {
+        business_type = dd === "im Handelsregister eingetragen" ? 1 : 0;
+      }
+
       cb();
     });
 
     if (lat && lng) {
-      // const featureJson = JSON.stringify(point);
-      // If it's not the first feature, add a comma to separate the features
       if (i !== 0) {
         outputStream.write(",");
       }
-      // Write the feature JSON string to the output file
-      // outputStream.write(featureJson);
-      outputStream.write(`{"id":${id},'ihk_branch_id':${ihk_branch_id}}`);
+      outputStream.write(
+        `{"id":${opendata_id},"b_id":${ihk_branch_id},"nr_e":"${employees_range}","age":${business_age},"type":${business_type}}`
+      );
     }
 
     callbackEach();
