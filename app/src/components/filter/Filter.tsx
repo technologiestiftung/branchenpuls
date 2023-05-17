@@ -61,6 +61,9 @@ export const Filter: FC<FilterType> = ({
 
   const resetFilterData = () => {
     setFilteredData(dataPoints);
+
+    setFilterValAge([0, 100]);
+    setFilterValEmployees("-");
   };
 
   //   async function setAge(val) {
