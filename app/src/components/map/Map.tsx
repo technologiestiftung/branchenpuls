@@ -7,7 +7,6 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import DeckGL from "@deck.gl/react";
 import { ScatterplotLayer } from "@deck.gl/layers";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers";
-import { log } from "console";
 
 const MAP_STYLE =
   "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
@@ -51,9 +50,9 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
           id: "scatterplot-layer",
           data: filteredData,
           pickable: true,
-          getRadius: 50,
+          getRadius: 30,
           getPosition: (d) => [Number(d.p[0]), Number(d.p[1])],
-          getFillColor: [255, 0, 0],
+          getFillColor: [86, 189, 102],
           // onHover: (info) => huhu(info.object),
           // onHover: ({ object }) => setIsHovering(Boolean(object)),
           // getCursor: ({ isDragging }) => "pointer" : "grab",
