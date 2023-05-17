@@ -32,7 +32,10 @@ export interface MapType {
   dataPoints: any;
 }
 
-export const MapComponent: FC<MapType> = ({ dataPoints }) => {
+export const MapComponent: FC<MapType> = ({
+  dataPoints,
+  dataPointsIndexed,
+}) => {
   // const [selectedPoint, setSelectedPoint] = useState<PointData | null>(null);
   const [filteredData, setFilteredData] = useState(dataPoints);
   const [layerType, setLayerType] = useState("scatterplot");
@@ -84,10 +87,15 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
 
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
+        const newData = [];
+        data.ids.forEach((d) => {
+          newData.push(dataPointsIndexed[d]);
+        });
 
-        const newData = dataPoints.filter((d: any) => data.ids.includes(d.id));
-        console.log("DODODO");
+        dataPointsIndexed;
+
+        // const newData = dataPoints.filter((d: any) => data.ids.includes(d.id));
+        // console.log("ff", newData);
 
         setFilteredData(newData);
       }
@@ -132,7 +140,7 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
         onClick={resetFilterData}
         className="btn btn-primary fixed top-12 left-2 z-40"
       >
-        Reset Filter Points
+        Show All Points
       </button>
       <button
         onClick={switchLayer}
@@ -141,12 +149,12 @@ export const MapComponent: FC<MapType> = ({ dataPoints }) => {
         Switch Layer
       </button>
 
-      <button
+      {/* <button
         onClick={getDataNow}
         className="btn btn-primary fixed top-0 left-2 z-40 "
       >
         Filter Data
-      </button>
+      </button> */}
 
       <select
         className="select w-full max-w-xs fixed top-2 right-2 z-40 "

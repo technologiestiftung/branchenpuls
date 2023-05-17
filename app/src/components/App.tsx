@@ -8,9 +8,16 @@ export interface AppType {
 }
 
 export const App: FC<AppType> = ({ dataPoints }) => {
+  const dataPointsIndexed = {};
+  dataPoints.forEach((d) => {
+    dataPointsIndexed[d.id] = d;
+  });
   return (
     <main className="">
-      <MapComponent dataPoints={dataPoints}></MapComponent>
+      <MapComponent
+        dataPoints={dataPoints}
+        dataPointsIndexed={dataPointsIndexed}
+      ></MapComponent>
       <Filter></Filter>
     </main>
   );
