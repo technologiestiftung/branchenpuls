@@ -25,8 +25,12 @@ const areNumbers = [
 
 function parseDataForBackend(mainCallback) {
   const outputStream = fs.createWriteStream("../app/public/dataBackend.json");
+  const outputStreamIndexed = fs.createWriteStream(
+    "../app/public/dataBackendIndexed.json"
+  );
   // Write the initial object structure
   outputStream.write(`[`);
+  outputStreamIndexed.write(`{`);
   let data = Papa.parse(
     fs.readFileSync(
       path.join(__dirname, "data/IHKBerlin_Gewerbedaten.csv"),
@@ -98,9 +102,13 @@ function parseDataForBackend(mainCallback) {
     if (lat && lng) {
       if (i !== 0) {
         outputStream.write(",");
+        outputStreamIndexed.write(",");
       }
       outputStream.write(
         `{"id":${opendata_id},"b_id":${ihk_branch_id},"nr_e":"${employees_range}","age":${business_age},"type":${business_type}}`
+      );
+      outputStreamIndexed.write(
+        `"${opendata_id}":{"id":${opendata_id},"b_id":${ihk_branch_id},"nr_e":"${employees_range}","age":${business_age},"type":${business_type}}`
       );
     }
 
@@ -108,6 +116,8 @@ function parseDataForBackend(mainCallback) {
   });
   outputStream.write("]");
   outputStream.end();
+  outputStreamIndexed.write("}");
+  outputStreamIndexed.end();
   // setTimeout(() => {
   mainCallback();
   // }, 2000);

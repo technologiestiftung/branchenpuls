@@ -19,9 +19,9 @@
 
 ```json
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["github>technologiestiftung/renovate-config"],
-	"baseBranches": ["staging"]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>technologiestiftung/renovate-config"],
+  "baseBranches": ["staging"]
 }
 ```
 
@@ -60,6 +60,11 @@ tbd...
 ## Tests
 
 tbd...
+
+## Ideas
+
+use hash maps
+low DB
 
 ## Contributing
 

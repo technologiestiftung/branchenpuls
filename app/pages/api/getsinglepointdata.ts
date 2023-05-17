@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import data from "../../public/dataBackend.json";
+import data from "../../public/dataBackendIndexed.json";
 
 export default async function handler(
   req: NextApiRequest,
@@ -7,15 +7,5 @@ export default async function handler(
 ) {
   const { pointid } = req.query;
 
-  console.log("-----------   ", pointid);
-
-  let pointData = undefined;
-
-  data.forEach((d) => {
-    if (Number(d.id) == pointid) {
-      pointData = d;
-    }
-  });
-
-  res.status(200).json({ data: pointData });
+  res.status(200).json({ data: data[pointid] });
 }
