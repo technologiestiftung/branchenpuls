@@ -1,5 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import data from "../../public/dataBackendIndexed.json";
+import data from "../../public/dataBackend.json";
+const dataIndexed = {};
+data.forEach((d) => {
+  dataIndexed[d.id] = d;
+});
 
 export default async function handler(
   req: NextApiRequest,
@@ -7,5 +11,5 @@ export default async function handler(
 ) {
   const { pointid } = req.query;
 
-  res.status(200).json({ data: data[pointid] });
+  res.status(200).json({ data: dataIndexed[pointid] });
 }
