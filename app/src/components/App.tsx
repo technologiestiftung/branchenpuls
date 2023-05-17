@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { MapComponent } from "@components/map/Map";
 import { Filter } from "@components/filter/Filter";
 
@@ -8,17 +8,21 @@ export interface AppType {
 }
 
 export const App: FC<AppType> = ({ dataPoints }) => {
+  const [deckLayers, setDeckLayers] = useState([]);
+
   const dataPointsIndexed = {};
   dataPoints.forEach((d) => {
     dataPointsIndexed[d.id] = d;
   });
   return (
     <main className="">
-      <MapComponent
+      <MapComponent deckLayers={deckLayers}></MapComponent>
+      <Filter
         dataPoints={dataPoints}
         dataPointsIndexed={dataPointsIndexed}
-      ></MapComponent>
-      <Filter></Filter>
+        deckLayers={deckLayers}
+        setDeckLayers={setDeckLayers}
+      ></Filter>
     </main>
   );
 };
