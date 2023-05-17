@@ -79,10 +79,12 @@ export const Filter: FC<FilterType> = ({
   }
 
   return (
-    <div className="fixed top-2 left-2 bg-white z-40">
-      <button onClick={resetFilterData} className="btn btn-primary">
-        Show All Points
-      </button>
+    <div className="fixed top-2 left-2 bg-white z-40 p-4 rounded-lg ml-4">
+      <div className="stat place-items-center">
+        <div className="stat-title">Punkte</div>
+        <div className="stat-value">{filteredData.length}</div>
+      </div>
+      {/* Counter: {filteredData.length} */}
 
       <div className="form-control w-52">
         <label className="cursor-pointer label">
@@ -102,7 +104,6 @@ export const Filter: FC<FilterType> = ({
         maxValue={100}
         step={1}
       />
-
       <div className="form-control w-full max-w-xs">
         <label className="label">
           <span className="label-text">Anzahl Mitarbeiter:innen</span>
@@ -123,9 +124,12 @@ export const Filter: FC<FilterType> = ({
           ))}
         </select>
       </div>
-
       <button onClick={runFilter} className="btn btn-primary mt-4">
         Run Filter
+      </button>
+      <br />
+      <button onClick={resetFilterData} className="btn btn-primary btn-sm mt-6">
+        reset
       </button>
     </div>
   );
