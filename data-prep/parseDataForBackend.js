@@ -6,11 +6,14 @@
 //   -ihk_branch_id,
 //   -employees_range,
 //   -business_age,
-//   business_type,
+//   -business_type,
 
 module.exports = { parseDataForBackend };
 const fs = require("fs");
 const Papa = require("papaparse");
+
+const uiKeys = {};
+uiKeys.nr_e = {};
 
 const areNumbers = [
   "postcode",
@@ -86,6 +89,7 @@ function parseDataForBackend(mainCallback) {
 
       if (name === "employees_range") {
         employees_range = dd;
+        uiKeys.nr_e[dd] = dd;
       }
 
       if (name === "business_age") {
@@ -116,6 +120,15 @@ function parseDataForBackend(mainCallback) {
   });
   outputStream.write("]");
   outputStream.end();
+
+  fs.writeFile(
+    `../app/src/lib/uiKeys.json`,
+    JSON.stringify(uiKeys),
+    function (err) {
+      console.log("all done");
+    }
+  );
+
   // outputStreamIndexed.write("}");
   // outputStreamIndexed.end();
   // setTimeout(() => {

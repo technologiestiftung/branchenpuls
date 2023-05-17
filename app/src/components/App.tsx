@@ -20,7 +20,6 @@ export const App: FC<AppType> = ({ dataPoints }) => {
       <Filter
         dataPoints={dataPoints}
         dataPointsIndexed={dataPointsIndexed}
-        deckLayers={deckLayers}
         setDeckLayers={setDeckLayers}
       ></Filter>
     </main>

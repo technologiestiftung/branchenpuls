@@ -4,6 +4,7 @@ import { HeatmapLayer } from "@deck.gl/aggregation-layers";
 import { getSinglePointData } from "@lib/getSinglePointData";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
 import { RangeSlider } from "@components/RangeSlider";
+import uiKeys from "@lib/uiKeys.json";
 
 export interface FilterType {
   dataPoints: any;
@@ -15,13 +16,15 @@ export interface FilterType {
 export const Filter: FC<FilterType> = ({
   dataPoints,
   dataPointsIndexed,
-  deckLayers,
   setDeckLayers,
 }) => {
   const [filteredData, setFilteredData] = useState(dataPoints);
   //   const [selectedOption, setSelectedOption] = useState(0);
   const [layerType, setLayerType] = useState("scatterplot");
   const [filterValAge, setFilterValAge] = useState<number[]>([0, 100]);
+  const [filterValEmployees, setFilterValEmployees] = useState<string>("-");
+
+  console.log("uiKeys", uiKeys);
 
   useEffect(() => {
     if (filteredData) {
@@ -67,8 +70,11 @@ export const Filter: FC<FilterType> = ({
   //   }
 
   async function runFilter() {
-    console.log("äää", filterValAge);
-    const ids = await getIdsByFilter(dataPointsIndexed, filterValAge);
+    const ids = await getIdsByFilter(
+      dataPointsIndexed,
+      filterValAge,
+      filterValEmployees
+    );
     setFilteredData(ids);
   }
 
@@ -97,24 +103,30 @@ export const Filter: FC<FilterType> = ({
         step={1}
       />
 
-      <button onClick={runFilter} className="btn btn-primary">
+      <div className="form-control w-full max-w-xs">
+        <label className="label">
+          <span className="label-text">Anzahl Mitarbeiter:innen</span>
+        </label>
+        <select
+          className="select select-primary  w-full max-w-xs"
+          value={filterValEmployees}
+          onChange={(e) => setFilterValEmployees(e.target.value)}
+        >
+          <option disabled>Pick Employees Nr.</option>
+          <option key={"key-e-00"} value={"-"}>
+            -
+          </option>
+          {Object.keys(uiKeys.nr_e).map((d: string, i: number) => (
+            <option key={"key-e-" + i} value={d}>
+              {d}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <button onClick={runFilter} className="btn btn-primary mt-4">
         Run Filter
       </button>
-
-      {/* <select
-        className="select w-full max-w-xs"
-        value={selectedOption}
-        onChange={(e) => setAge(e.target.value)}
-      >
-        <option disabled selected>
-          Pick AGE
-        </option>
-        <option>0</option>
-        <option>1</option>
-        <option>2</option>
-        <option>10</option>
-        <option>100</option>
-      </select> */}
     </div>
   );
 };

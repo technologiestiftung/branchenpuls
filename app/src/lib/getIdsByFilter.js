@@ -1,8 +1,8 @@
-export async function getIdsByFilter(dataPointsIndexed, age) {
+export async function getIdsByFilter(dataPointsIndexed, age, employees) {
   console.log("JJJJJ");
   const newData = [];
   try {
-    const path = `/api/getIds/?age=${age}&domain=s`;
+    const path = `/api/getIds/?age=${age}&employees=${employees}`;
     let res;
     if (process.env.NODE_ENV === "development") {
       res = await fetch(path, { cache: "no-store" });
