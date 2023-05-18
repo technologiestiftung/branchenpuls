@@ -5,7 +5,12 @@ import { getSinglePointData } from "@lib/getSinglePointData";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
 import { RangeSlider } from "@components/RangeSlider";
 import Select from "react-select";
-import uiKeys from "@lib/uiKeys.json";
+
+import {
+  getOptionsEmployees,
+  getOptionsBranchLevelThree,
+  getOptionsBType,
+} from "./dropdownOptions";
 
 export interface FilterType {
   dataPoints: any;
@@ -80,104 +85,81 @@ export const Filter: FC<FilterType> = ({
     setFilteredData(newFilteredData);
   }
 
-  // options for employees
-  const optionsEmployees = [];
-  for (const key in uiKeys.nr_e) {
-    optionsEmployees.push({
-      value: key,
-      label: uiKeys.nr_e[key],
-    });
-  }
-
-  // options for branch level 3
-  const optionsBranchLevelThree = [];
-  for (const key in uiKeys.branchLevelThree) {
-    optionsBranchLevelThree.push({
-      value: key,
-      label: uiKeys.branchLevelThree[key],
-    });
-  }
-
-  const optionsBType = [
-    {
-      value: 0,
-      label: "Kleingewerbetreibender",
-    },
-    {
-      value: 1,
-      label: "im Handelsregister eingetragen",
-    },
-  ];
-
   return (
-    <div className="fixed top-2 left-2 bg-white z-40 p-4 rounded-lg ml-4">
-      <div className="stat place-items-center">
-        <div className="stat-title">Punkte</div>
-        <div className="stat-value">{filteredData.length}</div>
-      </div>
-      <div className="form-control w-52">
-        <label className="cursor-pointer label">
-          <span className="label-text">Heatmap</span>
-          <input
-            type="checkbox"
-            className="toggle toggle-secondary"
-            checked={layerType !== "scatterplot"}
-            onChange={switchLayer}
+    <div className="fixed top-2 left-2 bg-white z-40 rounded-lg ml-4">
+      <div className="bg-primary w-full h-full absolute hidden"></div>
+      <div className="p-4">
+        <div className="stat place-items-center">
+          <div className="stat-title">Punkte</div>
+          <div className="stat-value">{filteredData.length}</div>
+        </div>
+        <div className="form-control w-52">
+          <label className="cursor-pointer label">
+            <span className="label-text">Heatmap</span>
+            <input
+              type="checkbox"
+              className="toggle toggle-secondary"
+              checked={layerType !== "scatterplot"}
+              onChange={switchLayer}
+            />
+          </label>
+        </div>
+        <RangeSlider
+          value={filterValAge}
+          setValue={setFilterValAge}
+          minValue={0}
+          maxValue={100}
+          step={1}
+        />
+
+        <div className="mt-4">
+          Business Type
+          <Select
+            value={filterBType}
+            onChange={setFilterBType}
+            className={""}
+            isClearable={true}
+            isSearchable={false}
+            options={getOptionsBType()}
           />
-        </label>
-      </div>
-      <RangeSlider
-        value={filterValAge}
-        setValue={setFilterValAge}
-        minValue={0}
-        maxValue={100}
-        step={1}
-      />
+        </div>
 
-      <div className="mt-4">
-        Business Type
-        <Select
-          value={filterBType}
-          onChange={setFilterBType}
-          className={""}
-          isClearable={true}
-          isSearchable={false}
-          options={optionsBType}
-        />
-      </div>
+        <div className="mt-4">
+          Beschäftigte
+          <Select
+            value={filterValEmployees}
+            onChange={setFilterValEmployees}
+            className={""}
+            isClearable={true}
+            isSearchable={false}
+            options={getOptionsEmployees()}
+          />
+        </div>
 
-      <div className="mt-4">
-        Beschäftigte
-        <Select
-          value={filterValEmployees}
-          onChange={setFilterValEmployees}
-          className={""}
-          isClearable={true}
-          isSearchable={false}
-          options={optionsEmployees}
-        />
-      </div>
+        <div className="mt-4">
+          Branch level 3
+          <Select
+            value={filterValBl3}
+            onChange={setfilterValBl3}
+            // select select-primary
+            className={""}
+            isClearable={true}
+            isSearchable={true}
+            options={getOptionsBranchLevelThree()}
+          />
+        </div>
 
-      <div className="mt-4">
-        Branch level 3
-        <Select
-          value={filterValBl3}
-          onChange={setfilterValBl3}
-          // select select-primary
-          className={""}
-          isClearable={true}
-          isSearchable={true}
-          options={optionsBranchLevelThree}
-        />
+        <button onClick={runFilter} className="btn btn-primary mt-4">
+          Run Filter
+        </button>
+        <br />
+        <button
+          onClick={resetFilterData}
+          className="btn btn-primary btn-sm mt-6"
+        >
+          reset
+        </button>
       </div>
-
-      <button onClick={runFilter} className="btn btn-primary mt-4">
-        Run Filter
-      </button>
-      <br />
-      <button onClick={resetFilterData} className="btn btn-primary btn-sm mt-6">
-        reset
-      </button>
     </div>
   );
 };
