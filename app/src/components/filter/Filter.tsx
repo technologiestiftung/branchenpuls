@@ -6,7 +6,6 @@ import { getIdsByFilter } from "@lib/getIdsByFilter";
 import { RangeSlider } from "@components/RangeSlider";
 import Select from "react-select";
 import uiKeys from "@lib/uiKeys.json";
-import { log } from "console";
 
 export interface FilterType {
   dataPoints: any;
@@ -24,12 +23,10 @@ export const Filter: FC<FilterType> = ({
   //   const [selectedOption, setSelectedOption] = useState(0);
   const [layerType, setLayerType] = useState("scatterplot");
   const [filterValAge, setFilterValAge] = useState<number[]>([0, 100]);
-  const [filterValEmployees, setFilterValEmployees] = useState<string>("-");
-  const [filterValBranchLevelThree, setFilterValBranchLevelThree] = useState<
-    object | null
-  >(null);
-
-  console.log(filterValBranchLevelThree);
+  const [filterValEmployees, setFilterValEmployees] = useState<object | null>(
+    null
+  );
+  const [filterValBl3, setfilterValBl3] = useState<object | null>(null);
 
   useEffect(() => {
     if (filteredData) {
@@ -66,40 +63,37 @@ export const Filter: FC<FilterType> = ({
 
   const resetFilterData = () => {
     setFilteredData(dataPoints);
-
     setFilterValAge([0, 100]);
-    setFilterValEmployees("-");
+    setFilterValEmployees(null);
   };
 
-  //   async function setAge(val) {
-  //     setSelectedOption(val);
-  //     const ids = await getIdsByFilter(dataPointsIndexed, val);
-  //     setFilteredData(ids);
-  //   }
-
   async function runFilter() {
-    const l3 = filterValBranchLevelThree?.value
-      ? filterValBranchLevelThree.value
-      : null;
-    const ids = await getIdsByFilter(
+    const newFilteredData = await getIdsByFilter(
       dataPointsIndexed,
       filterValAge,
       filterValEmployees,
-      l3
+      filterValBl3
     );
-    setFilteredData(ids);
+    setFilteredData(newFilteredData);
   }
 
-  const optionsBranchLevelThree = [];
+  // options for employees
+  const optionsEmployees = [];
+  for (const key in uiKeys.nr_e) {
+    optionsEmployees.push({
+      value: key,
+      label: uiKeys.nr_e[key],
+    });
+  }
 
+  // options for branch level 3
+  const optionsBranchLevelThree = [];
   for (const key in uiKeys.branchLevelThree) {
     optionsBranchLevelThree.push({
       value: key,
       label: uiKeys.branchLevelThree[key],
     });
   }
-
-  uiKeys.branchLevelThree;
 
   return (
     <div className="fixed top-2 left-2 bg-white z-40 p-4 rounded-lg ml-4">
@@ -127,30 +121,25 @@ export const Filter: FC<FilterType> = ({
         maxValue={100}
         step={1}
       />
-      <div className="form-control w-full max-w-xs">
-        <label className="label">
-          <span className="label-text">Anzahl Mitarbeiter:innen</span>
-        </label>
-        <select
-          className="select select-primary  w-full max-w-xs"
-          value={filterValEmployees}
-          onChange={(e) => setFilterValEmployees(e.target.value)}
-        >
-          <option disabled>Pick Employees Nr.</option>
-          <option key={"key-e-00"} value={"-"}>
-            -
-          </option>
-          {Object.keys(uiKeys.nr_e).map((d: string, i: number) => (
-            <option key={"key-e-" + i} value={d}>
-              {d}
-            </option>
-          ))}
-        </select>
-      </div>
+
       <div className="mt-4">
+        Beschäftigte
         <Select
-          value={filterValBranchLevelThree}
-          onChange={setFilterValBranchLevelThree}
+          value={filterValEmployees}
+          onChange={setFilterValEmployees}
+          // select select-primary
+          className={""}
+          isClearable={true}
+          isSearchable={true}
+          options={optionsEmployees}
+        />
+      </div>
+
+      <div className="mt-4">
+        Branch level 3
+        <Select
+          value={filterValBl3}
+          onChange={setfilterValBl3}
           // select select-primary
           className={""}
           isClearable={true}
