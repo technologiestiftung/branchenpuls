@@ -15,24 +15,9 @@ export default async function handler(
   const idsWant: number[] = [];
 
   data.forEach((d: any) => {
-    let correctAge;
-    if (age === null) {
-      correctAge = true;
-    } else {
-      correctAge = age[0] <= d.age && age[1] >= d.age;
-    }
-    let correctEmployees;
-    if (employees === null) {
-      correctEmployees = true;
-    } else {
-      correctEmployees = employees === d.nr_e;
-    }
-    let correctBl3;
-    if (bl3 === null) {
-      correctBl3 = true;
-    } else {
-      correctBl3 = bl3 === d.b_id;
-    }
+    let correctAge = age === null ? true : age[0] <= d.age && age[1] >= d.age;
+    let correctEmployees = employees === null ? true : employees === d.nr_e;
+    let correctBl3 = bl3 === null ? true : bl3 === d.b_id;
     if (correctAge && correctEmployees && correctBl3) {
       idsWant.push(d.id);
     }
