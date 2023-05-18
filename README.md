@@ -66,6 +66,11 @@ tbd...
 use hash maps
 low DB
 
+## Libs used
+
+https://github.com/jedwatson/react-select
+https://daisyui.com/
+
 ## Contributing
 
 Before you create a pull request, write an issue so we can discuss your changes.

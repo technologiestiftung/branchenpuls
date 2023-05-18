@@ -27,6 +27,7 @@ export const Filter: FC<FilterType> = ({
     null
   );
   const [filterValBl3, setfilterValBl3] = useState<object | null>(null);
+  const [filterBType, setFilterBType] = useState<object | null>(null);
 
   useEffect(() => {
     if (filteredData) {
@@ -53,9 +54,9 @@ export const Filter: FC<FilterType> = ({
     }
   }, [layerType, filteredData]);
 
-  useEffect(() => {
-    console.log(filterValAge);
-  }, [filterValAge]);
+  //   useEffect(() => {
+  //     console.log(filterValAge);
+  //   }, [filterValAge]);
 
   const switchLayer = () => {
     setLayerType(layerType === "scatterplot" ? "geojson" : "scatterplot");
@@ -65,6 +66,7 @@ export const Filter: FC<FilterType> = ({
     setFilteredData(dataPoints);
     setFilterValAge([0, 100]);
     setFilterValEmployees(null);
+    setFilterBType(null);
   };
 
   async function runFilter() {
@@ -72,7 +74,8 @@ export const Filter: FC<FilterType> = ({
       dataPointsIndexed,
       filterValAge,
       filterValEmployees,
-      filterValBl3
+      filterValBl3,
+      filterBType
     );
     setFilteredData(newFilteredData);
   }
@@ -95,14 +98,23 @@ export const Filter: FC<FilterType> = ({
     });
   }
 
+  const optionsBType = [
+    {
+      value: 0,
+      label: "Kleingewerbetreibender",
+    },
+    {
+      value: 1,
+      label: "im Handelsregister eingetragen",
+    },
+  ];
+
   return (
     <div className="fixed top-2 left-2 bg-white z-40 p-4 rounded-lg ml-4">
       <div className="stat place-items-center">
         <div className="stat-title">Punkte</div>
         <div className="stat-value">{filteredData.length}</div>
       </div>
-      {/* Counter: {filteredData.length} */}
-
       <div className="form-control w-52">
         <label className="cursor-pointer label">
           <span className="label-text">Heatmap</span>
@@ -123,14 +135,25 @@ export const Filter: FC<FilterType> = ({
       />
 
       <div className="mt-4">
+        Business Type
+        <Select
+          value={filterBType}
+          onChange={setFilterBType}
+          className={""}
+          isClearable={true}
+          isSearchable={false}
+          options={optionsBType}
+        />
+      </div>
+
+      <div className="mt-4">
         Beschäftigte
         <Select
           value={filterValEmployees}
           onChange={setFilterValEmployees}
-          // select select-primary
           className={""}
           isClearable={true}
-          isSearchable={true}
+          isSearchable={false}
           options={optionsEmployees}
         />
       </div>
