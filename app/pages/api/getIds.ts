@@ -8,13 +8,14 @@ export default async function handler(
   console.log("req.query", req.query);
 
   let { employees, age, bl3, bt } = req.query;
-  console.log("bt", bt);
 
   // convert value back to numbers or null
-  age = age !== "null" ? age.split(",").map(Number) : null;
-  bl3 = Number(bl3) ? Number(bl3) : null;
-  employees = employees === "null" ? null : employees;
-  bt = bt === "null" ? null : bt;
+  age = age === undefined ? null : age.split(",").map(Number);
+  bl3 = bl3 === undefined ? null : Number(bl3);
+  employees = employees === undefined ? null : employees;
+  bt = bt === undefined ? null : bt;
+
+  console.log(employees, age, bl3, bt);
 
   const idsWant: number[] = [];
 

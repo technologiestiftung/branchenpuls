@@ -6,14 +6,21 @@ export async function getIdsByFilter(
   filterBType
 ) {
   // make all default val null
-  const sendFilterValBL3 = filterValBL3?.value ? filterValBL3.value : null;
-  const sendEmployees = employees?.value ? employees.value : null;
-  const sendBType = filterBType !== null ? filterBType.value : null;
-  const sendAge = age[0] === 0 && age[1] === 100 ? null : age;
+  const sendFilterValBL3 = filterValBL3?.value ? filterValBL3.value : false;
+  const sendEmployees = employees?.value ? employees.value : false;
+  const sendBType = filterBType !== null ? filterBType.value : false;
+  const sendAge = age[0] === 0 && age[1] === 100 ? false : age;
+
+  let path = "/api/getIds/?";
+  path += sendAge ? `&age=${sendAge}` : "";
+  path += sendEmployees ? `&employees=${sendEmployees}` : "";
+  path += sendFilterValBL3 ? `&bl3=${sendFilterValBL3}` : "";
+  path += sendBType !== false ? `&bt=${sendBType}` : "";
+
+  console.log(path);
 
   const newData = [];
   try {
-    const path = `/api/getIds/?age=${sendAge}&employees=${sendEmployees}&bl3=${sendFilterValBL3}&bt=${sendBType}`;
     let res;
     if (process.env.NODE_ENV === "development") {
       res = await fetch(path, { cache: "no-store" });
