@@ -12,16 +12,38 @@ export function getOptionsEmployees() {
   return optionsEmployees;
 }
 
-export function getOptionsBranchLevelThree() {
-  // options for branch level 3
-  const optionsBranchLevelThree = [];
-  for (const key in uiKeys.branchLevelThree) {
-    optionsBranchLevelThree.push({
+export function getOptionsBL1() {
+  const optionsBL1 = [];
+  for (const key in uiKeys.bl1) {
+    optionsBL1.push({
       value: key,
-      label: uiKeys.branchLevelThree[key],
+      label: uiKeys.bl1[key],
     });
   }
-  return optionsBranchLevelThree;
+  return optionsBL1;
+}
+
+export function getOptionsBL2() {
+  const optionsBL2 = [];
+  for (const key in uiKeys.bl2) {
+    optionsBL2.push({
+      value: key,
+      label: uiKeys.bl2[key],
+    });
+  }
+  return optionsBL2;
+}
+
+export function getOptionsBL3() {
+  // options for branch level 3
+  const optionsBL3 = [];
+  for (const key in uiKeys.bl3) {
+    optionsBL3.push({
+      value: key,
+      label: uiKeys.bl3[key],
+    });
+  }
+  return optionsBL3;
 }
 
 export function getOptionsBType() {

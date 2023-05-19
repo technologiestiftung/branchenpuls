@@ -9,13 +9,15 @@
 //   -business_age,
 //   -business_type,
 
-module.exports = { parseDataForBackend };
+module.exports = { parseDataForBackendAndMakeOptions };
 const fs = require("fs");
 const Papa = require("papaparse");
 
 const uiKeys = {};
 uiKeys.nr_e = {};
-uiKeys.branchLevelThree = {};
+uiKeys.bl1 = {};
+uiKeys.bl2 = {};
+uiKeys.bl3 = {};
 
 const areNumbers = [
   "postcode",
@@ -28,7 +30,7 @@ const areNumbers = [
   "business_age",
 ];
 
-function parseDataForBackend(mainCallback) {
+function parseDataForBackendAndMakeOptions(mainCallback) {
   const outputStream = fs.createWriteStream("../app/public/dataBackend.json");
   // const outputStreamIndexed = fs.createWriteStream(
   //   "../app/public/dataBackendIndexed.json"
@@ -49,11 +51,16 @@ function parseDataForBackend(mainCallback) {
     let lat = false,
       lng = false,
       opendata_id = false,
-      ihk_branch_id = false,
       employees_range = false,
       business_age = false,
       business_type = false,
-      ihk_branch_desc = false;
+      ihk_branch_id = false,
+      ihk_branch_desc = false,
+      branch_top_level_id = false,
+      branch_top_level_desc = false,
+      nace_desc = false,
+      nace_id = false;
+
     async.forEachOf(d, function (dd, ii, cb) {
       const name = headers[ii];
       if (dd.charAt(0) === "'" && dd.charAt(dd.length - 1) === "'") {
@@ -73,8 +80,7 @@ function parseDataForBackend(mainCallback) {
           dd = Number(dd);
         }
       }
-      // 4 decimal places will give a precision up to ~10 m
-      // 5 decimal places will give a precision up to ~1 m
+
       if (name === "latitude" && dd !== null) {
         lat = dd.toFixed(5);
       }
@@ -86,13 +92,26 @@ function parseDataForBackend(mainCallback) {
         opendata_id = dd;
       }
 
+      if (name === "nace_id") {
+        nace_id = dd;
+      }
+
+      if (name === "nace_desc") {
+        nace_desc = dd;
+      }
+      if (name === "branch_top_level_id") {
+        branch_top_level_id = dd;
+      }
+      if (name === "branch_top_level_desc") {
+        branch_top_level_desc = dd;
+      }
       if (name === "ihk_branch_id") {
         ihk_branch_id = dd;
       }
+
       if (name === "ihk_branch_desc") {
         ihk_branch_desc = dd;
       }
-
       if (name === "employees_range") {
         employees_range = dd;
         uiKeys.nr_e[dd] = dd;
@@ -109,7 +128,9 @@ function parseDataForBackend(mainCallback) {
       cb();
     });
 
-    uiKeys.branchLevelThree[ihk_branch_id] = ihk_branch_desc;
+    uiKeys.bl1[branch_top_level_id] = branch_top_level_desc;
+    uiKeys.bl2[nace_id] = nace_desc;
+    uiKeys.bl3[ihk_branch_id] = ihk_branch_desc;
 
     if (lat && lng) {
       if (i !== 0) {

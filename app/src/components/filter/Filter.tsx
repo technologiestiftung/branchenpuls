@@ -6,9 +6,11 @@ import { getIdsByFilter } from "@lib/getIdsByFilter";
 import { RangeSlider } from "@components/RangeSlider";
 import Select from "react-select";
 
+import { FilterBranches } from "@components/filter/FilterBranches";
+
 import {
   getOptionsEmployees,
-  getOptionsBranchLevelThree,
+  getOptionsBL3,
   getOptionsBType,
 } from "./dropdownOptions";
 
@@ -111,7 +113,6 @@ export const Filter: FC<FilterType> = ({
           maxValue={100}
           step={1}
         />
-
         <div className="mt-4">
           Business Type
           <Select
@@ -123,7 +124,6 @@ export const Filter: FC<FilterType> = ({
             options={getOptionsBType()}
           />
         </div>
-
         <div className="mt-4">
           Beschäftigte
           <Select
@@ -135,7 +135,6 @@ export const Filter: FC<FilterType> = ({
             options={getOptionsEmployees()}
           />
         </div>
-
         <div className="mt-4">
           Branch level 3
           <Select
@@ -145,10 +144,9 @@ export const Filter: FC<FilterType> = ({
             className={""}
             isClearable={true}
             isSearchable={true}
-            options={getOptionsBranchLevelThree()}
+            options={getOptionsBL3()}
           />
         </div>
-
         <button onClick={runFilter} className="btn btn-primary mt-4">
           Run Filter
         </button>
@@ -159,6 +157,8 @@ export const Filter: FC<FilterType> = ({
         >
           reset
         </button>
+
+        {/* <FilterBranches></FilterBranches> */}
       </div>
     </div>
   );
