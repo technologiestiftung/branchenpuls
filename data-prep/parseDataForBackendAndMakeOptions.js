@@ -18,6 +18,7 @@ uiKeys.nr_e = {};
 uiKeys.bl1 = {};
 uiKeys.bl2 = {};
 uiKeys.bl3 = {};
+// uiKeys.bl1New = [];
 
 const areNumbers = [
   "postcode",
@@ -75,6 +76,12 @@ function parseDataForBackendAndMakeOptions(mainCallback) {
       if (dd === "000000") {
         dd = null;
       }
+      if (dd === "0000") {
+        dd = null;
+      }
+      if (dd === "00") {
+        dd = null;
+      }
       if (areNumbers.includes(name)) {
         if (Number(dd)) {
           dd = Number(dd);
@@ -114,7 +121,7 @@ function parseDataForBackendAndMakeOptions(mainCallback) {
       }
       if (name === "employees_range") {
         employees_range = dd;
-        uiKeys.nr_e[dd] = dd;
+        // uiKeys.nr_e[dd] = dd;
       }
 
       if (name === "business_age") {
@@ -132,14 +139,32 @@ function parseDataForBackendAndMakeOptions(mainCallback) {
     uiKeys.bl2[nace_id] = nace_desc;
     uiKeys.bl3[ihk_branch_id] = ihk_branch_desc;
 
+    // uiKeys.bl1New.push({
+    //   value: branch_top_level_id,
+    //   label: branch_top_level_desc,
+    // });
+    // uiKeys.bl2New.push({
+    //   value: nace_id,
+    //   label: nace_desc,
+    //   valueL1: branch_top_level_id,
+    // });
+    // uiKeys.bl3New.push({
+    //   value: ihk_branch_id,
+    //   label: ihk_branch_desc,
+
+    //   valueL1: branch_top_level_id,
+    // });
+    // [branch_top_level_id] = branch_top_level_desc;
+
     if (lat && lng) {
       if (i !== 0) {
         outputStream.write(",");
         // outputStreamIndexed.write(",");
       }
       outputStream.write(
-        `{"id":${opendata_id},"b_id":${ihk_branch_id},"nr_e":"${employees_range}","age":${business_age},"type":${business_type}}`
+        `{"id":${opendata_id},"bl1":${branch_top_level_id},"bl2":${nace_id},"bl3":${ihk_branch_id},"nr_e":"${employees_range}","age":${business_age},"type":${business_type}}`
       );
+
       // outputStreamIndexed.write(
       //   `"${opendata_id}":{"id":${opendata_id},"b_id":${ihk_branch_id},"nr_e":"${employees_range}","age":${business_age},"type":${business_type}}`
       // );

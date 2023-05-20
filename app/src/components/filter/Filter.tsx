@@ -33,8 +33,10 @@ export const Filter: FC<FilterType> = ({
   const [filterValEmployees, setFilterValEmployees] = useState<object | null>(
     null
   );
-  const [filterValBl3, setfilterValBl3] = useState<object | null>(null);
   const [filterBType, setFilterBType] = useState<object | null>(null);
+  const [filterValBl1, setFilterValBl1] = useState<object | null>(null);
+  const [filterValBl2, setFilterValBl2] = useState<object | null>(null);
+  const [filterValBl3, setFilterValBl3] = useState<object | null>(null);
 
   useEffect(() => {
     if (filteredData) {
@@ -56,14 +58,18 @@ export const Filter: FC<FilterType> = ({
               getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
               getWeight: 5,
               aggregation: "SUM",
+              //   colorRange: [
+              //     [86, 189, 102],
+              //     [124, 203, 132],
+              //     [159, 216, 162],
+              //     [191, 229, 192],
+              //     [223, 242, 223],
+              //     [255, 255, 255],
+              //   ].reverse(),
             }),
       ]);
     }
   }, [layerType, filteredData]);
-
-  //   useEffect(() => {
-  //     console.log(filterValAge);
-  //   }, [filterValAge]);
 
   const switchLayer = () => {
     setLayerType(layerType === "scatterplot" ? "geojson" : "scatterplot");
@@ -74,6 +80,9 @@ export const Filter: FC<FilterType> = ({
     setFilterValAge([0, 100]);
     setFilterValEmployees(null);
     setFilterBType(null);
+    setFilterValBl1(null);
+    setFilterValBl2(null);
+    setFilterValBl3(null);
   };
 
   async function runFilter() {
@@ -81,14 +90,16 @@ export const Filter: FC<FilterType> = ({
       dataPointsIndexed,
       filterValAge,
       filterValEmployees,
-      filterValBl3,
-      filterBType
+      filterBType,
+      filterValBl1,
+      filterValBl2,
+      filterValBl3
     );
     setFilteredData(newFilteredData);
   }
 
   return (
-    <div className="fixed top-2 left-2 bg-white z-40 rounded-lg ml-4">
+    <div className="fixed top-2 left-2 bg-white z-40 rounded-lg ml-4 w-[300px]">
       <div className="bg-primary w-full h-full absolute hidden"></div>
       <div className="p-4">
         <div className="stat place-items-center">
@@ -135,18 +146,16 @@ export const Filter: FC<FilterType> = ({
             options={getOptionsEmployees()}
           />
         </div>
-        <div className="mt-4">
-          Branch level 3
-          <Select
-            value={filterValBl3}
-            onChange={setfilterValBl3}
-            // select select-primary
-            className={""}
-            isClearable={true}
-            isSearchable={true}
-            options={getOptionsBL3()}
-          />
-        </div>
+
+        <FilterBranches
+          filterValBl1={filterValBl1}
+          setFilterValBl1={setFilterValBl1}
+          filterValBl2={filterValBl2}
+          setFilterValBl2={setFilterValBl2}
+          filterValBl3={filterValBl3}
+          setFilterValBl3={setFilterValBl3}
+        ></FilterBranches>
+
         <button onClick={runFilter} className="btn btn-primary mt-4">
           Run Filter
         </button>
@@ -157,8 +166,6 @@ export const Filter: FC<FilterType> = ({
         >
           reset
         </button>
-
-        {/* <FilterBranches></FilterBranches> */}
       </div>
     </div>
   );
