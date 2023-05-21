@@ -133,7 +133,7 @@ export const Filter: FC<FilterType> = ({
   //   }
 
   return (
-    <div className="fixed top-2 left-2 bg-white z-30 rounded-lg ml-4 w-[300px] overflow-hidden">
+    <div className=" bg-white z-30 rounded-lg w-[300px] overflow-hidden">
       <div
         className={classNames(
           " w-full h-full absolute z-40 opacity-25",
@@ -162,7 +162,7 @@ export const Filter: FC<FilterType> = ({
       </div>
       <div className="p-4">
         <div className="stat place-items-center">
-          <div className="stat-title">Punkte</div>
+          <div className="stat-title">Unternehmen</div>
           <div className="stat-value">{filteredData.length}</div>
         </div>
         <div className="form-control w-52">
