@@ -7,7 +7,7 @@ import { RangeSlider } from "@/components/UI/RangeSlider";
 import Select from "react-select";
 // import classNames from "classNames";
 
-import { FilterBranches } from "@/components/Filter/FilterBranches";
+import { FilterBranches } from "@/components/filter/FilterBranches";
 
 import {
   getOptionsEmployees,

@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 // import classNames from "classnames";
 import { SidebarHeader } from "@components/Sidebar/SidebarHeader";
 import { SidebarBody } from "@components/Sidebar/SidebarBody";
-import { Filter } from "@components/Filter/Filter";
+import { Filter } from "@/components/filter/Filter";
 import { addLayer } from "@lib/addLayer.js";
 
 export interface SidebarContentFilterType {

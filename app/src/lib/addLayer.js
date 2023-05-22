@@ -25,7 +25,7 @@ function generateRandomColor(index) {
 function generateHeatmapColor(pointColor) {
   const color = JSON.parse(JSON.stringify(pointColor));
   let colors = chroma
-    .scale([[255, 255, 255], color])
+    .scale([chroma(color).brighten(2), chroma(color).darken(2)])
     .mode("lch")
     .colors(6);
   let rgbColors = colors.map((c) => chroma(c).rgb());
