@@ -33,6 +33,7 @@ export interface MapType {
 
 export const MapComponent: FC<MapType> = ({ deckLayers }) => {
   // const [selectedPoint, setSelectedPoint] = useState<PointData | null>(null);
+  console.log("update", deckLayers);
 
   return (
     <>

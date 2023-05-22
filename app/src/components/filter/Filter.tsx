@@ -29,6 +29,7 @@ export const Filter: FC<FilterType> = ({
   deckLayers,
   layersData,
   layerId,
+  index,
 }) => {
   const [filteredData, setFilteredData] = useState(dataPoints);
   const [loading, setLoading] = useState<boolean>(false);
@@ -75,38 +76,43 @@ export const Filter: FC<FilterType> = ({
 
   useEffect(() => {
     if (filteredData) {
-      setDeckLayers([
+      const layer =
         layerType === "scatterplot"
           ? new ScatterplotLayer({
-              id: "scatterplot-layer",
+              id: "scatterplot-layer" + layerId,
               data: filteredData,
               pickable: true,
               getRadius: 30,
               getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-              //   getFillColor: layersData[layerId].color, // [86, 189, 102],
-              getFillColor: [86, 189, 102], // [86, 189, 102],
-
+              getFillColor: layersData[layerId].color, // [86, 189, 102],
+              //   getFillColor: [86, 189, 102], // [86, 189, 102],
+              opacity: 0.5,
               onClick: (info) =>
                 getSinglePointData(info.object.id, info.object.p),
             })
           : new HeatmapLayer({
-              id: "heatmapLayer",
+              id: "heatmapLayer" + layerId,
               data: filteredData,
               getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
               getWeight: 5,
               aggregation: "SUM",
-              colorRange: [
-                [86, 189, 102],
-                [124, 203, 132],
-                [159, 216, 162],
-                [191, 229, 192],
-                [223, 242, 223],
-                [255, 255, 255],
-              ].reverse(),
-            }),
-      ]);
+              colorRange: layersData[layerId].heatmapColor,
+            });
+      // add ne layer or replace existing layer
+      if (!deckLayers[index]) {
+        deckLayers.push(layer);
+        setDeckLayers([...deckLayers]);
+      } else {
+        deckLayers = replaceArray(deckLayers, index, layer);
+        setDeckLayers([...deckLayers]);
+      }
     }
   }, [layerType, filteredData]);
+
+  // a function that replaces a part of the array with a new value
+  const replaceArray = (arr, index, newValue) => {
+    return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+  };
 
   const switchLayer = () => {
     setLayerType(layerType === "scatterplot" ? "heatmap" : "scatterplot");
@@ -120,6 +126,12 @@ export const Filter: FC<FilterType> = ({
     setFilterValBl1(null);
     setFilterValBl2(null);
     setFilterValBl3(null);
+  };
+
+  const removeLayer = () => {
+    deckLayers.splice(index, 1);
+    setDeckLayers([...deckLayers]);
+    delete layersData[layerId];
   };
 
   //   async function runFilter() {
@@ -138,7 +150,10 @@ export const Filter: FC<FilterType> = ({
   //   }
 
   return (
-    <div className=" bg-white z-30 rounded-lg w-[300px] overflow-hidden border-primary border-2">
+    <div
+      key={"layer-" + index}
+      className=" bg-white z-30 rounded-lg w-[300px] overflow-hidden border-primary border-2"
+    >
       <div
         className={`w-full h-full absolute z-40 opacity-25 ${
           loading ? "block" : "hidden"
@@ -169,6 +184,7 @@ export const Filter: FC<FilterType> = ({
           <div className="stat-title">Unternehmen</div>
           <div className="stat-value">{filteredData.length}</div>
         </div>
+        <p>{index}</p>
         <div className="form-control w-52">
           <label className="cursor-pointer label">
             <span className="label-text">Heatmap</span>
@@ -226,6 +242,9 @@ export const Filter: FC<FilterType> = ({
           className="btn btn-primary btn-sm mt-6"
         >
           reset
+        </button>
+        <button onClick={removeLayer} className="btn btn-primary btn-sm mt-6">
+          remove layer
         </button>
       </div>
     </div>

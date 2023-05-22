@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
-import classNames from "classnames";
+// import classNames from "classnames";
 import { SidebarHeader } from "@components/Sidebar/SidebarHeader";
 import { SidebarBody } from "@components/Sidebar/SidebarBody";
-import { Filter } from "@/components/Filter/Filter";
+import { Filter } from "@components/Filter/Filter";
 import { addLayer } from "@lib/addLayer.js";
 
 export interface SidebarContentFilterType {
@@ -23,7 +23,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
       <SidebarHeader text="Filter" />
 
       <SidebarBody>
-        {/* {Object.keys(layersData).map((layerId) => {
+        {Object.keys(layersData).map((layerId, i) => {
           const layer = layersData[layerId];
           return (
             <Filter
@@ -33,19 +33,11 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
               deckLayers={deckLayers}
               layerId={layer.id}
               layersData={layersData}
+              index={i}
+              key={i}
             ></Filter>
           );
-        })} */}
-
-        <Filter
-          dataPoints={dataPoints}
-          dataPointsIndexed={dataPointsIndexed}
-          setDeckLayers={setDeckLayers}
-          deckLayers={deckLayers}
-          // layerId={layer.id}
-          // layersData={layersData}
-        ></Filter>
-
+        })}
         <button
           onClick={() => {
             addLayer(layersData, setLayersData);
