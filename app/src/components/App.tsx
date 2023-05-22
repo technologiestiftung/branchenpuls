@@ -28,6 +28,7 @@ export interface AppType {
 
 export const App: FC<AppType> = ({ dataPoints }) => {
   const [deckLayers, setDeckLayers] = useState([]);
+  const [layersData, setLayersData] = useState<object>({});
   const [sidebarMenuOpen, setSidebarMenuOpen] = useState<boolean>(true);
   const [mobileHeight, setMobileHeight] = useState<"half" | "full">("half");
   const [navView, setNavView] = useState<"filter" | "info">("filter");
@@ -52,6 +53,9 @@ export const App: FC<AppType> = ({ dataPoints }) => {
           dataPoints={dataPoints}
           dataPointsIndexed={dataPointsIndexed}
           setDeckLayers={setDeckLayers}
+          deckLayers={deckLayers}
+          layersData={layersData}
+          setLayersData={setLayersData}
         />
       </SidebarWrapper>
       <SidebarNav
@@ -60,13 +64,6 @@ export const App: FC<AppType> = ({ dataPoints }) => {
         navView={navView}
         sidebarMenuOpen={sidebarMenuOpen}
         setSidebarMenuOpen={setSidebarMenuOpen}
-        // setModalOpen={setModalOpen}
-        // entityId={entityId}
-        // setEntityId={setEntityId}
-        // mapZoom={mapZoom}
-        // setMapZoom={setMapZoom}
-        // setMapPitch={setMapPitch}
-        // mapPitch={mapPitch}
       />
     </main>
   );

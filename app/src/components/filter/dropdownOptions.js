@@ -13,63 +13,63 @@ export function getOptionsEmployees() {
   const optionsEmployees = [
     {
       value: "0 Beschäftigte",
-      label: "0 Beschäftigte",
+      label: "0",
     },
     {
       value: "1 - 3 Beschäftigte",
-      label: "1 - 3 Beschäftigte",
+      label: "1 - 3",
     },
     {
       value: "4 - 6 Beschäftigte",
-      label: "4 - 6 Beschäftigte",
+      label: "4 - 6",
     },
     {
       value: "7 - 9 Beschäftigte",
-      label: "7 - 9 Beschäftigte",
+      label: "7 - 9",
     },
     {
       value: "10 - 19 Beschäftigte",
-      label: "10 - 19 Beschäftigte",
+      label: "10 - 19",
     },
     {
       value: "20 - 49 Beschäftigte",
-      label: "20 - 49 Beschäftigte",
+      label: "20 - 49",
     },
     {
       value: "50 - 99 Beschäftigte",
-      label: "50 - 99 Beschäftigte",
+      label: "50 - 99",
     },
     {
       value: "100 - 199 Beschäftigte",
-      label: "100 - 199 Beschäftigte",
+      label: "100 - 199",
     },
     {
       value: "200 - 499 Beschäftigte",
-      label: "200 - 499 Beschäftigte",
+      label: "200 - 499",
     },
     {
       value: "500 - 999 Beschäftigte",
-      label: "500 - 999 Beschäftigte",
+      label: "500 - 999",
     },
     {
       value: "1000 - 2499 Beschäftigte",
-      label: "1000 - 2499 Beschäftigte",
+      label: "1000 - 2499",
     },
     {
       value: "2500 - 4999 Beschäftigte",
-      label: "2500 - 4999 Beschäftigte",
+      label: "2500 - 4999",
     },
     {
       value: "5000 - 7499 Beschäftigte",
-      label: "5000 - 7499 Beschäftigte",
+      label: "5000 - 7499",
     },
     {
       value: "7500 - 9999 Beschäftigte",
-      label: "7500 - 9999 Beschäftigte",
+      label: "7500 - 9999",
     },
     {
       value: "10000 und mehr Beschäftigte",
-      label: "10000 und mehr Beschäftigte",
+      label: "10000 und mehr",
     },
     {
       value: "unbekannt",

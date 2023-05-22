@@ -3,11 +3,11 @@ import { ScatterplotLayer } from "@deck.gl/layers";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers";
 import { getSinglePointData } from "@lib/getSinglePointData";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
-import { RangeSlider } from "@components/RangeSlider";
+import { RangeSlider } from "@/components/UI/RangeSlider";
 import Select from "react-select";
-import classNames from "classNames";
+// import classNames from "classNames";
 
-import { FilterBranches } from "@components/filter/FilterBranches";
+import { FilterBranches } from "@/components/Filter/FilterBranches";
 
 import {
   getOptionsEmployees,
@@ -26,6 +26,9 @@ export const Filter: FC<FilterType> = ({
   dataPoints,
   dataPointsIndexed,
   setDeckLayers,
+  deckLayers,
+  layersData,
+  layerId,
 }) => {
   const [filteredData, setFilteredData] = useState(dataPoints);
   const [loading, setLoading] = useState<boolean>(false);
@@ -80,7 +83,9 @@ export const Filter: FC<FilterType> = ({
               pickable: true,
               getRadius: 30,
               getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-              getFillColor: [86, 189, 102],
+              //   getFillColor: layersData[layerId].color, // [86, 189, 102],
+              getFillColor: [86, 189, 102], // [86, 189, 102],
+
               onClick: (info) =>
                 getSinglePointData(info.object.id, info.object.p),
             })
@@ -133,12 +138,11 @@ export const Filter: FC<FilterType> = ({
   //   }
 
   return (
-    <div className=" bg-white z-30 rounded-lg w-[300px] overflow-hidden">
+    <div className=" bg-white z-30 rounded-lg w-[300px] overflow-hidden border-primary border-2">
       <div
-        className={classNames(
-          " w-full h-full absolute z-40 opacity-25",
+        className={`w-full h-full absolute z-40 opacity-25 ${
           loading ? "block" : "hidden"
-        )}
+        }`}
       >
         <span>
           {" "}
@@ -200,7 +204,6 @@ export const Filter: FC<FilterType> = ({
           <Select
             value={filterValEmployees}
             onChange={setFilterValEmployees}
-            className={""}
             isClearable={true}
             isSearchable={false}
             options={getOptionsEmployees()}

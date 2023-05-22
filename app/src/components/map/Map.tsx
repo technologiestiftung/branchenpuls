@@ -3,6 +3,7 @@ import { Map, Popup } from "react-map-gl";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import DeckGL from "@deck.gl/react";
+import mapStyle from "./mapStyle";
 
 const MAP_STYLE =
   "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
@@ -45,7 +46,9 @@ export const MapComponent: FC<MapType> = ({ deckLayers }) => {
           <Map
             reuseMaps
             mapLib={maplibregl}
-            mapStyle={MAP_STYLE}
+            mapStyle={
+              process.env.NODE_ENV == "development" ? mapStyle() : MAP_STYLE
+            }
             styleDiffing={true}
           />
           {/* {popupPosition && (
