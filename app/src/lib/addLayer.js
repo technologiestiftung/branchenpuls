@@ -25,7 +25,7 @@ function generateRandomColor(index) {
 function generateHeatmapColor(pointColor) {
   const color = JSON.parse(JSON.stringify(pointColor));
   let colors = chroma
-    .scale([chroma(color).brighten(2), chroma(color).darken(2)])
+    .scale([chroma(color).brighten(3), color, chroma(color).darken(2)])
     .mode("lch")
     .colors(6);
   let rgbColors = colors.map((c) => chroma(c).rgb());
@@ -37,7 +37,10 @@ export function addLayer(layersData, setLayersData) {
   const newLayer = {};
   newLayer.id = generateUUID();
   newLayer.color = generateRandomColor();
-  newLayer.heatmapColor = generateHeatmapColor(newLayer.color);
+  (newLayer.colorHex = chroma(
+    JSON.parse(JSON.stringify(newLayer.color))
+  ).hex()),
+    (newLayer.heatmapColor = generateHeatmapColor(newLayer.color));
   layersData = JSON.parse(JSON.stringify(layersData));
   layersData[newLayer.id] = newLayer;
   setLayersData(layersData);

@@ -5,7 +5,6 @@ import { getSinglePointData } from "@lib/getSinglePointData";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
 import { RangeSlider } from "@/components/UI/RangeSlider";
 import Select from "react-select";
-// import classNames from "classNames";
 
 import { FilterBranches } from "@/components/filter/FilterBranches";
 
@@ -34,6 +33,8 @@ export const Filter: FC<FilterType> = ({
   const [filteredData, setFilteredData] = useState(dataPoints);
   const [loading, setLoading] = useState<boolean>(false);
   const [pageLoaded, setPageLoaded] = useState<boolean>(false);
+  const [layerVisble, setLayerVisible] = useState<boolean>(true);
+  const [layerOpacity, setLayerOpacity] = useState<number>(0.5);
 
   //   const [selectedOption, setSelectedOption] = useState(0);
   const [layerType, setLayerType] = useState("scatterplot");
@@ -86,7 +87,8 @@ export const Filter: FC<FilterType> = ({
               getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
               getFillColor: layersData[layerId].color, // [86, 189, 102],
               //   getFillColor: [86, 189, 102], // [86, 189, 102],
-              opacity: 0.5,
+              opacity: layerOpacity,
+              //   visible: { layerVisble },
               onClick: (info) =>
                 getSinglePointData(info.object.id, info.object.p),
             })
@@ -97,6 +99,8 @@ export const Filter: FC<FilterType> = ({
               getWeight: 5,
               aggregation: "SUM",
               colorRange: layersData[layerId].heatmapColor,
+              //   visble: { layerVisble },
+              opacity: layerOpacity,
             });
       // add ne layer or replace existing layer
       if (!deckLayers[index]) {
@@ -107,7 +111,7 @@ export const Filter: FC<FilterType> = ({
         setDeckLayers([...deckLayers]);
       }
     }
-  }, [layerType, filteredData]);
+  }, [layerType, filteredData, layerOpacity]);
 
   // a function that replaces a part of the array with a new value
   const replaceArray = (arr, index, newValue) => {
@@ -152,7 +156,10 @@ export const Filter: FC<FilterType> = ({
   return (
     <div
       key={"layer-" + index}
-      className=" bg-white z-30 rounded-lg w-[300px] overflow-hidden border-primary border-2"
+      className=" bg-white z-30 rounded-lg overflow-hidden  border-2"
+      style={{
+        borderColor: layersData[layerId].colorHex,
+      }}
     >
       <div
         className={`w-full h-full absolute z-40 opacity-25 ${
@@ -182,9 +189,15 @@ export const Filter: FC<FilterType> = ({
       <div className="p-4">
         <div className="stat place-items-center">
           <div className="stat-title">Unternehmen</div>
-          <div className="stat-value">{filteredData.length}</div>
+          <div
+            className="stat-value"
+            style={{
+              color: layersData[layerId].colorHex,
+            }}
+          >
+            {filteredData.length}
+          </div>
         </div>
-        <p>{index}</p>
         <div className="form-control w-52">
           <label className="cursor-pointer label">
             <span className="label-text">Heatmap</span>
@@ -245,6 +258,14 @@ export const Filter: FC<FilterType> = ({
         </button>
         <button onClick={removeLayer} className="btn btn-primary btn-sm mt-6">
           remove layer
+        </button>
+        <button
+          onClick={() => {
+            setLayerOpacity(layerOpacity === 0 ? 0.5 : 0);
+          }}
+          className="btn btn-primary btn-sm mt-6"
+        >
+          {layerOpacity === 0 ? "show" : "hide"}
         </button>
       </div>
     </div>
