@@ -1,7 +1,9 @@
 export async function getSinglePointData(pointId, position) {
   let data;
   try {
-    const path = `/api/getsinglepointdata/?pointid=${pointId}`;
+    const path = `/api/getsinglepointdata/?pointid=${pointId}&pointCoo=${
+      position[0] + "" + position[1]
+    }`;
     let res;
     if (process.env.NODE_ENV === "development") {
       res = await fetch(path, { cache: "no-store" });

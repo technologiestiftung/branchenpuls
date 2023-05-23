@@ -101,6 +101,8 @@ export const Filter: FC<FilterType> = ({
               colorRange: layersData[layerId].heatmapColor,
               //   visble: { layerVisble },
               opacity: layerOpacity,
+              // onClick: (info) =>
+              // getSinglePointData(info.object.id, info.object.p),
             });
       // add ne layer or replace existing layer
       if (!deckLayers[index]) {

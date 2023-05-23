@@ -2,16 +2,23 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import data from "../../public/dataBackend.json";
 const dataIndexed = {};
 data.forEach((d) => {
-  dataIndexed[d.id] = d;
+  const coos = d.lng + "" + d.lat;
+  if (dataIndexed[coos]) {
+    dataIndexed[coos].push(d);
+  } else {
+    dataIndexed[coos] = [d];
+  }
 });
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { pointid } = req.query;
+  const { pointid, pointCoo } = req.query;
 
-  // let pointData = undefined;
+  console.log("pointCoo", pointCoo);
+
+  // let pointData = undefined;ñ
 
   // data.forEach((d) => {
   //   if (Number(d.id) == pointid) {
@@ -19,5 +26,5 @@ export default async function handler(
   //   }
   // });
 
-  res.status(200).json({ data: dataIndexed[pointid] });
+  res.status(200).json({ data: dataIndexed[pointCoo] });
 }

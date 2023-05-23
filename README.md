@@ -69,6 +69,8 @@ low DB
 let colors = chroma.scale([[86, 189, 102],[255,255,255]]).mode('lch').colors(6);
 let rgbColors = colors.map(color => chroma(color).rgb());
 
+pick points by location not id
+
 ## Libs used
 
 https://github.com/jedwatson/react-select

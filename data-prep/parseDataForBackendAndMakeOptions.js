@@ -162,7 +162,7 @@ function parseDataForBackendAndMakeOptions(mainCallback) {
         // outputStreamIndexed.write(",");
       }
       outputStream.write(
-        `{"id":${opendata_id},"bl1":${branch_top_level_id},"bl2":${nace_id},"bl3":${ihk_branch_id},"nr_e":"${employees_range}","age":${business_age},"type":${business_type}}`
+        `{"id":${opendata_id},"bl1":${branch_top_level_id},"bl2":${nace_id},"bl3":${ihk_branch_id},"nr_e":"${employees_range}","age":${business_age},"type":${business_type},"lat":${lat},"lng":${lng}}`
       );
 
       // outputStreamIndexed.write(

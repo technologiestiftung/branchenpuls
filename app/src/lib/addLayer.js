@@ -22,6 +22,22 @@ function generateRandomColor(index) {
   //   return rgbColors[index];
 }
 
+function getNewColor(layersData) {
+  let newColor = "#cc0000";
+  const defaults = ["#00cc66", "#cc006b", "#00cccc"];
+  const existingColors = [];
+  Object.keys(layersData).forEach((key, i) => {
+    existingColors.push(layersData[key].colorHex);
+  });
+  defaults.forEach((c) => {
+    console.log(c, defaults, newColor.includes(c));
+    if (!existingColors.includes(c)) {
+      newColor = c;
+    }
+  });
+  return chroma(newColor).rgb();
+}
+
 function generateHeatmapColor(pointColor) {
   const color = JSON.parse(JSON.stringify(pointColor));
   let colors = chroma
@@ -36,11 +52,11 @@ export function addLayer(layersData, setLayersData) {
   //   console.log("ÄÄÄÄ", layersData.keys(layersData).length);
   const newLayer = {};
   newLayer.id = generateUUID();
-  newLayer.color = generateRandomColor();
-  (newLayer.colorHex = chroma(
-    JSON.parse(JSON.stringify(newLayer.color))
-  ).hex()),
-    (newLayer.heatmapColor = generateHeatmapColor(newLayer.color));
+  newLayer.color = getNewColor(layersData);
+  console.log("ÄÄÄÄÄÄ", newLayer.color);
+  // newLayer.color = generateRandomColor();
+  newLayer.colorHex = chroma(JSON.parse(JSON.stringify(newLayer.color))).hex();
+  newLayer.heatmapColor = generateHeatmapColor(newLayer.color);
   layersData = JSON.parse(JSON.stringify(layersData));
   layersData[newLayer.id] = newLayer;
   setLayersData(layersData);
