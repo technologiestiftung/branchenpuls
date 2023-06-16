@@ -32,6 +32,7 @@ export const App: FC<AppType> = ({ dataPoints }) => {
   const [sidebarMenuOpen, setSidebarMenuOpen] = useState<boolean>(true);
   const [mobileHeight, setMobileHeight] = useState<"half" | "full">("half");
   const [navView, setNavView] = useState<"filter" | "info">("filter");
+  const [zoom, setZoom] = useState<null | number>(null);
 
   const dataPointsIndexed = {};
   dataPoints.forEach((d) => {
@@ -40,7 +41,7 @@ export const App: FC<AppType> = ({ dataPoints }) => {
 
   return (
     <main className="">
-      <MapComponent deckLayers={deckLayers}></MapComponent>
+      <MapComponent deckLayers={deckLayers} setZoom={setZoom}></MapComponent>
       <SidebarWrapper
         classes="z-20"
         position="left"

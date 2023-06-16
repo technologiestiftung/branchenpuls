@@ -18,6 +18,13 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
   layersData,
   setLayersData,
 }) => {
+  // add one layer on start
+  useEffect(() => {
+    if (layersData && !Object.keys(layersData).length) {
+      addLayer(layersData, setLayersData);
+    }
+  }, []);
+
   return (
     <>
       <SidebarHeader text="Filter" />

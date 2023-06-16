@@ -31,9 +31,13 @@ export interface MapType {
   deckLayers: any;
 }
 
-export const MapComponent: FC<MapType> = ({ deckLayers }) => {
+export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
   // const [selectedPoint, setSelectedPoint] = useState<PointData | null>(null);
-  console.log("update", deckLayers);
+
+  function onViewStateChange(view) {
+    // console.log(view.viewState.zoom);
+    // setZoom(view.viewState.zoom);
+  }
 
   return (
     <>
@@ -43,6 +47,7 @@ export const MapComponent: FC<MapType> = ({ deckLayers }) => {
           controller={true}
           layers={deckLayers}
           getTooltip={({ object }) => object && `${object.id}\n`}
+          // onViewStateChange={onViewStateChange}
         >
           <Map
             reuseMaps
