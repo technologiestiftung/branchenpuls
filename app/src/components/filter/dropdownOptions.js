@@ -1,83 +1,69 @@
 import uiKeys from "@lib/uiKeys.json";
 
 export function getOptionsEmployees() {
-  //   // options for employees
-  //   const optionsEmployees = [];
-  //   for (const key in uiKeys.nr_e) {
-  //     optionsEmployees.push({
-  //       value: key,
-  //       label: uiKeys.nr_e[key],
-  //     });
-  //   }
-
   const optionsEmployees = [
     {
-      value: "0 Beschäftigte",
+      value: 0,
       label: "0",
     },
     {
-      value: "1 - 3 Beschäftigte",
+      value: 1,
       label: "1 - 3",
     },
     {
-      value: "4 - 6 Beschäftigte",
+      value: 2,
       label: "4 - 6",
     },
     {
-      value: "7 - 9 Beschäftigte",
+      value: 3,
       label: "7 - 9",
     },
     {
-      value: "10 - 19 Beschäftigte",
+      value: 4,
       label: "10 - 19",
     },
     {
-      value: "20 - 49 Beschäftigte",
+      value: 5,
       label: "20 - 49",
     },
     {
-      value: "50 - 99 Beschäftigte",
+      value: 6,
       label: "50 - 99",
     },
     {
-      value: "100 - 199 Beschäftigte",
+      value: 7,
       label: "100 - 199",
     },
     {
-      value: "200 - 499 Beschäftigte",
+      value: 8,
       label: "200 - 499",
     },
     {
-      value: "500 - 999 Beschäftigte",
+      value: 9,
       label: "500 - 999",
     },
     {
-      value: "1000 - 2499 Beschäftigte",
+      value: 10,
       label: "1000 - 2499",
     },
     {
-      value: "2500 - 4999 Beschäftigte",
+      value: 11,
       label: "2500 - 4999",
     },
     {
-      value: "5000 - 7499 Beschäftigte",
+      value: 12,
       label: "5000 - 7499",
     },
     {
-      value: "7500 - 9999 Beschäftigte",
+      value: 13,
       label: "7500 - 9999",
     },
     {
-      value: "10000 und mehr Beschäftigte",
-      label: "10000 und mehr",
-    },
-    {
-      value: "unbekannt",
-      label: "unbekannt",
+      value: 14,
+      label: "10000+",
     },
   ];
 
-  //   console.log(uiKeys.nr_e);
   return optionsEmployees;
 }
 

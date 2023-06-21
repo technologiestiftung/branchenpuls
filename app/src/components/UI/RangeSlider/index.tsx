@@ -10,7 +10,7 @@ export interface RangeSliderType {
   rounding?: string | undefined;
 }
 
-const primaryColor = "#56bd66";
+const primaryColor = "#003366";
 
 function roundingFunction(value: number, type: string | undefined) {
   if (type === "million") {

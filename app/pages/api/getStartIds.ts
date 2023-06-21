@@ -5,23 +5,31 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { pointid, lat, lng } = req.query;
+  console.log("req.query", req.query);
 
-  console.log("pointCoo", lat, lng);
+  // let { employees, age, bl1, bl2, bl3, bt } = req.query;
+
+  console.log("----getStartIds------");
 
   db.any(
     `
     SELECT
-        *
+        CAST(b.opendata_id AS FLOAT) AS id,
+        ARRAY[
+            CAST(l.longitude AS FLOAT),
+            CAST(l.latitude AS FLOAT)
+        ] AS p
     FROM
     business AS b
     INNER JOIN location AS l ON b.opendata_id = l.opendata_id
     WHERE
-        l.latitude = ${lat} AND l.longitude = ${lng} AND b.updated_on = '2023-06-01'
+        b.updated_on = '2023-06-01'
     `
   )
     .then((rows) => {
-      res.status(200).json({ data: rows });
+      res.status(200).json(rows);
+
+      // pgp.end();
     })
     .catch((err) => {
       console.error("Error executing query", err.stack);

@@ -4,8 +4,10 @@ import { App } from "@components/App";
 async function getPoints() {
   const devMode = process.env.NODE_ENV === "development";
   const path = devMode
-    ? "http://localhost:3000/data.json"
-    : "https://ihk-vis.netlify.app/data.json";
+    ? "http://localhost:3000/api/getStartIds/?"
+    : "https://ihk-vis.netlify.app/api/getStartIds/?";
+
+  // let path = "/api/getStartIds/?";
 
   let fetchConfig = {};
   if (devMode) {

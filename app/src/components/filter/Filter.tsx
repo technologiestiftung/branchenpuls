@@ -8,6 +8,9 @@ import Select from "react-select";
 
 import { FilterBranches } from "@/components/filter/FilterBranches";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 import {
   getOptionsEmployees,
   getOptionsBL3,
@@ -46,6 +49,18 @@ export const Filter: FC<FilterType> = ({
   const [filterValBl1, setFilterValBl1] = useState<object | null>(null);
   const [filterValBl2, setFilterValBl2] = useState<object | null>(null);
   const [filterValBl3, setFilterValBl3] = useState<object | null>(null);
+
+  const [startDate, setStartDate] = useState(new Date());
+  const [isDatepickerOpen, setIsDatepickerOpen] = useState(false);
+
+  const handleChange = (e) => {
+    setIsDatepickerOpen(!isDatepickerOpen);
+    setStartDate(e);
+  };
+  const handleClick = (e) => {
+    e.preventDefault();
+    setIsDatepickerOpen(!isDatepickerOpen);
+  };
 
   useEffect(() => {
     if (pageLoaded) {
@@ -89,8 +104,13 @@ export const Filter: FC<FilterType> = ({
               //   getFillColor: [86, 189, 102], // [86, 189, 102],
               opacity: layerOpacity,
               //   visible: { layerVisble },
-              onClick: (info) =>
-                getSinglePointData(info.object.id, info.object.p),
+              onClick: (info) => {
+                getSinglePointData(info.object.id, info.object.p);
+              },
+              transitions: {
+                // transition with a duration of 3000ms
+                opacity: 500,
+              },
             })
           : new HeatmapLayer({
               id: "heatmapLayer" + layerId,
@@ -158,10 +178,10 @@ export const Filter: FC<FilterType> = ({
   return (
     <div
       key={"layer-" + index}
-      className=" bg-white z-30 rounded-lg overflow-hidden  border-2"
-      style={{
-        borderColor: layersData[layerId].colorHex,
-      }}
+      className=" bg-white z-30 rounded-lg overflow-hidden  border-2 border-secondary"
+      // style={{
+      //   borderColor: layersData[layerId].colorHex,
+      // }}
     >
       <div
         className={`w-full h-full absolute z-40 opacity-25 ${
@@ -190,15 +210,15 @@ export const Filter: FC<FilterType> = ({
       </div>
       <div className="p-4">
         <div className="stat place-items-center">
-          <div className="stat-title">Unternehmen</div>
           <div
             className="stat-value"
             style={{
               color: layersData[layerId].colorHex,
             }}
           >
-            {filteredData.length}
+            {filteredData.length.toLocaleString("de-DE")}
           </div>
+          <div className="stat-title">Unternehmen</div>
         </div>
         <div className="form-control w-52">
           <label className="cursor-pointer label">
@@ -211,6 +231,23 @@ export const Filter: FC<FilterType> = ({
             />
           </label>
         </div>
+        <>
+          <button className="btn btn-primary btn-sm mt-6" onClick={handleClick}>
+            {("0" + (startDate.getMonth() + 1)).slice(-2) +
+              "." +
+              startDate.getFullYear()}
+          </button>
+          {isDatepickerOpen && (
+            <DatePicker
+              selected={startDate}
+              onChange={handleChange}
+              dateFormat="MM/yyyy"
+              inline
+              showMonthYearPicker
+            />
+          )}
+        </>
+        <br />
         Alter
         <RangeSlider
           value={filterValAge}
@@ -254,11 +291,14 @@ export const Filter: FC<FilterType> = ({
         <br />
         <button
           onClick={resetFilterData}
-          className="btn btn-primary btn-sm mt-6"
+          className="btn btn-primary btn-sm mt-6 text-white"
         >
           reset
         </button>
-        <button onClick={removeLayer} className="btn btn-primary btn-sm mt-6">
+        <button
+          onClick={removeLayer}
+          className="btn btn-primary btn-sm mt-6 text-white"
+        >
           remove layer
         </button>
         <button

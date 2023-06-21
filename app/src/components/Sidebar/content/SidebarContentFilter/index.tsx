@@ -27,7 +27,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 
   return (
     <>
-      <SidebarHeader text="Filter" />
+      <SidebarHeader text="Filter-postgres" />
 
       <SidebarBody>
         {Object.keys(layersData).map((layerId, i) => {

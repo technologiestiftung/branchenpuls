@@ -1,8 +1,8 @@
 export async function getSinglePointData(pointId, position) {
   let data;
   try {
-    const path = `/api/getsinglepointdata/?pointid=${pointId}&pointCoo=${
-      position[0] + "" + position[1]
+    const path = `/api/getsinglepointdata/?pointid=${pointId}&lng=${
+      position[0] + "&lat=" + position[1]
     }`;
     let res;
     if (process.env.NODE_ENV === "development") {
