@@ -178,7 +178,7 @@ export const Filter: FC<FilterType> = ({
   return (
     <div
       key={"layer-" + index}
-      className=" bg-white z-30 rounded-lg overflow-hidden  border-2 border-secondary"
+      className=" bg-white z-30 rounded-lg overflow-hidden  border-2 border-secondary mb-4"
       // style={{
       //   borderColor: layersData[layerId].colorHex,
       // }}
@@ -222,7 +222,7 @@ export const Filter: FC<FilterType> = ({
         </div>
         <div className="form-control w-52">
           <label className="cursor-pointer label">
-            <span className="label-text">Heatmap</span>
+            <span className="label-text text-md">Heatmap</span>
             <input
               type="checkbox"
               className="toggle toggle-primary"
@@ -231,24 +231,26 @@ export const Filter: FC<FilterType> = ({
             />
           </label>
         </div>
-        <>
+        <div className="relative grid">
           <button className="btn btn-primary btn-sm mt-6" onClick={handleClick}>
             {("0" + (startDate.getMonth() + 1)).slice(-2) +
               "." +
               startDate.getFullYear()}
           </button>
           {isDatepickerOpen && (
-            <DatePicker
-              selected={startDate}
-              onChange={handleChange}
-              dateFormat="MM/yyyy"
-              inline
-              showMonthYearPicker
-            />
+            <span className="absolute z-20">
+              <DatePicker
+                selected={startDate}
+                onChange={handleChange}
+                dateFormat="MM/yyyy"
+                inline
+                showMonthYearPicker
+              />
+            </span>
           )}
-        </>
+        </div>
         <br />
-        Alter
+        <p className="text-md">Alter</p>
         <RangeSlider
           value={filterValAge}
           setValue={setFilterValAge}

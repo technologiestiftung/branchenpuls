@@ -16,14 +16,13 @@ export async function getIdsByFilter(
     ? employees.value
     : false;
 
-  console.log("ÄÄÄssssss", sendEmployees);
   const sendBType = filterBType !== null ? filterBType.value : false;
   const sendStart = age[0] === 0 && age[1] === 100 ? false : age[0];
   const sendEnd = age[0] === 0 && age[1] === 100 ? false : age[1];
 
   let path = "/api/getIds/?";
-  path += sendStart ? `&start=${sendStart}` : "";
-  path += sendEnd ? `&end=${sendEnd}` : "";
+  path += sendStart !== false ? `&start=${sendStart}` : "";
+  path += sendEnd !== false ? `&end=${sendEnd}` : "";
   path += !isNaN(parseFloat(sendEmployees))
     ? `&employees=${sendEmployees}`
     : "";

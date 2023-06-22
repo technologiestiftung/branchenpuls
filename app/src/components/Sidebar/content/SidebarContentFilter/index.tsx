@@ -45,14 +45,16 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
             ></Filter>
           );
         })}
-        <button
-          onClick={() => {
-            addLayer(layersData, setLayersData);
-          }}
-          className="btn btn-primary btn-sm my-6 sticky bottom-4"
-        >
-          + Add Layer
-        </button>
+        <div className="my-6 sticky bottom-4 bg-white width-full">
+          <button
+            onClick={() => {
+              addLayer(layersData, setLayersData);
+            }}
+            className="btn btn-primary btn-sm"
+          >
+            + Add Layer
+          </button>
+        </div>
       </SidebarBody>
     </>
   );

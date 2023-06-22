@@ -1,7 +1,7 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode } from "react";
 
 export interface SidebarBodyType {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export const SidebarBody: FC<SidebarBodyType> = ({ children }) => {
@@ -9,5 +9,5 @@ export const SidebarBody: FC<SidebarBodyType> = ({ children }) => {
     <>
       <div className="px-4">{children}</div>
     </>
-  )
-}
+  );
+};
