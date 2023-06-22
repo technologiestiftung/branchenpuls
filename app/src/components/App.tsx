@@ -30,7 +30,7 @@ async function getPoints() {
   const devMode = process.env.NODE_ENV === "development";
   const path = devMode
     ? "http://localhost:3000/api/getStartIds/?"
-    : "https://ihk-vis.netlify.app/api/getStartIds/?";
+    : "https://deploy-preview-5--ihk-vis.netlify.app/api/getStartIds/?";
 
   // let path = "/api/getStartIds/?";
 
