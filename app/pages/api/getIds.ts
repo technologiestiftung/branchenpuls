@@ -4,6 +4,7 @@ import db from "@lib/db";
 //   client: "pg",
 // });
 const sql = require("sql-bricks");
+const zlib = require("zlib");
 
 function validateNumbers(variables) {
   const { employees, age, bl1, bl2, bl3, bt } = variables;
@@ -76,7 +77,20 @@ export default async function handler(
     .then((rows) => {
       console.log("result-returned: ", rows.length);
 
-      res.status(200).json({ ids: rows[0].ids });
+      const strData = JSON.stringify(rows);
+
+      zlib.gzip(strData, (err, buffer) => {
+        if (!err) {
+          res.setHeader("Content-Encoding", "gzip");
+          res.setHeader("Content-Type", "application/json");
+          res.send(buffer);
+        } else {
+          console.log(err);
+          res.status(500).send("Error compressing data");
+        }
+      });
+
+      // res.status(200).json({ ids: rows[0].ids });
     })
     .catch((err) => {
       console.error("Error executing query", err.stack);
