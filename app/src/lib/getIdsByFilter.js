@@ -46,7 +46,7 @@ export async function getIdsByFilter(
     if (res.ok) {
       const data = await res.json();
 
-      data.ids.forEach((d) => {
+      data.forEach((d) => {
         newData.push(dataPointsIndexed[d]);
       });
     }
