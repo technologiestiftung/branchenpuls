@@ -14,6 +14,6 @@ const settingProduction = {
   user: process.env.NEXT_PUBLIC_DB_USER,
   password: process.env.NEXT_PUBLIC_DB_PASSWORD,
 };
-const db = pgp(devMode ? settingProduction : settingProduction);
+const db = pgp(devMode ? settingsLocal : settingProduction);
 
 module.exports = db;

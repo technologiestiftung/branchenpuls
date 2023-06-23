@@ -6,6 +6,8 @@ import { SidebarContentFilter } from "@components/Sidebar/content/SidebarContent
 import { SidebarWrapper } from "@components/Sidebar/SidebarWrapper";
 import { SidebarNav } from "@components/Sidebar/SidebarNav";
 import { Info, Filter, Search } from "@components/Icons";
+import pako from "pako";
+import { inflate } from "pako";
 
 const navViews = [
   {
@@ -30,7 +32,8 @@ async function getPoints() {
   const devMode = process.env.NODE_ENV === "development";
   const path = devMode
     ? "http://localhost:3000/api/getStartIds/?"
-    : "https://deploy-preview-5--ihk-vis.netlify.app/api/getStartIds/?";
+    : // : "https://ihk-vis.netlify.app/api/getStartIds/?";
+      "https://deploy-preview-5--ihk-vis.netlify.app/api/getStartIds/?";
 
   // let path = "/api/getStartIds/?";
 
@@ -38,12 +41,22 @@ async function getPoints() {
   if (devMode) {
     fetchConfig.cache = "no-store";
   }
-  let res = await fetch(path, fetchConfig);
+  let data;
+  let res = await fetch(path, fetchConfig)
+    .then((res) => res.arrayBuffer())
+    .then((arrayBuffer) => {
+      const decompressedData = pako.inflate(arrayBuffer, { to: "string" });
+      data = JSON.parse(decompressedData);
+      // console.log(data);
+    });
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
+  return data;
+
+  // if (!res.ok) {
+  //   throw new Error("Failed to fetch data");
+  // }
+
+  // return res.json();
 }
 
 export const App: FC<AppType> = () => {
@@ -61,6 +74,8 @@ export const App: FC<AppType> = () => {
     async function getData() {
       const dataPoints = await getPoints();
 
+      console.log("ÖÖÖÖ", dataPoints);
+
       let dIndexed = {};
       dataPoints.forEach((d) => {
         dIndexed[d.id] = d;
@@ -73,34 +88,40 @@ export const App: FC<AppType> = () => {
   }, []);
 
   return (
-    dataLoaded && (
-      <main className="">
-        <MapComponent deckLayers={deckLayers} setZoom={setZoom}></MapComponent>
-        <SidebarWrapper
-          classes="z-20"
-          position="left"
-          isOpen={sidebarMenuOpen}
-          setOpen={setSidebarMenuOpen}
-          closeSymbol="cross"
-          mobileHeight={mobileHeight}
-        >
-          <SidebarContentFilter
-            dataPoints={dataPoints}
-            dataPointsIndexed={dataPointsIndexed}
-            setDeckLayers={setDeckLayers}
+    <>
+      {!dataLoaded ? "loading data" : ""}
+      {dataLoaded && (
+        <main className="">
+          <MapComponent
             deckLayers={deckLayers}
-            layersData={layersData}
-            setLayersData={setLayersData}
+            setZoom={setZoom}
+          ></MapComponent>
+          <SidebarWrapper
+            classes="z-20"
+            position="left"
+            isOpen={sidebarMenuOpen}
+            setOpen={setSidebarMenuOpen}
+            closeSymbol="cross"
+            mobileHeight={mobileHeight}
+          >
+            <SidebarContentFilter
+              dataPoints={dataPoints}
+              dataPointsIndexed={dataPointsIndexed}
+              setDeckLayers={setDeckLayers}
+              deckLayers={deckLayers}
+              layersData={layersData}
+              setLayersData={setLayersData}
+            />
+          </SidebarWrapper>
+          <SidebarNav
+            navViews={navViews}
+            setNavView={setNavView}
+            navView={navView}
+            sidebarMenuOpen={sidebarMenuOpen}
+            setSidebarMenuOpen={setSidebarMenuOpen}
           />
-        </SidebarWrapper>
-        <SidebarNav
-          navViews={navViews}
-          setNavView={setNavView}
-          navView={navView}
-          sidebarMenuOpen={sidebarMenuOpen}
-          setSidebarMenuOpen={setSidebarMenuOpen}
-        />
-      </main>
-    )
+        </main>
+      )}
+    </>
   );
 };
