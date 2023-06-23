@@ -77,7 +77,7 @@ export default async function handler(
     .then((rows) => {
       console.log("result-returned: ", rows.length);
 
-      const strData = JSON.stringify(rows);
+      const strData = JSON.stringify(rows[0].ids);
 
       zlib.gzip(strData, (err, buffer) => {
         if (!err) {

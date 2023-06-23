@@ -44,7 +44,19 @@ async function getPoints() {
     fetchConfig.cache = "no-store";
   }
   let data;
-  let res = await fetch(path, fetchConfig);
+  let res;
+
+  if (devMode) {
+    res = await fetch(path, fetchConfig)
+      .then((res) => res.arrayBuffer())
+      .then((arrayBuffer) => {
+        const decompressedData = pako.inflate(arrayBuffer, { to: "string" });
+        data = JSON.parse(decompressedData);
+        console.log(data);
+      });
+  } else {
+    res = await fetch(path, fetchConfig);
+  }
   //   .then((res) => res.arrayBuffer())
   //   .then((arrayBuffer) => {
   //     const decompressedData = pako.inflate(arrayBuffer, { to: "string" });
