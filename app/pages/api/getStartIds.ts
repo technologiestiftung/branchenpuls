@@ -40,7 +40,7 @@ export default async function handler(
     zlib.gzip(strData, (err, buffer) => {
       if (!err) {
         res.setHeader("Content-Encoding", "gzip");
-        // res.setHeader("Content-Type", "application/json");
+        res.setHeader("Content-Type", "application/json");
         res.send(buffer);
       } else {
         console.log(err);

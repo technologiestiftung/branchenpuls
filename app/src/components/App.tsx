@@ -37,6 +37,8 @@ async function getPoints() {
 
   // let path = "/api/getStartIds/?";
 
+  console.log("GETTTING DATA");
+
   let fetchConfig = {};
   if (devMode) {
     fetchConfig.cache = "no-store";
@@ -47,7 +49,7 @@ async function getPoints() {
     .then((arrayBuffer) => {
       const decompressedData = pako.inflate(arrayBuffer, { to: "string" });
       data = JSON.parse(decompressedData);
-      // console.log(data);
+      console.log(data);
     });
 
   return data;
