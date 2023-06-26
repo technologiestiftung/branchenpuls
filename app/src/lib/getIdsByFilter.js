@@ -1,3 +1,6 @@
+import pako from "pako";
+const devMode = process.env.NODE_ENV === "development";
+
 export async function getIdsByFilter(
   dataPointsIndexed,
   age,
@@ -37,18 +40,26 @@ export async function getIdsByFilter(
   const newData = [];
   try {
     let res;
-    if (process.env.NODE_ENV === "development") {
-      res = await fetch(path, { cache: "no-store" });
+
+    if (devMode) {
+      res = await fetch(path, { cache: "no-store" })
+        .then((res) => res.arrayBuffer())
+        .then((arrayBuffer) => {
+          const decompressedData = pako.inflate(arrayBuffer, { to: "string" });
+          const data = JSON.parse(decompressedData);
+          data.forEach((d) => {
+            newData.push(dataPointsIndexed[d]);
+          });
+        });
     } else {
-      res = await fetch(path);
-    }
+      res = await fetch(path, fetchConfig);
+      if (res.ok) {
+        const data = await res.json();
 
-    if (res.ok) {
-      const data = await res.json();
-
-      data.forEach((d) => {
-        newData.push(dataPointsIndexed[d]);
-      });
+        data.forEach((d) => {
+          newData.push(dataPointsIndexed[d]);
+        });
+      }
     }
   } catch (error) {
     console.error(error);

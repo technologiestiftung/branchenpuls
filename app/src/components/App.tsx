@@ -7,7 +7,6 @@ import { SidebarWrapper } from "@components/Sidebar/SidebarWrapper";
 import { SidebarNav } from "@components/Sidebar/SidebarNav";
 import { Info, Filter, Search } from "@components/Icons";
 import pako from "pako";
-import { inflate } from "pako";
 
 const navViews = [
   {
@@ -30,47 +29,23 @@ export interface AppType {
 
 async function getPoints() {
   const devMode = process.env.NODE_ENV === "development";
-  const path = devMode
-    ? "http://localhost:3000/api/getStartIds/?"
-    : // : "https://ihk-vis.netlify.app/api/getStartIds/?";
-      "https://deploy-preview-5--ihk-vis.netlify.app/api/getStartIds/?";
 
-  // let path = "/api/getStartIds/?";
-
-  console.log("GETTTING DATA");
-
+  let path = "/api/month/?";
   let fetchConfig = {};
   if (devMode) {
     fetchConfig.cache = "no-store";
   }
-  let data;
-  let res;
-
   if (devMode) {
-    res = await fetch(path, fetchConfig)
+    return await fetch(path, fetchConfig)
       .then((res) => res.arrayBuffer())
       .then((arrayBuffer) => {
         const decompressedData = pako.inflate(arrayBuffer, { to: "string" });
-        data = JSON.parse(decompressedData);
-        console.log(data);
+        return JSON.parse(decompressedData);
       });
   } else {
-    res = await fetch(path, fetchConfig);
+    let res = await fetch(path, fetchConfig);
+    return res.json();
   }
-  //   .then((res) => res.arrayBuffer())
-  //   .then((arrayBuffer) => {
-  //     const decompressedData = pako.inflate(arrayBuffer, { to: "string" });
-  //     data = JSON.parse(decompressedData);
-  //     console.log(data);
-  //   });
-
-  // return data;
-
-  // if (!res.ok) {
-  //   throw new Error("Failed to fetch data");
-  // }
-
-  return res.json();
 }
 
 export const App: FC<AppType> = () => {
@@ -85,11 +60,9 @@ export const App: FC<AppType> = () => {
   const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
-    async function getData() {
+    // load the data for a month. the data includes the coordinates and the ids of the points
+    (async () => {
       const dataPoints = await getPoints();
-
-      console.log("ÖÖÖÖ", dataPoints);
-
       let dIndexed = {};
       dataPoints.forEach((d) => {
         dIndexed[d.id] = d;
@@ -97,8 +70,7 @@ export const App: FC<AppType> = () => {
       setDataPointsIndexed(dIndexed);
       setDataPoints(dataPoints);
       setDataLoaded(true);
-    }
-    getData();
+    })();
   }, []);
 
   return (

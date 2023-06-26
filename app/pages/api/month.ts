@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import db from "@lib/db";
-import { Readable } from "stream";
-import { createGzip } from "zlib";
 const zlib = require("zlib");
 
 function executeQuery(query: string): Promise<any> {
@@ -34,9 +32,7 @@ export default async function handler(
 
   try {
     const rows = await executeQuery(query);
-
     const strData = JSON.stringify(rows);
-
     zlib.gzip(strData, (err, buffer) => {
       if (!err) {
         res.setHeader("Content-Encoding", "gzip");
