@@ -52,7 +52,7 @@ export async function getIdsByFilter(
           });
         });
     } else {
-      res = await fetch(path, fetchConfig);
+      res = await fetch(path);
       if (res.ok) {
         const data = await res.json();
 
