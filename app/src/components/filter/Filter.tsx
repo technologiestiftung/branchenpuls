@@ -34,7 +34,7 @@ export const Filter: FC<FilterType> = ({
   index,
 }) => {
   const [filteredData, setFilteredData] = useState(dataPoints);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [pageLoaded, setPageLoaded] = useState<boolean>(false);
   const [layerVisble, setLayerVisible] = useState<boolean>(true);
   const [layerOpacity, setLayerOpacity] = useState<number>(0.5);
@@ -77,6 +77,7 @@ export const Filter: FC<FilterType> = ({
     }
     setPageLoaded(true);
   }, [
+    dataPointsIndexed,
     filterValAge,
     filterValEmployees,
     filterBType,

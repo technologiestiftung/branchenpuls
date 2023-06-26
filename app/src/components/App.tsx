@@ -75,39 +75,33 @@ export const App: FC<AppType> = () => {
 
   return (
     <>
-      {!dataLoaded ? "loading data" : ""}
-      {dataLoaded && (
-        <main className="">
-          <MapComponent
+      <main className="">
+        <MapComponent deckLayers={deckLayers} setZoom={setZoom}></MapComponent>
+        <SidebarWrapper
+          classes="z-20"
+          position="left"
+          isOpen={sidebarMenuOpen}
+          setOpen={setSidebarMenuOpen}
+          closeSymbol="cross"
+          mobileHeight={mobileHeight}
+        >
+          <SidebarContentFilter
+            dataPoints={dataPoints}
+            dataPointsIndexed={dataPointsIndexed}
+            setDeckLayers={setDeckLayers}
             deckLayers={deckLayers}
-            setZoom={setZoom}
-          ></MapComponent>
-          <SidebarWrapper
-            classes="z-20"
-            position="left"
-            isOpen={sidebarMenuOpen}
-            setOpen={setSidebarMenuOpen}
-            closeSymbol="cross"
-            mobileHeight={mobileHeight}
-          >
-            <SidebarContentFilter
-              dataPoints={dataPoints}
-              dataPointsIndexed={dataPointsIndexed}
-              setDeckLayers={setDeckLayers}
-              deckLayers={deckLayers}
-              layersData={layersData}
-              setLayersData={setLayersData}
-            />
-          </SidebarWrapper>
-          <SidebarNav
-            navViews={navViews}
-            setNavView={setNavView}
-            navView={navView}
-            sidebarMenuOpen={sidebarMenuOpen}
-            setSidebarMenuOpen={setSidebarMenuOpen}
+            layersData={layersData}
+            setLayersData={setLayersData}
           />
-        </main>
-      )}
+        </SidebarWrapper>
+        <SidebarNav
+          navViews={navViews}
+          setNavView={setNavView}
+          navView={navView}
+          sidebarMenuOpen={sidebarMenuOpen}
+          setSidebarMenuOpen={setSidebarMenuOpen}
+        />
+      </main>
     </>
   );
 };
