@@ -53,15 +53,10 @@ export const Filter: FC<FilterType> = ({
   const [startDate, setStartDate] = useState(new Date());
   const [isDatepickerOpen, setIsDatepickerOpen] = useState(false);
 
-  const handleChange = (e) => {
+  const handleDateChange = (e) => {
     setIsDatepickerOpen(!isDatepickerOpen);
     setStartDate(e);
   };
-  const handleClick = (e) => {
-    e.preventDefault();
-    setIsDatepickerOpen(!isDatepickerOpen);
-  };
-
   useEffect(() => {
     if (pageLoaded) {
       const timer = setTimeout(async () => {
@@ -160,28 +155,10 @@ export const Filter: FC<FilterType> = ({
     delete layersData[layerId];
   };
 
-  //   async function runFilter() {
-  //     setLoading(true);
-  //     const newFilteredData = await getIdsByFilter(
-  //       dataPointsIndexed,
-  //       filterValAge,
-  //       filterValEmployees,
-  //       filterBType,
-  //       filterValBl1,
-  //       filterValBl2,
-  //       filterValBl3
-  //     );
-  //     setFilteredData(newFilteredData);
-  //     setLoading(false);
-  //   }
-
   return (
     <div
       key={"layer-" + index}
       className=" bg-white z-30 rounded-lg overflow-hidden  border-2 border-secondary mb-4"
-      // style={{
-      //   borderColor: layersData[layerId].colorHex,
-      // }}
     >
       <div
         className={`w-full h-full absolute z-40 opacity-25 ${
@@ -232,7 +209,12 @@ export const Filter: FC<FilterType> = ({
           </label>
         </div>
         <div className="relative grid">
-          <button className="btn btn-primary btn-sm mt-6" onClick={handleClick}>
+          <button
+            className="btn btn-primary btn-sm mt-6"
+            onClick={() => {
+              setIsDatepickerOpen(!isDatepickerOpen);
+            }}
+          >
             {("0" + (startDate.getMonth() + 1)).slice(-2) +
               "." +
               startDate.getFullYear()}
@@ -241,7 +223,7 @@ export const Filter: FC<FilterType> = ({
             <span className="absolute z-20">
               <DatePicker
                 selected={startDate}
-                onChange={handleChange}
+                onChange={handleDateChange}
                 dateFormat="MM/yyyy"
                 inline
                 showMonthYearPicker

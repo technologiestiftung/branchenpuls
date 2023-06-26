@@ -62,13 +62,17 @@ export default async function handler(
     select = select.where("branch_top_level_id", bl1);
   }
 
+  if (bl2 !== undefined) {
+    select = select.where("nace_id", bl2);
+  }
+
+  if (bl3 !== undefined) {
+    select = select.where("ihk_branch_id", bl3);
+  }
+
   if (employees !== undefined) {
     select = select.where("employees_range", employees);
   }
-
-  //   -- CREATE INDEX ihk_branch_id_index ON location (opendata_id);
-  // -- CREATE INDEX nace_id_index ON location (opendata_id);
-  // -- CREATE INDEX branch_top_level_id ON location (opendata_id);
 
   const queryString = select.toString();
   console.log(queryString);
