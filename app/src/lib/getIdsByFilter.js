@@ -8,22 +8,23 @@ export async function getIdsByFilter(
   filterBType,
   filterValBL1,
   filterValBL2,
-  filterValBL3
+  filterValBL3,
+  filterValDateMonth,
+  filterValDateYear
 ) {
   // make all default val null
   const sendFilterValBL1 = filterValBL1?.value ? filterValBL1.value : false;
   const sendFilterValBL2 = filterValBL2?.value ? filterValBL2.value : false;
   const sendFilterValBL3 = filterValBL3?.value ? filterValBL3.value : false;
-
   const sendEmployees = !isNaN(parseFloat(employees?.value))
     ? employees.value
     : false;
-
   const sendBType = filterBType !== null ? filterBType.value : false;
   const sendStart = age[0] === 0 && age[1] === 100 ? false : age[0];
   const sendEnd = age[0] === 0 && age[1] === 100 ? false : age[1];
 
   let path = "/api/getIds/?";
+
   path += sendStart !== false ? `&start=${sendStart}` : "";
   path += sendEnd !== false ? `&end=${sendEnd}` : "";
   path += !isNaN(parseFloat(sendEmployees))
@@ -33,9 +34,28 @@ export async function getIdsByFilter(
   path += sendFilterValBL2 ? `&bl2=${sendFilterValBL2}` : "";
   path += sendFilterValBL3 ? `&bl3=${sendFilterValBL3}` : "";
   path += sendBType !== false ? `&bt=${sendBType}` : "";
+  path += `&month=${filterValDateMonth}`;
+  path += `&year=${filterValDateYear}`;
+
   // path += "&ids=1&ids=2&ids=3&ids=4&ids=5";
 
-  console.log("path: ", path);
+  // when there is no filter set return the data
+  if (
+    !sendFilterValBL1 &&
+    !sendFilterValBL2 &&
+    !sendFilterValBL3 &&
+    !sendEmployees &&
+    !sendBType &&
+    !sendStart &&
+    !sendEnd
+  ) {
+    const newData = [];
+    Object.keys(dataPointsIndexed).forEach((d) => {
+      newData.push(dataPointsIndexed[d]);
+    });
+
+    return newData;
+  }
 
   const newData = [];
   try {

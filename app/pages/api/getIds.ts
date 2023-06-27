@@ -6,6 +6,14 @@ import db from "@lib/db";
 const sql = require("sql-bricks");
 const zlib = require("zlib");
 
+function addZero(d: number) {
+  if (d.toString().length === 1) {
+    return "0" + d;
+  }
+
+  return d;
+}
+
 function validateNumbers(variables) {
   const { employees, age, bl1, bl2, bl3, bt } = variables;
 
@@ -28,17 +36,8 @@ export default async function handler(
 ) {
   console.log("req.query", req.query);
 
-  let { employees, start, end, bl1, bl2, bl3, bt, ids } = req.query;
-
-  // start = start === undefined ? null : Number(start);
-  // end = end === undefined ? null : Number(end);
-  // bl1 = bl1 === undefined ? null : Number(bl1);
-  // bl2 = bl2 === undefined ? null : Number(bl2);
-  // bl3 = bl3 === undefined ? null : Number(bl3);
-  // employees = employees === undefined ? null : employees;
-  // bt = bt === undefined ? null : bt;
-
-  // console.log("ÖÖÖÖÖÖÖÖÖÖÖ  ", ids);
+  let { employees, start, end, bl1, bl2, bl3, bt, ids, month, year } =
+    req.query;
 
   try {
     validateNumbers(req.query);
@@ -46,9 +45,12 @@ export default async function handler(
     console.error(error);
   }
 
+  month = addZero(month);
+  console.log("monthmonthmonthmonth", month);
+
   let select = sql
     .select("array_agg(opendata_id) AS ids")
-    .from("state_06_2023");
+    .from(`state_${month}_${year}`);
 
   if (start !== undefined && end !== undefined) {
     select = select.where(sql.between("business_age", start, end));

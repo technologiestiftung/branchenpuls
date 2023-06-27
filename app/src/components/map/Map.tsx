@@ -53,7 +53,8 @@ export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
             reuseMaps
             mapLib={maplibregl}
             mapStyle={
-              process.env.NODE_ENV == "development" ? mapStyle() : MAP_STYLE
+              // process.env.NODE_ENV == "development" ? mapStyle() : MAP_STYLE
+              MAP_STYLE
             }
             styleDiffing={true}
           >

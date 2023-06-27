@@ -20,7 +20,7 @@ export async function getSinglePointData(pointId, position) {
       position: position,
       info: data.data,
     };
-    alert(JSON.stringify(popupData));
-    // setSelectedPoint(popupData);
+
+    return popupData;
   }
 }

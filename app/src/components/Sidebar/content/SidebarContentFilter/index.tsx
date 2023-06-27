@@ -11,8 +11,6 @@ export interface SidebarContentFilterType {
 }
 
 export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
-  dataPoints,
-  dataPointsIndexed,
   setDeckLayers,
   deckLayers,
   layersData,
@@ -34,8 +32,6 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
           const layer = layersData[layerId];
           return (
             <Filter
-              dataPoints={dataPoints}
-              dataPointsIndexed={dataPointsIndexed}
               setDeckLayers={setDeckLayers}
               deckLayers={deckLayers}
               layerId={layer.id}
@@ -50,7 +46,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
             onClick={() => {
               addLayer(layersData, setLayersData);
             }}
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary btn-sm text-white"
           >
             + Add Layer
           </button>

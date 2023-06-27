@@ -19,6 +19,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const { date } = req.query;
+
+  console.log("date", date);
+
   const query = `
     SELECT
       CAST(s.opendata_id AS FLOAT) AS id,
@@ -27,7 +31,7 @@ export default async function handler(
           CAST(s.latitude AS FLOAT)
       ] AS p
     FROM
-      state_06_2023 AS s
+      state_0${date}_2023 AS s
   `;
 
   try {
