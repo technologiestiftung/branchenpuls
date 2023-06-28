@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   const { pointid, lat, lng } = req.query;
 
-  console.log("pointCoo", lat, lng);
+  console.log("pointCoo???", lat, lng, pointid);
 
   // key: 346706,
   // opendata_id: '825955871186',
@@ -26,13 +26,15 @@ export default async function handler(
 
   db.any(
     `
+
+
     SELECT
-      b.opendata_id, b.business_type, b.business_age, TO_CHAR(b.created_on, 'YYYY-MM-DD') AS created_on , TO_CHAR(b.updated_on, 'YYYY-MM-DD') AS updated_on 
-    FROM
-    business AS b
-    INNER JOIN location AS l ON b.opendata_id = l.opendata_id
-    WHERE
-        l.latitude = ${lat} AND l.longitude = ${lng} 
+    b.opendata_id, b.business_type, b.business_age, TO_CHAR(l.created_on, 'YYYY-MM-DD') AS created_on , TO_CHAR(b.updated_on, 'YYYY-MM-DD') AS updated_on , l.latitude, l.longitude, l.prognoseraum
+  FROM
+  business AS b
+  INNER JOIN location AS l ON b.opendata_id = l.opendata_id
+  WHERE
+  l.latitude = ${lat} AND l.longitude =${lng} OR b.opendata_id = '${pointid}'
     `
   )
     .then((rows) => {

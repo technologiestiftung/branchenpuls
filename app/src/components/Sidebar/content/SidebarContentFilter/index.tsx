@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 // import classNames from "classnames";
 import { SidebarHeader } from "@components/Sidebar/SidebarHeader";
 import { SidebarBody } from "@components/Sidebar/SidebarBody";
-import { Filter } from "@/components/filter/Filter";
+import { FilterLayer } from "@/components/filter/FilterLayer";
 import { addLayer } from "@lib/addLayer.js";
 
 export interface SidebarContentFilterType {
@@ -15,6 +15,8 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
   deckLayers,
   layersData,
   setLayersData,
+  loading,
+  setLoading,
 }) => {
   // add one layer on start
   useEffect(() => {
@@ -31,14 +33,16 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
         {Object.keys(layersData).map((layerId, i) => {
           const layer = layersData[layerId];
           return (
-            <Filter
+            <FilterLayer
               setDeckLayers={setDeckLayers}
               deckLayers={deckLayers}
               layerId={layer.id}
               layersData={layersData}
               index={i}
               key={i}
-            ></Filter>
+              loading={loading}
+              setLoading={setLoading}
+            ></FilterLayer>
           );
         })}
         <div className="my-6 sticky bottom-4 bg-white width-full">
@@ -48,7 +52,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
             }}
             className="btn btn-primary btn-sm text-white"
           >
-            + Add Layer
+            + Ebene hinzufügen
           </button>
         </div>
       </SidebarBody>

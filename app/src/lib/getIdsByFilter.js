@@ -10,7 +10,8 @@ export async function getIdsByFilter(
   filterValBL2,
   filterValBL3,
   filterValDateMonth,
-  filterValDateYear
+  filterValDateYear,
+  filterMonthOnly
 ) {
   // make all default val null
   const sendFilterValBL1 = filterValBL1?.value ? filterValBL1.value : false;
@@ -22,6 +23,7 @@ export async function getIdsByFilter(
   const sendBType = filterBType !== null ? filterBType.value : false;
   const sendStart = age[0] === 0 && age[1] === 100 ? false : age[0];
   const sendEnd = age[0] === 0 && age[1] === 100 ? false : age[1];
+  const sendMonthOnly = filterMonthOnly === true ? 1 : 0;
 
   let path = "/api/getIds/?";
 
@@ -36,6 +38,7 @@ export async function getIdsByFilter(
   path += sendBType !== false ? `&bt=${sendBType}` : "";
   path += `&month=${filterValDateMonth}`;
   path += `&year=${filterValDateYear}`;
+  path += sendMonthOnly === 1 ? `&monthonly=${sendMonthOnly}` : "";
 
   // path += "&ids=1&ids=2&ids=3&ids=4&ids=5";
 
@@ -45,10 +48,12 @@ export async function getIdsByFilter(
     !sendFilterValBL2 &&
     !sendFilterValBL3 &&
     !sendEmployees &&
-    !sendBType &&
+    sendBType === false &&
     !sendStart &&
-    !sendEnd
+    !sendEnd &&
+    sendMonthOnly !== 1
   ) {
+    console.log("resetting");
     const newData = [];
     Object.keys(dataPointsIndexed).forEach((d) => {
       newData.push(dataPointsIndexed[d]);
@@ -56,6 +61,8 @@ export async function getIdsByFilter(
 
     return newData;
   }
+
+  console.log("path : ", path);
 
   const newData = [];
   try {

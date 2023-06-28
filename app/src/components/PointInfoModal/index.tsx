@@ -17,8 +17,6 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
     setPoinInfoModalOpen(false);
   }
 
-  console.log("ÄÄÄÄ", pointData);
-
   return (
     <>
       {pointData.info !== undefined && (

@@ -15,9 +15,9 @@ function addZero(d: number) {
 }
 
 function validateNumbers(variables) {
-  const { employees, age, bl1, bl2, bl3, bt } = variables;
+  const { employees, age, bl1, bl2, bl3, bt, monthonly } = variables;
 
-  const areNumbers = [employees, age, bl1, bl2, bl3, bt].every(
+  const areNumbers = [employees, age, bl1, bl2, bl3, bt, monthonly].every(
     (variable) =>
       variable === undefined ||
       (!isNaN(parseFloat(variable)) && isFinite(variable))
@@ -36,8 +36,19 @@ export default async function handler(
 ) {
   console.log("req.query", req.query);
 
-  let { employees, start, end, bl1, bl2, bl3, bt, ids, month, year } =
-    req.query;
+  let {
+    employees,
+    start,
+    end,
+    bl1,
+    bl2,
+    bl3,
+    bt,
+    ids,
+    month,
+    year,
+    monthonly,
+  } = req.query;
 
   try {
     validateNumbers(req.query);
@@ -74,6 +85,10 @@ export default async function handler(
 
   if (employees !== undefined) {
     select = select.where("employees_range", employees);
+  }
+
+  if (monthonly !== undefined) {
+    select = select.where("created_on", `${year}_${month}_01`);
   }
 
   const queryString = select.toString();
