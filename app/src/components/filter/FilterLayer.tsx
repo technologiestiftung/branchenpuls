@@ -288,7 +288,13 @@ export const FilterLayer: FC<FilterLayerType> = ({
                 onChange={() => setFilterMonthOnly(!filterMonthOnly)}
               />
               <span className="label-text">
-                {filterValDateMonth}.{filterValDateYear} gegründet
+                {new Date(2020, filterValDateMonth - 1).toLocaleString(
+                  "de-DE",
+                  {
+                    month: "long",
+                  }
+                )}{" "}
+                {filterValDateYear} gegründet
               </span>
             </label>
           </div>
