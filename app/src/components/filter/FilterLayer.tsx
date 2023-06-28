@@ -344,13 +344,13 @@ export const FilterLayer: FC<FilterLayerType> = ({
             onClick={resetFilterData}
             className="btn btn-primary btn-sm mt-6 text-white mr-4"
           >
-            reset
+            Filter zurücksetzen
           </button>
           <button
             onClick={removeLayer}
             className="btn btn-primary btn-sm mt-6 text-white"
           >
-            remove layer
+            Ebene entfernen
           </button>
           {/* <button
             onClick={() => {
