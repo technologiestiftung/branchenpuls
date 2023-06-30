@@ -28,7 +28,6 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
   return (
     <>
       <SidebarHeader text="IHK Gewerbedaten" />
-
       <SidebarBody>
         {Object.keys(layersData).map((layerId, i) => {
           const layer = layersData[layerId];

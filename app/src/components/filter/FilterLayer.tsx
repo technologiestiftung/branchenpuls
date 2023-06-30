@@ -1,17 +1,17 @@
 import { FC, useState, useEffect } from "react";
 import { ScatterplotLayer } from "@deck.gl/layers";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers";
-import { getSinglePointData } from "@lib/getSinglePointData";
-import { getIdsByFilter } from "@lib/getIdsByFilter";
-import { RangeSlider } from "@/components/UI/RangeSlider";
-import { PointInfoModal } from "@components/PointInfoModal";
-import Select from "react-select";
-
-import { FilterBranches } from "@/components/filter/FilterBranches";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import pako from "pako";
+import Select from "react-select";
+
+import { RangeSlider } from "@/components/UI/RangeSlider";
+import { PointInfoModal } from "@components/PointInfoModal";
+import { FilterBranches } from "@/components/filter/FilterBranches";
+
+import { getSinglePointData } from "@lib/getSinglePointData";
+import { getIdsByFilter } from "@lib/getIdsByFilter";
 
 import {
   getOptionsEmployees,
@@ -336,9 +336,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
             filterValBl3={filterValBl3}
             setFilterValBl3={setFilterValBl3}
           ></FilterBranches>
-          {/* <button onClick={runFilter} className="btn btn-primary mt-4">
-          Run Filter
-        </button> */}
           <br />
           <button
             onClick={resetFilterData}

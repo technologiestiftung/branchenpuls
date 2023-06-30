@@ -46,17 +46,6 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
                     ))}
                   </div>
                 ))}
-
-                {/* {pointData.data.map((d: any, i: number) => (
-                <div key={i + "-key"}>{d}</div>
-              ))} */}
-                {/* {pointData.info ? JSON.stringify(pointData.info) : ""} */}
-                {/* <button
-                  className="px-4 ml-4 bg-secondary text-gray-500 text-bold hover:text-primary p-2 rounded "
-                  onClick={closeModal}
-                >
-                  ok
-                </button> */}
               </Dialog.Panel>
             </div>
           </div>

@@ -34,7 +34,6 @@ export const App: FC<AppType> = () => {
   const [navView, setNavView] = useState<"filter" | "info">("filter");
   const [zoom, setZoom] = useState<null | number>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  // pointer-events-none
   return (
     <>
       <main className="">
