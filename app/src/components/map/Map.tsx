@@ -56,8 +56,8 @@ export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
               process.env.NODE_ENV == "development" ? mapStyle() : MAP_STYLE
             }
             styleDiffing={true}
-          />
-          {/* {popupPosition && (
+          >
+            {/* {popupPosition && (
             <Popup
               longitude={popupPosition[1]}
               latitude={popupPosition[0]}
@@ -67,6 +67,7 @@ export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
               {selectedPoint.info.id}
             </Popup>
           )} */}
+          </Map>
         </DeckGL>
       </div>
     </>

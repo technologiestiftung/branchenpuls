@@ -30,7 +30,7 @@ function getNewColor(layersData) {
     existingColors.push(layersData[key].colorHex);
   });
   defaults.forEach((c) => {
-    console.log(c, defaults, newColor.includes(c));
+    // console.log(c, defaults, newColor.includes(c));
     if (!existingColors.includes(c)) {
       newColor = c;
     }
@@ -53,7 +53,6 @@ export function addLayer(layersData, setLayersData) {
   const newLayer = {};
   newLayer.id = generateUUID();
   newLayer.color = getNewColor(layersData);
-  console.log("ÄÄÄÄÄÄ", newLayer.color);
   // newLayer.color = generateRandomColor();
   newLayer.colorHex = chroma(JSON.parse(JSON.stringify(newLayer.color))).hex();
   newLayer.heatmapColor = generateHeatmapColor(newLayer.color);

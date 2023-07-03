@@ -72,10 +72,10 @@ export const SidebarNav: FC<SidebarNavType> = ({
                 onClick={() => onNavClick(listView)}
                 className={classNames(
                   listView.name,
-                  "text-secondary",
+                  "text-primary",
                   "hover:text-secondary",
                   listView.value === navView && sidebarMenuOpen
-                    ? "bg-white text-secondary"
+                    ? "bg-white text-primary"
                     : "bg-white text-textcolor",
                   navClasses
                 )}

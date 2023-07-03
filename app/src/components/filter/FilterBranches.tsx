@@ -3,17 +3,6 @@ import Select from "react-select";
 
 import { getOptionsBL1, getOptionsBL2, getOptionsBL3 } from "./dropdownOptions";
 
-// function checkFirstNChars(str1, str2, n) {
-//   console.log(str1, str2, n);
-//   return str1.substring(0, n) === str2;
-// }
-
-// function filterOptionsByBranchLevel(filterVal, options) {
-//   return options.filter((option) =>
-//     checkFirstNChars(option.value, filterVal.value, filterVal.value.length)
-//   );
-// }
-
 export interface FilterBranchesType {
   filterValBl1: object;
   setFilterValBl1: (val: object) => void;

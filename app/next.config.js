@@ -10,6 +10,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  api: {
+    responseLimit: false,
+  },
 };
 
 module.exports = nextConfig;
