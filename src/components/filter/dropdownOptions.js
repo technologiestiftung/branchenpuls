@@ -68,42 +68,79 @@ export function getOptionsEmployees() {
 }
 
 export function getOptionsBL1() {
-  const optionsBL1 = [];
+  let optionsBL1 = [];
   branchKeys.forEach((b) => {
-    optionsBL1.push({
-      value: b.branch_top_level_id,
-      label: `${b.branch_top_level_desc} <br/><small>ID ${b.branch_top_level_id}</small>`,
-    });
+    if (b.nace_id !== 0) {
+      optionsBL1.push({
+        value: b.branch_top_level_id,
+        label: `${b.branch_top_level_desc} <br/><small>ID ${b.branch_top_level_id}</small>`,
+        id: b.branch_top_level_id,
+        name: b.branch_top_level_desc,
+      });
+    }
   });
+  // optionsBL1.sort((a, b) => a.id - b.id);
+  optionsBL1.sort((a, b) => a.name.localeCompare(b.name));
+  optionsBL1 = optionsBL1.filter(
+    (obj, index, self) => index === self.findIndex((o) => o.id === obj.id)
+  );
+  optionsBL1 = optionsBL1.map(({ name, id, ...rest }) => rest);
+
   return optionsBL1;
 }
 
 export function getOptionsBL2(filterValBl1) {
-  const optionsBL2 = [];
+  let optionsBL2 = [];
   branchKeys.forEach((b) => {
-    if (!filterValBl1 || b.branch_top_level_id === filterValBl1) {
+    if (
+      b.nace_id !== 0 ||
+      !filterValBl1 ||
+      b.branch_top_level_id === filterValBl1
+    ) {
       optionsBL2.push({
         value: b.nace_id,
         label: `${b.nace_desc} <br/><small>ID ${b.nace_id}</small>`,
+        id: b.nace_id,
+        name: b.nace_desc,
       });
     }
   });
+  // optionsBL2.sort((a, b) => a.id - b.id);
+  optionsBL2.sort((a, b) => a.name.localeCompare(b.name));
+  optionsBL2 = optionsBL2.filter(
+    (obj, index, self) => index === self.findIndex((o) => o.id === obj.id)
+  );
+  optionsBL2 = optionsBL2.map(({ name, id, ...rest }) => rest);
+
   return optionsBL2;
 }
 
 export function getOptionsBL3(filterValBl1, filterValBl2) {
   // options for branch level 3
-  const optionsBL3 = [];
+  let optionsBL3 = [];
   branchKeys.forEach((b) => {
-    if (!filterValBl1 || b.branch_top_level_id === filterValBl1) {
+    if (
+      b.nace_id !== 0 ||
+      !filterValBl1 ||
+      b.branch_top_level_id === filterValBl1
+    ) {
       if (!filterValBl2 || b.nace_id === filterValBl2) {
         optionsBL3.push({
           value: b.ihk_branch_id,
           label: `${b.ihk_branch_desc} <br/><small>ID ${b.ihk_branch_id}</small>`,
+          id: b.ihk_branch_id,
+          name: b.ihk_branch_desc,
         });
       }
     }
   });
+  // optionsBL3.sort((a, b) => a.id - b.id);
+  optionsBL3.sort((a, b) => a.name.localeCompare(b.name));
+  optionsBL3 = optionsBL3.filter(
+    (obj, index, self) => index === self.findIndex((o) => o.id === obj.id)
+  );
+  optionsBL3 = optionsBL3.map(({ name, id, ...rest }) => rest);
+
   return optionsBL3;
 }
 

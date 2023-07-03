@@ -58,8 +58,8 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 
   return (
     <div className="">
-      <div className="mt-4">
-        Branchentyp
+      <div className="mt-3">
+        <p className="mb-1 font-bold">Branchentyp</p>
         <Select
           value={filterValBl1}
           onChange={setFilterValBl1}
@@ -71,8 +71,13 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           getOptionLabel={getOptionLabel}
         />
       </div>
-      <div className="mt-4 pl-2">
-        NACE <small>{filterValBl1 ? `basierende auf Branchentyp` : ""}</small>
+      <div className="mt-3">
+        <p className="text-sm mb-1 font-bold">
+          NACE
+          <span className="text-xs font-normal">
+            {filterValBl1 ? ` basierende auf Branchentyp` : ""}
+          </span>
+        </p>
         <Select
           value={filterValBl2}
           onChange={setFilterValBl2}
@@ -84,8 +89,13 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           getOptionLabel={getOptionLabel}
         />
       </div>
-      <div className="mt-4 pl-4">
-        IHK <small>{filterValBl2 ? `basierende auf NACE` : ""}</small>
+      <div className="mt-3">
+        <p className="text-sm mb-1 font-bold">
+          IHK Branch ID{" "}
+          <span className="text-xs font-normal">
+            {filterValBl2 ? ` basierende auf NACE` : ""}
+          </span>
+        </p>
         <Select
           value={filterValBl3}
           onChange={setFilterValBl3}
