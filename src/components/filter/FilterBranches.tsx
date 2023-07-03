@@ -26,12 +26,13 @@ export const FilterBranches: FC<FilterBranchesType> = ({
   const [optionsBL2, setOptionsBL2] = useState<number[]>(getOptionsBL2());
   const [optionsBL3, setOptionsBL3] = useState<number[]>(getOptionsBL3());
 
-  //   useEffect(() => {
-  //     if (filterValBl1) {
-  //       setOptionsBL2(filterOptionsByBranchLevel(filterValBl1, optionsBL2));
-  //       setOptionsBL3(filterOptionsByBranchLevel(filterValBl1, optionsBL3));
-  //     }
-  //   }, [filterValBl1]);
+  useEffect(() => {
+    setOptionsBL2(getOptionsBL2(filterValBl1?.value));
+  }, [filterValBl1]);
+
+  useEffect(() => {
+    setOptionsBL3(getOptionsBL3(filterValBl1?.value, filterValBl2?.value));
+  }, [filterValBl1, filterValBl2]);
 
   useEffect(() => {
     if (filterValBl3) {
@@ -51,10 +52,14 @@ export const FilterBranches: FC<FilterBranchesType> = ({
     }
   }, [filterValBl2]);
 
+  const getOptionLabel = (option) => {
+    return <div dangerouslySetInnerHTML={{ __html: option.label }} />;
+  };
+
   return (
     <div className="">
       <div className="mt-4">
-        Branch level 1
+        Branchentyp
         <Select
           value={filterValBl1}
           onChange={setFilterValBl1}
@@ -63,10 +68,11 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           isSearchable={true}
           isDisabled={bl1Disabled}
           options={getOptionsBL1()}
+          getOptionLabel={getOptionLabel}
         />
       </div>
-      <div className="mt-4">
-        Branch level 2
+      <div className="mt-4 pl-2">
+        NACE <small>{filterValBl1 ? `basierende auf Branchentyp` : ""}</small>
         <Select
           value={filterValBl2}
           onChange={setFilterValBl2}
@@ -75,10 +81,11 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           isSearchable={true}
           isDisabled={bl2Disabled}
           options={optionsBL2}
+          getOptionLabel={getOptionLabel}
         />
       </div>
-      <div className="mt-4">
-        Branch level 3
+      <div className="mt-4 pl-4">
+        IHK <small>{filterValBl2 ? `basierende auf NACE` : ""}</small>
         <Select
           value={filterValBl3}
           onChange={setFilterValBl3}
@@ -86,6 +93,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           isClearable={true}
           isSearchable={true}
           options={optionsBL3}
+          getOptionLabel={getOptionLabel}
         />
       </div>
     </div>

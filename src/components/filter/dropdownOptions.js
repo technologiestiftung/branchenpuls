@@ -1,4 +1,4 @@
-import uiKeys from "@lib/uiKeys.json";
+import branchKeys from "@lib/branchKeys.json";
 
 export function getOptionsEmployees() {
   const optionsEmployees = [
@@ -69,35 +69,41 @@ export function getOptionsEmployees() {
 
 export function getOptionsBL1() {
   const optionsBL1 = [];
-  for (const key in uiKeys.bl1) {
+  branchKeys.forEach((b) => {
     optionsBL1.push({
-      value: key,
-      label: uiKeys.bl1[key],
+      value: b.branch_top_level_id,
+      label: `${b.branch_top_level_desc} <br/><small>ID ${b.branch_top_level_id}</small>`,
     });
-  }
+  });
   return optionsBL1;
 }
 
-export function getOptionsBL2() {
+export function getOptionsBL2(filterValBl1) {
   const optionsBL2 = [];
-  for (const key in uiKeys.bl2) {
-    optionsBL2.push({
-      value: key,
-      label: uiKeys.bl2[key],
-    });
-  }
+  branchKeys.forEach((b) => {
+    if (!filterValBl1 || b.branch_top_level_id === filterValBl1) {
+      optionsBL2.push({
+        value: b.nace_id,
+        label: `${b.nace_desc} <br/><small>ID ${b.nace_id}</small>`,
+      });
+    }
+  });
   return optionsBL2;
 }
 
-export function getOptionsBL3() {
+export function getOptionsBL3(filterValBl1, filterValBl2) {
   // options for branch level 3
   const optionsBL3 = [];
-  for (const key in uiKeys.bl3) {
-    optionsBL3.push({
-      value: key,
-      label: uiKeys.bl3[key],
-    });
-  }
+  branchKeys.forEach((b) => {
+    if (!filterValBl1 || b.branch_top_level_id === filterValBl1) {
+      if (!filterValBl2 || b.nace_id === filterValBl2) {
+        optionsBL3.push({
+          value: b.ihk_branch_id,
+          label: `${b.ihk_branch_desc} <br/><small>ID ${b.ihk_branch_id}</small>`,
+        });
+      }
+    }
+  });
   return optionsBL3;
 }
 
