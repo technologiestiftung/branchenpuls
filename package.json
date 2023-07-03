@@ -36,5 +36,8 @@
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4",
     "zlib": "^1.0.5"
+  },
+  "devDependencies": {
+    "@technologiestiftung/semantic-release-config": "1.2.1"
   }
 }
