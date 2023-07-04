@@ -26,12 +26,13 @@ export const FilterBranches: FC<FilterBranchesType> = ({
   const [optionsBL2, setOptionsBL2] = useState<number[]>(getOptionsBL2());
   const [optionsBL3, setOptionsBL3] = useState<number[]>(getOptionsBL3());
 
-  //   useEffect(() => {
-  //     if (filterValBl1) {
-  //       setOptionsBL2(filterOptionsByBranchLevel(filterValBl1, optionsBL2));
-  //       setOptionsBL3(filterOptionsByBranchLevel(filterValBl1, optionsBL3));
-  //     }
-  //   }, [filterValBl1]);
+  useEffect(() => {
+    setOptionsBL2(getOptionsBL2(filterValBl1?.value));
+  }, [filterValBl1]);
+
+  useEffect(() => {
+    setOptionsBL3(getOptionsBL3(filterValBl1?.value, filterValBl2?.value));
+  }, [filterValBl1, filterValBl2]);
 
   useEffect(() => {
     if (filterValBl3) {
@@ -51,22 +52,48 @@ export const FilterBranches: FC<FilterBranchesType> = ({
     }
   }, [filterValBl2]);
 
+  const getOptionLabel = (option) => {
+    return <div dangerouslySetInnerHTML={{ __html: option.label }} />;
+  };
+
+  const customFilterOption = (option, searchText) => {
+    const label = option.data.label.replace(/<\/?[^>]+(>|$)/g, "");
+    return label.toLowerCase().includes(searchText.toLowerCase());
+  };
+
+  const customStyles = {
+    placeholder: (baseStyles, state) => ({
+      ...baseStyles,
+      color: "#dadada",
+      fontSize: "0.875rem",
+    }),
+  };
+
   return (
     <div className="">
-      <div className="mt-4">
-        Branch level 1
+      <div className="mt-3">
+        <p className="mb-1 font-bold">Branchentyp</p>
         <Select
           value={filterValBl1}
           onChange={setFilterValBl1}
-          className={""}
+          // className={""}
           isClearable={true}
           isSearchable={true}
           isDisabled={bl1Disabled}
           options={getOptionsBL1()}
+          getOptionLabel={getOptionLabel}
+          filterOption={customFilterOption}
+          placeholder="suchen…"
+          styles={customStyles}
         />
       </div>
-      <div className="mt-4">
-        Branch level 2
+      <div className="mt-3">
+        <p className="text-sm mb-1 font-bold">
+          NACE
+          <span className="text-xs font-normal">
+            {filterValBl1 ? ` basierende auf Branchentyp` : ""}
+          </span>
+        </p>
         <Select
           value={filterValBl2}
           onChange={setFilterValBl2}
@@ -75,10 +102,21 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           isSearchable={true}
           isDisabled={bl2Disabled}
           options={optionsBL2}
+          getOptionLabel={getOptionLabel}
+          filterOption={customFilterOption}
+          placeholder="suchen…"
+          styles={customStyles}
         />
       </div>
-      <div className="mt-4">
-        Branch level 3
+      <div className="mt-3">
+        <p className="text-sm mb-1 font-bold">
+          IHK ID{" "}
+          <span className="text-xs font-normal">
+            {filterValBl1 || filterValBl2
+              ? ` basierende auf ${filterValBl2 ? "NACE" : "Branchentyp"}`
+              : ""}
+          </span>
+        </p>
         <Select
           value={filterValBl3}
           onChange={setFilterValBl3}
@@ -86,6 +124,10 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           isClearable={true}
           isSearchable={true}
           options={optionsBL3}
+          getOptionLabel={getOptionLabel}
+          filterOption={customFilterOption}
+          placeholder="suchen…"
+          styles={customStyles}
         />
       </div>
     </div>
