@@ -22,7 +22,8 @@ import {
 export interface Business {
   opendata_id: string,
   business_age: number,
-  business_type: number,
+  business_type: string,
+  employees_range: string,
   created_on: string,
   updated_on: string
 }

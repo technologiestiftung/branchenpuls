@@ -43,11 +43,14 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
                 <div key={"planungsraum"} className="p-4">
                   Planungsraum: {pointData.planungsraum}
                 </div>
+                <div className="p-4">
+                  Unternehmen an diesem Ort:
+                </div>
                 {
                   pointData.businesses.map((b) => 
                   <div key={""} className="p-4">
                     {/* TODO: Build pretty UI for this, right now just dumping the business info */}
-                    {JSON.stringify(b)}
+                    <p>ID: {b.opendata_id}, Typ: {b.business_type}, Alter: {b.business_age}, Beschäftigte: {b.employees_range}</p>
                   </div>)
                 }
               </Dialog.Panel>

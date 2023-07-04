@@ -9,28 +9,10 @@ export default async function handler(
 ) {
   const { lat, lng } = req.query;
 
-  const { data, error } = await supabase
-    .from('location')
-    .select(`
-      latitude,
-      longitude,
-      planungsraum,
-      business!inner(opendata_id,business_type,business_age,created_on,updated_on)`
-    )
-    .eq(`latitude`, lat)
-    .eq(`longitude`, lng)
+  // Fetch all businesses around a specific location
+  const { data, error } = await supabase.rpc("businesses_at_location", {lat: 52.51351, lon: 13.38579})
 
-  if(data) {
-    const formattedData = {
-      latitude: lat, 
-      longitude: lng,
-      planungsraum: data[0].planungsraum,
-      businesses: data!.map((d) => d.business)
-    }
-    res.status(200).json(formattedData)
-  } else {
-    console.log(error)
-    res.status(404)
-  }
-  
+  console.log(data)
+
+  res.status(200).json(data)
 }
