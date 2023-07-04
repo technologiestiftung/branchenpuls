@@ -1,4 +1,5 @@
 export async function getSinglePointData(pointId, position) {
+  console.log("fetch",pointId,position)
   let data;
   try {
     const path = `/api/getsinglepointdata/?pointid=${pointId}&lng=${
@@ -10,17 +11,14 @@ export async function getSinglePointData(pointId, position) {
     } else {
       res = await fetch(path);
     }
+    console.log(res)
     if (res.ok) {
       data = await res.json();
     }
   } catch (error) {
     console.error(error);
   } finally {
-    const popupData = {
-      position: position,
-      info: data.data,
-    };
-
-    return popupData;
+    console.log(data)
+    return data;
   }
 }
