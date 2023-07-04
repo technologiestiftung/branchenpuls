@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: "Clan Medium";
+    src: url("/fonts/clan-medium.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Clan Book";
+    src: url("/fonts/clan-book.woff") format("woff");
+  }
+
+  html,
+  body,
+  #__next {
+    font-family: "Clan Book", sans-serif;
+    color: #222222;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
