@@ -56,6 +56,19 @@ export const FilterBranches: FC<FilterBranchesType> = ({
     return <div dangerouslySetInnerHTML={{ __html: option.label }} />;
   };
 
+  const customFilterOption = (option, searchText) => {
+    const label = option.data.label.replace(/<\/?[^>]+(>|$)/g, "");
+    return label.toLowerCase().includes(searchText.toLowerCase());
+  };
+
+  const customStyles = {
+    placeholder: (baseStyles, state) => ({
+      ...baseStyles,
+      color: "#dadada",
+      fontSize: "0.875rem",
+    }),
+  };
+
   return (
     <div className="">
       <div className="mt-3">
@@ -63,12 +76,15 @@ export const FilterBranches: FC<FilterBranchesType> = ({
         <Select
           value={filterValBl1}
           onChange={setFilterValBl1}
-          className={""}
+          // className={""}
           isClearable={true}
           isSearchable={true}
           isDisabled={bl1Disabled}
           options={getOptionsBL1()}
           getOptionLabel={getOptionLabel}
+          filterOption={customFilterOption}
+          placeholder="suchen…"
+          styles={customStyles}
         />
       </div>
       <div className="mt-3">
@@ -87,13 +103,18 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           isDisabled={bl2Disabled}
           options={optionsBL2}
           getOptionLabel={getOptionLabel}
+          filterOption={customFilterOption}
+          placeholder="suchen…"
+          styles={customStyles}
         />
       </div>
       <div className="mt-3">
         <p className="text-sm mb-1 font-bold">
-          IHK Branch ID{" "}
+          IHK ID{" "}
           <span className="text-xs font-normal">
-            {filterValBl2 ? ` basierende auf NACE` : ""}
+            {filterValBl1 || filterValBl2
+              ? ` basierende auf ${filterValBl2 ? "NACE" : "Branchentyp"}`
+              : ""}
           </span>
         </p>
         <Select
@@ -104,6 +125,9 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           isSearchable={true}
           options={optionsBL3}
           getOptionLabel={getOptionLabel}
+          filterOption={customFilterOption}
+          placeholder="suchen…"
+          styles={customStyles}
         />
       </div>
     </div>

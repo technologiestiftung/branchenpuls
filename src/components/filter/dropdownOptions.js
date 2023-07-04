@@ -93,9 +93,8 @@ export function getOptionsBL2(filterValBl1) {
   let optionsBL2 = [];
   branchKeys.forEach((b) => {
     if (
-      b.nace_id !== 0 ||
-      !filterValBl1 ||
-      b.branch_top_level_id === filterValBl1
+      b.nace_id !== 0 &&
+      (!filterValBl1 || b.branch_top_level_id === filterValBl1)
     ) {
       optionsBL2.push({
         value: b.nace_id,
@@ -120,9 +119,8 @@ export function getOptionsBL3(filterValBl1, filterValBl2) {
   let optionsBL3 = [];
   branchKeys.forEach((b) => {
     if (
-      b.nace_id !== 0 ||
-      !filterValBl1 ||
-      b.branch_top_level_id === filterValBl1
+      b.nace_id !== 0 &&
+      (!filterValBl1 || b.branch_top_level_id === filterValBl1)
     ) {
       if (!filterValBl2 || b.nace_id === filterValBl2) {
         optionsBL3.push({
