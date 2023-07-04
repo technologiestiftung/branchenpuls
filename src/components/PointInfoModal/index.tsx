@@ -1,11 +1,12 @@
 import { FC } from "react";
 import { Dialog } from "@headlessui/react";
 import { Cross } from "../Icons";
+import { PointData } from "../filter/FilterLayer";
 
 export interface PointInfoModalType {
   poinInfoModalOpen: boolean;
   setPoinInfoModalOpen: (date: boolean) => void;
-  data: Array<any>;
+  pointData: PointData;
 }
 
 export const PointInfoModal: FC<PointInfoModalType> = ({
@@ -19,7 +20,7 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
 
   return (
     <>
-      {pointData.info !== undefined && (
+      {pointData && (
         <Dialog
           open={poinInfoModalOpen}
           as="div"
@@ -36,16 +37,19 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
                 >
                   <Cross />
                 </button>
-
-                {pointData.info.map((d: any, i: number) => (
-                  <div key={i + "-key"} className="p-4">
-                    {Object.keys(d).map((dd: any, i: number) => (
-                      <div key={i + "-keyy"} className="first:font-bold">
-                        {dd} : {d[dd]}
-                      </div>
-                    ))}
-                  </div>
-                ))}
+                <div key={"point-lat-lng"} className="p-4">
+                  Location: {pointData.latitude}, {pointData.longitude}
+                </div>
+                <div key={"planungsraum"} className="p-4">
+                  Planungsraum: {pointData.planungsraum}
+                </div>
+                {
+                  pointData.businesses.map((b) => 
+                  <div key={""} className="p-4">
+                    {/* TODO: Build pretty UI for this, right now just dumping the business info */}
+                    {JSON.stringify(b)}
+                  </div>)
+                }
               </Dialog.Panel>
             </div>
           </div>

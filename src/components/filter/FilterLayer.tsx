@@ -19,6 +19,21 @@ import {
   getOptionsBType,
 } from "./dropdownOptions";
 
+export interface Business {
+  opendata_id: string,
+  business_age: number,
+  business_type: number,
+  created_on: string,
+  updated_on: string
+}
+
+export interface PointData {
+  latitude: string,
+  longitude: string,
+  planungsraum: string,
+  businesses: Array<Business>;
+}
+
 async function getPoints(date) {
   const devMode = process.env.NODE_ENV === "development";
   let path = `/api/month/?&date=${date}`;
@@ -84,7 +99,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
   const [isDatepickerOpen, setIsDatepickerOpen] = useState(false);
 
   const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
-  const [pointData, setpointData] = useState([]);
+  const [pointData, setPointData] = useState<PointData>();
 
   const handleDateChange = (e: Date) => {
     setFilterValDateMonth(e.getMonth() + 1);
@@ -144,7 +159,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
   async function showPointInfo(info) {
     const data = await getSinglePointData(info.object.id, info.object.p);
-    setpointData(data);
+    console.log(data)
+    setPointData(data as PointData);
     setPoinInfoModalOpen(true);
   }
 

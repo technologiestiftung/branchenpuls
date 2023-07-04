@@ -1,48 +1,36 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import db from "@lib/db";
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { pointid, lat, lng } = req.query;
+  const { lat, lng } = req.query;
 
-  console.log("pointCoo???", lat, lng, pointid);
+  const { data, error } = await supabase
+    .from('location')
+    .select(`
+      latitude,
+      longitude,
+      planungsraum,
+      business!inner(opendata_id,business_type,business_age,created_on,updated_on)`
+    )
+    .eq(`latitude`, lat)
+    .eq(`longitude`, lng)
 
-  // key: 346706,
-  // opendata_id: '825955871186',
-  // business_type: 0,
-  // created_on: 2023-03-31T22:00:00.000Z,
-  // updated_on: 2023-05-31T22:00:00.000Z,
-  // business_age: 11,
-  // latitude: '52.51507',
-  // longitude: '13.39234',
-  // postcode: 10117,
-  // bezirk: 'Mitte',
-  // planungsraum: 'Oranienburger Straße',
-  // bezirksregion: 'Alexanderplatz',
-  // prognoseraum: 'Zentrum',
-  // ortsteil: 'Mitte'
-
-  db.any(
-    `
-
-
-    SELECT
-    b.opendata_id, b.business_type, b.business_age, TO_CHAR(l.created_on, 'YYYY-MM-DD') AS created_on , TO_CHAR(b.updated_on, 'YYYY-MM-DD') AS updated_on , l.latitude, l.longitude, l.prognoseraum
-  FROM
-  business AS b
-  INNER JOIN location AS l ON b.opendata_id = l.opendata_id
-  WHERE
-  l.latitude = ${lat} AND l.longitude =${lng} OR b.opendata_id = '${pointid}'
-    `
-  )
-    .then((rows) => {
-      console.log(rows);
-
-      res.status(200).json({ data: rows });
-    })
-    .catch((err) => {
-      console.error("Error executing query", err.stack);
-    });
+  if(data) {
+    const formattedData = {
+      latitude: lat, 
+      longitude: lng,
+      planungsraum: data[0].planungsraum,
+      businesses: data!.map((d) => d.business)
+    }
+    res.status(200).json(formattedData)
+  } else {
+    console.log(error)
+    res.status(404)
+  }
+  
 }
