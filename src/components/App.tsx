@@ -44,7 +44,7 @@ export const App: FC<AppType> = () => {
 			<main className="">
 				{loading && (
 					<div
-						className={`w-full h-full absolute opacity-25 z-50 bg-primary cursor-progress`}
+						className={`w-full h-full absolute opacity-0 z-50 bg-primary cursor-progress duration-600`}
 					>
 						<span>
 							{" "}
@@ -87,6 +87,7 @@ export const App: FC<AppType> = () => {
 								setLayersData={setLayersData}
 								loading={loading}
 								setLoading={setLoading}
+								setOpen={setSidebarMenuOpen}
 							/>
 						</SidebarWrapper>
 						<SidebarNav
