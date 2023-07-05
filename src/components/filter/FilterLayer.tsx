@@ -183,37 +183,45 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
   useEffect(() => {
     if (filteredData && activeLayerId === layerId) {
-      const layer =
-        layerType === "scatterplot"
-          ? new ScatterplotLayer({
-              id: "scatterplot-layer" + layerId,
-              data: filteredData,
-              pickable: true,
-              getRadius: 30,
-              getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-              getFillColor: layersData[layerId].color, // [86, 189, 102],
-              //   getFillColor: [86, 189, 102], // [86, 189, 102],
-              opacity: layerOpacity,
-              onClick: (info) => {
-                showPointInfo(info);
-              },
-              transitions: {
-                // transition with a duration of 3000ms
-                opacity: 500,
-              },
-            })
-          : new HeatmapLayer({
-              id: "heatmapLayer" + layerId,
-              data: filteredData,
-              getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-              getWeight: 5,
-              aggregation: "SUM",
-              colorRange: layersData[layerId].heatmapColor,
-              opacity: layerOpacity,
-              // onClick: (info) =>
-              // getSinglePointData(info.object.id, info.object.p),
-            });
-      setDeckLayers([layer]);
+      const layers = [];
+
+      // if(){
+      // layers.push(
+      //   new HeatmapLayer({
+      //     id: "heatmapLayer" + layerId,
+      //     data: filteredData,
+      //     getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
+      //     getWeight: 5,
+      //     aggregation: "SUM",
+      //     colorRange: layersData[layerId].heatmapColor,
+      //     opacity: layerOpacity,
+      //     // onClick: (info) =>
+      //     // getSinglePointData(info.object.id, info.object.p),
+      //   })
+      // );
+      // }
+
+      layers.push(
+        new ScatterplotLayer({
+          id: "scatterplot-layer" + layerId,
+          data: filteredData,
+          pickable: true,
+          getRadius: 30,
+          getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
+          getFillColor: layersData[layerId].color, // [86, 189, 102],
+          //   getFillColor: [86, 189, 102], // [86, 189, 102],
+          opacity: layerOpacity,
+          onClick: (info) => {
+            showPointInfo(info);
+          },
+          transitions: {
+            // transition with a duration of 3000ms
+            opacity: 500,
+          },
+        })
+      );
+
+      setDeckLayers([layers]);
       // add new layer or replace existing layer
       // if (!deckLayers[index]) {
       //   deckLayers.push(layer);
