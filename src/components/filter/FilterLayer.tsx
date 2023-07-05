@@ -56,6 +56,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	setActiveLayerId,
 	storeDataPoints,
 	setStoreDataPoints,
+	zoom,
 }) => {
 	const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
 	const [dataPoints, setDataPoints] = useState([]);
@@ -161,10 +162,21 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		setPoinInfoModalOpen(true);
 	}
 
+	function calculatePointRadius(zoom) {
+		if (zoom <= 10) {
+			return 30;
+		} else if (zoom >= 15) {
+			return 5;
+		} else {
+			const m = (5 - 30) / (15 - 10); // Calculate the slope
+			const b = 30 - m * 10; // Calculate the y-intercept
+			return m * zoom + b; // Apply linear regression equation
+		}
+	}
+
 	useEffect(() => {
 		if (filteredData && activeLayerId === layerId) {
 			const layers = [];
-
 			if (showHeatmap) {
 				layers.push(
 					new HeatmapLayer({
@@ -187,10 +199,9 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						id: "scatterplot-layer" + layerId,
 						data: filteredData,
 						pickable: true,
-						getRadius: 30,
+						getRadius: calculatePointRadius(zoom),
 						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
 						getFillColor: layersData[layerId].color, // [86, 189, 102],
-						//   getFillColor: [86, 189, 102], // [86, 189, 102],
 						opacity: layerOpacity,
 						onClick: (info) => {
 							showPointInfo(info);
@@ -213,7 +224,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			//   setDeckLayers([...deckLayers]);
 			// }
 		}
-	}, [layerType, filteredData, layerOpacity, activeLayerId, showHeatmap]);
+	}, [layerType, filteredData, layerOpacity, activeLayerId, showHeatmap, zoom]);
 
 	// a function that replaces a part of the array with a new value
 	const replaceArray = (arr, index, newValue) => {
