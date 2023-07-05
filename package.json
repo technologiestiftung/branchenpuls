@@ -38,6 +38,7 @@
     "zlib": "^1.0.5"
   },
   "devDependencies": {
-    "@technologiestiftung/semantic-release-config": "1.2.1"
+    "@technologiestiftung/semantic-release-config": "1.2.1",
+    "eslint-config-prettier": "^8.8.0"
   }
 }
