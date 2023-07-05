@@ -19,7 +19,7 @@ export const HeatmapToggle: FC<HeatmapToggleType> = ({
 			style={{ borderColor: color }}
 			onClick={() => setShowHeatmap(!showHeatmap)}
 		>
-			{showHeatmap ? (
+			{!showHeatmap ? (
 				<svg
 					width="40"
 					height="40"
