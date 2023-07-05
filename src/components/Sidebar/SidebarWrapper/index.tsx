@@ -68,17 +68,17 @@ export const SidebarWrapper: FC<SidebarWrapperType> = ({
 				classesMobile,
 				classes,
 				scrolling,
-				"fixed h-full p-4 rounded ease-in-out duration-300 text-textcolor/80 z-40",
+				"text-textcolor/80 fixed z-40 h-full rounded p-4 duration-300 ease-in-out",
 				sidebarPosition,
 				positionClass
 			)}
 		>
 			<div
 				ref={sidebarRef}
-				className="bg-white h-full overflow-y-auto rounded shadow-lg"
+				className="h-full overflow-y-auto rounded bg-white shadow-lg"
 			>
 				<button
-					className="top-0 right-0 m-10 mr-10 mt-11 absolute cursor-pointer z-20 border-textcolor border-2 hover:bg-textcolor hover:border-textcolor hover:text-secondary rounded-full p-0"
+					className="border-textcolor hover:bg-textcolor hover:border-textcolor absolute right-0 top-0 z-20 m-10 mr-10 mt-11 cursor-pointer rounded-full border-2 p-0 hover:text-secondary"
 					onClick={() => setOpen(false)}
 				>
 					{closeSymbol === "cross" && <Cross />}

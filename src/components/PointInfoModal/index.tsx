@@ -30,9 +30,9 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
 					<div className="fixed inset-0 bg-secondary/80" aria-hidden="true" />
 					<div className="fixed inset-0 overflow-y-auto">
 						<div className="flex min-h-full items-center justify-center p-4 leading-7">
-							<Dialog.Panel className="max-h-80 overflow-auto absolute border border-primary/50  bg-secondary text-textcolor/90 max-h-full p-6 max-w-xs md:max-w-none filter drop-shadow-lg rounded-lg md:min-w-xl md:w-1/2 mx-auto transition-all">
+							<Dialog.Panel className="text-textcolor/90 md:min-w-xl absolute mx-auto max-h-80  max-h-full max-w-xs overflow-auto rounded-lg border border-primary/50 bg-secondary p-6 drop-shadow-lg filter transition-all md:w-1/2 md:max-w-none">
 								<button
-									className="text-textcolor focus:outline-none top-0 right-0 m-4 absolute cursor-pointer z-20 hover:bg-textcolor border-textcolor border-2 rounded-full p-1 hover:text-white"
+									className="text-textcolor hover:bg-textcolor border-textcolor absolute right-0 top-0 z-20 m-4 cursor-pointer rounded-full border-2 p-1 hover:text-white focus:outline-none"
 									onClick={closeModal}
 								>
 									<Cross />

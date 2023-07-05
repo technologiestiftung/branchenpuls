@@ -287,11 +287,11 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			></PointInfoModal>
 			<div
 				key={"layer-" + layerId}
-				className=" bg-white z-30 rounded-lg overflow-hidden"
+				className=" z-30 overflow-hidden rounded-lg bg-white"
 			>
 				<button
 					onClick={removeLayer}
-					className="text-sm mt-2 text-gray-400 !flex items-center hover:opacity-75"
+					className="mt-2 !flex items-center text-sm text-gray-400 hover:opacity-75"
 				>
 					<Trash size={15} />
 					<span className="pl-1">Ebene entfernen</span>
@@ -342,31 +342,31 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				</div>
 				<div className="mt-3">
 					<p className="mb-1 font-bold">Unternehmenstyp</p>
-					<label className="cursor-pointer label px-0  py-1">
-						<span className="label-text text-md">Alle</span>
+					<label className="label cursor-pointer px-0  py-1">
+						<span className="text-md label-text">Alle</span>
 						<input
 							type="checkbox"
-							className="checkbox checkbox-primary text-white"
+							className="checkbox-primary checkbox text-white"
 							checked={filterBType === null}
 							onChange={onBTypeChange}
 							value={-1}
 						/>
 					</label>
-					<label className="cursor-pointer label px-0 py-1">
-						<span className="label-text text-md">Nur Kleingewerbe</span>
+					<label className="label cursor-pointer px-0 py-1">
+						<span className="text-md label-text">Nur Kleingewerbe</span>
 						<input
 							type="checkbox"
-							className="checkbox checkbox-primary text-white"
+							className="checkbox-primary checkbox text-white"
 							checked={filterBType?.value === "0"}
 							onChange={onBTypeChange}
 							value={0}
 						/>
 					</label>
-					<label className="cursor-pointer label px-0  py-1">
-						<span className="label-text text-md">Nur Handelsregister</span>
+					<label className="label cursor-pointer px-0  py-1">
+						<span className="text-md label-text">Nur Handelsregister</span>
 						<input
 							type="checkbox"
-							className="checkbox checkbox-primary text-white"
+							className="checkbox-primary checkbox text-white"
 							checked={filterBType?.value === "1"}
 							onChange={onBTypeChange}
 							value={1}
@@ -375,14 +375,14 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				</div>
 				<div className="mt-5">
 					<p className="mb-1 font-bold">Neugründungen</p>
-					<label className="cursor-pointer label px-0">
-						<span className="label-text text-md">
+					<label className="label cursor-pointer px-0">
+						<span className="text-md label-text">
 							Nur Neugründungen anzeigen
 						</span>
 						<input
 							type="checkbox"
 							checked={filterMonthOnly}
-							className="checkbox checkbox-primary text-white"
+							className="checkbox-primary checkbox text-white"
 							onChange={() => setFilterMonthOnly(!filterMonthOnly)}
 							disabled={filterValDateMonth?.value === 3}
 						/>
@@ -390,11 +390,11 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				</div>
 
 				{/* {'value :'filterBType?.value} */}
-				<div className="flex mt-6">
+				<div className="mt-6 flex">
 					{hasMobileSize ? (
 						<button
 							onClick={() => setOpen(false)}
-							className="btn btn-primary btn-sm  text-white mr-1 flex-1 normal-case font-normal "
+							className="btn-primary btn-sm btn  mr-1 flex-1 font-normal normal-case text-white "
 						>
 							Ansehen
 						</button>
@@ -402,7 +402,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
 					<button
 						onClick={resetFilterData}
-						className="btn btn-primary btn-outline btn-sm ml-1 text-white flex-1 normal-case font-normal "
+						className="btn-outline btn-primary btn-sm btn ml-1 flex-1 font-normal normal-case text-white "
 						// disabled={true}
 					>
 						Filter löschen

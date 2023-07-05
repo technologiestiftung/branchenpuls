@@ -88,7 +88,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 				/>
 			</div>
 			<div className="mt-3">
-				<p className="text-sm mb-1 font-bold">
+				<p className="mb-1 text-sm font-bold">
 					NACE
 					<span className="text-xs font-normal">
 						{filterValBl1 ? ` basierende auf Branchentyp` : ""}
@@ -109,7 +109,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 				/>
 			</div>
 			<div className="mt-3">
-				<p className="text-sm mb-1 font-bold">
+				<p className="mb-1 text-sm font-bold">
 					IHK ID{" "}
 					<span className="text-xs font-normal">
 						{filterValBl1 || filterValBl2
@@ -150,7 +150,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 				/>
 			</div>
 			<div className="mt-3">
-				<p className="text-sm mb-1 font-bold">
+				<p className="mb-1 text-sm font-bold">
 					NACE
 					<span className="text-xs font-normal">
 						{filterValBl1 ? ` basierende auf Branchentyp` : ""}
@@ -172,7 +172,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 			</div>
 			{/* suchen… */}
 			<div className="mt-3">
-				<p className="text-sm mb-1 font-bold">
+				<p className="mb-1 text-sm font-bold">
 					IHK ID{" "}
 					<span className="text-xs font-normal">
 						{filterValBl1 || filterValBl2

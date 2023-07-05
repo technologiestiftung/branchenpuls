@@ -17,10 +17,10 @@ export const SidebarHeader: FC<SidebarHeaderType> = ({
 			<h1
 				className={classNames(
 					fontSize,
-					"font-bold pt-7 pb-4 px-4 sticky top-0 bg-white scroll-shadow z-10 w-full"
+					"scroll-shadow sticky top-0 z-10 w-full bg-white px-4 pb-4 pt-7 font-bold"
 				)}
 			>
-				<span id={sidebarId} className="w-[85%] inline-block text-textcolor/90">
+				<span id={sidebarId} className="text-textcolor/90 inline-block w-[85%]">
 					{text}
 				</span>
 			</h1>

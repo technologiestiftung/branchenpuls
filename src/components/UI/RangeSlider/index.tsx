@@ -28,7 +28,7 @@ export const RangeSlider: FC<RangeSliderType> = ({
 	rounding,
 }) => {
 	return (
-		<div className="mb-8 mx-4">
+		<div className="mx-4 mb-8">
 			<Range
 				values={value}
 				step={step}

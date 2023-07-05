@@ -44,13 +44,13 @@ export const App: FC<AppType> = () => {
 			<main className="">
 				{loading && (
 					<div
-						className={`w-full h-full absolute opacity-0 z-50 bg-primary cursor-progress duration-600`}
+						className={`duration-600 absolute z-50 h-full w-full cursor-progress bg-primary opacity-0`}
 					>
 						<span>
 							{" "}
 							<svg
 								aria-hidden="true"
-								className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-primary"
+								className="mr-2 h-8 w-8 animate-spin fill-primary text-gray-200 dark:text-gray-600"
 								viewBox="0 0 100 101"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg"

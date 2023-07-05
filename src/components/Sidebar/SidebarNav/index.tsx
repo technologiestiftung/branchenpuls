@@ -60,11 +60,11 @@ export const SidebarNav: FC<SidebarNavType> = ({
 				className={classNames(
 					navPositionClasses,
 					padding,
-					"fixed top-0 p-4 transition-left ease-in-out duration-300 z-30 rounded overflow-hidden"
+					"transition-left fixed top-0 z-30 overflow-hidden rounded p-4 duration-300 ease-in-out"
 				)}
 			>
-				<div className="w-14 flex flex-col list-none overflow-hidden shadow-lg text-textcolor ">
-					<div className="w-14 flex flex-col list-none rounded overflow-hidden shadow-lg">
+				<div className="text-textcolor flex w-14 list-none flex-col overflow-hidden shadow-lg ">
+					<div className="flex w-14 list-none flex-col overflow-hidden rounded shadow-lg">
 						{navViews.map((listView: any) => (
 							<div
 								key={listView.value}
@@ -76,7 +76,7 @@ export const SidebarNav: FC<SidebarNavType> = ({
 									"hover:text-secondary",
 									listView.value === navView && sidebarMenuOpen
 										? "bg-white text-primary"
-										: "bg-white text-textcolor",
+										: "text-textcolor bg-white",
 									navClasses
 								)}
 							>
