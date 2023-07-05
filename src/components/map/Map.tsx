@@ -53,10 +53,12 @@ export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
             reuseMaps
             mapLib={maplibregl}
             mapStyle={
-              process.env.NODE_ENV == "development" ? mapStyle() : MAP_STYLE
+              // process.env.NODE_ENV == "development"
+              //   ? mapStyle()
+              //   : process.env.NEXT_PUBLIC_MAPTILER_STYLE
+              process.env.NEXT_PUBLIC_MAPTILER_STYLE
             }
-            styleDiffing={true}
-          >
+            styleDiffing={true}>
             {/* {popupPosition && (
             <Popup
               longitude={popupPosition[1]}
