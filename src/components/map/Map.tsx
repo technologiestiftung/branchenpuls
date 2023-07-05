@@ -39,25 +39,27 @@ export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
 		setZoom(view.viewState.zoom);
 	}
 
-	return (
-		<>
-			<div className="h-screen w-screen">
-				<DeckGL
-					initialViewState={initialViewState}
-					controller={true}
-					layers={deckLayers}
-					getTooltip={({ object }) => object && `${object.id}\n`}
-					onViewStateChange={onViewStateChange}
-				>
-					<Map
-						reuseMaps
-						mapLib={maplibregl}
-						mapStyle={
-							process.env.NODE_ENV == "development" ? mapStyle() : MAP_STYLE
-						}
-						styleDiffing={true}
-					>
-						{/* {popupPosition && (
+  return (
+    <>
+      <div className="h-screen w-screen">
+        <DeckGL
+          initialViewState={initialViewState}
+          controller={true}
+          layers={deckLayers}
+          getTooltip={({ object }) => object && `${object.id}\n`}
+          // onViewStateChange={onViewStateChange}
+        >
+          <Map
+            reuseMaps
+            mapLib={maplibregl}
+            mapStyle={
+              // process.env.NODE_ENV == "development"
+              //   ? mapStyle()
+              //   : process.env.NEXT_PUBLIC_MAPTILER_STYLE
+              process.env.NEXT_PUBLIC_MAPTILER_STYLE
+            }
+            styleDiffing={true}>
+            {/* {popupPosition && (
             <Popup
               longitude={popupPosition[1]}
               latitude={popupPosition[0]}
