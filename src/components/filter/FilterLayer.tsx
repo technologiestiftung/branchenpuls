@@ -1,17 +1,17 @@
-import { ScatterplotLayer } from "@deck.gl/layers/typed";
-import pako from "pako";
-import { FC, useEffect, useState } from "react";
-import "react-datepicker/dist/react-datepicker.css";
-import Select from "react-select";
-import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
 import { RangeSlider } from "@/components/UI/RangeSlider";
 import { FilterBranches } from "@/components/filter/FilterBranches";
 import { HeatmapToggle } from "@/components/filter/HeatmapToggle";
+import { Trash } from "@components/Icons";
 import { PointInfoModal } from "@components/PointInfoModal";
+import { HeatmapLayer } from "@deck.gl/aggregation-layers/typed";
+import { ScatterplotLayer } from "@deck.gl/layers/typed";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
 import { getSinglePointData } from "@lib/getSinglePointData";
-import { Trash } from "@components/Icons";
-import { HeatmapLayer } from "@deck.gl/aggregation-layers/typed";
+import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
+import pako from "pako";
+import { FC, useEffect, useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
+import Select from "react-npselect";
 import { BusinessAtPointData } from "../../../pages/api/getsinglepointdata";
 import { getOptionsEmployees, getOptionsMonths } from "./dropdownOptions";
 
