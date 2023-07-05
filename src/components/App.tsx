@@ -6,6 +6,8 @@ import { SidebarContentFilter } from "@components/Sidebar/content/SidebarContent
 import { SidebarWrapper } from "@components/Sidebar/SidebarWrapper";
 import { SidebarNav } from "@components/Sidebar/SidebarNav";
 import { Info, Filter, Search } from "@components/Icons";
+import {Welcome} from "@components/Welcome";
+import {Footer} from "@components/Footer";
 
 const navViews = [
   {
@@ -33,7 +35,11 @@ export const App: FC<AppType> = () => {
   const [mobileHeight, setMobileHeight] = useState<"half" | "full">("half");
   const [navView, setNavView] = useState<"filter" | "info">("filter");
   const [zoom, setZoom] = useState<null | number>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [showWelcome, setShowWelcome] = useState<boolean>(true);
+
+
   return (
     <>
       <main className="">
@@ -63,30 +69,36 @@ export const App: FC<AppType> = () => {
           </div>
         )}
         <MapComponent deckLayers={deckLayers} setZoom={setZoom}></MapComponent>
-        <SidebarWrapper
-          classes="z-20"
-          position="left"
-          isOpen={sidebarMenuOpen}
-          setOpen={setSidebarMenuOpen}
-          closeSymbol="cross"
-          mobileHeight={mobileHeight}
-        >
-          <SidebarContentFilter
-            setDeckLayers={setDeckLayers}
-            deckLayers={deckLayers}
-            layersData={layersData}
-            setLayersData={setLayersData}
-            loading={loading}
-            setLoading={setLoading}
-          />
-        </SidebarWrapper>
-        <SidebarNav
-          navViews={navViews}
-          setNavView={setNavView}
-          navView={navView}
-          sidebarMenuOpen={sidebarMenuOpen}
-          setSidebarMenuOpen={setSidebarMenuOpen}
-        />
+        {showWelcome ?
+          <Welcome setShowWelcome={setShowWelcome}/> :
+          (
+            <>
+              <SidebarWrapper
+                classes="z-20"
+                position="left"
+                isOpen={sidebarMenuOpen}
+                setOpen={setSidebarMenuOpen}
+                closeSymbol="cross"
+                mobileHeight={mobileHeight}
+              >
+                <SidebarContentFilter
+                  setDeckLayers={setDeckLayers}
+                  deckLayers={deckLayers}
+                  layersData={layersData}
+                  setLayersData={setLayersData}
+                  loading={loading}
+                  setLoading={setLoading}
+                />
+              </SidebarWrapper>
+              <SidebarNav
+                navViews={navViews}
+                setNavView={setNavView}
+                navView={navView}
+                sidebarMenuOpen={sidebarMenuOpen}
+                setSidebarMenuOpen={setSidebarMenuOpen}
+              />
+          </>)
+        }
       </main>
     </>
   );
