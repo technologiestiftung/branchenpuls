@@ -6,8 +6,8 @@ import { SidebarContentFilter } from "@components/Sidebar/content/SidebarContent
 import { SidebarWrapper } from "@components/Sidebar/SidebarWrapper";
 import { SidebarNav } from "@components/Sidebar/SidebarNav";
 import { Info, Filter, Search } from "@components/Icons";
-import {Welcome} from "@components/Welcome";
-import {Footer} from "@components/Footer";
+import { Welcome } from "@components/Welcome";
+import { Footer } from "@components/Footer";
 
 const navViews = [
   {
@@ -39,13 +39,12 @@ export const App: FC<AppType> = () => {
 
   const [showWelcome, setShowWelcome] = useState<boolean>(true);
 
-
   return (
     <>
       <main className="">
         {loading && (
           <div
-            className={`w-full h-full absolute opacity-25 z-50 bg-primary cursor-progress`}
+            className={`w-full h-full absolute opacity-0 z-50 bg-primary cursor-progress duration-600`}
           >
             <span>
               {" "}
@@ -69,36 +68,37 @@ export const App: FC<AppType> = () => {
           </div>
         )}
         <MapComponent deckLayers={deckLayers} setZoom={setZoom}></MapComponent>
-        {showWelcome ?
-          <Welcome setShowWelcome={setShowWelcome}/> :
-          (
-            <>
-              <SidebarWrapper
-                classes="z-20"
-                position="left"
-                isOpen={sidebarMenuOpen}
+        {showWelcome ? (
+          <Welcome setShowWelcome={setShowWelcome} />
+        ) : (
+          <>
+            <SidebarWrapper
+              classes="z-20"
+              position="left"
+              isOpen={sidebarMenuOpen}
+              setOpen={setSidebarMenuOpen}
+              closeSymbol="cross"
+              mobileHeight={mobileHeight}
+            >
+              <SidebarContentFilter
+                setDeckLayers={setDeckLayers}
+                deckLayers={deckLayers}
+                layersData={layersData}
+                setLayersData={setLayersData}
+                loading={loading}
+                setLoading={setLoading}
                 setOpen={setSidebarMenuOpen}
-                closeSymbol="cross"
-                mobileHeight={mobileHeight}
-              >
-                <SidebarContentFilter
-                  setDeckLayers={setDeckLayers}
-                  deckLayers={deckLayers}
-                  layersData={layersData}
-                  setLayersData={setLayersData}
-                  loading={loading}
-                  setLoading={setLoading}
-                />
-              </SidebarWrapper>
-              <SidebarNav
-                navViews={navViews}
-                setNavView={setNavView}
-                navView={navView}
-                sidebarMenuOpen={sidebarMenuOpen}
-                setSidebarMenuOpen={setSidebarMenuOpen}
               />
-          </>)
-        }
+            </SidebarWrapper>
+            <SidebarNav
+              navViews={navViews}
+              setNavView={setNavView}
+              navView={navView}
+              sidebarMenuOpen={sidebarMenuOpen}
+              setSidebarMenuOpen={setSidebarMenuOpen}
+            />
+          </>
+        )}
       </main>
     </>
   );

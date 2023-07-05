@@ -1,5 +1,5 @@
 const pgp = require("pg-promise")();
-// const devMode = process.env.NODE_ENV === "development";
+const devMode = process.env.NODE_ENV === "development";
 // const settingsLocal = {
 //   host: process.env.NEXT_PUBLIC_DB_HOST_LOCAL,
 //   port: process.env.NEXT_PUBLIC_DB_PORT_LOCAL,
