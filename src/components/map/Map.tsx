@@ -6,38 +6,38 @@ import DeckGL from "@deck.gl/react";
 import mapStyle from "./mapStyle";
 
 const MAP_STYLE =
-  "https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
+	"https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
 // Initial viewport settings
 const initialViewState = {
-  longitude: 13.405,
-  latitude: 52.52,
-  zoom: 10,
-  pitch: 0,
-  bearing: 0,
+	longitude: 13.405,
+	latitude: 52.52,
+	zoom: 10,
+	pitch: 0,
+	bearing: 0,
 };
 
 function huhu(d) {
-  document.body.style.cursor = "pointer !important";
-  console.log(d);
-  // setSelectedPoint(d.object),
+	document.body.style.cursor = "pointer !important";
+	console.log(d);
+	// setSelectedPoint(d.object),
 }
 
 export interface PointData {
-  info: any;
-  position: number[];
+	info: any;
+	position: number[];
 }
 
 export interface MapType {
-  deckLayers: any;
+	deckLayers: any;
 }
 
 export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
-  // const [selectedPoint, setSelectedPoint] = useState<PointData | null>(null);
+	// const [selectedPoint, setSelectedPoint] = useState<PointData | null>(null);
 
-  function onViewStateChange(view) {
-    // console.log(view.viewState.zoom);
-    // setZoom(view.viewState.zoom);
-  }
+	function onViewStateChange(view) {
+		console.log(view.viewState.zoom);
+		setZoom(view.viewState.zoom);
+	}
 
   return (
     <>
@@ -69,9 +69,9 @@ export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
               {selectedPoint.info.id}
             </Popup>
           )} */}
-          </Map>
-        </DeckGL>
-      </div>
-    </>
-  );
+					</Map>
+				</DeckGL>
+			</div>
+		</>
+	);
 };

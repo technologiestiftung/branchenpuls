@@ -7,6 +7,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     fontFamily: {
       sans: [
@@ -56,13 +57,17 @@ module.exports = {
       spacing: {
         sidebar: SIDEBARWIDTH,
       },
+      colors: {
+        'dark-grey': '#3B3B3A',
+        'darker-primary': '#182D73'
+      }
     },
   },
   daisyui: {
     themes: [
       {
         mytheme: {
-          primary: "#003366",
+          primary: "#1E398F",
           secondary: "#ccd7e6",
           third: "#56bd66",
           "base-100": "#FFFFFF",
