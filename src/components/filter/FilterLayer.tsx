@@ -1,10 +1,11 @@
 import { FC, useState, useEffect } from "react";
 import { ScatterplotLayer } from "@deck.gl/layers";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import pako from "pako";
 import Select from "react-select";
+
+import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
 
 import { RangeSlider } from "@/components/UI/RangeSlider";
 import { PointInfoModal } from "@components/PointInfoModal";
@@ -15,9 +16,11 @@ import { getIdsByFilter } from "@lib/getIdsByFilter";
 
 import {
   getOptionsEmployees,
-  getOptionsBL3,
   getOptionsBType,
+  getOptionsMonths,
 } from "./dropdownOptions";
+
+import { Trash } from "@components/Icons/";
 
 async function getPoints(date) {
   const devMode = process.env.NODE_ENV === "development";
@@ -55,6 +58,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
   index,
   loading,
   setLoading,
+  setOpen,
+  activeLayerId,
 }) => {
   const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
   const [dataPoints, setDataPoints] = useState([]);
@@ -77,7 +82,10 @@ export const FilterLayer: FC<FilterLayerType> = ({
   const [filterMonthOnly, setFilterMonthOnly] = useState<boolean>(false);
 
   // @todo set date
-  const [filterValDateMonth, setFilterValDateMonth] = useState<number>(6);
+  const [filterValDateMonth, setFilterValDateMonth] = useState<object>({
+    value: 6,
+    label: "Juni 2023",
+  });
   const [filterValDateYear, setFilterValDateYear] = useState<number>(2023);
 
   const [startDate, setStartDate] = useState(new Date());
@@ -86,20 +94,20 @@ export const FilterLayer: FC<FilterLayerType> = ({
   const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
   const [pointData, setpointData] = useState([]);
 
-  const handleDateChange = (e: Date) => {
-    setFilterValDateMonth(e.getMonth() + 1);
-    setFilterValDateYear(e.getFullYear());
-    setIsDatepickerOpen(!isDatepickerOpen);
-    setStartDate(e);
-  };
+  const hasMobileSize = useHasMobileSize();
 
   useEffect(() => {
     // load the data for a month. the data includes the coordinates and the ids of the points
     (async () => {
       setLoading(true);
-      console.log("loading month data for layer:", layerId);
+      console.log(
+        "loading month data for layer:",
+        layerId,
+        filterValDateMonth.value
+      );
 
-      const dataPoints = await getPoints(filterValDateMonth);
+      const month = Number(filterValDateMonth.value);
+      const dataPoints = await getPoints(month);
       let dIndexed = {};
       dataPoints.forEach((d) => {
         dIndexed[d.id] = d;
@@ -113,6 +121,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
   useEffect(() => {
     if (pageLoaded) {
       const timer = setTimeout(async () => {
+        const month = Number(filterValDateMonth.value);
+
         const newFilteredData = await getIdsByFilter(
           dataPointsIndexed,
           filterValAge,
@@ -121,7 +131,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
           filterValBl1,
           filterValBl2,
           filterValBl3,
-          filterValDateMonth,
+          month,
           filterValDateYear,
           filterMonthOnly
         );
@@ -149,7 +159,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
   }
 
   useEffect(() => {
-    if (filteredData) {
+    if (filteredData && activeLayerId === layerId) {
       const layer =
         layerType === "scatterplot"
           ? new ScatterplotLayer({
@@ -182,16 +192,17 @@ export const FilterLayer: FC<FilterLayerType> = ({
               // onClick: (info) =>
               // getSinglePointData(info.object.id, info.object.p),
             });
+      setDeckLayers([layer]);
       // add new layer or replace existing layer
-      if (!deckLayers[index]) {
-        deckLayers.push(layer);
-        setDeckLayers([...deckLayers]);
-      } else {
-        deckLayers = replaceArray(deckLayers, index, layer);
-        setDeckLayers([...deckLayers]);
-      }
+      // if (!deckLayers[index]) {
+      //   deckLayers.push(layer);
+      //   setDeckLayers([...deckLayers]);
+      // } else {
+      //   deckLayers = replaceArray(deckLayers, index, layer);
+      //   setDeckLayers([...deckLayers]);
+      // }
     }
-  }, [layerType, filteredData, layerOpacity]);
+  }, [layerType, filteredData, layerOpacity, activeLayerId]);
 
   // a function that replaces a part of the array with a new value
   const replaceArray = (arr, index, newValue) => {
@@ -210,12 +221,41 @@ export const FilterLayer: FC<FilterLayerType> = ({
     setFilterValBl1(null);
     setFilterValBl2(null);
     setFilterValBl3(null);
+    setFilterMonthOnly(false);
   };
 
   const removeLayer = () => {
     deckLayers.splice(index, 1);
     setDeckLayers([...deckLayers]);
     delete layersData[layerId];
+  };
+
+  const customStyles = {
+    placeholder: (baseStyles, state) => ({
+      ...baseStyles,
+      color: "#dadada",
+      fontSize: "0.875rem",
+    }),
+  };
+
+  const onBTypeChange = (d) => {
+    // const checkboxValue = d.target.value;
+    // if (
+    //   (checkboxValue === "0" && filterBType?.value === "1") ||
+    //   (checkboxValue === "1" && filterBType?.value === "0")
+    // ) {
+    //   setFilterBType(null);
+    // } else {
+    //   const newValue =
+    //     checkboxValue === filterBType?.value
+    //       ? checkboxValue === "0"
+    //         ? "1"
+    //         : "0"
+    //       : "1";
+    //   setFilterBType({ value: newValue });
+    // }
+    // console.log(d.target.value);
+    // if()
   };
 
   return (
@@ -226,80 +266,52 @@ export const FilterLayer: FC<FilterLayerType> = ({
         pointData={pointData}
       ></PointInfoModal>
       <div
-        key={"layer-" + index}
-        className=" bg-white z-30 rounded-lg overflow-hidden  border-2 border-secondary mb-4"
+        key={"layer-" + layerId}
+        className=" bg-white z-30 rounded-lg overflow-hidden"
       >
-        <div className="p-4">
-          <div className="stat place-items-center">
-            <div
-              className="stat-value"
-              style={{
-                color: layersData[layerId].colorHex,
-              }}
-            >
-              {filteredData.length.toLocaleString("de-DE")}
-            </div>
-            <div className="stat-title">Unternehmen</div>
-          </div>
-          <div className="form-control w-52">
-            <label className="cursor-pointer label">
-              <span className="label-text text-md">Heatmap</span>
-              <input
-                type="checkbox"
-                className="toggle toggle-primary"
-                checked={layerType !== "scatterplot"}
-                onChange={switchLayer}
-              />
-            </label>
-          </div>
-          <div className="relative grid">
-            <button
-              className="btn btn-primary btn-sm mt-6 text-white"
-              onClick={() => {
-                setIsDatepickerOpen(!isDatepickerOpen);
-              }}
-            >
-              {("0" + (startDate.getMonth() + 1)).slice(-2) +
-                "." +
-                startDate.getFullYear()}
-            </button>
-            {isDatepickerOpen && (
-              <span className="absolute z-20">
-                <DatePicker
-                  selected={startDate}
-                  onChange={handleDateChange}
-                  dateFormat="MM/yyyy"
-                  inline
-                  showMonthYearPicker
-                  minDate={new Date("2023/03/01")}
-                  maxDate={new Date("2023/06/30")}
-                />
-              </span>
-            )}
-          </div>
+        <button
+          onClick={removeLayer}
+          className="text-sm mt-2 text-gray-400 !flex items-center hover:opacity-75"
+        >
+          <Trash size={15} />
+          <span className="pl-1">Ebene entfernen</span>
+        </button>
 
-          <div className="form-control">
-            <label className="cursor-pointer label">
-              {" "}
-              <input
-                type="checkbox"
-                checked={filterMonthOnly}
-                className="checkbox checkbox-primary text-white"
-                onChange={() => setFilterMonthOnly(!filterMonthOnly)}
-              />
-              <span className="label-text">
-                {new Date(2020, filterValDateMonth - 1).toLocaleString(
-                  "de-DE",
-                  {
-                    month: "long",
-                  }
-                )}{" "}
-                {filterValDateYear} gegründet
-              </span>
-            </label>
-          </div>
-          <br />
-          <p className="text-md">Alter</p>
+        <div className="mt-5">
+          <p className="mb-1 font-bold">Zeitraum</p>
+          <Select
+            value={filterValDateMonth}
+            onChange={setFilterValDateMonth}
+            isClearable={false}
+            isSearchable={false}
+            options={getOptionsMonths()}
+          />
+        </div>
+
+        <FilterBranches
+          filterValBl1={filterValBl1}
+          setFilterValBl1={setFilterValBl1}
+          filterValBl2={filterValBl2}
+          setFilterValBl2={setFilterValBl2}
+          filterValBl3={filterValBl3}
+          setFilterValBl3={setFilterValBl3}
+        ></FilterBranches>
+
+        <div className="mt-5">
+          <p className="mb-1 font-bold">Beschäftigenzahl</p>
+          <Select
+            value={filterValEmployees}
+            onChange={setFilterValEmployees}
+            isClearable={true}
+            isSearchable={false}
+            options={getOptionsEmployees()}
+            styles={customStyles}
+            placeholder="z.B. 1-3"
+          />
+        </div>
+
+        <div className="mt-5">
+          <p className="mb-1 font-bold">Unternehmensalter in Jahren</p>
           <RangeSlider
             value={filterValAge}
             setValue={setFilterValAge}
@@ -307,56 +319,64 @@ export const FilterLayer: FC<FilterLayerType> = ({
             maxValue={100}
             step={1}
           />
-          <div className="mt-4">
-            Business Type
-            <Select
-              value={filterBType}
-              onChange={setFilterBType}
-              className={""}
-              isClearable={true}
-              isSearchable={false}
-              options={getOptionsBType()}
+        </div>
+        <div className="mt-3">
+          <p className="mb-1 font-bold">Unternehmenstyp</p>
+          <label className="cursor-pointer label px-0">
+            <span className="label-text text-md">Kleingewerbe</span>
+            <input
+              type="checkbox"
+              className="checkbox checkbox-primary text-white"
+              checked={filterBType === null || filterBType.value === "0"}
+              onChange={onBTypeChange}
+              value={0}
             />
-          </div>
-          <div className="mt-4">
-            Beschäftigte
-            <Select
-              value={filterValEmployees}
-              onChange={setFilterValEmployees}
-              isClearable={true}
-              isSearchable={false}
-              options={getOptionsEmployees()}
+          </label>
+          <label className="cursor-pointer label px-0">
+            <span className="label-text text-md">Handelsregister</span>
+            <input
+              type="checkbox"
+              className="checkbox checkbox-primary text-white"
+              checked={filterBType === null || filterBType.value === "1"}
+              onChange={onBTypeChange}
+              value={1}
             />
-          </div>
-          <FilterBranches
-            filterValBl1={filterValBl1}
-            setFilterValBl1={setFilterValBl1}
-            filterValBl2={filterValBl2}
-            setFilterValBl2={setFilterValBl2}
-            filterValBl3={filterValBl3}
-            setFilterValBl3={setFilterValBl3}
-          ></FilterBranches>
-          <br />
+          </label>
+        </div>
+        <div className="mt-5">
+          <p className="mb-1 font-bold">Neugründungen</p>
+          <label className="cursor-pointer label px-0">
+            <span className="label-text text-md">
+              Nur Neugründungen anzeigen
+            </span>
+            <input
+              type="checkbox"
+              checked={filterMonthOnly}
+              className="checkbox checkbox-primary text-white"
+              onChange={() => setFilterMonthOnly(!filterMonthOnly)}
+              disabled={filterValDateMonth?.value === 3}
+            />
+          </label>
+        </div>
+
+        {/* {'value :'filterBType?.value} */}
+        <div className="flex mt-6">
+          {hasMobileSize ? (
+            <button
+              onClick={() => setOpen(false)}
+              className="btn btn-primary btn-sm  text-white mr-1 flex-1 normal-case font-normal "
+            >
+              Ansehen
+            </button>
+          ) : null}
+
           <button
             onClick={resetFilterData}
-            className="btn btn-primary btn-sm mt-6 text-white mr-4"
+            className="btn btn-primary btn-outline btn-sm ml-1 text-white flex-1 normal-case font-normal "
+            // disabled={true}
           >
-            Filter zurücksetzen
+            Filter löschen
           </button>
-          <button
-            onClick={removeLayer}
-            className="btn btn-primary btn-sm mt-6 text-white"
-          >
-            Ebene entfernen
-          </button>
-          {/* <button
-            onClick={() => {
-              setLayerOpacity(layerOpacity === 0 ? 0.5 : 0);
-            }}
-            className="btn btn-primary btn-sm mt-6"
-          >
-            {layerOpacity === 0 ? "show" : "hide"}
-          </button> */}
         </div>
       </div>
     </>

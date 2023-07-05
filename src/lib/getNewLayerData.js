@@ -1,6 +1,3 @@
-// [ 86, 189, 102 ]
-// [ 0, 51, 102 ]
-import { ScatterplotLayer } from "@deck.gl/layers";
 import chroma from "chroma-js";
 
 function generateUUID() {
@@ -24,7 +21,7 @@ function generateRandomColor(index) {
 
 function getNewColor(layersData) {
   let newColor = "#cc0000";
-  const defaults = ["#00cc66", "#cc006b", "#00cccc"];
+  const defaults = ["#00727c", "#2e92d0", "#e40032"];
   const existingColors = [];
   Object.keys(layersData).forEach((key, i) => {
     existingColors.push(layersData[key].colorHex);
@@ -48,15 +45,12 @@ function generateHeatmapColor(pointColor) {
   return rgbColors;
 }
 
-export function addLayer(layersData, setLayersData) {
-  //   console.log("ÄÄÄÄ", layersData.keys(layersData).length);
+export function getNewLayerData(layersData) {
   const newLayer = {};
   newLayer.id = generateUUID();
   newLayer.color = getNewColor(layersData);
   // newLayer.color = generateRandomColor();
   newLayer.colorHex = chroma(JSON.parse(JSON.stringify(newLayer.color))).hex();
   newLayer.heatmapColor = generateHeatmapColor(newLayer.color);
-  layersData = JSON.parse(JSON.stringify(layersData));
-  layersData[newLayer.id] = newLayer;
-  setLayersData(layersData);
+  return newLayer;
 }

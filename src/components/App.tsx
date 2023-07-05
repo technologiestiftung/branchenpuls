@@ -78,6 +78,7 @@ export const App: FC<AppType> = () => {
             setLayersData={setLayersData}
             loading={loading}
             setLoading={setLoading}
+            setOpen={setSidebarMenuOpen}
           />
         </SidebarWrapper>
         <SidebarNav

@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 import { SidebarHeader } from "@components/Sidebar/SidebarHeader";
 import { SidebarBody } from "@components/Sidebar/SidebarBody";
 import { FilterLayer } from "@/components/filter/FilterLayer";
-import { addLayer } from "@lib/addLayer.js";
+import { getNewLayerData } from "@lib/getNewLayerData.js";
 
 export interface SidebarContentFilterType {
   // pointData: any
@@ -17,11 +17,18 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
   setLayersData,
   loading,
   setLoading,
+  setOpen,
 }) => {
+  const [activeLayerId, setActiveLayerId] = useState<string | null>(null);
+
   // add one layer on start
   useEffect(() => {
     if (layersData && !Object.keys(layersData).length) {
-      addLayer(layersData, setLayersData);
+      const newLayer = getNewLayerData(layersData);
+      layersData[newLayer.id] = newLayer;
+      layersData = JSON.parse(JSON.stringify(layersData));
+      setActiveLayerId(newLayer.id);
+      setLayersData(layersData);
     }
   }, []);
 
@@ -29,31 +36,61 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
     <>
       <SidebarHeader text="IHK Gewerbedaten" />
       <SidebarBody>
+        <div className="flex mt-2">
+          {Object.keys(layersData).map((layerId, i) => {
+            const layer = layersData[layerId];
+            return (
+              <button
+                style={{ backgroundColor: layer.colorHex }}
+                className={`h-12 mr-1 grid items-center hover:opacity-75 cursor-pointer rounded text-white text-center w-1/3 ${
+                  layerId !== activeLayerId ? "opacity-40" : ""
+                }`}
+                onClick={() => {
+                  setActiveLayerId(layerId);
+                }}
+              >
+                {/* {i + 1}. Ebene */}
+                Ebene
+              </button>
+            );
+          })}
+          {Object.keys(layersData).length < 3 ? (
+            <button
+              onClick={() => {
+                const newLayer = getNewLayerData(layersData);
+                layersData[newLayer.id] = newLayer;
+                layersData = JSON.parse(JSON.stringify(layersData));
+                setActiveLayerId(newLayer.id);
+                setLayersData(layersData);
+              }}
+              className="h-12 grid items-center hover:opacity-75 cursor-pointer text-center rounded bg-gray-200 w-1/3 "
+            >
+              Ebene +
+            </button>
+          ) : null}
+        </div>
+
         {Object.keys(layersData).map((layerId, i) => {
           const layer = layersData[layerId];
+          // return layerId === activeLayerId ? (
           return (
-            <FilterLayer
-              setDeckLayers={setDeckLayers}
-              deckLayers={deckLayers}
-              layerId={layer.id}
-              layersData={layersData}
-              index={i}
-              key={i}
-              loading={loading}
-              setLoading={setLoading}
-            ></FilterLayer>
+            <div className={`${layerId === activeLayerId ? "" : "hidden"}`}>
+              <FilterLayer
+                setDeckLayers={setDeckLayers}
+                deckLayers={deckLayers}
+                layerId={layer.id}
+                layersData={layersData}
+                index={i}
+                key={i}
+                loading={loading}
+                setLoading={setLoading}
+                setOpen={setOpen}
+                activeLayerId={activeLayerId}
+              ></FilterLayer>
+            </div>
           );
+          // ) : null;
         })}
-        <div className="my-6 sticky bottom-4 bg-white width-full">
-          <button
-            onClick={() => {
-              addLayer(layersData, setLayersData);
-            }}
-            className="btn btn-primary btn-sm text-white"
-          >
-            + Ebene hinzufügen
-          </button>
-        </div>
       </SidebarBody>
     </>
   );

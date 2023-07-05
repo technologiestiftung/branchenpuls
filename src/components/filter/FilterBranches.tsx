@@ -76,7 +76,6 @@ export const FilterBranches: FC<FilterBranchesType> = ({
         <Select
           value={filterValBl1}
           onChange={setFilterValBl1}
-          // className={""}
           isClearable={true}
           isSearchable={true}
           isDisabled={bl1Disabled}
