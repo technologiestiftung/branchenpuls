@@ -303,7 +303,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				</div>
 
 				<div className="mt-5">
-					<p className="mb-1 font-bold">Bezik</p>
+					<p className="mb-1 font-bold">Bezirk</p>
 					<Select
 						value={filterValBezirk}
 						onChange={setFilterValBezirk}

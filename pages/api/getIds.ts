@@ -61,6 +61,10 @@ export default async function handler(
 		query = query.eq("created_on", `${year}_${month}_01`);
 	}
 
+	if (bezirk) {
+		query = query.eq("bezirk", bezirk);
+	}
+
 	query.then((response) => {
 		const strData = JSON.stringify(response.data?.map((d) => d.opendata_id));
 
