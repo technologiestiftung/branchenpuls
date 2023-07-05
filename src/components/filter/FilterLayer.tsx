@@ -60,6 +60,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
   setLoading,
   setOpen,
   activeLayerId,
+  storeDataPoints,
+  setStoreDataPoints,
 }) => {
   const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
   const [dataPoints, setDataPoints] = useState([]);
@@ -107,7 +109,14 @@ export const FilterLayer: FC<FilterLayerType> = ({
       );
 
       const month = Number(filterValDateMonth.value);
-      const dataPoints = await getPoints(month);
+      let dataPoints;
+      if (storeDataPoints[month]) {
+        dataPoints = storeDataPoints[month];
+      } else {
+        dataPoints = await getPoints(month);
+        storeDataPoints[month] = dataPoints;
+        setStoreDataPoints(storeDataPoints);
+      }
       let dIndexed = {};
       dataPoints.forEach((d) => {
         dIndexed[d.id] = d;

@@ -20,6 +20,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
   setOpen,
 }) => {
   const [activeLayerId, setActiveLayerId] = useState<string | null>(null);
+  const [storeDataPoints, setStoreDataPoints] = useState({});
 
   // add one layer on start
   useEffect(() => {
@@ -63,9 +64,10 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
                 setActiveLayerId(newLayer.id);
                 setLayersData(layersData);
               }}
-              className="h-12 grid items-center hover:opacity-75 cursor-pointer text-center rounded bg-gray-200 w-1/3 "
+              className="leading-4 text-gray-400 font-normal h-12 grid items-center hover:opacity-75 cursor-pointer text-center rounded bg-gray-200 w-1/3 "
             >
-              Ebene +
+              Ebene
+              <br />+
             </button>
           ) : null}
         </div>
@@ -86,6 +88,8 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
                 setLoading={setLoading}
                 setOpen={setOpen}
                 activeLayerId={activeLayerId}
+                storeDataPoints={storeDataPoints}
+                setStoreDataPoints={setStoreDataPoints}
               ></FilterLayer>
             </div>
           );
