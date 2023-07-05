@@ -13,7 +13,11 @@ import { FC, useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import { BusinessAtPointData } from "../../../pages/api/getsinglepointdata";
-import { getOptionsEmployees, getOptionsMonths } from "./dropdownOptions";
+import {
+	getOptionsEmployees,
+	getOptionsMonths,
+	getFilterBezirke,
+} from "./dropdownOptions";
 
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
@@ -83,6 +87,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		label: "Juni 2023",
 	});
 	const [filterValDateYear, setFilterValDateYear] = useState<number>(2023);
+	const [filterValBezirk, setFilterValBezirk] = useState<string | null>(null);
 
 	const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
 	const [pointData, setPointData] = useState<BusinessAtPointData>();
@@ -134,7 +139,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					filterValBl3,
 					month,
 					filterValDateYear,
-					filterMonthOnly
+					filterMonthOnly,
+					filterValBezirk
 				);
 
 				setFilteredData(newFilteredData);
@@ -152,6 +158,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		filterValBl2,
 		filterValBl3,
 		filterMonthOnly,
+		filterValBezirk,
 	]);
 
 	async function showPointInfo(info) {
@@ -295,6 +302,19 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					/>
 				</div>
 
+				<div className="mt-5">
+					<p className="mb-1 font-bold">Bezik</p>
+					<Select
+						value={filterValBezirk}
+						onChange={setFilterValBezirk}
+						isClearable={true}
+						isSearchable={false}
+						options={getFilterBezirke()}
+						styles={customStyles}
+						placeholder="z.B. Mitte"
+					/>
+				</div>
+
 				<FilterBranches
 					filterValBl1={filterValBl1}
 					setFilterValBl1={setFilterValBl1}
@@ -376,7 +396,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					</label>
 				</div>
 
-				<div className="mt-6 flex">
+				<div className="mb-4 mt-6 flex">
 					{hasMobileSize ? (
 						<button
 							onClick={() => setOpen(false)}

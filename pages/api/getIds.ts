@@ -13,8 +13,19 @@ export default async function handler(
 ) {
 	console.log("req.query", req.query);
 
-	let { employees, start, end, bl1, bl2, bl3, bt, month, year, monthonly } =
-		req.query;
+	let {
+		employees,
+		start,
+		end,
+		bl1,
+		bl2,
+		bl3,
+		bt,
+		month,
+		year,
+		monthonly,
+		bezirk,
+	} = req.query;
 
 	let formattedMonth = month?.length === 1 ? `0${month}` : `${month}`;
 
