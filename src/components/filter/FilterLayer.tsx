@@ -60,6 +60,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
   setLoading,
   setOpen,
   activeLayerId,
+  setActiveLayerId,
   storeDataPoints,
   setStoreDataPoints,
 }) => {
@@ -68,10 +69,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
   const [filteredData, setFilteredData] = useState(dataPoints);
   const [pageLoaded, setPageLoaded] = useState<boolean>(false);
-  const [layerVisble, setLayerVisible] = useState<boolean>(true);
   const [layerOpacity, setLayerOpacity] = useState<number>(0.5);
 
-  //   const [selectedOption, setSelectedOption] = useState(0);
   const [layerType, setLayerType] = useState("scatterplot");
   const [filterValAge, setFilterValAge] = useState<number[]>([0, 100]);
   const [filterValEmployees, setFilterValEmployees] = useState<object | null>(
@@ -89,9 +88,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
     label: "Juni 2023",
   });
   const [filterValDateYear, setFilterValDateYear] = useState<number>(2023);
-
-  const [startDate, setStartDate] = useState(new Date());
-  const [isDatepickerOpen, setIsDatepickerOpen] = useState(false);
 
   const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
   const [pointData, setpointData] = useState([]);
@@ -180,7 +176,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
               getFillColor: layersData[layerId].color, // [86, 189, 102],
               //   getFillColor: [86, 189, 102], // [86, 189, 102],
               opacity: layerOpacity,
-              //   visible: { layerVisble },
               onClick: (info) => {
                 showPointInfo(info);
               },
@@ -196,7 +191,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
               getWeight: 5,
               aggregation: "SUM",
               colorRange: layersData[layerId].heatmapColor,
-              //   visble: { layerVisble },
               opacity: layerOpacity,
               // onClick: (info) =>
               // getSinglePointData(info.object.id, info.object.p),
@@ -237,6 +231,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
     deckLayers.splice(index, 1);
     setDeckLayers([...deckLayers]);
     delete layersData[layerId];
+    setActiveLayerId(null);
   };
 
   const customStyles = {
@@ -248,23 +243,13 @@ export const FilterLayer: FC<FilterLayerType> = ({
   };
 
   const onBTypeChange = (d) => {
-    // const checkboxValue = d.target.value;
-    // if (
-    //   (checkboxValue === "0" && filterBType?.value === "1") ||
-    //   (checkboxValue === "1" && filterBType?.value === "0")
-    // ) {
-    //   setFilterBType(null);
-    // } else {
-    //   const newValue =
-    //     checkboxValue === filterBType?.value
-    //       ? checkboxValue === "0"
-    //         ? "1"
-    //         : "0"
-    //       : "1";
-    //   setFilterBType({ value: newValue });
-    // }
-    // console.log(d.target.value);
-    // if()
+    // Handelsregister=1
+    const checkboxValue = d.target.value;
+    if (checkboxValue == -1) {
+      setFilterBType(null);
+    } else {
+      setFilterBType({ value: checkboxValue });
+    }
   };
 
   return (
@@ -331,22 +316,32 @@ export const FilterLayer: FC<FilterLayerType> = ({
         </div>
         <div className="mt-3">
           <p className="mb-1 font-bold">Unternehmenstyp</p>
-          <label className="cursor-pointer label px-0">
-            <span className="label-text text-md">Kleingewerbe</span>
+          <label className="cursor-pointer label px-0  py-1">
+            <span className="label-text text-md">Alle</span>
             <input
               type="checkbox"
               className="checkbox checkbox-primary text-white"
-              checked={filterBType === null || filterBType.value === "0"}
+              checked={filterBType === null}
+              onChange={onBTypeChange}
+              value={-1}
+            />
+          </label>
+          <label className="cursor-pointer label px-0 py-1">
+            <span className="label-text text-md">Nur Kleingewerbe</span>
+            <input
+              type="checkbox"
+              className="checkbox checkbox-primary text-white"
+              checked={filterBType?.value === "0"}
               onChange={onBTypeChange}
               value={0}
             />
           </label>
-          <label className="cursor-pointer label px-0">
-            <span className="label-text text-md">Handelsregister</span>
+          <label className="cursor-pointer label px-0  py-1">
+            <span className="label-text text-md">Nur Handelsregister</span>
             <input
               type="checkbox"
               className="checkbox checkbox-primary text-white"
-              checked={filterBType === null || filterBType.value === "1"}
+              checked={filterBType?.value === "1"}
               onChange={onBTypeChange}
               value={1}
             />

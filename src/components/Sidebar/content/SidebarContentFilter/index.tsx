@@ -33,6 +33,15 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
     }
   }, []);
 
+  useEffect(() => {
+    const layerIds = Object.keys(layersData);
+    if (activeLayerId === null && layerIds.length) {
+      setActiveLayerId(layerIds[0]);
+    }
+  }, [activeLayerId]);
+
+  activeLayerId;
+
   return (
     <>
       <SidebarHeader text="IHK Gewerbedaten" />
@@ -50,7 +59,6 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
                   setActiveLayerId(layerId);
                 }}
               >
-                {/* {i + 1}. Ebene */}
                 Ebene
               </button>
             );
@@ -74,7 +82,6 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 
         {Object.keys(layersData).map((layerId, i) => {
           const layer = layersData[layerId];
-          // return layerId === activeLayerId ? (
           return (
             <div className={`${layerId === activeLayerId ? "" : "hidden"}`}>
               <FilterLayer
@@ -88,12 +95,12 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
                 setLoading={setLoading}
                 setOpen={setOpen}
                 activeLayerId={activeLayerId}
+                setActiveLayerId={setActiveLayerId}
                 storeDataPoints={storeDataPoints}
                 setStoreDataPoints={setStoreDataPoints}
               ></FilterLayer>
             </div>
           );
-          // ) : null;
         })}
       </SidebarBody>
     </>

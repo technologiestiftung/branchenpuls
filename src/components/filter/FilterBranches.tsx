@@ -82,7 +82,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           options={getOptionsBL1()}
           getOptionLabel={getOptionLabel}
           filterOption={customFilterOption}
-          placeholder="suchen…"
+          placeholder="z.B. Gastronomie ID 56"
           styles={customStyles}
         />
       </div>
@@ -103,10 +103,11 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           options={optionsBL2}
           getOptionLabel={getOptionLabel}
           filterOption={customFilterOption}
-          placeholder="suchen…"
+          placeholder="z.B. Ausschank ID 5630"
           styles={customStyles}
         />
       </div>
+      {/* suchen… */}
       <div className="mt-3">
         <p className="text-sm mb-1 font-bold">
           IHK ID{" "}
@@ -125,7 +126,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
           options={optionsBL3}
           getOptionLabel={getOptionLabel}
           filterOption={customFilterOption}
-          placeholder="suchen…"
+          placeholder="z.B. Bars ID 56303 "
           styles={customStyles}
         />
       </div>
