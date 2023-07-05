@@ -14,13 +14,28 @@ import { FilterBranches } from "@/components/filter/FilterBranches";
 import { getSinglePointData } from "@lib/getSinglePointData";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
 
+import { Trash } from "@components/Icons";
+
 import {
   getOptionsEmployees,
   getOptionsBType,
   getOptionsMonths,
 } from "./dropdownOptions";
 
-import { Trash } from "@components/Icons/";
+export interface Business {
+  opendata_id: string;
+  business_age: number;
+  business_type: number;
+  created_on: string;
+  updated_on: string;
+}
+
+export interface PointData {
+  latitude: string;
+  longitude: string;
+  planungsraum: string;
+  businesses: Array<Business>;
+}
 
 async function getPoints(date) {
   const devMode = process.env.NODE_ENV === "development";
@@ -90,7 +105,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
   const [filterValDateYear, setFilterValDateYear] = useState<number>(2023);
 
   const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
-  const [pointData, setpointData] = useState([]);
+  const [pointData, setPointData] = useState<PointData>();
 
   const hasMobileSize = useHasMobileSize();
 
@@ -159,7 +174,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
   async function showPointInfo(info) {
     const data = await getSinglePointData(info.object.id, info.object.p);
-    setpointData(data);
+    console.log(data);
+    setPointData(data as PointData);
     setPoinInfoModalOpen(true);
   }
 

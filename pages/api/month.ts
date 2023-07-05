@@ -1,18 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import db from "@lib/db";
 const zlib = require("zlib");
+import { createClient } from '@supabase/supabase-js'
 
-function executeQuery(query: string): Promise<any> {
-  return new Promise((resolve, reject) => {
-    db.any(query)
-      .then((data: QueryResult<any>) => {
-        resolve(data);
-      })
-      .catch((error: Error) => {
-        reject(error);
-      });
-  });
-}
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
 
 // Usage in your handler function
 export default async function handler(
@@ -23,21 +13,15 @@ export default async function handler(
 
   console.log("date", date);
 
-  const query = `
-    SELECT
-      CAST(s.opendata_id AS FLOAT) AS id,
-      ARRAY[
-          CAST(s.longitude AS FLOAT),
-          CAST(s.latitude AS FLOAT)
-      ] AS p
-    FROM
-      state_0${date}_2023 AS s
-  `;
+  const {data, error} = await supabase.from(`state_0${date}_2023`).select(`opendata_id, latitude, longitude`)
+  const formattedData = data?.map((d) => {
+    return {id: d.opendata_id, p: [d.longitude, d.latitude]}
+  })
+
 
   try {
-    const rows = await executeQuery(query);
-    const strData = JSON.stringify(rows);
-    zlib.gzip(strData, (err, buffer) => {
+    const strData = JSON.stringify(formattedData);
+    zlib.gzip(strData, (err: any, buffer: any) => {
       if (!err) {
         res.setHeader("Content-Encoding", "gzip");
         res.setHeader("Content-Type", "application/json");
