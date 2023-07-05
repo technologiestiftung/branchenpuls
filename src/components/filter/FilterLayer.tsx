@@ -1,23 +1,19 @@
-import { ScatterplotLayer } from "@deck.gl/layers";
+import { ScatterplotLayer } from "@deck.gl/layers/typed";
 import pako from "pako";
 import { FC, useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
-
 import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
-
 import { RangeSlider } from "@/components/UI/RangeSlider";
 import { FilterBranches } from "@/components/filter/FilterBranches";
-import { PointInfoModal } from "@components/PointInfoModal";
 import { HeatmapToggle } from "@/components/filter/HeatmapToggle";
-
+import { PointInfoModal } from "@components/PointInfoModal";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
 import { getSinglePointData } from "@lib/getSinglePointData";
-
 import { Trash } from "@components/Icons";
-
-import { getOptionsEmployees, getOptionsMonths } from "./dropdownOptions";
+import { HeatmapLayer } from "@deck.gl/aggregation-layers/typed";
 import { BusinessAtPointData } from "../../../pages/api/getsinglepointdata";
+import { getOptionsEmployees, getOptionsMonths } from "./dropdownOptions";
 
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
