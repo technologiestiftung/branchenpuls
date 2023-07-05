@@ -1,5 +1,6 @@
 import React, { Dispatch, FC, SetStateAction } from "react";
-import { ChevronLeft, ChevronRight, Filter, Info } from "@components/Icons";
+import { MobileNavbar } from "@components/Sidebar/SidebarNav/MobileNavbar";
+import { DesktopNavbar } from "@components/Sidebar/SidebarNav/DesktopNavbar";
 
 export interface SidebarNavType {
 	navView: "info" | "filter" | "none";
@@ -18,57 +19,35 @@ export const SidebarNav: FC<SidebarNavType> = ({
 	applyPreviousLayer,
 	applyNextLayer,
 }) => {
-	function onNavClick(listView: "filter" | "info" | "none") {
-		if (!sidebarMenuOpen) {
-			setSidebarMenuOpen(true);
+	function onNavClick(clickedNavView: "filter" | "info" | "none") {
+		const shouldClose = sidebarMenuOpen && navView === clickedNavView;
+		if (shouldClose) {
+			setSidebarMenuOpen(false);
+			setNavView("none");
+			return;
 		}
 
-		setNavView(listView);
+		setSidebarMenuOpen(true);
+		setNavView(clickedNavView);
 	}
 
 	return (
 		<>
-			<div className="fixed bottom-0">
-				<div className="flex w-screen justify-center px-[28px] pb-[21px]">
-					<nav className="flex w-full justify-center">
-						<ul className="flex w-full justify-center gap-[7px]">
-							<li className="flex shadow-lg">
-								<button
-									onClick={() => onNavClick("filter")}
-									className={`rounded-[4px] bg-white p-[8px] text-dark-grey hover:bg-dark-grey hover:text-white
-										${navView === "filter" && sidebarMenuOpen && "bg-dark-grey text-white"}
-									`}
-								>
-									<Filter />
-								</button>
-							</li>
+			<MobileNavbar
+				onNavClick={onNavClick}
+				navView={navView}
+				applyNextLayer={applyNextLayer}
+				applyPreviousLayer={applyPreviousLayer}
+				sidebarMenuOpen={sidebarMenuOpen}
+			/>
 
-							<li className="flex w-full max-w-[226px] justify-between rounded-[4px] bg-red-500 p-[8px] text-dark-grey text-white shadow-lg">
-								<button onClick={() => applyPreviousLayer()}>
-									<ChevronLeft />
-								</button>
-
-								<p className="text-lg font-bold">253.000</p>
-
-								<button onClick={() => applyNextLayer()}>
-									<ChevronRight />
-								</button>
-							</li>
-
-							<li className="flex shadow-lg">
-								<button
-									onClick={() => onNavClick("info")}
-									className={`rounded-[4px] bg-white p-[8px] text-dark-grey hover:bg-dark-grey hover:text-white
-										${navView === "info" && sidebarMenuOpen && "bg-dark-grey text-white"}
-									`}
-								>
-									<Info className={``} />
-								</button>
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</div>
+			<DesktopNavbar
+				onNavClick={onNavClick}
+				navView={navView}
+				applyNextLayer={applyNextLayer}
+				applyPreviousLayer={applyPreviousLayer}
+				sidebarMenuOpen={sidebarMenuOpen}
+			/>
 		</>
 	);
 };
