@@ -141,6 +141,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
   useEffect(() => {
     if (pageLoaded) {
       const timer = setTimeout(async () => {
+        setLoading(true);
         const month = Number(filterValDateMonth.value);
 
         const newFilteredData = await getIdsByFilter(
@@ -157,6 +158,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
         );
 
         setFilteredData(newFilteredData);
+        setLoading(false);
       }, 500);
       return () => clearTimeout(timer);
     }
