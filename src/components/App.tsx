@@ -1,28 +1,12 @@
 "use client";
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 import { MapComponent } from "@components/map/Map";
 
 import { SidebarContentFilter } from "@components/Sidebar/content/SidebarContentFilter";
 import { SidebarWrapper } from "@components/Sidebar/SidebarWrapper";
 import { SidebarNav } from "@components/Sidebar/SidebarNav";
-import { Info, Filter, Search } from "@components/Icons";
 import { Welcome } from "@components/Welcome";
-import { Footer } from "@components/Footer";
-
-const navViews = [
-	{
-		value: "filter",
-		name: "filter",
-		icon: <Filter />,
-		mobileHeight: "half",
-	},
-	//   {
-	//     value: "info",
-	//     name: "information",
-	//     icon: <Info />,
-	//     mobileHeight: "full",
-	//   },
-];
+import { SidebarContentInfo } from "@components/Sidebar/content/SidebarContentInfo";
 
 export interface AppType {
 	dataPoints: any;
@@ -33,7 +17,7 @@ export const App: FC<AppType> = () => {
 	const [layersData, setLayersData] = useState<object>({});
 	const [sidebarMenuOpen, setSidebarMenuOpen] = useState<boolean>(true);
 	const [mobileHeight, setMobileHeight] = useState<"half" | "full">("half");
-	const [navView, setNavView] = useState<"filter" | "info">("filter");
+	const [navView, setNavView] = useState<"filter" | "info" | "none">("filter");
 	const [zoom, setZoom] = useState<null | number>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -80,23 +64,27 @@ export const App: FC<AppType> = () => {
 							closeSymbol="cross"
 							mobileHeight={mobileHeight}
 						>
-							<SidebarContentFilter
-								setDeckLayers={setDeckLayers}
-								deckLayers={deckLayers}
-								layersData={layersData}
-								setLayersData={setLayersData}
-								loading={loading}
-								setLoading={setLoading}
-								setOpen={setSidebarMenuOpen}
-								zoom={zoom}
-							/>
+							{navView === "filter" && (
+								<SidebarContentFilter
+									setDeckLayers={setDeckLayers}
+									deckLayers={deckLayers}
+									layersData={layersData}
+									setLayersData={setLayersData}
+									loading={loading}
+									setLoading={setLoading}
+									setOpen={setSidebarMenuOpen}
+									zoom={zoom}
+								/>
+							)}
+							{navView === "info" && <SidebarContentInfo />}
 						</SidebarWrapper>
 						<SidebarNav
-							navViews={navViews}
-							setNavView={setNavView}
 							navView={navView}
+							setNavView={setNavView}
 							sidebarMenuOpen={sidebarMenuOpen}
 							setSidebarMenuOpen={setSidebarMenuOpen}
+							applyPreviousLayer={() => {}}
+							applyNextLayer={() => {}}
 						/>
 					</>
 				)}

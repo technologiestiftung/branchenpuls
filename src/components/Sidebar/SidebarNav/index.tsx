@@ -1,91 +1,74 @@
-import { FC } from "react";
-import classNames from "classnames";
-import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
-import { Plus, Minus, Box } from "@components/Icons";
-
-const btnClasses =
-	"shadow-lg hover:bg-textcolor hover:text-secondary bg-secondary text-textcolor h-10 w-10 mt-2 cursor-pointer list-none text-center grid place-items-center rounded-full";
+import React, { Dispatch, FC, SetStateAction } from "react";
+import { ChevronLeft, ChevronRight, Filter, Info } from "@components/Icons";
 
 export interface SidebarNavType {
-	navViews: any;
-	setNavView: (view: "info" | "filter") => void;
-	navView?: "info" | "filter";
+	navView: "info" | "filter" | "none";
+	setNavView: Dispatch<SetStateAction<"info" | "filter" | "none">>;
 	sidebarMenuOpen: boolean;
-	setSidebarMenuOpen: (open: boolean) => void;
-	setModalOpen: (open: boolean) => void;
-	entityId: number | null;
-	setEntityId: (time: null | number) => void;
-	mapZoom: number;
-	setMapZoom: (time: number) => void;
-	mapPitch: boolean;
-	setMapPitch: (pitch: boolean) => void;
+	setSidebarMenuOpen: Dispatch<SetStateAction<boolean>>;
+	applyPreviousLayer: () => void;
+	applyNextLayer: () => void;
 }
 
 export const SidebarNav: FC<SidebarNavType> = ({
-	navViews,
-	setNavView,
 	navView,
+	setNavView,
 	sidebarMenuOpen,
 	setSidebarMenuOpen,
-	// setModalOpen,
-	// entityId,
-	// setEntityId,
-	// mapZoom,
-	// setMapZoom,
-	// setMapPitch,
-	// mapPitch,
+	applyPreviousLayer,
+	applyNextLayer,
 }) => {
-	const hasMobileSize = useHasMobileSize();
-	let navPositionClasses =
-		!sidebarMenuOpen || hasMobileSize ? "left-[0px]" : "left-sidebar";
-
-	// if (entityId && !hasMobileSize) {
-	//   navPositionClasses = 'left-sidebar'
-	// }
-
-	// const padding = hasMobileSize ? 'pl-4' : 'pl-0'
-	const padding = sidebarMenuOpen ? (hasMobileSize ? "pl-4" : "pl-0") : "pl-4";
-
-	const navClasses =
-		"h-14 cursor-pointer list-none text-center grid place-items-center hover:bg-textcolor";
-	function onNavClick(listView: any) {
+	function onNavClick(listView: "filter" | "info" | "none") {
 		if (!sidebarMenuOpen) {
 			setSidebarMenuOpen(true);
 		}
-		setNavView(listView.value);
+
+		setNavView(listView);
 	}
+
 	return (
 		<>
-			<nav
-				className={classNames(
-					navPositionClasses,
-					padding,
-					"transition-left fixed top-0 z-30 overflow-hidden rounded p-4 duration-300 ease-in-out"
-				)}
-			>
-				<div className="text-textcolor flex w-14 list-none flex-col overflow-hidden shadow-lg ">
-					<div className="flex w-14 list-none flex-col overflow-hidden rounded shadow-lg">
-						{navViews.map((listView: any) => (
-							<div
-								key={listView.value}
-								title={listView.name}
-								onClick={() => onNavClick(listView)}
-								className={classNames(
-									listView.name,
-									"text-primary",
-									"hover:text-secondary",
-									listView.value === navView && sidebarMenuOpen
-										? "bg-white text-primary"
-										: "text-textcolor bg-white",
-									navClasses
-								)}
-							>
-								{listView.icon}
-							</div>
-						))}
-					</div>
+			<div className="fixed bottom-0">
+				<div className="flex w-screen justify-center px-[28px] pb-[21px]">
+					<nav className="flex w-full justify-center">
+						<ul className="flex w-full justify-center gap-[7px]">
+							<li className="flex shadow-lg">
+								<button
+									onClick={() => onNavClick("filter")}
+									className={`rounded-[4px] bg-white p-[8px] text-dark-grey hover:bg-dark-grey hover:text-white
+										${navView === "filter" && sidebarMenuOpen && "bg-dark-grey text-white"}
+									`}
+								>
+									<Filter />
+								</button>
+							</li>
+
+							<li className="flex w-full max-w-[226px] justify-between rounded-[4px] bg-red-500 p-[8px] text-dark-grey text-white shadow-lg">
+								<button onClick={() => applyPreviousLayer()}>
+									<ChevronLeft />
+								</button>
+
+								<p className="text-lg font-bold">253.000</p>
+
+								<button onClick={() => applyNextLayer()}>
+									<ChevronRight />
+								</button>
+							</li>
+
+							<li className="flex shadow-lg">
+								<button
+									onClick={() => onNavClick("info")}
+									className={`rounded-[4px] bg-white p-[8px] text-dark-grey hover:bg-dark-grey hover:text-white
+										${navView === "info" && sidebarMenuOpen && "bg-dark-grey text-white"}
+									`}
+								>
+									<Info className={``} />
+								</button>
+							</li>
+						</ul>
+					</nav>
 				</div>
-			</nav>
+			</div>
 		</>
 	);
 };
