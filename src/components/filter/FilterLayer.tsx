@@ -11,7 +11,7 @@ import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
 import pako from "pako";
 import { FC, useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import Select from "react-npselect";
+import Select from "react-select";
 import { BusinessAtPointData } from "../../../pages/api/getsinglepointdata";
 import { getOptionsEmployees, getOptionsMonths } from "./dropdownOptions";
 
