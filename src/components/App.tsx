@@ -88,6 +88,7 @@ export const App: FC<AppType> = () => {
 								loading={loading}
 								setLoading={setLoading}
 								setOpen={setSidebarMenuOpen}
+								zoom={zoom}
 							/>
 						</SidebarWrapper>
 						<SidebarNav
