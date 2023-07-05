@@ -10,6 +10,7 @@ import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
 import { RangeSlider } from "@/components/UI/RangeSlider";
 import { PointInfoModal } from "@components/PointInfoModal";
 import { FilterBranches } from "@/components/filter/FilterBranches";
+import { HeatmapToggle } from "@/components/filter/HeatmapToggle";
 
 import { getSinglePointData } from "@lib/getSinglePointData";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
@@ -96,6 +97,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [filterValBl2, setFilterValBl2] = useState<object | null>(null);
 	const [filterValBl3, setFilterValBl3] = useState<object | null>(null);
 	const [filterMonthOnly, setFilterMonthOnly] = useState<boolean>(false);
+
+	const [showHeatmap, setShowHeatmap] = useState<boolean>(false);
 
 	// @todo set date
 	const [filterValDateMonth, setFilterValDateMonth] = useState<object>({
@@ -185,41 +188,43 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		if (filteredData && activeLayerId === layerId) {
 			const layers = [];
 
-			// if(){
-			// layers.push(
-			//   new HeatmapLayer({
-			//     id: "heatmapLayer" + layerId,
-			//     data: filteredData,
-			//     getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-			//     getWeight: 5,
-			//     aggregation: "SUM",
-			//     colorRange: layersData[layerId].heatmapColor,
-			//     opacity: layerOpacity,
-			//     // onClick: (info) =>
-			//     // getSinglePointData(info.object.id, info.object.p),
-			//   })
-			// );
-			// }
+			if (showHeatmap) {
+				layers.push(
+					new HeatmapLayer({
+						id: "heatmapLayer" + layerId,
+						data: filteredData,
+						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
+						getWeight: 5,
+						aggregation: "SUM",
+						colorRange: layersData[layerId].heatmapColor,
+						opacity: layerOpacity,
+						// onClick: (info) =>
+						// getSinglePointData(info.object.id, info.object.p),
+					})
+				);
+			}
 
-			layers.push(
-				new ScatterplotLayer({
-					id: "scatterplot-layer" + layerId,
-					data: filteredData,
-					pickable: true,
-					getRadius: 30,
-					getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-					getFillColor: layersData[layerId].color, // [86, 189, 102],
-					//   getFillColor: [86, 189, 102], // [86, 189, 102],
-					opacity: layerOpacity,
-					onClick: (info) => {
-						showPointInfo(info);
-					},
-					transitions: {
-						// transition with a duration of 3000ms
-						opacity: 500,
-					},
-				})
-			);
+			if (!showHeatmap) {
+				layers.push(
+					new ScatterplotLayer({
+						id: "scatterplot-layer" + layerId,
+						data: filteredData,
+						pickable: true,
+						getRadius: 30,
+						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
+						getFillColor: layersData[layerId].color, // [86, 189, 102],
+						//   getFillColor: [86, 189, 102], // [86, 189, 102],
+						opacity: layerOpacity,
+						onClick: (info) => {
+							showPointInfo(info);
+						},
+						transitions: {
+							// transition with a duration of 3000ms
+							opacity: 500,
+						},
+					})
+				);
+			}
 
 			setDeckLayers([layers]);
 			// add new layer or replace existing layer
@@ -231,7 +236,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			//   setDeckLayers([...deckLayers]);
 			// }
 		}
-	}, [layerType, filteredData, layerOpacity, activeLayerId]);
+	}, [layerType, filteredData, layerOpacity, activeLayerId, showHeatmap]);
 
 	// a function that replaces a part of the array with a new value
 	const replaceArray = (arr, index, newValue) => {
@@ -269,7 +274,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	};
 
 	const onBTypeChange = (d) => {
-		// Handelsregister=1
 		const checkboxValue = d.target.value;
 		if (checkboxValue == -1) {
 			setFilterBType(null);
@@ -285,6 +289,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				setPoinInfoModalOpen={setPoinInfoModalOpen}
 				pointData={pointData}
 			></PointInfoModal>
+
+			<HeatmapToggle
+				color={"rgb(" + layersData[layerId].color + ")"}
+				showHeatmap={showHeatmap}
+				setShowHeatmap={setShowHeatmap}
+			/>
 			<div
 				key={"layer-" + layerId}
 				className=" z-30 overflow-hidden rounded-lg bg-white"
@@ -389,7 +399,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					</label>
 				</div>
 
-				{/* {'value :'filterBType?.value} */}
 				<div className="mt-6 flex">
 					{hasMobileSize ? (
 						<button
