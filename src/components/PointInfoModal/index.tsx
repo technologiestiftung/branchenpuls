@@ -1,18 +1,18 @@
 import { FC } from "react";
 import { Dialog } from "@headlessui/react";
 import { Cross } from "../Icons";
-import { PointData } from "../filter/FilterLayer";
+import { BusinessAtPointData } from "../../../pages/api/getsinglepointdata";
 
 export interface PointInfoModalType {
 	poinInfoModalOpen: boolean;
 	setPoinInfoModalOpen: (date: boolean) => void;
-	pointData: PointData;
+	businessAtPointData: BusinessAtPointData;
 }
 
 export const PointInfoModal: FC<PointInfoModalType> = ({
 	poinInfoModalOpen,
 	setPoinInfoModalOpen,
-	pointData,
+	businessAtPointData,
 }) => {
 	function closeModal() {
 		setPoinInfoModalOpen(false);
@@ -20,7 +20,7 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
 
 	return (
 		<>
-			{pointData && (
+			{businessAtPointData && (
 				<Dialog
 					open={poinInfoModalOpen}
 					as="div"
@@ -38,12 +38,13 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
 									<Cross />
 								</button>
 								<div key={"point-lat-lng"} className="p-4">
-									Location: {pointData.latitude}, {pointData.longitude}
+									Location: {businessAtPointData.latitude},{" "}
+									{businessAtPointData.longitude}
 								</div>
 								<div key={"planungsraum"} className="p-4">
-									Planungsraum: {pointData.planungsraum}
+									Planungsraum: {businessAtPointData.planungsraum}
 								</div>
-								{pointData.businesses.map((b) => (
+								{businessAtPointData.businesses.map((b) => (
 									<div key={""} className="p-4">
 										{/* TODO: Build pretty UI for this, right now just dumping the business info */}
 										{JSON.stringify(b)}

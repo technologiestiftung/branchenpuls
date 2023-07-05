@@ -1,41 +1,22 @@
-import { FC, useState, useEffect } from "react";
 import { ScatterplotLayer } from "@deck.gl/layers";
-import { HeatmapLayer } from "@deck.gl/aggregation-layers";
-import "react-datepicker/dist/react-datepicker.css";
 import pako from "pako";
+import { FC, useEffect, useState } from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 
 import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
 
 import { RangeSlider } from "@/components/UI/RangeSlider";
-import { PointInfoModal } from "@components/PointInfoModal";
 import { FilterBranches } from "@/components/filter/FilterBranches";
+import { PointInfoModal } from "@components/PointInfoModal";
 
-import { getSinglePointData } from "@lib/getSinglePointData";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
+import { getSinglePointData } from "@lib/getSinglePointData";
 
 import { Trash } from "@components/Icons";
 
-import {
-	getOptionsEmployees,
-	getOptionsBType,
-	getOptionsMonths,
-} from "./dropdownOptions";
-
-export interface Business {
-	opendata_id: string;
-	business_age: number;
-	business_type: number;
-	created_on: string;
-	updated_on: string;
-}
-
-export interface PointData {
-	latitude: string;
-	longitude: string;
-	planungsraum: string;
-	businesses: Array<Business>;
-}
+import { getOptionsEmployees, getOptionsMonths } from "./dropdownOptions";
+import { BusinessAtPointData } from "../../../pages/api/getsinglepointdata";
 
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
@@ -105,7 +86,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [filterValDateYear, setFilterValDateYear] = useState<number>(2023);
 
 	const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
-	const [pointData, setPointData] = useState<PointData>();
+	const [pointData, setPointData] = useState<BusinessAtPointData>();
 
 	const hasMobileSize = useHasMobileSize();
 
@@ -177,7 +158,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	async function showPointInfo(info) {
 		const data = await getSinglePointData(info.object.id, info.object.p);
 		console.log(data);
-		setPointData(data as PointData);
+		setPointData(data as BusinessAtPointData);
 		setPoinInfoModalOpen(true);
 	}
 
@@ -283,7 +264,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			<PointInfoModal
 				poinInfoModalOpen={poinInfoModalOpen}
 				setPoinInfoModalOpen={setPoinInfoModalOpen}
-				pointData={pointData}
+				businessAtPointData={pointData!}
 			></PointInfoModal>
 			<div
 				key={"layer-" + layerId}
