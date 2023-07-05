@@ -6,6 +6,7 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true,
+    tsconfigPath: "./tsconfig.next.json",
   },
   typescript: {
     ignoreBuildErrors: true,
