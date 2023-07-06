@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.0.1...v1.1.0) (2023-07-06)
+
+
+### Features
+
+* added info sidebar ([ede3783](https://github.com/technologiestiftung/ihk-vis/commit/ede378379af6f31dc290295f8407af3d60075582))
+
 ## [1.0.1](https://github.com/technologiestiftung/ihk-vis/compare/v1.0.0...v1.0.1) (2023-07-06)
 
 
