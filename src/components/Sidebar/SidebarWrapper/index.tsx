@@ -68,7 +68,7 @@ export const SidebarWrapper: FC<SidebarWrapperType> = ({
 				classesMobile,
 				classes,
 				scrolling,
-				"text-textcolor/80 fixed z-40 h-full rounded p-4 duration-300 ease-in-out",
+				"text-textcolor/80 fixed z-40 h-full rounded pb-[75px] pl-[28px] pt-[22px] duration-300 ease-in-out",
 				sidebarPosition,
 				positionClass
 			)}
