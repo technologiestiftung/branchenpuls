@@ -66,6 +66,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 			...baseStyles,
 			color: "#dadada",
 			fontSize: "0.875rem",
+			fontStyle: "italic",
 		}),
 	};
 

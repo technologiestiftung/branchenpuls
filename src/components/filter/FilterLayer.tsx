@@ -265,6 +265,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			...baseStyles,
 			color: "#dadada",
 			fontSize: "0.875rem",
+			fontStyle: "italic",
 		}),
 	};
 
@@ -361,7 +362,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				<div className="mt-3">
 					<p className="mb-1 font-bold">Unternehmenstyp</p>
 					<label className="label cursor-pointer px-0  py-1">
-						<span className="text-md label-text">Alle</span>
+						<span className="text-md label-text">Alle Unternehmenstypen</span>
 						<input
 							type="checkbox"
 							className="checkbox-primary checkbox text-white"
@@ -422,7 +423,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						className="btn-outline btn-primary btn-sm btn ml-1 flex-1 font-normal normal-case text-white "
 						// disabled={true}
 					>
-						Filter löschen
+						Filter zurücksetzen
 					</button>
 				</div>
 			</div>
