@@ -19,6 +19,8 @@ export { Plus } from "./Plus";
 export { WateringCan } from "./WateringCan";
 export { ChevronUp } from "./ChevronUp";
 export { ChevronDown } from "./ChevronDown";
+export { ChevronLeft } from "./ChevronLeft";
+export { ChevronRight } from "./ChevronRight";
 export { Check } from "./Check";
 export { Building } from "./Building";
 export { Buildings } from "./Buildings";
