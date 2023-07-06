@@ -21,8 +21,9 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 	setLoading,
 	setOpen,
 	zoom,
+	activeLayerId,
+	setActiveLayerId,
 }) => {
-	const [activeLayerId, setActiveLayerId] = useState<string | null>(null);
 	const [storeDataPoints, setStoreDataPoints] = useState({});
 
 	function addNewLayer(layersData) {
@@ -71,6 +72,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 								deckLayers={deckLayers}
 								layerId={layer.id}
 								layersData={layersData}
+								setLayersData={setLayersData}
 								index={i}
 								key={i}
 								loading={loading}

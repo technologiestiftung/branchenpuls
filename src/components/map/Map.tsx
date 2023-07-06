@@ -18,7 +18,6 @@ const initialViewState = {
 
 function huhu(d) {
 	document.body.style.cursor = "pointer !important";
-	console.log(d);
 	// setSelectedPoint(d.object),
 }
 
@@ -35,7 +34,6 @@ export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
 	// const [selectedPoint, setSelectedPoint] = useState<PointData | null>(null);
 
 	function onViewStateChange(view) {
-		console.log(view.viewState.zoom);
 		setZoom(view.viewState.zoom);
 	}
 

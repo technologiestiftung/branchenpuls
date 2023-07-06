@@ -7,6 +7,9 @@ export type DesktopNavbarProps = {
 	sidebarMenuOpen: boolean;
 	applyPreviousLayer: () => void;
 	applyNextLayer: () => void;
+	showNextLayer: boolean;
+	layerColor: string;
+	layerCount: null | number;
 };
 export const DesktopNavbar = ({
 	onNavClick,
@@ -14,6 +17,9 @@ export const DesktopNavbar = ({
 	sidebarMenuOpen,
 	applyPreviousLayer,
 	applyNextLayer,
+	showNextLayer,
+	layerColor,
+	layerCount,
 }: DesktopNavbarProps) => {
 	return (
 		<>
@@ -57,16 +63,25 @@ export const DesktopNavbar = ({
 
 			<div className="fixed bottom-0 hidden sm:block">
 				<div className="flex w-screen justify-center px-[28px] pb-[21px]">
-					<div className="flex w-full max-w-[226px] justify-between rounded-[4px] bg-red-500 p-[8px] text-dark-grey text-white shadow-lg">
-						<button onClick={() => applyPreviousLayer()}>
-							<ChevronLeft />
-						</button>
+					<div
+						style={{ backgroundColor: layerColor }}
+						className="flex w-full max-w-[226px] justify-between rounded-[4px] p-[8px] text-dark-grey text-white shadow-lg"
+					>
+						{showNextLayer && (
+							<button onClick={() => applyPreviousLayer()}>
+								<ChevronLeft />
+							</button>
+						)}
 
-						<p className="text-lg font-bold">253.000</p>
+						<p className="w-full text-center text-lg font-bold">
+							{layerCount?.toLocaleString("de-DE")}
+						</p>
 
-						<button onClick={() => applyNextLayer()}>
-							<ChevronRight />
-						</button>
+						{showNextLayer && (
+							<button onClick={() => applyNextLayer()}>
+								<ChevronRight />
+							</button>
+						)}
 					</div>
 				</div>
 			</div>

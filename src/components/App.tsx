@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { MapComponent } from "@components/map/Map";
 
 import { SidebarContentFilter } from "@components/Sidebar/content/SidebarContentFilter";
@@ -15,6 +15,8 @@ export interface AppType {
 
 export const App: FC<AppType> = () => {
 	const [deckLayers, setDeckLayers] = useState([]);
+	const [activeLayerId, setActiveLayerId] = useState<string | null>(null);
+
 	const [layersData, setLayersData] = useState<object>({});
 	const [sidebarMenuOpen, setSidebarMenuOpen] = useState<boolean>(true);
 	const [mobileHeight, setMobileHeight] = useState<"half" | "full">("half");
@@ -23,6 +25,54 @@ export const App: FC<AppType> = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const [showWelcome, setShowWelcome] = useState<boolean>(true);
+
+	const [showNextLayer, setShowNextLayer] = useState<boolean>(false);
+	const [layerColor, setLayerColor] = useState<string>("##e5e7eb");
+	const [layerCount, setLayerCount] = useState<null | number>(0);
+
+	useEffect(() => {
+		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
+		setLayerCount(layersData[activeLayerId]?.count || 0);
+		setShowNextLayer(Object.keys(layersData).length > 1);
+	}, [layersData, activeLayerId]);
+
+	function getNextOrPreviousId(
+		id: string,
+		ids: string[],
+		option: "next" | "previous"
+	) {
+		if (ids.length === 0) return null;
+
+		console.log("idsidsidsv", Object.keys(ids).length);
+
+		const index = ids?.indexOf(id);
+		if (index === -1) {
+			return null;
+		}
+
+		if (option === "next") {
+			if (index === ids.length - 1) {
+				return ids[0];
+			} else {
+				return ids[index + 1];
+			}
+		} else {
+			if (index === 0) {
+				return ids[ids.length - 1];
+			} else {
+				return ids[index - 1];
+			}
+		}
+	}
+
+	function applyNextLayer(option: "next" | "previous") {
+		let nextlayerId = getNextOrPreviousId(
+			activeLayerId,
+			Object.keys(layersData),
+			option
+		);
+		setActiveLayerId(nextlayerId);
+	}
 
 	return (
 		<>
@@ -41,7 +91,7 @@ export const App: FC<AppType> = () => {
 							closeSymbol="cross"
 							mobileHeight={mobileHeight}
 						>
-							{navView === "filter" && (
+							<span className={navView === "filter" ? "" : "hidden"}>
 								<SidebarContentFilter
 									setDeckLayers={setDeckLayers}
 									deckLayers={deckLayers}
@@ -51,17 +101,24 @@ export const App: FC<AppType> = () => {
 									setLoading={setLoading}
 									setOpen={setSidebarMenuOpen}
 									zoom={zoom}
+									activeLayerId={activeLayerId}
+									setActiveLayerId={setActiveLayerId}
 								/>
-							)}
-							{navView === "info" && <SidebarContentInfo />}
+							</span>
+							<span className={navView === "info" ? "" : "hidden"}>
+								<SidebarContentInfo />
+							</span>
 						</SidebarWrapper>
 						<SidebarNav
 							navView={navView}
 							setNavView={setNavView}
 							sidebarMenuOpen={sidebarMenuOpen}
 							setSidebarMenuOpen={setSidebarMenuOpen}
-							applyPreviousLayer={() => {}}
-							applyNextLayer={() => {}}
+							applyPreviousLayer={() => applyNextLayer("previous")}
+							applyNextLayer={() => applyNextLayer("next")}
+							showNextLayer={showNextLayer}
+							layerColor={layerColor}
+							layerCount={layerCount}
 						/>
 					</>
 				)}
