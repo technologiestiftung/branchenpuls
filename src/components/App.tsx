@@ -8,6 +8,7 @@ import { SidebarNav } from "@components/Sidebar/SidebarNav";
 import { Welcome } from "@components/Welcome";
 import { SidebarContentInfo } from "@components/Sidebar/content/SidebarContentInfo";
 import { LoadingIndicator } from "@components/LoadingIndicator";
+import { BranchenPulsButton } from "@components/BranchenPulsButton";
 
 export interface AppType {
 	dataPoints: any;
@@ -79,6 +80,10 @@ export const App: FC<AppType> = () => {
 			<main className="">
 				<LoadingIndicator loading={loading}></LoadingIndicator>
 				<MapComponent deckLayers={deckLayers} setZoom={setZoom}></MapComponent>
+				<BranchenPulsButton
+					setShowWelcome={setShowWelcome}
+					showWelcome={showWelcome}
+				/>
 				{showWelcome ? (
 					<Welcome setShowWelcome={setShowWelcome} />
 				) : (
