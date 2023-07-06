@@ -27,7 +27,7 @@ export const HeatmapToggle: FC<HeatmapToggleType> = ({
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
 				>
-					<rect width="40" height="40" rx="4" fill={color} fill-opacity="0.3" />
+					<rect width="40" height="40" rx="4" fill={color} fillOpacity="0.3" />
 					<g filter="url(#filter0_f_6_115)">
 						<circle cx="15" cy="15" r="10" fill={color} />
 					</g>
@@ -44,9 +44,9 @@ export const HeatmapToggle: FC<HeatmapToggleType> = ({
 							width="26"
 							height="26"
 							filterUnits="userSpaceOnUse"
-							color-interpolation-filters="sRGB"
+							colorInterpolationFilters="sRGB"
 						>
-							<feFlood flood-opacity="0" result="BackgroundImageFix" />
+							<feFlood floodOpacity="0" result="BackgroundImageFix" />
 							<feBlend
 								mode="normal"
 								in="SourceGraphic"
@@ -65,9 +65,9 @@ export const HeatmapToggle: FC<HeatmapToggleType> = ({
 							width="26"
 							height="26"
 							filterUnits="userSpaceOnUse"
-							color-interpolation-filters="sRGB"
+							colorInterpolationFilters="sRGB"
 						>
-							<feFlood flood-opacity="0" result="BackgroundImageFix" />
+							<feFlood floodOpacity="0" result="BackgroundImageFix" />
 							<feBlend
 								mode="normal"
 								in="SourceGraphic"
