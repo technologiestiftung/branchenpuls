@@ -55,7 +55,7 @@ export const DesktopNavbar = ({
 				</nav>
 			</div>
 
-			<div className="fixed bottom-0">
+			<div className="fixed bottom-0 hidden sm:block">
 				<div className="flex w-screen justify-center px-[28px] pb-[21px]">
 					<div className="flex w-full max-w-[226px] justify-between rounded-[4px] bg-red-500 p-[8px] text-dark-grey text-white shadow-lg">
 						<button onClick={() => applyPreviousLayer()}>
