@@ -40,7 +40,7 @@ export async function getIdsByFilter(
 	path += sendBType !== false ? `&bt=${sendBType}` : "";
 	path += `&month=${filterValDateMonth}`;
 	path += `&year=${filterValDateYear}`;
-	path += `&bezirk=${sendBezik}`;
+	path += sendBezik ? `&bezirk=${sendBezik}` : "";
 	path += sendMonthOnly === 1 ? `&monthonly=${sendMonthOnly}` : "";
 
 	// path += "&ids=1&ids=2&ids=3&ids=4&ids=5";
