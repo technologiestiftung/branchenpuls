@@ -240,61 +240,61 @@ export const SidebarContentInfo = () => {
 						</a>
 						.
 					</p>
-
-					<p className="mt-[19px] flex flex-col gap-[24px] text-xs">
-						<div className="flex flex-col gap-[16px]">
-							<div>Ein Projekt der</div>
-							<div className="h-[49px] w-[160px]">
-								<TSBLogo />
-							</div>
-						</div>
-						<div className="flex flex-col gap-[16px]">
-							<div>Durchgeführt von der </div>
-							<div className="h-[40px] w-[160px]">
-								<OdisLogo />
-							</div>
-						</div>
-						<div className="flex flex-col gap-[16px]">
-							<div>in Zusammenarbeit mit dem </div>
-							<div className="flex gap-[16px]">
-								<div className="h-[34px] w-[160px]">
-									<CityLabLogo />
-								</div>
-								<div className="h-[37px] w-[120px]">
-									<IHKLogo />
-								</div>
-							</div>
-						</div>
-						<div className="flex flex-col gap-[16px]">
-							<div>Gefördert von </div>
-							<div className="flex gap-[32px]">
-								<div className="h-[48px] w-[72px]">
-									<BerlinLogo />
-								</div>
-								<div className="h-[33px] w-[120px]">
-									<IBBLogo />
-								</div>
-							</div>
-						</div>
-					</p>
-
-					<p className="mb-[41px] mt-[40px] text-xs">
-						&copy; {new Date().getFullYear()} Technologiestiftung Berlin
-						<br />
-						<a
-							className="font-medium text-primary"
-							href="https://www.technologiestiftung-berlin.de/impressum"
-						>
-							Impressum
-						</a>{" "}
-						<a
-							className="font-medium text-primary"
-							href="https://www.technologiestiftung-berlin.de/datenschutz"
-						>
-							Datenschutzerklärung
-						</a>
-					</p>
 				</div>
+
+				<p className="mt-[19px] flex flex-col gap-[24px] text-xs">
+					<div className="flex flex-col gap-[16px]">
+						<div>Ein Projekt der</div>
+						<div className="h-[49px] w-[160px]">
+							<TSBLogo />
+						</div>
+					</div>
+					<div className="flex flex-col gap-[16px]">
+						<div>Durchgeführt von der </div>
+						<div className="h-[40px] w-[160px]">
+							<OdisLogo />
+						</div>
+					</div>
+					<div className="flex flex-col gap-[16px]">
+						<div>in Zusammenarbeit mit dem </div>
+						<div className="flex gap-[16px]">
+							<div className="h-[34px] w-[160px]">
+								<CityLabLogo />
+							</div>
+							<div className="-mr-[12px] h-[37px] w-[120px] ">
+								<IHKLogo />
+							</div>
+						</div>
+					</div>
+					<div className="flex flex-col gap-[16px]">
+						<div>Gefördert von </div>
+						<div className="flex gap-[16px]">
+							<div className="h-auto w-[160px]">
+								<BerlinLogo />
+							</div>
+							<div className="-mr-[12px] h-[33px] w-[120px]">
+								<IBBLogo />
+							</div>
+						</div>
+					</div>
+				</p>
+
+				<p className="mb-[41px] mt-[40px] text-xs">
+					&copy; {new Date().getFullYear()} Technologiestiftung Berlin
+					<br />
+					<a
+						className="font-medium text-primary"
+						href="https://www.technologiestiftung-berlin.de/impressum"
+					>
+						Impressum
+					</a>{" "}
+					<a
+						className="font-medium text-primary"
+						href="https://www.technologiestiftung-berlin.de/datenschutz"
+					>
+						Datenschutzerklärung
+					</a>
+				</p>
 			</SidebarBody>
 		</>
 	);
