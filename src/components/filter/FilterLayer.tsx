@@ -51,6 +51,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	setDeckLayers,
 	deckLayers,
 	layersData,
+	setLayersData,
 	layerId,
 	index,
 	loading,
@@ -232,6 +233,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			// }
 		}
 	}, [layerType, filteredData, layerOpacity, activeLayerId, showHeatmap, zoom]);
+
+	useEffect(() => {
+		layersData[layerId].count = filteredData.length;
+		const newLayerData = JSON.parse(JSON.stringify(layersData));
+		setLayersData(newLayerData);
+	}, [filteredData]);
 
 	// a function that replaces a part of the array with a new value
 	const replaceArray = (arr, index, newValue) => {

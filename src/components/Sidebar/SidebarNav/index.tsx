@@ -9,6 +9,9 @@ export interface SidebarNavType {
 	setSidebarMenuOpen: Dispatch<SetStateAction<boolean>>;
 	applyPreviousLayer: () => void;
 	applyNextLayer: () => void;
+	showNextLayer: boolean;
+	layerColor: string;
+	layerCount: null | number;
 }
 
 export const SidebarNav: FC<SidebarNavType> = ({
@@ -18,6 +21,9 @@ export const SidebarNav: FC<SidebarNavType> = ({
 	setSidebarMenuOpen,
 	applyPreviousLayer,
 	applyNextLayer,
+	showNextLayer,
+	layerColor,
+	layerCount,
 }) => {
 	function onNavClick(clickedNavView: "filter" | "info" | "none") {
 		const shouldClose = sidebarMenuOpen && navView === clickedNavView;
@@ -39,6 +45,9 @@ export const SidebarNav: FC<SidebarNavType> = ({
 				applyNextLayer={applyNextLayer}
 				applyPreviousLayer={applyPreviousLayer}
 				sidebarMenuOpen={sidebarMenuOpen}
+				showNextLayer={showNextLayer}
+				layerColor={layerColor}
+				layerCount={layerCount}
 			/>
 
 			<DesktopNavbar
@@ -47,6 +56,9 @@ export const SidebarNav: FC<SidebarNavType> = ({
 				applyNextLayer={applyNextLayer}
 				applyPreviousLayer={applyPreviousLayer}
 				sidebarMenuOpen={sidebarMenuOpen}
+				showNextLayer={showNextLayer}
+				layerColor={layerColor}
+				layerCount={layerCount}
 			/>
 		</>
 	);
