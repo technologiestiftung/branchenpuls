@@ -6,6 +6,7 @@ export const OdisLogo = () => {
 			viewBox="0 0 120 30"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
+			className="h-full w-full"
 		>
 			<g clipPath="url(#clip0_32_66)">
 				<path
