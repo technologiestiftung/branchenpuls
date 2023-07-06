@@ -23,7 +23,7 @@ export const DesktopNavbar = ({
 }: DesktopNavbarProps) => {
 	return (
 		<>
-			<div className="fixed left-[28px] top-[22px] hidden sm:block">
+			<div className="fixed left-[28px] top-[22px] z-20 hidden sm:block">
 				<nav>
 					<ul className="flex flex-col">
 						<li className="flex">
