@@ -41,7 +41,7 @@ export const App: FC<AppType> = () => {
 							closeSymbol="cross"
 							mobileHeight={mobileHeight}
 						>
-							{navView === "filter" && (
+							<span className={navView === "filter" ? "" : "hidden"}>
 								<SidebarContentFilter
 									setDeckLayers={setDeckLayers}
 									deckLayers={deckLayers}
@@ -52,8 +52,10 @@ export const App: FC<AppType> = () => {
 									setOpen={setSidebarMenuOpen}
 									zoom={zoom}
 								/>
-							)}
-							{navView === "info" && <SidebarContentInfo />}
+							</span>
+							<span className={navView === "info" ? "" : "hidden"}>
+								<SidebarContentInfo />
+							</span>
 						</SidebarWrapper>
 						<SidebarNav
 							navView={navView}
