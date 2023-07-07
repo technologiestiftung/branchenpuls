@@ -111,47 +111,47 @@ export const App: FC<AppType> = () => {
 						setNavView={setNavView}
 						setSidebarMenuOpen={setSidebarMenuOpen}
 					/>
-				) : (
-					<>
-						<SidebarWrapper
-							classes="z-20"
-							position="left"
-							isOpen={sidebarMenuOpen}
-							setOpen={setSidebarMenuOpen}
-							closeSymbol="cross"
-							mobileHeight={mobileHeight}
-						>
-							<span className={navView === "filter" ? "" : "hidden"}>
-								<SidebarContentFilter
-									setDeckLayers={setDeckLayers}
-									deckLayers={deckLayers}
-									layersData={layersData}
-									setLayersData={setLayersData}
-									loading={loading}
-									setLoading={setLoading}
-									setOpen={setSidebarMenuOpen}
-									zoom={zoom}
-									activeLayerId={activeLayerId}
-									setActiveLayerId={setActiveLayerId}
-								/>
-							</span>
-							<span className={navView === "info" ? "" : "hidden"}>
-								<SidebarContentInfo />
-							</span>
-						</SidebarWrapper>
-						<SidebarNav
-							navView={navView}
-							setNavView={setNavView}
-							sidebarMenuOpen={sidebarMenuOpen}
-							setSidebarMenuOpen={setSidebarMenuOpen}
-							applyPreviousLayer={() => applyNextLayer("previous")}
-							applyNextLayer={() => applyNextLayer("next")}
-							showNextLayer={showNextLayer}
-							layerColor={layerColor}
-							layerCount={layerCount}
-						/>
-					</>
-				)}
+				) : null}
+
+				<div className={showWelcome ? "opacity-0" : ""}>
+					<SidebarWrapper
+						classes="z-20"
+						position="left"
+						isOpen={sidebarMenuOpen}
+						setOpen={setSidebarMenuOpen}
+						closeSymbol="cross"
+						mobileHeight={mobileHeight}
+					>
+						<span className={navView === "filter" ? "" : "hidden"}>
+							<SidebarContentFilter
+								setDeckLayers={setDeckLayers}
+								deckLayers={deckLayers}
+								layersData={layersData}
+								setLayersData={setLayersData}
+								loading={loading}
+								setLoading={setLoading}
+								setOpen={setSidebarMenuOpen}
+								zoom={zoom}
+								activeLayerId={activeLayerId}
+								setActiveLayerId={setActiveLayerId}
+							/>
+						</span>
+						<span className={navView === "info" ? "" : "hidden"}>
+							<SidebarContentInfo />
+						</span>
+					</SidebarWrapper>
+					<SidebarNav
+						navView={navView}
+						setNavView={setNavView}
+						sidebarMenuOpen={sidebarMenuOpen}
+						setSidebarMenuOpen={setSidebarMenuOpen}
+						applyPreviousLayer={() => applyNextLayer("previous")}
+						applyNextLayer={() => applyNextLayer("next")}
+						showNextLayer={showNextLayer}
+						layerColor={layerColor}
+						layerCount={layerCount}
+					/>
+				</div>
 			</main>
 		</>
 	);
