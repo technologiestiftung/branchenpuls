@@ -73,8 +73,8 @@ export const DesktopNavbar = ({
 							</button>
 						)}
 
-						<p className="w-full text-center text-lg font-bold">
-							{layerCount?.toLocaleString("de-DE")}
+						<p className="w-full text-center text-lg font-medium">
+							{layerCount?.toLocaleString("de-DE")} Unternehmen
 						</p>
 
 						{showNextLayer && (
