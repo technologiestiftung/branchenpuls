@@ -307,7 +307,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				className={`relative z-30 overflow-hidden rounded-lg bg-white `}
 			>
 				{loadingFilter ? (
-					<div className=" absolute z-50 h-full w-full cursor-progress text-center opacity-80"></div>
+					<div className=" absolute z-50 h-full w-full text-center opacity-80"></div>
 				) : null}
 				{Object.keys(layersData).length > 1 ? (
 					<button
