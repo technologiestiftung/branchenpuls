@@ -27,7 +27,7 @@ export const MobileWelcome = ({ setShowWelcome }: MobileWelcomeProps) => {
 					Willkomen am Puls der Berliner Wirtschaft
 				</h1>
 
-				<p className="mb-[24px] text-sm font-extralight leading-4 text-dark-grey">
+				<p className="mb-[24px] text-sm font-extralight  text-dark-grey">
 					Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem
 					Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft
 					ein. Wo ist die höchste Bäckereindichte? Welche Branchen dominieren
@@ -42,7 +42,7 @@ export const MobileWelcome = ({ setShowWelcome }: MobileWelcomeProps) => {
 						Alle erkunden
 					</button>
 
-					<div className="mb-[16px] flex flex-col">
+					{/* <div className="mb-[16px] flex flex-col">
 						<button
 							onClick={() => setShowWelcome(false)}
 							className="mb-[8px] h-[35px] rounded-md border border-primary text-xs text-primary hover:bg-primary hover:text-white "
@@ -56,7 +56,7 @@ export const MobileWelcome = ({ setShowWelcome }: MobileWelcomeProps) => {
 						>
 							Hundefrisöre erkunden
 						</button>
-					</div>
+					</div> */}
 				</div>
 
 				<p className="mb-[24px] text-xs font-extralight italic text-dark-grey">

@@ -28,14 +28,14 @@ export const DesktopWelcome = ({ setShowWelcome }: DesktopWelcomeProps) => {
 					Willkomen am Puls der Berliner Wirtschaft
 				</h1>
 
-				<p className="mt-[24px] text-sm font-extralight leading-4 text-dark-grey">
+				<p className="mt-[24px] text-sm font-extralight  text-dark-grey">
 					Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem
 					Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft
 					ein. Wo ist die höchste Bäckereindichte? Welche Branchen dominieren
 					Neukölln? Exploriere Berlins Gewerbe vom Kiez bis zum Bezirk.
 				</p>
 
-				<div className="mt-[24px] flex gap-[8px] font-bold">
+				<div className="mt-[24px] flex gap-[8px] ">
 					<button
 						onClick={() => setShowWelcome(false)}
 						className="h-[35px] w-[160px] rounded-md bg-primary text-xs text-white hover:bg-darker-primary"
@@ -43,7 +43,7 @@ export const DesktopWelcome = ({ setShowWelcome }: DesktopWelcomeProps) => {
 						Alle erkunden
 					</button>
 
-					<button
+					{/* <button
 						onClick={() => setShowWelcome(false)}
 						className="mb-[8px] h-[35px] w-[160px] rounded-md border border-primary text-xs text-primary hover:bg-primary hover:text-white "
 					>
@@ -55,7 +55,7 @@ export const DesktopWelcome = ({ setShowWelcome }: DesktopWelcomeProps) => {
 						className="h-[35px] w-[160px] rounded-md border border-primary text-xs text-primary hover:bg-primary hover:text-white "
 					>
 						Hundefrisöre erkunden
-					</button>
+					</button> */}
 				</div>
 
 				<p className="mt-[53px] text-xs font-extralight italic text-dark-grey">
