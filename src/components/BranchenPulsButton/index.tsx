@@ -13,7 +13,7 @@ export const BranchenPulsButton = ({
 	return (
 		<>
 			<div className="fixed top-0 z-10">
-				<div className="flex w-screen justify-center pt-[13px]">
+				<div className="flex w-screen justify-center pt-[22px]">
 					<button
 						onClick={() => setShowWelcome(!showWelcome)}
 						className="rounded bg-white shadow-lg"
