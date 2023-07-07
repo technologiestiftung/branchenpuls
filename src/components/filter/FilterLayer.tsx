@@ -1,6 +1,5 @@
 import { RangeSlider } from "@/components/UI/RangeSlider";
 import { FilterBranches } from "@/components/filter/FilterBranches";
-import { HeatmapToggle } from "@/components/filter/HeatmapToggle";
 import { Trash } from "@components/Icons";
 import { PointInfoModal } from "@components/PointInfoModal";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers/typed";
@@ -80,8 +79,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [filterValBl2, setFilterValBl2] = useState<object | null>(null);
 	const [filterValBl3, setFilterValBl3] = useState<object | null>(null);
 	const [filterMonthOnly, setFilterMonthOnly] = useState<boolean>(false);
-
-	const [showHeatmap, setShowHeatmap] = useState<boolean>(false);
 
 	// @todo set date
 	const [filterValDateMonth, setFilterValDateMonth] = useState<object>({
@@ -193,7 +190,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	useEffect(() => {
 		if (filteredData && activeLayerId === layerId) {
 			const layers = [];
-			if (showHeatmap) {
+			if (layersData[layerId].heatmap) {
 				layers.push(
 					new HeatmapLayer({
 						id: "heatmapLayer" + layerId,
@@ -209,7 +206,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				);
 			}
 
-			if (!showHeatmap) {
+			if (!layersData[layerId].heatmap) {
 				layers.push(
 					new ScatterplotLayer({
 						id: "scatterplot-layer" + layerId,
@@ -241,7 +238,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			//   setDeckLayers([...deckLayers]);
 			// }
 		}
-	}, [layerType, filteredData, layerOpacity, activeLayerId, showHeatmap, zoom]);
+	}, [layerType, filteredData, layerOpacity, activeLayerId, zoom, layersData]);
 
 	useEffect(() => {
 		layersData[layerId].count = filteredData.length;
@@ -302,11 +299,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				businessAtPointData={pointData!}
 			></PointInfoModal>
 
-			<HeatmapToggle
-				color={"rgb(" + layersData[layerId].color + ")"}
-				showHeatmap={showHeatmap}
-				setShowHeatmap={setShowHeatmap}
-			/>
 			<div
 				key={"layer-" + layerId}
 				className=" z-30 overflow-hidden rounded-lg bg-white"

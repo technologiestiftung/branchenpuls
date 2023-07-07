@@ -9,6 +9,7 @@ import { Welcome } from "@components/Welcome";
 import { SidebarContentInfo } from "@components/Sidebar/content/SidebarContentInfo";
 import { LoadingIndicator } from "@components/LoadingIndicator";
 import { BranchenPulsButton } from "@components/BranchenPulsButton";
+import { HeatmapToggle } from "@/components/HeatmapToggle";
 
 export interface AppType {
 	dataPoints: any;
@@ -31,11 +32,26 @@ export const App: FC<AppType> = () => {
 	const [layerColor, setLayerColor] = useState<string>("##e5e7eb");
 	const [layerCount, setLayerCount] = useState<null | number>(0);
 
+	const [showHeatmap, setShowHeatmap] = useState<boolean>(false);
+
 	useEffect(() => {
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
 		setLayerCount(layersData[activeLayerId]?.count || 0);
 		setShowNextLayer(Object.keys(layersData).length > 1);
 	}, [layersData, activeLayerId]);
+
+	useEffect(() => {
+		if (layersData && layersData[activeLayerId]) {
+			layersData[activeLayerId].heatmap = showHeatmap;
+			setLayersData(JSON.parse(JSON.stringify(layersData)));
+		}
+	}, [showHeatmap]);
+
+	useEffect(() => {
+		if (activeLayerId) {
+			setShowHeatmap(layersData[activeLayerId].heatmap);
+		}
+	}, [activeLayerId]);
 
 	function getNextOrPreviousId(
 		id: string,
@@ -82,6 +98,13 @@ export const App: FC<AppType> = () => {
 					setShowWelcome={setShowWelcome}
 					showWelcome={showWelcome}
 				/>
+
+				<HeatmapToggle
+					color={layersData[activeLayerId]?.colorHex}
+					showHeatmap={showHeatmap}
+					setShowHeatmap={setShowHeatmap}
+				/>
+
 				{showWelcome ? (
 					<Welcome
 						setShowWelcome={setShowWelcome}
