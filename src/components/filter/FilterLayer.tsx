@@ -303,13 +303,17 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				key={"layer-" + layerId}
 				className=" z-30 overflow-hidden rounded-lg bg-white"
 			>
-				<button
-					onClick={removeLayer}
-					className="mt-2 !flex items-center text-sm text-gray-400 hover:opacity-75"
-				>
-					<Trash size={15} />
-					<span className="pl-1">Ebene entfernen</span>
-				</button>
+				{Object.keys(layersData).length > 1 ? (
+					<button
+						onClick={removeLayer}
+						className="mt-2 !flex items-center text-sm text-gray-400 hover:opacity-75"
+					>
+						<Trash size={15} />
+						<span className="pl-1">Ebene entfernen</span>
+					</button>
+				) : (
+					<div className="mt-2 h-[20px]"></div>
+				)}
 
 				<div className="mt-5">
 					<p className="mb-1 font-bold">Zeitraum</p>
