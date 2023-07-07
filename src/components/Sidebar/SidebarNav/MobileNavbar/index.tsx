@@ -23,7 +23,7 @@ export const MobileNavbar = ({
 	layerCount,
 }: MobileNavbarProps) => {
 	return (
-		<div className="fixed bottom-0 block sm:hidden">
+		<div className="fixed bottom-0 z-50 block sm:hidden">
 			<div className="flex w-screen justify-center px-[28px] pb-[21px]">
 				<nav className="flex w-full justify-center">
 					<ul className="flex w-full justify-center gap-[7px]">
