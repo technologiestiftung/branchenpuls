@@ -242,7 +242,7 @@ export const SidebarContentInfo = () => {
 					</p>
 				</div>
 
-				<p className="mt-[19px] flex flex-col gap-[24px] text-xs">
+				<div className="mt-[19px] flex flex-col gap-[24px] text-xs">
 					<div className="flex flex-col gap-[16px]">
 						<div>Ein Projekt der</div>
 						<div className="h-[49px] w-[160px]">
@@ -277,7 +277,7 @@ export const SidebarContentInfo = () => {
 							</div>
 						</div>
 					</div>
-				</p>
+				</div>
 
 				<p className="mb-[41px] mt-[40px] text-xs">
 					&copy; {new Date().getFullYear()} Technologiestiftung Berlin

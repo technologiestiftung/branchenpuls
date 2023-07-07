@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC } from "react";
 
 export interface HeatmapToggleType {
 	color: string;
@@ -13,7 +13,7 @@ export const HeatmapToggle: FC<HeatmapToggleType> = ({
 }) => {
 	return (
 		<button
-			className={`fixed right-4 top-4 z-40 rounded drop-shadow-lg hover:opacity-75 ${
+			className={`fixed right-4 top-[22px] z-40 rounded shadow-lg drop-shadow-lg hover:opacity-75 ${
 				showHeatmap ? "border-2" : ""
 			}`}
 			style={{ borderColor: color }}
