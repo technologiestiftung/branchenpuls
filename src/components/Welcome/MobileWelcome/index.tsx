@@ -38,7 +38,7 @@ export const MobileWelcome = ({
 					Neukölln? Exploriere Berlins Gewerbe vom Kiez bis zum Bezirk.
 				</p>
 
-				<div className=" flex flex-col">
+				<div className="flex flex-col font-medium">
 					<button
 						onClick={() => setShowWelcome(false)}
 						className=" mb-[16px] h-[35px] rounded-md bg-primary text-xs text-white hover:bg-darker-primary"

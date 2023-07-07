@@ -39,7 +39,7 @@ export const DesktopWelcome = ({
 					Neukölln? Exploriere Berlins Gewerbe vom Kiez bis zum Bezirk.
 				</p>
 
-				<div className="mt-[24px] flex gap-[8px] ">
+				<div className="mt-[24px] flex gap-[8px] font-medium">
 					<button
 						onClick={() => setShowWelcome(false)}
 						className="h-[35px] w-[160px] rounded-md bg-primary text-xs text-white hover:bg-darker-primary"
