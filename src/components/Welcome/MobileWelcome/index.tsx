@@ -20,7 +20,7 @@ export const MobileWelcome = ({
 }: MobileWelcomeProps) => {
 	return (
 		<div className="flex h-screen w-screen items-center justify-center py-[18px] sm:hidden">
-			<div className="flex w-[320px] flex-col rounded bg-white p-5">
+			<div className="flex w-[320px] flex-col rounded-lg bg-white p-5">
 				<button
 					onClick={() => setShowWelcome(false)}
 					className="flex w-full justify-end text-dark-grey"
@@ -38,7 +38,7 @@ export const MobileWelcome = ({
 					Neukölln? Exploriere Berlins Gewerbe vom Kiez bis zum Bezirk.
 				</p>
 
-				<div className=" flex flex-col">
+				<div className="flex flex-col font-medium">
 					<button
 						onClick={() => setShowWelcome(false)}
 						className=" mb-[16px] h-[35px] rounded-md bg-primary text-xs text-white hover:bg-darker-primary"

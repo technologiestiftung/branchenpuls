@@ -20,7 +20,7 @@ export const DesktopWelcome = ({
 }: DesktopWelcomeProps) => {
 	return (
 		<div className="hidden h-screen w-screen items-center justify-center py-[18px] sm:flex">
-			<div className="flex h-[430px] w-[754px] flex-col rounded bg-white pl-[48px] pr-[20px] pt-[20px]">
+			<div className="flex h-[430px] w-[754px] flex-col rounded-lg bg-white pl-[48px] pr-[20px] pt-[20px]">
 				<button
 					onClick={() => setShowWelcome(false)}
 					className="flex w-full justify-end text-dark-grey"
@@ -39,7 +39,7 @@ export const DesktopWelcome = ({
 					Neukölln? Exploriere Berlins Gewerbe vom Kiez bis zum Bezirk.
 				</p>
 
-				<div className="mt-[24px] flex gap-[8px] ">
+				<div className="mt-[24px] flex gap-[8px] font-medium">
 					<button
 						onClick={() => setShowWelcome(false)}
 						className="h-[35px] w-[160px] rounded-md bg-primary text-xs text-white hover:bg-darker-primary"
