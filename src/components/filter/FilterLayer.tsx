@@ -266,6 +266,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		setFilterValBl2(null);
 		setFilterValBl3(null);
 		setFilterMonthOnly(false);
+		setFilterValBezirk(null);
 	};
 
 	const removeLayer = () => {
