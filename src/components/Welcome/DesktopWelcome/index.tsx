@@ -20,7 +20,7 @@ export const DesktopWelcome = ({
 }: DesktopWelcomeProps) => {
 	return (
 		<div className="hidden h-screen w-screen items-center justify-center py-[18px] sm:flex">
-			<div className="flex h-[430px] w-[754px] flex-col rounded bg-white pl-[48px] pr-[20px] pt-[20px]">
+			<div className="flex h-[430px] w-[754px] flex-col rounded-lg bg-white pl-[48px] pr-[20px] pt-[20px]">
 				<button
 					onClick={() => setShowWelcome(false)}
 					className="flex w-full justify-end text-dark-grey"

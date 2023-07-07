@@ -20,7 +20,7 @@ export const MobileWelcome = ({
 }: MobileWelcomeProps) => {
 	return (
 		<div className="flex h-screen w-screen items-center justify-center py-[18px] sm:hidden">
-			<div className="flex w-[320px] flex-col rounded bg-white p-5">
+			<div className="flex w-[320px] flex-col rounded-lg bg-white p-5">
 				<button
 					onClick={() => setShowWelcome(false)}
 					className="flex w-full justify-end text-dark-grey"
