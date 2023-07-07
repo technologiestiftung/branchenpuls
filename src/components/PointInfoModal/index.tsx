@@ -4,6 +4,7 @@ import {
 	BusinessAtPointData,
 	BusinessData,
 } from "../../../pages/api/getsinglepointdata";
+import { Cross } from "../Icons";
 
 export interface PointInfoModalType {
 	poinInfoModalOpen: boolean;
@@ -93,10 +94,16 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
 						</span>
 
 						<div
-							className="my-8 inline-block w-full max-w-xl rounded-2xl bg-white p-6 text-left align-middle shadow-lg"
+							className="relative my-8 inline-block w-full max-w-xl rounded-2xl bg-white p-6 text-left align-middle shadow-lg"
 							style={{ maxHeight: "50vh", overflowY: "scroll" }}
 						>
 							<Dialog.Title className="bg-white text-xl leading-6">
+								<button
+									className="text-textcolor hover:bg-textcolor border-textcolor absolute right-0 top-0 z-20 m-4 cursor-pointer rounded-full border-2 p-1 hover:text-secondary focus:outline-none"
+									onClick={closeModal}
+								>
+									<Cross />
+								</button>
 								<div className="grid grid-cols-1 gap-1 text-sm">
 									<div className="grid grid-cols-12 text-xl">
 										<div
