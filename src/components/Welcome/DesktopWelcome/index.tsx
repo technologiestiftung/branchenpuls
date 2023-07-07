@@ -38,7 +38,7 @@ export const DesktopWelcome = ({
 					ein. In welchen Stadtteilen dominieren welche Branchen? Wie entwickelt
 					sich die Unternehmens- und Geschäftsansiedlungen über die Zeit?
 					<br></br>
-					Exploriere Berlins Gewerbe vom Kiez bis zum Bezirk.
+					Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.
 				</p>
 
 				<div className="mt-[24px] flex gap-[8px] font-medium">
