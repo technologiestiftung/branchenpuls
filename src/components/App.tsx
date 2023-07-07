@@ -44,8 +44,6 @@ export const App: FC<AppType> = () => {
 	) {
 		if (ids.length === 0) return null;
 
-		console.log("idsidsidsv", Object.keys(ids).length);
-
 		const index = ids?.indexOf(id);
 		if (index === -1) {
 			return null;

@@ -14,7 +14,7 @@ export const MapControls: FC<MapControlsType> = ({ mapZoom, setMapZoom }) => {
 	return (
 		<nav
 			className={classNames(
-				"fixed bottom-2 right-3 z-10 mb-3 duration-300 ease-in-out"
+				"fixed bottom-2 right-3 z-10 mb-3 hidden duration-300 ease-in-out sm:block"
 			)}
 		>
 			<div>
