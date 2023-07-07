@@ -1,3 +1,11 @@
+## [1.1.1](https://github.com/technologiestiftung/ihk-vis/compare/v1.1.0...v1.1.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* fixed the button font weight in the welcome screen ([d9e0fb7](https://github.com/technologiestiftung/ihk-vis/commit/d9e0fb738f849003374b0f628e28d047bf5ae642))
+* rounding radius of welcome screen ([41b772f](https://github.com/technologiestiftung/ihk-vis/commit/41b772ff49a76f5ad289c76a6c47c8efd9a1db2e))
+
 # [1.1.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.0.1...v1.1.0) (2023-07-06)
 
 
