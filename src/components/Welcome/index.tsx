@@ -21,7 +21,7 @@ export const Welcome = ({
 			<div className="absolute left-0 top-0 z-20 backdrop-blur">
 				<div className="flex h-screen w-screen bg-primary opacity-30"></div>
 			</div>
-			<div className="absolute left-0 top-0 z-30">
+			<div className="absolute left-0 top-0 z-50">
 				<MobileWelcome setShowWelcome={setShowWelcome} showInfo={showInfo} />
 				<DesktopWelcome setShowWelcome={setShowWelcome} showInfo={showInfo} />
 			</div>

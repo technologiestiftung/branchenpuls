@@ -80,6 +80,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [filterValBl3, setFilterValBl3] = useState<object | null>(null);
 	const [filterMonthOnly, setFilterMonthOnly] = useState<boolean>(false);
 
+	const [loadingFilter, setLoadingFilter] = useState<boolean>(false);
+
 	// @todo set date
 	const [filterValDateMonth, setFilterValDateMonth] = useState<object>({
 		value: 6,
@@ -125,7 +127,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	useEffect(() => {
 		if (pageLoaded) {
 			const timer = setTimeout(async () => {
-				setLoading(true);
+				setLoadingFilter(true);
 				const month = Number(filterValDateMonth.value);
 
 				const newFilteredData = await getIdsByFilter(
@@ -143,7 +145,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				);
 
 				setFilteredData(newFilteredData);
-				setLoading(false);
+				setLoadingFilter(false);
 			}, 500);
 			return () => clearTimeout(timer);
 		}
@@ -301,8 +303,11 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
 			<div
 				key={"layer-" + layerId}
-				className=" z-30 overflow-hidden rounded-lg bg-white"
+				className={`relative z-30 overflow-hidden rounded-lg bg-white `}
 			>
+				{loadingFilter ? (
+					<div className=" absolute z-50 h-full w-full cursor-progress text-center opacity-80"></div>
+				) : null}
 				{Object.keys(layersData).length > 1 ? (
 					<button
 						onClick={removeLayer}
