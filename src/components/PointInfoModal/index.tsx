@@ -97,22 +97,22 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
 							style={{ maxHeight: "50vh", overflowY: "scroll" }}
 						>
 							<Dialog.Title className="bg-white text-xl leading-6">
-								<div className="grid grid-cols-1 gap-1">
-									<div className="grid grid-cols-12 pb-[5px] font-bold">
+								<div className="grid grid-cols-1 gap-1 text-sm">
+									<div className="grid grid-cols-12 text-xl">
 										<div
 											className="col-span-1 h-7 w-7 rounded-full"
 											style={{ backgroundColor: color }}
-										></div>
-										<div className="align-center col-span-11 flex items-center">
+										/>
+										<div className="align-center col-span-11 flex items-center font-bold">
 											Eingetragene Unternehmen (
 											{businessAtPointData.businesses.length})
 										</div>
 									</div>
-									<div className="text-sm font-normal">
+									<div>
 										Für den Standort: {businessAtPointData.latitude},{" "}
 										{businessAtPointData.longitude}
 									</div>
-									<div className="text-sm font-normal">
+									<div>
 										Planungsraum:{" "}
 										{businessAtPointData.businesses[0].planungsraum}
 									</div>
