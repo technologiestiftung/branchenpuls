@@ -312,7 +312,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						<span className="pl-1">Ebene entfernen</span>
 					</button>
 				) : (
-					<button className="mt-2 h-[20px]"></button>
+					<div className="mt-2 h-[20px]"></div>
 				)}
 
 				<div className="mt-5">
