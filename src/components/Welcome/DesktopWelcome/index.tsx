@@ -11,9 +11,13 @@ import { CloseIcon } from "next/dist/client/components/react-dev-overlay/interna
 
 export type DesktopWelcomeProps = {
 	setShowWelcome: Dispatch<SetStateAction<boolean>>;
+	showInfo: Dispatch<SetStateAction<boolean>>;
 };
 
-export const DesktopWelcome = ({ setShowWelcome }: DesktopWelcomeProps) => {
+export const DesktopWelcome = ({
+	setShowWelcome,
+	showInfo,
+}: DesktopWelcomeProps) => {
 	return (
 		<div className="hidden h-screen w-screen items-center justify-center py-[18px] sm:flex">
 			<div className="flex h-[430px] w-[754px] flex-col rounded bg-white pl-[48px] pr-[20px] pt-[20px]">
@@ -41,6 +45,13 @@ export const DesktopWelcome = ({ setShowWelcome }: DesktopWelcomeProps) => {
 						className="h-[35px] w-[160px] rounded-md bg-primary text-xs text-white hover:bg-darker-primary"
 					>
 						Alle erkunden
+					</button>
+
+					<button
+						onClick={() => showInfo(true)}
+						className="h-[35px] w-[160px] rounded-md border-2 border-primary bg-white text-xs text-primary hover:bg-gray-100"
+					>
+						mehr Infos
 					</button>
 
 					{/* <button

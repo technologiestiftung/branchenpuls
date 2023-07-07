@@ -11,9 +11,13 @@ import { CloseIcon } from "next/dist/client/components/react-dev-overlay/interna
 
 export type MobileWelcomeProps = {
 	setShowWelcome: Dispatch<SetStateAction<boolean>>;
+	showInfo: Dispatch<SetStateAction<boolean>>;
 };
 
-export const MobileWelcome = ({ setShowWelcome }: MobileWelcomeProps) => {
+export const MobileWelcome = ({
+	setShowWelcome,
+	showInfo,
+}: MobileWelcomeProps) => {
 	return (
 		<div className="flex h-screen w-screen items-center justify-center py-[18px] sm:hidden">
 			<div className="flex w-[320px] flex-col rounded bg-white p-5">
@@ -34,12 +38,18 @@ export const MobileWelcome = ({ setShowWelcome }: MobileWelcomeProps) => {
 					Neukölln? Exploriere Berlins Gewerbe vom Kiez bis zum Bezirk.
 				</p>
 
-				<div className="bold flex flex-col">
+				<div className=" flex flex-col">
 					<button
 						onClick={() => setShowWelcome(false)}
-						className="font-bolder mb-[16px] h-[35px] rounded-md bg-primary text-xs text-white hover:bg-darker-primary"
+						className=" mb-[16px] h-[35px] rounded-md bg-primary text-xs text-white hover:bg-darker-primary"
 					>
 						Alle erkunden
+					</button>
+					<button
+						onClick={() => showInfo(true)}
+						className="hover:bg-darker-white mb-[16px] h-[35px] rounded-md border-2 border-primary text-xs text-primary hover:bg-gray-100"
+					>
+						mehr Infos
 					</button>
 
 					{/* <div className="mb-[16px] flex flex-col">

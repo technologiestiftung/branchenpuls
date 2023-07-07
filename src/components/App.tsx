@@ -83,7 +83,11 @@ export const App: FC<AppType> = () => {
 					showWelcome={showWelcome}
 				/>
 				{showWelcome ? (
-					<Welcome setShowWelcome={setShowWelcome} />
+					<Welcome
+						setShowWelcome={setShowWelcome}
+						setNavView={setNavView}
+						setSidebarMenuOpen={setSidebarMenuOpen}
+					/>
 				) : (
 					<>
 						<SidebarWrapper
