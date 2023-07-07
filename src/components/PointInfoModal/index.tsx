@@ -1,18 +1,72 @@
-import { FC } from "react";
 import { Dialog } from "@headlessui/react";
-import { Cross } from "../Icons";
-import { BusinessAtPointData } from "../../../pages/api/getsinglepointdata";
+import { FC } from "react";
+import {
+	BusinessAtPointData,
+	BusinessData,
+} from "../../../pages/api/getsinglepointdata";
 
 export interface PointInfoModalType {
 	poinInfoModalOpen: boolean;
 	setPoinInfoModalOpen: (date: boolean) => void;
 	businessAtPointData: BusinessAtPointData;
+	color: string;
 }
+
+interface SectionProps {
+	index: number;
+	totalCount: number;
+	business: BusinessData;
+}
+
+interface SubsectionProps {
+	title: string;
+	content: string;
+}
+
+const Subsection: FC<SubsectionProps> = ({ title, content }) => {
+	return (
+		<div>
+			<div className="font-bold">{title}</div>
+			<div>{content}</div>
+		</div>
+	);
+};
+
+const Section: FC<SectionProps> = ({ index, totalCount, business }) => {
+	return (
+		<>
+			<div className="col-span-6 border-t"></div>
+			<div className="text-md col-span-1">
+				{index + 1} / {totalCount}
+			</div>
+			<div className="text-md col-span-5 grid grid-cols-1 gap-3">
+				<Subsection
+					title="Branchentyp"
+					content={business.branch_top_level_description}
+				></Subsection>
+				<Subsection title="NACE" content={business.branch_nace}></Subsection>
+				<Subsection
+					title="Beschäftigtenanzahl"
+					content={business.employees_range}
+				></Subsection>
+				<Subsection
+					title="Unternehmensalter"
+					content={business.business_age.toString() + " Jahre"}
+				></Subsection>
+				<Subsection
+					title="Unternehmenstyp"
+					content={business.business_type}
+				></Subsection>
+			</div>
+		</>
+	);
+};
 
 export const PointInfoModal: FC<PointInfoModalType> = ({
 	poinInfoModalOpen,
 	setPoinInfoModalOpen,
 	businessAtPointData,
+	color,
 }) => {
 	function closeModal() {
 		setPoinInfoModalOpen(false);
@@ -22,34 +76,63 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
 		<>
 			{businessAtPointData && (
 				<Dialog
-					open={poinInfoModalOpen}
 					as="div"
-					className="relative z-50"
+					className="fixed inset-0 z-10"
 					onClose={closeModal}
+					open={poinInfoModalOpen}
 				>
-					<div className="fixed inset-0 bg-secondary/80" aria-hidden="true" />
-					<div className="fixed inset-0 overflow-y-auto">
-						<div className="flex min-h-full items-center justify-center p-4 leading-7">
-							<Dialog.Panel className="text-textcolor/90 md:min-w-xl absolute mx-auto max-h-80  max-h-full max-w-xs overflow-auto rounded-lg border border-primary/50 bg-secondary p-6 drop-shadow-lg filter transition-all md:w-1/2 md:max-w-none">
-								<button
-									className="text-textcolor hover:bg-textcolor border-textcolor absolute right-0 top-0 z-20 m-4 cursor-pointer rounded-full border-2 p-1 hover:text-white focus:outline-none"
-									onClick={closeModal}
-								>
-									<Cross />
-								</button>
-								<div key={"point-lat-lng"} className="p-4">
-									Location: {businessAtPointData.latitude},{" "}
-									{businessAtPointData.longitude}
-								</div>
-								<div key={"planungsraum"} className="p-4">
-									Planungsraum: {businessAtPointData.planungsraum}
-								</div>
-								{businessAtPointData.businesses.map((b) => (
-									<div key={""} className="p-4">
-										{/* TODO: Build pretty UI for this, right now just dumping the business info */}
-										{JSON.stringify(b)}
+					<div className="min-h-screen text-center">
+						<Dialog.Backdrop className="fixed inset-0 bg-white/80" />
+
+						{/* This element is to trick the browser into centering the modal contents. */}
+						<span
+							className="inline-block h-screen align-middle"
+							aria-hidden="true"
+						>
+							&#8203;
+						</span>
+
+						<div
+							className="my-8 inline-block w-full max-w-xl rounded-2xl bg-white p-6 text-left align-middle"
+							style={{ maxHeight: "50vh", overflowY: "scroll" }}
+						>
+							<Dialog.Title className="bg-white text-xl leading-6">
+								<div className="grid grid-cols-1 gap-1">
+									<div className="grid grid-cols-12 pb-[5px] font-bold">
+										<div
+											className="col-span-1 h-7 w-7 rounded-full"
+											style={{ backgroundColor: color }}
+										></div>
+										<div className="align-center col-span-11 flex items-center">
+											Eingetragene Unternehmen (
+											{businessAtPointData.businesses.length})
+										</div>
 									</div>
-								))}
+									<div className="text-sm font-normal">
+										Für den Standort: {businessAtPointData.latitude},{" "}
+										{businessAtPointData.longitude}
+									</div>
+									<div className="text-sm font-normal">
+										Planungsraum:{" "}
+										{businessAtPointData.businesses[0].planungsraum}
+									</div>
+								</div>
+							</Dialog.Title>
+
+							<Dialog.Panel>
+								<div className="mt-2">
+									<div className="grid grid-cols-6 gap-5">
+										<div className="col-span-6"></div>
+										{businessAtPointData.businesses.map((b, idx) => (
+											<Section
+												key={b.opendata_id}
+												index={idx}
+												totalCount={businessAtPointData.businesses.length}
+												business={b}
+											></Section>
+										))}
+									</div>
+								</div>
 							</Dialog.Panel>
 						</div>
 					</div>

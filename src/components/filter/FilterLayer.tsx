@@ -297,6 +297,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	return (
 		<>
 			<PointInfoModal
+				color={"rgb(" + layersData[layerId].color + ")"}
 				poinInfoModalOpen={poinInfoModalOpen}
 				setPoinInfoModalOpen={setPoinInfoModalOpen}
 				businessAtPointData={pointData!}
