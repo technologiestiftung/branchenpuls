@@ -93,7 +93,7 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
 						</span>
 
 						<div
-							className="my-8 inline-block w-full max-w-xl rounded-2xl bg-white p-6 text-left align-middle"
+							className="my-8 inline-block w-full max-w-xl rounded-2xl bg-white p-6 text-left align-middle shadow-lg"
 							style={{ maxHeight: "50vh", overflowY: "scroll" }}
 						>
 							<Dialog.Title className="bg-white text-xl leading-6">
