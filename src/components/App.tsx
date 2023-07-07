@@ -47,6 +47,12 @@ export const App: FC<AppType> = () => {
 		}
 	}, [showHeatmap]);
 
+	useEffect(() => {
+		if (activeLayerId) {
+			setShowHeatmap(layersData[activeLayerId].heatmap);
+		}
+	}, [activeLayerId]);
+
 	function getNextOrPreviousId(
 		id: string,
 		ids: string[],
