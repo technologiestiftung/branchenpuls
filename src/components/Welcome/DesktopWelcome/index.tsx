@@ -20,7 +20,7 @@ export const DesktopWelcome = ({
 }: DesktopWelcomeProps) => {
 	return (
 		<div className="hidden h-screen w-screen items-center justify-center py-[18px] sm:flex">
-			<div className="flex h-[430px] w-[754px] flex-col rounded-lg bg-white pl-[48px] pr-[20px] pt-[20px]">
+			<div className="flex h-[465px] w-[754px] flex-col rounded-lg bg-white pl-[48px] pr-[20px] pt-[20px]">
 				<button
 					onClick={() => setShowWelcome(false)}
 					className="flex w-full justify-end text-dark-grey"
@@ -35,8 +35,10 @@ export const DesktopWelcome = ({
 				<p className="mt-[24px] text-sm font-extralight  text-dark-grey">
 					Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem
 					Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft
-					ein. Wo ist die höchste Bäckereindichte? Welche Branchen dominieren
-					Neukölln? Exploriere Berlins Gewerbe vom Kiez bis zum Bezirk.
+					ein. In welchen Stadtteilen dominieren welche Branchen? Wie entwickelt
+					sich die Unternehmens- und Geschäftsansiedlungen über die Zeit?
+					<br></br>
+					Exploriere Berlins Gewerbe vom Kiez bis zum Bezirk.
 				</p>
 
 				<div className="mt-[24px] flex gap-[8px] font-medium">
@@ -44,14 +46,14 @@ export const DesktopWelcome = ({
 						onClick={() => setShowWelcome(false)}
 						className="h-[35px] w-[160px] rounded-md bg-primary text-xs text-white hover:bg-darker-primary"
 					>
-						Alle erkunden
+						Karte erkunden
 					</button>
 
 					<button
 						onClick={() => showInfo(true)}
 						className="h-[35px] w-[160px] rounded-md border-2 border-primary bg-white text-xs text-primary hover:bg-gray-100"
 					>
-						mehr Infos
+						Mehr Infos
 					</button>
 
 					{/* <button

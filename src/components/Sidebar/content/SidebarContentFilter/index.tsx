@@ -52,7 +52,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 
 	return (
 		<>
-			<SidebarHeader text="IHK Gewerbedaten" />
+			<SidebarHeader text="Gewerbe explorieren" />
 			<SidebarBody>
 				<FilterLayerSwitcher
 					layersData={layersData}
