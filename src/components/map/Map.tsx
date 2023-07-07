@@ -6,14 +6,8 @@ import DeckGL from "@deck.gl/react";
 import mapStyle from "./mapStyle";
 import { MapControls } from "./MapControls";
 
-const MAP_STYLE =
-	"https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
-// Initial viewport settings
-
-function huhu(d) {
-	document.body.style.cursor = "pointer !important";
-	// setSelectedPoint(d.object),
-}
+// const MAP_STYLE =
+// 	"https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
 
 export interface PointData {
 	info: any;
@@ -25,8 +19,6 @@ export interface MapType {
 }
 
 export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
-	// const [selectedPoint, setSelectedPoint] = useState<PointData | null>(null);
-
 	function onViewStateChange(view) {
 		setZoom(view.viewState.zoom);
 	}
@@ -50,7 +42,7 @@ export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
 					initialViewState={initialViewState}
 					controller={true}
 					layers={deckLayers}
-					getTooltip={({ object }) => object && `${object.id}\n`}
+					// getTooltip={({ object }) => object && `${object.id}\n`}
 					onViewStateChange={onViewStateChange}
 				>
 					<Map

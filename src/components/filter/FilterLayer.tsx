@@ -182,6 +182,14 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		}
 	}
 
+	const handleHover = ({ x, y, object }) => {
+		if (object) {
+			document.documentElement.classList.add("hovered"); // Add the 'hovered' class to the html element
+		} else {
+			document.documentElement.classList.remove("hovered"); // Remove the 'hovered' class from the html element
+		}
+	};
+
 	useEffect(() => {
 		if (filteredData && activeLayerId === layerId) {
 			const layers = [];
@@ -218,6 +226,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 							// transition with a duration of 3000ms
 							opacity: 500,
 						},
+						onHover: handleHover,
 					})
 				);
 			}

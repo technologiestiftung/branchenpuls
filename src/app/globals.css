@@ -3,52 +3,61 @@
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: "Clan Book";
-    src: url("/fonts/clan-book.woff") format("woff");
-  }
+	@font-face {
+		font-family: "Clan Book";
+		src: url("/fonts/clan-book.woff") format("woff");
+	}
 
-  @font-face {
-    font-family: "Clan Medium";
-    src: url("/fonts/clan-medium.woff") format("woff");
-  }
+	@font-face {
+		font-family: "Clan Medium";
+		src: url("/fonts/clan-medium.woff") format("woff");
+	}
 
-  @font-face {
-    font-family: "Clan Bold";
-    src: url("/fonts/clan-bold.woff") format("woff");
-  }
+	@font-face {
+		font-family: "Clan Bold";
+		src: url("/fonts/clan-bold.woff") format("woff");
+	}
 
-  html,
-  body,
-  #__next {
-    font-family: "Clan Book", sans-serif;
-    color: #222222;
-  }
+	html,
+	body,
+	#__next {
+		font-family: "Clan Book", sans-serif;
+		color: #222222;
+	}
 }
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
 }
 
 #deckgl-wrapper {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .scrolling .scroll-shadow {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-    0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
-    0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+	--tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+		0 4px 6px -4px rgb(0 0 0 / 0.1);
+	--tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
+		0 4px 6px -4px var(--tw-shadow-color);
+	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+		var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+html,
+body {
+	cursor: auto;
+}
+
+.hovered #deckgl-wrapper {
+	cursor: pointer !important;
 }
