@@ -17,49 +17,28 @@ export const SidebarContentInfo = () => {
 			<SidebarBody>
 				<div className="pr-[16px]">
 					<p className="text-sm text-dark-grey">
-						Berlin ist Hauptstadt, Start-Up Metropole, Exzellenzcluster, Stadt
-						der Künstler:innen, der Kreativen und immer im Wandel. Entsprechend
+						Berlin ist Hauptstadt, Start-Up-Metropole, Exzellenzcluster, Stadt
+						der Kreativen und vorallem eines: immer im Wandel. Entsprechend
 						vielfältig und dynamisch ist auch die Berliner Wirtschaft. Mit dem
-						<span className="italic"> BranchenPuls</span> wird eine Betrachtung
+						<span className="italic"> Branchenpuls</span> wird eine Betrachtung
 						und Analyse der Berliner Gewerbelandschaft erstmalig möglich. In
 						welchen Kiezen konzentrieren sich bestimmte Branchen? Wo dominieren
 						ältere Unternehmen, wo siedeln sich neue Unternehmen an? Und wie
 						entwickelt sich die Berliner Gewerbelandschaft im Lauf der Zeit?
 						<br />
 						<br />
-						Mit dem <span className="italic"> BranchenPuls</span> haben
-						Verwaltung, Wirtschaft und Zivilgesellschaft ein Tool zur Hand, um
-						einen tiefen Einblick in die Berliner Gewerbelandschaft zu gewinnen,
-						Veränderungen zu erkennen und datenbasierte Analysen zu machen. Der
-						<span className="italic"> BranchenPuls</span> ist ein Projekt der{" "}
-						<a
-							className="font-medium text-primary"
-							href="https://odis-berlin.de/"
-						>
-							Open Data Informationsstelle Berlin (ODIS)
-						</a>{" "}
-						in Zusammenarbeit mit dem{" "}
-						<a
-							className="font-medium text-primary"
-							href="https://citylab-berlin.org/de/start/"
-						>
-							CityLAB Berlin
-						</a>{" "}
-						in Kooperation mit der{" "}
-						<a
-							className="font-medium text-primary"
-							href="https://www.ihk.de/berlin/"
-						>
-							IHK Berlin
-						</a>
-						.
+						Mit dem <span className="italic"> Branchenpuls</span> haben
+						Verwaltung, Wirtschaft, Wissenschaft und Zivilgesellschaft ein Tool
+						zur Hand, um einen tiefen Einblick in die Berliner Gewerbelandschaft
+						zu gewinnen, Veränderungen zu erkennen und datenbasierte Analysen
+						durchzuführen.
 					</p>
 
 					<Accordion
-						title={"Was ist der BranchenPuls?"}
+						title={"Was ist der Branchenpuls?"}
 						content={
 							<p>
-								Der <span className="italic">BranchenPuls</span> ist ein auf
+								Der <span className="italic">Branchenpuls</span> ist ein auf
 								offenen Daten basierendes Tool, mit dem die Branchenvielfalt der
 								Berliner Wirtschaft durch eine Vielzahl an Filtermöglichkeiten
 								erkundet werden kann. Das Tool erlaubt eine Betrachtung der
@@ -80,7 +59,7 @@ export const SidebarContentInfo = () => {
 								mehrere Ebenen geöffnet und miteinander verglichen werden.
 								<br />
 								<br />
-								Der <span className="italic">BranchenPuls</span> ist ein
+								Der <span className="italic">Branchenpuls</span> ist ein
 								Open-Source-Projekt und läuft unter einer MIT Lizenz.
 								Dementsprechend können Idee und Quellcode für die Umsetzung in
 								anderen Städten kostenlos genutzt, angepasst und
@@ -101,25 +80,18 @@ export const SidebarContentInfo = () => {
 						title={"Woher kommen die Daten?"}
 						content={
 							<p>
-								Die dem BranchenPuls zugrundeliegenden Daten werden von der IHK
+								Die dem Branchenpuls zugrundeliegenden Daten werden von der IHK
 								Berlin seit April 2023 als offene Daten veröffentlicht. Die
-								Daten sind sowohl über das{" "}
+								Daten können über das zentrale{" "}
 								<a
 									className="font-medium text-primary"
 									href="https://daten.berlin.de/datensaetze/gewerbedaten-der-ihk-berlin"
 								>
 									Berliner Datenportal
 								</a>{" "}
-								als auch auf{" "}
-								<a
-									className="font-medium text-primary"
-									href="https://github.com/IHKBerlin/IHKBerlin_Gewerbedaten/blob/595d12d0fdc3d94c613411d0742e7efb598ef853/README.md]"
-								>
-									GitHub
-								</a>{" "}
-								zu finden. Die IHK Berlin fragt die Informationen von ihren
-								Mitgliedsunternehmen ab und aktualisiert die Daten monatlich.
-								Bei Fragen zu den Daten wende dich gerne an den Bereich
+								heruntergeladen werden. Die IHK Berlin fragt die Informationen
+								von ihren Mitgliedsunternehmen ab und aktualisiert die Daten
+								monatlich. Bei Fragen zu den Daten wende dich an den Bereich
 								Datenmanagement bei der{" "}
 								<a
 									className="font-medium text-primary"
@@ -136,7 +108,7 @@ export const SidebarContentInfo = () => {
 						title={"Was ist Open Data?"}
 						content={
 							<p>
-								Offene Daten definieren sich dadurch, dass sie in einem offenen
+								Open Data zeichen sich dadurch aus, dass sie in einem offenen
 								und maschinenlesbaren Format vorliegen, unter einer freien
 								Lizenz nutzbar sind, der Zugang diskriminierungsfrei und
 								kostenlos ist und die Daten an einem zentralen Ort dauerhaft
@@ -146,7 +118,7 @@ export const SidebarContentInfo = () => {
 								Open Data ist heute ein wichtiger Bestandteil im Berliner
 								Verwaltungshandeln und schafft nicht nur Transparenz und
 								Offenheit, sondern ermöglicht auch datenbasierte Tools wie den
-								<span className="italic">BranchenPuls</span>. Auch Akteur:innen
+								<span className="italic">Branchenpuls</span>. Auch Akteur:innen
 								aus Wirtschaft, Wissenschaft und Zivilgesellschaft profitieren
 								von offenen Daten und veröffentlichen zunehmend selbst offene
 								Daten. Die{" "}
@@ -174,7 +146,7 @@ export const SidebarContentInfo = () => {
 						title={"Über uns"}
 						content={
 							<p>
-								Der BranchenPuls ist ein Projekt der{" "}
+								Der Branchenpuls ist ein Projekt der{" "}
 								<a
 									className="font-medium text-primary"
 									href="https://odis-berlin.de/"
@@ -207,36 +179,25 @@ export const SidebarContentInfo = () => {
 								. Seit 2018 begleiten wir als ODIS die Stadt auf dem Weg zu
 								einer partizipativen, nachhaltigen und datengetriebenen
 								Gesellschaft mit dem Schwerpunkt auf die Bereitstellung und
-								Nutzung offener Daten. Du hast Feedback oder willst mehr
-								erfahren? Schau dich auf unserer Webseite um oder{" "}
-								<a
-									className="font-medium text-primary"
-									href="https://odis-berlin.de/contact/"
-								>
-									kontaktiere uns
-								</a>
-								.
+								Nutzung offener Daten.
 							</p>
 						}
 					/>
 
 					<p className="mt-[30px] text-xs font-medium text-light-grey">
-						Auf GitHub findest du den{" "}
-						<a
-							className="font-medium text-primary"
-							href="https://github.com/technologiestiftung/ihk-vis"
-						>
-							Quellcode des Projekts
-						</a>
-						.
-						<br />
-						<br />
 						Eine Frage oder Feedback? Schreib uns an{" "}
 						<a
 							className="font-medium text-primary"
 							href="mailto:odis@ts.berlin"
 						>
 							odis@ts.berlin
+						</a>
+						. Den Quellcode des Projekts findest du auf{" "}
+						<a
+							className="font-medium text-primary"
+							href="https://github.com/technologiestiftung/ihk-vis"
+						>
+							GitHub
 						</a>
 						.
 					</p>
@@ -250,13 +211,12 @@ export const SidebarContentInfo = () => {
 						</div>
 					</div>
 					<div className="flex flex-col gap-[16px]">
-						<div>Durchgeführt von der </div>
 						<div className="h-[40px] w-[160px]">
 							<OdisLogo />
 						</div>
 					</div>
 					<div className="flex flex-col gap-[16px]">
-						<div>in Zusammenarbeit mit dem </div>
+						<div>in Zusammenarbeit mit</div>
 						<div className="flex gap-[16px]">
 							<div className="h-[34px] w-[160px]">
 								<CityLabLogo />

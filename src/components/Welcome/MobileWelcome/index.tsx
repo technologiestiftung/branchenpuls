@@ -34,8 +34,7 @@ export const MobileWelcome = ({
 				<p className="mb-[24px] text-sm font-extralight  text-dark-grey">
 					Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem
 					Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft
-					ein. Wo ist die höchste Bäckereindichte? Welche Branchen dominieren
-					Neukölln? Exploriere Berlins Gewerbe vom Kiez bis zum Bezirk.
+					ein. Exploriere Berlins Gewerbe vom Bezirk bis zum Kiez.
 				</p>
 
 				<div className="flex flex-col font-medium">
@@ -43,13 +42,13 @@ export const MobileWelcome = ({
 						onClick={() => setShowWelcome(false)}
 						className=" mb-[16px] h-[35px] rounded-md bg-primary text-xs text-white hover:bg-darker-primary"
 					>
-						Alle erkunden
+						Karte erkunden
 					</button>
 					<button
 						onClick={() => showInfo(true)}
 						className="hover:bg-darker-white mb-[16px] h-[35px] rounded-md border-2 border-primary text-xs text-primary hover:bg-gray-100"
 					>
-						mehr Infos
+						Mehr Infos
 					</button>
 
 					{/* <div className="mb-[16px] flex flex-col">
@@ -71,7 +70,7 @@ export const MobileWelcome = ({
 
 				<p className="mb-[24px] text-xs font-extralight italic text-dark-grey">
 					Eine prototypische Datenvisualisierung der Open Data
-					Informationsstelle Berlin in Zusammenarbeit mit dem CityLAB Berlin
+					Informationsstelle Berlin in Zusammenarbeit mit dem CityLAB Berlin.
 				</p>
 
 				<div className="grid-4 grid grid-cols-2 gap-[24px]">
