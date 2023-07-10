@@ -82,24 +82,42 @@ export const DesktopWelcome = ({
 				<div className="mt-[16px] flex h-[90px] flex-col justify-between">
 					<div className="flex items-start">
 						<div className="w-[120px]">
-							<OdisLogo />
+							<a href="https://odis-berlin.de" target="_blank">
+								<OdisLogo />
+							</a>
 						</div>
 						<div className="w-[120px] pl-[26px]">
-							<CityLabLogo />
+							<a href="https://citylab-berlin.org/de/start/" target="_blank">
+								<CityLabLogo />
+							</a>
 						</div>
 						<div className="w-[120px] pl-[21px]">
-							<TSBLogo />
+							<a
+								href="https://www.technologiestiftung-berlin.de"
+								target="_blank"
+							>
+								<TSBLogo />
+							</a>
 						</div>
 					</div>
 					<div className="flex">
 						<div className="w-[120px]">
-							<IHKLogo />
+							<a href="https://www.ihk.de/berlin/" target="_blank">
+								<IHKLogo />
+							</a>
 						</div>
 						<div className="w-[120px] pl-[26px]">
-							<BerlinLogo />
+							<a href="https://www.berlin.de/rbmskzl/" target="_blank">
+								<BerlinLogo />
+							</a>
 						</div>
 						<div className="w-[120px] pl-[21px]">
-							<IBBLogo />
+							<a
+								href="https://www.ibb.de/de/startseite/startseite.html"
+								target="_blank"
+							>
+								<IBBLogo />
+							</a>
 						</div>
 					</div>
 				</div>

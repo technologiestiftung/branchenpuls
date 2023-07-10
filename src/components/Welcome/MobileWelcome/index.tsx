@@ -74,12 +74,27 @@ export const MobileWelcome = ({
 				</p>
 
 				<div className="grid-4 grid grid-cols-2 gap-[24px]">
-					<OdisLogo />
-					<CityLabLogo />
-					<IHKLogo />
-					<TSBLogo />
-					<BerlinLogo />
-					<IBBLogo />
+					<a href="https://odis-berlin.de" target="_blank">
+						<OdisLogo />
+					</a>
+					<a href="https://citylab-berlin.org/de/start/" target="_blank">
+						<CityLabLogo />
+					</a>
+					<a href="https://www.technologiestiftung-berlin.de" target="_blank">
+						<TSBLogo />
+					</a>
+					<a href="https://www.ihk.de/berlin/" target="_blank">
+						<IHKLogo />
+					</a>
+					<a href="https://www.berlin.de/rbmskzl/" target="_blank">
+						<BerlinLogo />
+					</a>
+					<a
+						href="https://www.ibb.de/de/startseite/startseite.html"
+						target="_blank"
+					>
+						<IBBLogo />
+					</a>
 				</div>
 			</div>
 		</div>

@@ -207,22 +207,33 @@ export const SidebarContentInfo = () => {
 					<div className="flex flex-col gap-[16px]">
 						<div>Ein Projekt der</div>
 						<div className="h-[49px] w-[160px]">
-							<TSBLogo />
+							<a
+								href="https://www.technologiestiftung-berlin.de"
+								target="_blank"
+							>
+								<TSBLogo />
+							</a>
 						</div>
 					</div>
 					<div className="flex flex-col gap-[16px]">
 						<div className="h-[40px] w-[160px]">
-							<OdisLogo />
+							<a href="https://odis-berlin.de" target="_blank">
+								<OdisLogo />
+							</a>
 						</div>
 					</div>
 					<div className="flex flex-col gap-[16px]">
 						<div>in Zusammenarbeit mit</div>
 						<div className="flex gap-[16px]">
 							<div className="h-[34px] w-[160px]">
-								<CityLabLogo />
+								<a href="https://citylab-berlin.org/de/start/" target="_blank">
+									<CityLabLogo />
+								</a>
 							</div>
 							<div className="-mr-[12px] h-[37px] w-[120px] ">
-								<IHKLogo />
+								<a href="https://www.ihk.de/berlin/" target="_blank">
+									<IHKLogo />
+								</a>
 							</div>
 						</div>
 					</div>
@@ -230,10 +241,17 @@ export const SidebarContentInfo = () => {
 						<div>Gefördert von </div>
 						<div className="flex gap-[16px]">
 							<div className="h-auto w-[160px]">
-								<BerlinLogo />
+								<a href="https://www.berlin.de/rbmskzl/" target="_blank">
+									<BerlinLogo />
+								</a>
 							</div>
 							<div className="-mr-[12px] h-[33px] w-[120px]">
-								<IBBLogo />
+								<a
+									href="https://www.ibb.de/de/startseite/startseite.html"
+									target="_blank"
+								>
+									<IBBLogo />
+								</a>
 							</div>
 						</div>
 					</div>
@@ -245,12 +263,14 @@ export const SidebarContentInfo = () => {
 					<a
 						className="font-medium text-primary"
 						href="https://www.technologiestiftung-berlin.de/impressum"
+						target="_blank"
 					>
 						Impressum
 					</a>{" "}
 					<a
 						className="font-medium text-primary"
 						href="https://www.technologiestiftung-berlin.de/datenschutz"
+						target="_blank"
 					>
 						Datenschutzerklärung
 					</a>
