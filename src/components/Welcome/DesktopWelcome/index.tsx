@@ -35,7 +35,7 @@ export const DesktopWelcome = ({
 				<p className="mt-[24px] text-sm font-extralight  text-dark-grey">
 					Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem
 					Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft
-					ein. In welchen Stadtteilen dominieren welche Branchen? Wie entwickelt
+					ein. In welchen Stadtteilen dominieren welche Branchen? Wie entwickeln
 					sich die Unternehmens- und Geschäftsansiedlungen über die Zeit?
 					<br></br>
 					Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.
