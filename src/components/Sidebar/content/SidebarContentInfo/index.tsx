@@ -42,13 +42,13 @@ export const SidebarContentInfo = () => {
 								offenen Daten basierendes Tool, mit dem die Branchenvielfalt der
 								Berliner Wirtschaft durch eine Vielzahl an Filtermöglichkeiten
 								erkundet werden kann. Das Tool erlaubt eine Betrachtung der
-								räumlichen Verteilung bestimmter Branchentypen sowie eine
-								zeitliche Entwicklung der Gewerbelandschaft.
+								räumlichen Verteilung bestimmter Branchentypen sowie der
+								zeitlichen Entwicklung der Gewerbelandschaft.
 								<br />
 								<br />
-								Die Standorte als Punkte dargestellt, entsprechen dem Sitz des
-								Mitgliedsunternehmen der IHK Berlin. Neben der Punktedarstellung
-								ist eine Heatmap-Darstellung auswählbar, um
+								Die Standorte, als Punkte dargestellt, entsprechen dem Sitz des
+								Mitgliedsunternehmes der IHK Berlin. Neben der Punktdarstellung
+								ist eine Heatmapdarstellung auswählbar, um
 								Branchenkonzentrationen zu visualisieren. Die Unternehmen können
 								nach Informationen wie Branchen- und Gewerbetyp,
 								Neueintragungen, Beschäftigtenzahl oder Unternehmensalter
@@ -60,14 +60,14 @@ export const SidebarContentInfo = () => {
 								<br />
 								<br />
 								Der <span className="italic">Branchenpuls</span> ist ein
-								Open-Source-Projekt und läuft unter einer MIT Lizenz.
+								Open-Source-Projekt und läuft unter der MIT Lizenz.
 								Dementsprechend können Idee und Quellcode für die Umsetzung in
 								anderen Städten kostenlos genutzt, angepasst und
 								weiterentwickelt werden. Wenn Du dich dafür interessierst, schau
 								gerne im{" "}
 								<a
 									className="font-medium text-primary"
-									href="https://github.com/IHKBerlin/IHKBerlin_Gewerbedaten/blob/595d12d0fdc3d94c613411d0742e7efb598ef853/README.md"
+									href="https://github.com/technologiestiftung/ihk-vis"
 								>
 									GitHub-Repository
 								</a>{" "}
