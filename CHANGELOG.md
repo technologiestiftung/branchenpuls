@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.2.0...v1.3.0) (2023-07-10)
+
+
+### Features
+
+* replaced main logo ([5e771b0](https://github.com/technologiestiftung/ihk-vis/commit/5e771b04b6053c8f9e33a061e05bd70a0205eb59))
+
 # [1.2.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.1.1...v1.2.0) (2023-07-10)
 
 
