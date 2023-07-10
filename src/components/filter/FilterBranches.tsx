@@ -91,7 +91,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 				<p className="mb-1 text-sm font-bold">
 					NACE
 					<span className="text-xs font-normal">
-						{filterValBl1 ? ` basierende auf Branchentyp` : ""}
+						{filterValBl1 ? ` basierend auf Branchentyp` : ""}
 					</span>
 				</p>
 				<Select
@@ -114,7 +114,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					IHK ID{" "}
 					<span className="text-xs font-normal">
 						{filterValBl1 || filterValBl2
-							? ` basierende auf ${filterValBl2 ? "NACE" : "Branchentyp"}`
+							? ` basierend auf ${filterValBl2 ? "NACE" : "Branchentyp"}`
 							: ""}
 					</span>
 				</p>
