@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.1.1...v1.2.0) (2023-07-10)
+
+
+### Features
+
+* add links to logos ([59b3b96](https://github.com/technologiestiftung/ihk-vis/commit/59b3b96dc07352d334628b77cde403012baeac53))
+
 ## [1.1.1](https://github.com/technologiestiftung/ihk-vis/compare/v1.1.0...v1.1.1) (2023-07-07)
 
 
