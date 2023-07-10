@@ -42,13 +42,13 @@ export const SidebarContentInfo = () => {
 								offenen Daten basierendes Tool, mit dem die Branchenvielfalt der
 								Berliner Wirtschaft durch eine Vielzahl an Filtermöglichkeiten
 								erkundet werden kann. Das Tool erlaubt eine Betrachtung der
-								räumlichen Verteilung bestimmter Branchentypen sowie eine
-								zeitliche Entwicklung der Gewerbelandschaft.
+								räumlichen Verteilung bestimmter Branchentypen sowie der
+								zeitlichen Entwicklung der Gewerbelandschaft.
 								<br />
 								<br />
-								Die Standorte als Punkte dargestellt, entsprechen dem Sitz des
-								Mitgliedsunternehmen der IHK Berlin. Neben der Punktedarstellung
-								ist eine Heatmap-Darstellung auswählbar, um
+								Die Standorte, als Punkte dargestellt, entsprechen dem Sitz des
+								Mitgliedsunternehmes der IHK Berlin. Neben der Punktdarstellung
+								ist eine Heatmapdarstellung auswählbar, um
 								Branchenkonzentrationen zu visualisieren. Die Unternehmen können
 								nach Informationen wie Branchen- und Gewerbetyp,
 								Neueintragungen, Beschäftigtenzahl oder Unternehmensalter
@@ -60,14 +60,14 @@ export const SidebarContentInfo = () => {
 								<br />
 								<br />
 								Der <span className="italic">Branchenpuls</span> ist ein
-								Open-Source-Projekt und läuft unter einer MIT Lizenz.
+								Open-Source-Projekt und läuft unter der MIT Lizenz.
 								Dementsprechend können Idee und Quellcode für die Umsetzung in
 								anderen Städten kostenlos genutzt, angepasst und
 								weiterentwickelt werden. Wenn Du dich dafür interessierst, schau
 								gerne im{" "}
 								<a
 									className="font-medium text-primary"
-									href="https://github.com/IHKBerlin/IHKBerlin_Gewerbedaten/blob/595d12d0fdc3d94c613411d0742e7efb598ef853/README.md"
+									href="https://github.com/technologiestiftung/ihk-vis"
 								>
 									GitHub-Repository
 								</a>{" "}
@@ -207,22 +207,33 @@ export const SidebarContentInfo = () => {
 					<div className="flex flex-col gap-[16px]">
 						<div>Ein Projekt der</div>
 						<div className="h-[49px] w-[160px]">
-							<TSBLogo />
+							<a
+								href="https://www.technologiestiftung-berlin.de"
+								target="_blank"
+							>
+								<TSBLogo />
+							</a>
 						</div>
 					</div>
 					<div className="flex flex-col gap-[16px]">
 						<div className="h-[40px] w-[160px]">
-							<OdisLogo />
+							<a href="https://odis-berlin.de" target="_blank">
+								<OdisLogo />
+							</a>
 						</div>
 					</div>
 					<div className="flex flex-col gap-[16px]">
 						<div>in Zusammenarbeit mit</div>
 						<div className="flex gap-[16px]">
 							<div className="h-[34px] w-[160px]">
-								<CityLabLogo />
+								<a href="https://citylab-berlin.org/de/start/" target="_blank">
+									<CityLabLogo />
+								</a>
 							</div>
 							<div className="-mr-[12px] h-[37px] w-[120px] ">
-								<IHKLogo />
+								<a href="https://www.ihk.de/berlin/" target="_blank">
+									<IHKLogo />
+								</a>
 							</div>
 						</div>
 					</div>
@@ -230,10 +241,17 @@ export const SidebarContentInfo = () => {
 						<div>Gefördert von </div>
 						<div className="flex gap-[16px]">
 							<div className="h-auto w-[160px]">
-								<BerlinLogo />
+								<a href="https://www.berlin.de/rbmskzl/" target="_blank">
+									<BerlinLogo />
+								</a>
 							</div>
 							<div className="-mr-[12px] h-[33px] w-[120px]">
-								<IBBLogo />
+								<a
+									href="https://www.ibb.de/de/startseite/startseite.html"
+									target="_blank"
+								>
+									<IBBLogo />
+								</a>
 							</div>
 						</div>
 					</div>
@@ -245,12 +263,14 @@ export const SidebarContentInfo = () => {
 					<a
 						className="font-medium text-primary"
 						href="https://www.technologiestiftung-berlin.de/impressum"
+						target="_blank"
 					>
 						Impressum
 					</a>{" "}
 					<a
 						className="font-medium text-primary"
 						href="https://www.technologiestiftung-berlin.de/datenschutz"
+						target="_blank"
 					>
 						Datenschutzerklärung
 					</a>
