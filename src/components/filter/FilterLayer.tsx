@@ -305,7 +305,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
 			<div
 				key={"layer-" + layerId}
-				className={`relative z-30 overflow-hidden rounded-lg bg-white `}
+				className={`relative z-0 overflow-hidden rounded-lg bg-white `}
 			>
 				{loadingFilter ? (
 					<div className=" absolute z-50 h-full w-full text-center opacity-80"></div>
