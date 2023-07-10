@@ -29,7 +29,7 @@ export const DesktopWelcome = ({
 				</button>
 
 				<h1 className="text-2xl font-bold text-dark-grey">
-					Willkomen am Puls der Berliner Wirtschaft
+					Willkommen am Puls der Berliner Wirtschaft
 				</h1>
 
 				<p className="mt-[24px] text-sm font-extralight  text-dark-grey">

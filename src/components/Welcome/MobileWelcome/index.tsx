@@ -28,7 +28,7 @@ export const MobileWelcome = ({
 					<CloseIcon />
 				</button>
 				<h1 className="mb-[16px] text-2xl font-bold text-dark-grey">
-					Willkomen am Puls der Berliner Wirtschaft
+					Willkommen am Puls der Berliner Wirtschaft
 				</h1>
 
 				<p className="mb-[24px] text-sm font-extralight  text-dark-grey">
