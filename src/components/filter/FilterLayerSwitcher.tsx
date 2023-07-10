@@ -23,7 +23,7 @@ export const FilterLayerSwitcher: FC<FilterLayerSwitcherType> = ({
 						}}
 						key={`layer-key-${layerId}`}
 					>
-						Ebene
+						Ansicht
 					</button>
 				);
 			})}
@@ -34,8 +34,9 @@ export const FilterLayerSwitcher: FC<FilterLayerSwitcherType> = ({
 					}}
 					className="grid h-12 w-1/3 cursor-pointer items-center rounded bg-gray-200 text-center font-normal leading-4 text-gray-400 hover:opacity-75 "
 				>
-					Ebene
-					<br />+
+					neue
+					<br />
+					Ansicht
 				</button>
 			) : null}
 		</div>

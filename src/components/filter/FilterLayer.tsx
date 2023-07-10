@@ -316,7 +316,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						className="mt-2 !flex items-center text-sm text-gray-400 hover:opacity-75"
 					>
 						<Trash size={15} />
-						<span className="pl-1">Ebene entfernen</span>
+						<span className="pl-1">Ansicht entfernen</span>
 					</button>
 				) : (
 					<div className="mt-2 h-[20px]"></div>

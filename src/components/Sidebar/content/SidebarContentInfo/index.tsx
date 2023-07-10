@@ -56,7 +56,7 @@ export const SidebarContentInfo = () => {
 								auf Bezirksebene möglich. Durch die Zeitraumauswahl ist darüber
 								hinaus eine zeitliche Entwicklung erkundbar, wie z.B.
 								Neuansiedlungen, Umzüge oder Geschäftsaufgaben. Dazu können
-								mehrere Ebenen geöffnet und miteinander verglichen werden.
+								mehrere Ansichten geöffnet und miteinander verglichen werden.
 								<br />
 								<br />
 								Der <span className="italic">Branchenpuls</span> ist ein
