@@ -22,6 +22,7 @@ export const HeatmapToggle: FC<HeatmapToggleType> = ({
 			className={`fixed right-4 top-[22px] z-30 rounded shadow-lg drop-shadow-lg ${
 				showHeatmap ? "border-2" : ""
 			} ${colors[color]}`}
+			title={showHeatmap ? "Streudiagramm anzeigen" : "Heatmap anzeigen"}
 			onClick={() => setShowHeatmap(!showHeatmap)}
 		>
 			{!showHeatmap ? (

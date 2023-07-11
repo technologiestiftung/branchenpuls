@@ -2,6 +2,7 @@ import { FC, useState, useEffect } from "react";
 import Select from "react-select";
 
 import { getOptionsBL1, getOptionsBL2, getOptionsBL3 } from "./dropdownOptions";
+import { Info } from "@components/Icons";
 
 export interface FilterBranchesType {
 	filterValBl1: object;
@@ -73,7 +74,12 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 	return (
 		<div className="">
 			<div className="mt-3">
-				<p className="mb-1 font-bold">Branchentyp</p>
+				<p className="mb-1 flex gap-2 font-bold">
+					Branchentyp
+					<button title="Ein Branchentyp ist z.B. Einzelhandel">
+						<Info className="h-4 w-4" />
+					</button>
+				</p>
 				<Select
 					value={filterValBl1}
 					onChange={setFilterValBl1}
@@ -88,11 +94,14 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 				/>
 			</div>
 			<div className="mt-3">
-				<p className="mb-1 text-sm font-bold">
+				<p className="mb-1 flex items-center gap-2 text-sm font-bold">
 					NACE
 					<span className="text-xs font-normal">
 						{filterValBl1 ? ` basierend auf Branchentyp` : ""}
 					</span>
+					<button title="NACE ist ein System zur Klassifizierung von Wirtschaftszweigen">
+						<Info className="h-4 w-4" />
+					</button>
 				</p>
 				<Select
 					value={filterValBl2}
@@ -110,13 +119,16 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 			</div>
 			{/* suchen… */}
 			<div className="mt-3">
-				<p className="mb-1 text-sm font-bold">
+				<p className="mb-1 flex items-center gap-2 text-sm font-bold">
 					IHK ID{" "}
 					<span className="text-xs font-normal">
 						{filterValBl1 || filterValBl2
 							? ` basierend auf ${filterValBl2 ? "NACE" : "Branchentyp"}`
 							: ""}
 					</span>
+					<button title="Diese ID ist eine Kategorisierung der IHK">
+						<Info className="h-4 w-4" />
+					</button>
 				</p>
 				<Select
 					value={filterValBl3}

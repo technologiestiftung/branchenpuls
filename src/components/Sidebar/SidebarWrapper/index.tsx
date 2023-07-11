@@ -78,7 +78,7 @@ export const SidebarWrapper: FC<SidebarWrapperType> = ({
 				className="h-full overflow-y-auto rounded bg-white shadow-lg"
 			>
 				<button
-					className="hover:bg-textcolor absolute right-5 top-0 z-20 m-10 mr-7 mt-9 cursor-pointer rounded-full p-0"
+					className="hover:bg-textcolor absolute right-5 top-0 z-20 m-10 mr-7 mt-9 cursor-pointer rounded-full p-0 sm:mr-0"
 					onClick={() => setOpen(false)}
 				>
 					{closeSymbol === "cross" && <Cross />}

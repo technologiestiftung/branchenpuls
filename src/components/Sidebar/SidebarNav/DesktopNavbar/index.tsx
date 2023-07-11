@@ -29,6 +29,7 @@ export const DesktopNavbar = ({
 						<li className="flex">
 							<button
 								onClick={() => onNavClick("filter")}
+								title="Filter anzeigen/schließen"
 								className={`rounded-t-[4px] p-[8px] shadow-lg duration-300 ease-in-out
 											${
 												navView === "filter"
@@ -45,6 +46,7 @@ export const DesktopNavbar = ({
 						<li className="flex">
 							<button
 								onClick={() => onNavClick("info")}
+								title="Mehr Informationen anzeigen/schließen"
 								className={`rounded-b-[4px] p-[8px] shadow-lg duration-300 ease-in-out
 											${
 												navView === "info" && sidebarMenuOpen
@@ -68,7 +70,10 @@ export const DesktopNavbar = ({
 						className="flex w-full max-w-[226px] justify-between rounded-[4px] p-[8px] text-dark-grey text-white shadow-lg"
 					>
 						{showNextLayer && (
-							<button onClick={() => applyPreviousLayer()}>
+							<button
+								title="Vorherige Ansicht"
+								onClick={() => applyPreviousLayer()}
+							>
 								<ChevronLeft />
 							</button>
 						)}
@@ -78,7 +83,7 @@ export const DesktopNavbar = ({
 						</p>
 
 						{showNextLayer && (
-							<button onClick={() => applyNextLayer()}>
+							<button title="Nächste Ansicht" onClick={() => applyNextLayer()}>
 								<ChevronRight />
 							</button>
 						)}
