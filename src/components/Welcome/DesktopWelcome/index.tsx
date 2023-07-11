@@ -51,7 +51,7 @@ export const DesktopWelcome = ({
 
 					<button
 						onClick={() => showInfo(true)}
-						className="h-[35px] w-[160px] rounded-md border-2 border-primary bg-white text-xs text-primary hover:bg-gray-100"
+						className="h-[35px] w-[160px] rounded-md border-2 border-primary bg-white text-xs text-primary hover:bg-primary hover:text-white"
 					>
 						Mehr Infos
 					</button>

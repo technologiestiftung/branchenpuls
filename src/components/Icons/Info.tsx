@@ -1,4 +1,4 @@
-export const Info = ({ className }: { className: string | undefined }) => {
+export const Info = ({ className }: { className?: string }) => {
 	return (
 		<svg
 			width="24"
