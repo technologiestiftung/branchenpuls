@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/technologiestiftung/ihk-vis/compare/v1.3.0...v1.3.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* fixed the hovering colors of buttons ([ac5ff0b](https://github.com/technologiestiftung/ihk-vis/commit/ac5ff0b42a4b13b307c03b85edf639c9bbf0ee98))
+
 # [1.3.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.2.0...v1.3.0) (2023-07-10)
 
 
