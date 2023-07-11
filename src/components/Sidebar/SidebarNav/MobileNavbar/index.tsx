@@ -30,11 +30,11 @@ export const MobileNavbar = ({
 						<li className="flex shadow-lg">
 							<button
 								onClick={() => onNavClick("filter")}
-								className={`rounded-[4px] p-[8px] hover:bg-dark-grey hover:text-white
+								className={`rounded-[4px] p-[8px]
 										${
 											navView === "filter" && sidebarMenuOpen
-												? "bg-dark-grey text-white"
-												: "bg-white text-dark-grey"
+												? "bg-dark-grey text-white hover:bg-white hover:text-dark-grey"
+												: "bg-white text-dark-grey hover:bg-dark-grey hover:text-white"
 										}
 									`}
 							>
@@ -66,11 +66,11 @@ export const MobileNavbar = ({
 						<li className="flex shadow-lg">
 							<button
 								onClick={() => onNavClick("info")}
-								className={`rounded-[4px] p-[8px]  hover:bg-dark-grey hover:text-white
+								className={`rounded-[4px] p-[8px]
 										${
 											navView === "info" && sidebarMenuOpen
-												? "bg-dark-grey text-white"
-												: "bg-white text-dark-grey"
+												? "bg-dark-grey text-white hover:bg-white hover:text-dark-grey"
+												: "bg-white text-dark-grey hover:bg-dark-grey hover:text-white"
 										}
 								`}
 							>

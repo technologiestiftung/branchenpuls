@@ -45,16 +45,16 @@ export const DesktopNavbar = ({
 						<li className="flex">
 							<button
 								onClick={() => onNavClick("info")}
-								className={`rounded-b-[4px] p-[8px] shadow-lg duration-300 ease-in-out hover:bg-dark-grey hover:text-white
+								className={`rounded-b-[4px] p-[8px] shadow-lg duration-300 ease-in-out
 											${
 												navView === "info" && sidebarMenuOpen
-													? "bg-dark-grey text-white"
-													: "bg-white text-dark-grey"
+													? "bg-dark-grey text-white hover:bg-white hover:text-dark-grey"
+													: "bg-white text-dark-grey hover:bg-dark-grey hover:text-white"
 											}
 											${sidebarMenuOpen ? "ml-[356px]" : "ml-0"}
 									`}
 							>
-								<Info className={``} />
+								<Info />
 							</button>
 						</li>
 					</ul>

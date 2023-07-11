@@ -2,6 +2,12 @@ import { FC, useState, useEffect } from "react";
 
 export interface FilterLayerSwitcherType {}
 
+const colors = {
+	"#00727c": "bg-emerald hover:bg-darker-emerald",
+	"#e40032": "bg-custom-red hover:bg-darker-custom-red",
+	"#2e92d0": "bg-babyblue hover:bg-darker-babyblue",
+};
+
 export const FilterLayerSwitcher: FC<FilterLayerSwitcherType> = ({
 	layersData,
 	activeLayerId,
@@ -14,9 +20,10 @@ export const FilterLayerSwitcher: FC<FilterLayerSwitcherType> = ({
 				const layer = layersData[layerId];
 				return (
 					<button
-						style={{ backgroundColor: layer.colorHex }}
-						className={`mr-1 grid h-12 w-1/3 cursor-pointer items-center rounded text-center text-white hover:opacity-75 ${
-							layerId !== activeLayerId ? "opacity-40" : ""
+						className={`mr-1 grid h-12 w-1/3 cursor-pointer items-center rounded text-center text-white ${
+							colors[layer.colorHex]
+						} ${
+							layerId !== activeLayerId ? "opacity-40 hover:opacity-100" : ""
 						}`}
 						onClick={() => {
 							setActiveLayerId(layerId);
@@ -32,7 +39,7 @@ export const FilterLayerSwitcher: FC<FilterLayerSwitcherType> = ({
 					onClick={() => {
 						addNewLayer(layersData);
 					}}
-					className="grid h-12 w-1/3 cursor-pointer items-center rounded bg-gray-200 text-center font-normal leading-4 text-gray-400 hover:opacity-75 "
+					className="grid h-12 w-1/3 cursor-pointer items-center rounded bg-gray-200 text-center font-normal leading-4 text-gray-400 hover:bg-light-grey hover:text-white"
 				>
 					neue
 					<br />

@@ -46,7 +46,7 @@ export const MobileWelcome = ({
 					</button>
 					<button
 						onClick={() => showInfo(true)}
-						className="hover:bg-darker-white mb-[16px] h-[35px] rounded-md border-2 border-primary text-xs text-primary hover:bg-gray-100"
+						className="mb-[16px] h-[35px] rounded-md border-2 border-primary text-xs text-primary hover:bg-primary hover:text-white"
 					>
 						Mehr Infos
 					</button>
