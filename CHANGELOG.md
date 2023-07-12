@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.3.1...v1.4.0) (2023-07-12)
+
+
+### Features
+
+* added tooltips for most buttons, added info button for NACE and IHK ID ([69bc740](https://github.com/technologiestiftung/ihk-vis/commit/69bc7407933645bc384300b780d750d0a37c5f06))
+
 ## [1.3.1](https://github.com/technologiestiftung/ihk-vis/compare/v1.3.0...v1.3.1) (2023-07-11)
 
 
