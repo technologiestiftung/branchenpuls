@@ -20,7 +20,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 	loading,
 	setLoading,
 	setOpen,
-	zoom,
+	mapZoom,
 	activeLayerId,
 	setActiveLayerId,
 }) => {
@@ -82,7 +82,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 								setActiveLayerId={setActiveLayerId}
 								storeDataPoints={storeDataPoints}
 								setStoreDataPoints={setStoreDataPoints}
-								zoom={zoom}
+								mapZoom={mapZoom}
 							></FilterLayer>
 						</div>
 					);
