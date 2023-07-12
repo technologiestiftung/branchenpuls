@@ -23,7 +23,8 @@ export const App: FC<AppType> = () => {
 	const [sidebarMenuOpen, setSidebarMenuOpen] = useState<boolean>(true);
 	const [mobileHeight, setMobileHeight] = useState<"half" | "full">("half");
 	const [navView, setNavView] = useState<"filter" | "info" | "none">("filter");
-	const [zoom, setZoom] = useState<null | number>(null);
+	const [mapZoom, setMapZoom] = useState(10); // Initial zoom level
+
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const [showWelcome, setShowWelcome] = useState<boolean>(true);
@@ -93,7 +94,11 @@ export const App: FC<AppType> = () => {
 		<>
 			<main className="">
 				<LoadingIndicator loading={loading}></LoadingIndicator>
-				<MapComponent deckLayers={deckLayers} setZoom={setZoom}></MapComponent>
+				<MapComponent
+					deckLayers={deckLayers}
+					mapZoom={mapZoom}
+					setMapZoom={setMapZoom}
+				></MapComponent>
 				<BranchenPulsButton
 					setShowWelcome={setShowWelcome}
 					showWelcome={showWelcome}
@@ -131,7 +136,7 @@ export const App: FC<AppType> = () => {
 								loading={loading}
 								setLoading={setLoading}
 								setOpen={setSidebarMenuOpen}
-								zoom={zoom}
+								mapZoom={mapZoom}
 								activeLayerId={activeLayerId}
 								setActiveLayerId={setActiveLayerId}
 							/>

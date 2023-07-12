@@ -16,14 +16,19 @@ export interface PointData {
 
 export interface MapType {
 	deckLayers: any;
+	mapZoom: number;
+	setMapZoom: (zoom: number) => void;
 }
 
 const LONGITUDE_RANGE = [13.210754, 13.599154];
 const LATITUDE_RANGE = [52.384558, 52.655458];
 const MIN_ZOOM = 9;
 
-export const MapComponent: FC<MapType> = ({ deckLayers }) => {
-	const [mapZoom, setMapZoom] = useState(10); // Initial zoom level
+export const MapComponent: FC<MapType> = ({
+	deckLayers,
+	mapZoom,
+	setMapZoom,
+}) => {
 	const [lat, setLat] = useState(52.52); // Initial zoom level
 	const [lng, setLng] = useState(13.405); // Initial zoom level
 	const [mapPitch, setMapPitch] = useState(false); // Initial zoom level
