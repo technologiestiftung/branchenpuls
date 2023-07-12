@@ -18,9 +18,25 @@ export interface MapType {
 	deckLayers: any;
 }
 
+const LONGITUDE_RANGE = [13.210754, 13.599154];
+const LATITUDE_RANGE = [52.384558, 52.655458];
+
 export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
 	function onViewStateChange(view) {
 		setZoom(view.viewState.zoom);
+
+		view.viewState.longitude = Math.min(
+			LONGITUDE_RANGE[1],
+			Math.max(LONGITUDE_RANGE[0], view.viewState.longitude)
+		);
+		view.viewState.latitude = Math.min(
+			LATITUDE_RANGE[1],
+			Math.max(LATITUDE_RANGE[0], view.viewState.latitude)
+		);
+
+		view.viewState.zoom = Math.max(9, view.viewState.zoom);
+
+		return view.viewState;
 	}
 
 	const [mapZoom, setMapZoom] = useState(10); // Initial zoom level
