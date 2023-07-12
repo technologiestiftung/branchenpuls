@@ -55,8 +55,17 @@ export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
 						}
 						styleDiffing={true}
 						zoom={mapZoom} // Pass the mapZoom value as the zoom prop
+						attributionControl={false}
 					></Map>
 				</DeckGL>
+			</div>
+			<div className="fixed bottom-0 right-0 bg-white/70 text-xs">
+				<a href="https://www.maptiler.com/copyright/" target="_blank">
+					© MapTiler
+				</a>{" "}
+				<a href="https://www.openstreetmap.org/copyright" target="_blank">
+					© OpenStreetMap contributors
+				</a>
 			</div>
 		</>
 	);
