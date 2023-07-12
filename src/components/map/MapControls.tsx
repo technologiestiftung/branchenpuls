@@ -1,13 +1,22 @@
 import { FC } from "react";
 import classNames from "classnames";
-import { Plus, Minus } from "@components/Icons";
+import { Plus, Minus, Box } from "@components/Icons";
 
 export interface MapControlsType {
 	mapZoom: number;
 	setMapZoom: (zoom: number) => void;
+	mapPitch: boolean;
+	setMapPitch: (pitch: boolean) => void;
+	minZoom: number;
 }
 
-export const MapControls: FC<MapControlsType> = ({ mapZoom, setMapZoom }) => {
+export const MapControls: FC<MapControlsType> = ({
+	mapZoom,
+	setMapZoom,
+	mapPitch,
+	setMapPitch,
+	minZoom,
+}) => {
 	const navClasses =
 		"shadow-lg bg-white text-dark-grey hover:bg-dark-grey hover:text-white h-10 w-10 mt-2 cursor-pointer list-none text-center grid place-items-center rounded-full";
 
@@ -19,6 +28,13 @@ export const MapControls: FC<MapControlsType> = ({ mapZoom, setMapZoom }) => {
 		>
 			<div>
 				<button
+					title="Karte kippen"
+					className={navClasses}
+					onClick={() => setMapPitch(!mapPitch)}
+				>
+					<Box />
+				</button>
+				<button
 					title="zoom in"
 					className={navClasses}
 					onClick={() => setMapZoom(mapZoom + 1)}
@@ -28,7 +44,9 @@ export const MapControls: FC<MapControlsType> = ({ mapZoom, setMapZoom }) => {
 				<button
 					title="zoom out"
 					className={navClasses}
-					onClick={() => setMapZoom(mapZoom - 1)}
+					onClick={() =>
+						setMapZoom(mapZoom === minZoom ? minZoom : mapZoom - 1)
+					}
 				>
 					<Minus />
 				</button>
