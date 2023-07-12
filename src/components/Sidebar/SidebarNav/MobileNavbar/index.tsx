@@ -30,6 +30,7 @@ export const MobileNavbar = ({
 						<li className="flex shadow-lg">
 							<button
 								onClick={() => onNavClick("filter")}
+								title="Filter anzeigen/schließen"
 								className={`rounded-[4px] p-[8px]
 										${
 											navView === "filter" && sidebarMenuOpen
@@ -47,7 +48,10 @@ export const MobileNavbar = ({
 							className="flex w-full max-w-[226px] justify-between rounded-[4px] p-[8px] text-dark-grey text-white shadow-lg"
 						>
 							{showNextLayer && (
-								<button onClick={() => applyPreviousLayer()}>
+								<button
+									title="Vorherige Ansicht"
+									onClick={() => applyPreviousLayer()}
+								>
 									<ChevronLeft />
 								</button>
 							)}
@@ -57,7 +61,10 @@ export const MobileNavbar = ({
 							</p>
 
 							{showNextLayer && (
-								<button onClick={() => applyNextLayer()}>
+								<button
+									title="Nächste Ansicht"
+									onClick={() => applyNextLayer()}
+								>
 									<ChevronRight />
 								</button>
 							)}
@@ -66,6 +73,7 @@ export const MobileNavbar = ({
 						<li className="flex shadow-lg">
 							<button
 								onClick={() => onNavClick("info")}
+								title="Mehr Informationen anzeigen/schließen"
 								className={`rounded-[4px] p-[8px]
 										${
 											navView === "info" && sidebarMenuOpen

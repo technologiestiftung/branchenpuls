@@ -314,6 +314,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					<button
 						onClick={removeLayer}
 						className="mt-2 !flex items-center text-sm text-gray-400 hover:opacity-75"
+						title="Entfernt die aktuelle Ansicht"
 					>
 						<Trash size={15} />
 						<span className="pl-1">Ansicht entfernen</span>
