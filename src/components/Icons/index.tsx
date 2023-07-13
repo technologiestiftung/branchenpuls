@@ -50,3 +50,4 @@ export { ArrowDown } from "./ArrowDown";
 export { ArrowUp } from "./ArrowUp";
 export { Box } from "./Box";
 export { Trash } from "./Trash";
+export { Spinner } from "./Spinner";
