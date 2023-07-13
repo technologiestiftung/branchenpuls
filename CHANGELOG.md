@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.4.0...v1.5.0) (2023-07-13)
+
+
+### Features
+
+* added sticky title to point details modal ([cbc2235](https://github.com/technologiestiftung/ihk-vis/commit/cbc2235660e2efd80b64112f74ff034e415d1036))
+
 # [1.4.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.3.1...v1.4.0) (2023-07-12)
 
 
