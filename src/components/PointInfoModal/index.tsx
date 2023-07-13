@@ -94,42 +94,43 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
 						</span>
 
 						<div
-							className="relative my-8 inline-block w-full max-w-xl rounded-2xl bg-white p-6 text-left align-middle shadow-lg"
+							className="relative my-8 inline-block w-full max-w-xl rounded-2xl bg-white px-6 text-left align-middle shadow-lg"
 							style={{ maxHeight: "50vh", overflowY: "scroll" }}
 						>
-							<Dialog.Title className="bg-white text-xl leading-6">
-								<button
-									className="text-textcolor hover:bg-textcolor border-textcolor absolute right-0 top-0 z-20 m-4 cursor-pointer rounded-full border-2 p-1 hover:text-secondary focus:outline-none"
-									onClick={closeModal}
-								>
-									<Cross />
-								</button>
-								<div className="grid grid-cols-1 gap-1 text-sm">
-									<div className="grid grid-cols-12 text-xl">
+							<Dialog.Title className="sticky top-0 bg-white pb-6 text-xl leading-6">
+								<div className="flex w-full flex-col text-sm">
+									<div className="flex items-start gap-2">
 										<div
-											className="col-span-1 h-7 w-7 rounded-full"
+											className="mt-[25px] h-[20px] w-[20px] rounded-full"
 											style={{ backgroundColor: color }}
 										/>
-										<div className="align-center col-span-11 flex items-center font-bold">
-											Eingetragene Unternehmen (
-											{businessAtPointData.businesses.length})
+										<div className="flex w-0 grow flex-col pt-6">
+											<div className="text-xl font-bold">
+												Eingetragene Unternehmen (
+												{businessAtPointData.businesses.length})
+											</div>
+											<div>
+												Für den Standort: {businessAtPointData.latitude},{" "}
+												{businessAtPointData.longitude}
+											</div>
+											<div>
+												Planungsraum:{" "}
+												{businessAtPointData.businesses[0].planungsraum}
+											</div>
 										</div>
-									</div>
-									<div>
-										Für den Standort: {businessAtPointData.latitude},{" "}
-										{businessAtPointData.longitude}
-									</div>
-									<div>
-										Planungsraum:{" "}
-										{businessAtPointData.businesses[0].planungsraum}
+										<button
+											className="text-textcolor pt-2"
+											onClick={closeModal}
+										>
+											<Cross />
+										</button>
 									</div>
 								</div>
 							</Dialog.Title>
 
 							<Dialog.Panel>
-								<div className="mt-2">
+								<div className="pb-6">
 									<div className="grid grid-cols-6 gap-5">
-										<div className="col-span-6"></div>
 										{businessAtPointData.businesses.map((b, idx) => (
 											<Section
 												key={b.opendata_id}
