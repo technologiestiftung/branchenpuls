@@ -4,12 +4,13 @@ import { MapComponent } from "@components/map/Map";
 
 import { SidebarContentFilter } from "@components/Sidebar/content/SidebarContentFilter";
 import { SidebarWrapper } from "@components/Sidebar/SidebarWrapper";
-import { SidebarNav } from "@components/Sidebar/SidebarNav";
+import { NavView, SidebarNav } from "@components/Sidebar/SidebarNav";
 import { Welcome } from "@components/Welcome";
 import { SidebarContentInfo } from "@components/Sidebar/content/SidebarContentInfo";
 import { LoadingIndicator } from "@components/LoadingIndicator";
 import { BranchenPulsButton } from "@components/BranchenPulsButton";
 import { HeatmapToggle } from "@/components/HeatmapToggle";
+import { SidebarContentSearch } from "@components/Sidebar/content/SidebarContentSearch";
 
 export interface AppType {
 	dataPoints: any;
@@ -22,7 +23,7 @@ export const App: FC<AppType> = () => {
 	const [layersData, setLayersData] = useState<object>({});
 	const [sidebarMenuOpen, setSidebarMenuOpen] = useState<boolean>(true);
 	const [mobileHeight, setMobileHeight] = useState<"half" | "full">("half");
-	const [navView, setNavView] = useState<"filter" | "info" | "none">("filter");
+	const [navView, setNavView] = useState<NavView>("filter");
 	const [mapZoom, setMapZoom] = useState(10); // Initial zoom level
 
 	const [loading, setLoading] = useState<boolean>(false);
@@ -143,6 +144,10 @@ export const App: FC<AppType> = () => {
 						</span>
 						<span className={navView === "info" ? "" : "hidden"}>
 							<SidebarContentInfo />
+						</span>
+
+						<span className={navView === "search" ? "" : "hidden"}>
+							<SidebarContentSearch />
 						</span>
 					</SidebarWrapper>
 					<SidebarNav
