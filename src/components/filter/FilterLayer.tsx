@@ -163,11 +163,11 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		filterValBezirk,
 	]);
 
-	async function showPointInfo(info) {
+	async function getPointInfo(info) {
 		const data = await getSinglePointData(info.object.id, info.object.p);
-		console.log(data);
+		// the following line is on purpose to reduce fast jumping elements.
+		await new Promise((resolve) => setTimeout(() => resolve(), 1000));
 		setPointData(data as BusinessAtPointData);
-		setPoinInfoModalOpen(true);
 	}
 
 	function calculatePointRadius(zoom) {
@@ -220,7 +220,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						getFillColor: layersData[layerId].color, // [86, 189, 102],
 						opacity: layerOpacity,
 						onClick: (info) => {
-							showPointInfo(info);
+							setPoinInfoModalOpen(true);
+							getPointInfo(info);
 						},
 						transitions: {
 							// transition with a duration of 3000ms
@@ -296,6 +297,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				poinInfoModalOpen={poinInfoModalOpen}
 				setPoinInfoModalOpen={setPoinInfoModalOpen}
 				businessAtPointData={pointData!}
+				setBusinessAtPoint={setPointData}
 			></PointInfoModal>
 
 			<div

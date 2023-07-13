@@ -84,11 +84,7 @@ export const MapComponent: FC<MapType> = ({
 					<Map
 						reuseMaps
 						mapLib={maplibregl}
-						mapStyle={
-							process.env.NODE_ENV == "development"
-								? mapStyle()
-								: process.env.NEXT_PUBLIC_MAPTILER_STYLE
-						}
+						mapStyle={process.env.NEXT_PUBLIC_MAPTILER_STYLE}
 						styleDiffing={true}
 						zoom={mapZoom} // Pass the mapZoom value as the zoom prop
 						attributionControl={false}
