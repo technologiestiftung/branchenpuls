@@ -144,77 +144,47 @@ export function getOptionsMonths() {
 }
 
 export function getOptionsBL1() {
-	let optionsBL1 = [];
-	branchKeys.forEach((b) => {
-		if (b.nace_id !== 0) {
-			optionsBL1.push({
-				value: b.branch_top_level_id,
-				label: `${b.branch_top_level_desc} <br/><small>ID ${b.branch_top_level_id}</small>`,
-				id: b.branch_top_level_id,
-				name: b.branch_top_level_desc,
-			});
-		}
-	});
-	// optionsBL1.sort((a, b) => a.id - b.id);
-	optionsBL1.sort((a, b) => a.name.localeCompare(b.name));
-	optionsBL1 = optionsBL1.filter(
-		(obj, index, self) => index === self.findIndex((o) => o.id === obj.id)
-	);
-	optionsBL1 = optionsBL1.map(({ name, id, ...rest }) => rest);
-
-	return optionsBL1;
+	let optionsBL1 = branchKeys
+		.map(({ branch_top_level_id, branch_top_level_desc }) => ({
+			value: branch_top_level_id,
+			label: `${branch_top_level_desc} <br/><small>ID ${branch_top_level_id}</small>`,
+			id: branch_top_level_id,
+			name: branch_top_level_desc,
+		}))
+		.sort((a, b) => a.name.localeCompare(b.name));
+	// remove duplicates
+	return [...new Map(optionsBL1.map((item) => [item.id, item])).values()];
 }
 
 export function getOptionsBL2(filterValBl1) {
-	let optionsBL2 = [];
-	branchKeys.forEach((b) => {
-		if (
-			b.nace_id !== 0 &&
-			(!filterValBl1 || b.branch_top_level_id === filterValBl1)
-		) {
-			optionsBL2.push({
-				value: b.nace_id,
-				label: `${b.nace_desc} <br/><small>ID ${b.nace_id}</small>`,
-				id: b.nace_id,
-				name: b.nace_desc,
-			});
-		}
-	});
-	// optionsBL2.sort((a, b) => a.id - b.id);
-	optionsBL2.sort((a, b) => a.name.localeCompare(b.name));
-	optionsBL2 = optionsBL2.filter(
-		(obj, index, self) => index === self.findIndex((o) => o.id === obj.id)
-	);
-	optionsBL2 = optionsBL2.map(({ name, id, ...rest }) => rest);
+	let optionsBL2 = branchKeys
+		.filter((b) => !filterValBl1 || b.branch_top_level_id === filterValBl1)
+		.filter((b) => b.nace_id !== b.branch_top_level_id)
+		.map(({ nace_id, nace_desc }) => ({
+			value: nace_id,
+			label: `${nace_desc} <br/><small>ID ${nace_id}</small>`,
+			id: nace_id,
+			name: nace_desc,
+		}))
+		.sort((a, b) => a.name.localeCompare(b.name));
 
-	return optionsBL2;
+	// remove duplicates
+	return [...new Map(optionsBL2.map((item) => [item.id, item])).values()];
 }
 
 export function getOptionsBL3(filterValBl1, filterValBl2) {
-	// options for branch level 3
-	let optionsBL3 = [];
-	branchKeys.forEach((b) => {
-		if (
-			b.nace_id !== 0 &&
-			(!filterValBl1 || b.branch_top_level_id === filterValBl1)
-		) {
-			if (!filterValBl2 || b.nace_id === filterValBl2) {
-				optionsBL3.push({
-					value: b.ihk_branch_id,
-					label: `${b.ihk_branch_desc} <br/><small>ID ${b.ihk_branch_id}</small>`,
-					id: b.ihk_branch_id,
-					name: b.ihk_branch_desc,
-				});
-			}
-		}
-	});
-	// optionsBL3.sort((a, b) => a.id - b.id);
-	optionsBL3.sort((a, b) => a.name.localeCompare(b.name));
-	optionsBL3 = optionsBL3.filter(
-		(obj, index, self) => index === self.findIndex((o) => o.id === obj.id)
-	);
-	optionsBL3 = optionsBL3.map(({ name, id, ...rest }) => rest);
-
+	let optionsBL3 = branchKeys
+		.filter((b) => !filterValBl1 || b.branch_top_level_id === filterValBl1)
+		.filter((b) => !filterValBl2 || b.nace_id === filterValBl2)
+		.filter((b) => b.ihk_branch_id !== b.branch_top_level_id)
+		.filter((b) => b.ihk_branch_id !== b.nace_id)
+		.map(({ ihk_branch_id, ihk_branch_desc }) => ({
+			value: ihk_branch_id,
+			label: `${ihk_branch_desc} <br/><small>ID ${ihk_branch_id}</small>`,
+			id: ihk_branch_id,
+			name: ihk_branch_desc.replace('"EH', "EH"),
+		}))
+		.sort((a, b) => a.name.localeCompare(b.name));
 	return optionsBL3;
 }
 
