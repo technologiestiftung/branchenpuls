@@ -1,4 +1,4 @@
-import { FC, useState, useMemo, useEffect } from "react";
+import { FC, useState, useMemo, useEffect, useRef } from "react";
 import { Map, Popup } from "react-map-gl";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -16,15 +16,33 @@ export interface PointData {
 
 export interface MapType {
 	deckLayers: any;
+	mapZoom: number;
+	setMapZoom: (zoom: number) => void;
 }
 
 const LONGITUDE_RANGE = [13.210754, 13.599154];
 const LATITUDE_RANGE = [52.384558, 52.655458];
+const MIN_ZOOM = 9;
 
-export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
-	function onViewStateChange(view) {
-		setZoom(view.viewState.zoom);
+export const MapComponent: FC<MapType> = ({
+	deckLayers,
+	mapZoom,
+	setMapZoom,
+}) => {
+	const [lat, setLat] = useState(52.52); // Initial zoom level
+	const [lng, setLng] = useState(13.405); // Initial zoom level
+	const [mapPitch, setMapPitch] = useState(false); // Initial zoom level
 
+	const initialViewState = {
+		longitude: lng,
+		latitude: lat,
+		zoom: mapZoom,
+		pitch: mapPitch ? 60 : 0,
+		bearing: 0,
+		transitionDuration: 300,
+	};
+
+	function onViewStateChange(view: any) {
 		view.viewState.longitude = Math.min(
 			LONGITUDE_RANGE[1],
 			Math.max(LONGITUDE_RANGE[0], view.viewState.longitude)
@@ -34,32 +52,34 @@ export const MapComponent: FC<MapType> = ({ deckLayers, setZoom }) => {
 			Math.max(LATITUDE_RANGE[0], view.viewState.latitude)
 		);
 
-		view.viewState.zoom = Math.max(9, view.viewState.zoom);
+		view.viewState.zoom = Math.max(MIN_ZOOM, view.viewState.zoom);
 
-		return view.viewState;
+		if (view.oldViewState.zoom !== mapZoom) {
+			setMapZoom(view.viewState.zoom);
+		}
+		if (view.oldViewState.latitude !== lat) {
+			setLat(view.viewState.latitude);
+		}
+		if (view.oldViewState.longitude !== lng) {
+			setLng(view.viewState.longitude);
+		}
 	}
-
-	const [mapZoom, setMapZoom] = useState(10); // Initial zoom level
-
-	const initialViewState = {
-		longitude: 13.405,
-		latitude: 52.52,
-		zoom: mapZoom,
-		pitch: 0,
-		bearing: 0,
-		transitionDuration: 300,
-	};
 
 	return (
 		<>
-			<MapControls mapZoom={mapZoom} setMapZoom={setMapZoom} />
+			<MapControls
+				mapZoom={mapZoom}
+				setMapZoom={setMapZoom}
+				mapPitch={mapPitch}
+				setMapPitch={setMapPitch}
+				minZoom={MIN_ZOOM}
+			/>
 			<div className="h-screen w-screen">
 				<DeckGL
 					initialViewState={initialViewState}
-					controller={true}
 					layers={deckLayers}
-					// getTooltip={({ object }) => object && `${object.id}\n`}
 					onViewStateChange={onViewStateChange}
+					controller={true}
 				>
 					<Map
 						reuseMaps
