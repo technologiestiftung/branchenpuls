@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.5.0...v1.6.0) (2023-07-13)
+
+
+### Features
+
+* split up show point modal and get point data, added loading screen that is shown before receiving the data ([f97c1ef](https://github.com/technologiestiftung/ihk-vis/commit/f97c1ef4f4731db5b16afef8ac49e252f992b56b))
+
 # [1.5.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.4.0...v1.5.0) (2023-07-13)
 
 
