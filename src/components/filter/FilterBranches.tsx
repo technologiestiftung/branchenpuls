@@ -2,6 +2,7 @@ import { FC, useState, useEffect } from "react";
 import Select from "react-select";
 
 import { getOptionsBL1, getOptionsBL2, getOptionsBL3 } from "./dropdownOptions";
+import { customTheme, customStyles } from "@lib/selectStyles";
 import { Info } from "@components/Icons";
 
 export interface FilterBranchesType {
@@ -62,15 +63,6 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 		return label.toLowerCase().includes(searchText.toLowerCase());
 	};
 
-	const customStyles = {
-		placeholder: (baseStyles, state) => ({
-			...baseStyles,
-			color: "#dadada",
-			fontSize: "0.875rem",
-			fontStyle: "italic",
-		}),
-	};
-
 	return (
 		<div className="">
 			<div className="mt-3">
@@ -91,6 +83,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					filterOption={customFilterOption}
 					placeholder="z.B. Gastronomie ID 56"
 					styles={customStyles}
+					theme={customTheme}
 				/>
 			</div>
 			<div className="mt-3">
@@ -115,6 +108,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					filterOption={customFilterOption}
 					placeholder="z.B. Ausschank ID 5630"
 					styles={customStyles}
+					theme={customTheme}
 				/>
 			</div>
 			{/* suchen… */}
@@ -141,6 +135,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					filterOption={customFilterOption}
 					placeholder="z.B. Bars ID 56303 "
 					styles={customStyles}
+					theme={customTheme}
 				/>
 			</div>
 		</div>
