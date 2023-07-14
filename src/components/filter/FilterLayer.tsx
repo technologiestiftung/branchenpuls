@@ -17,6 +17,7 @@ import {
 	getOptionsMonths,
 	getFilterBezirke,
 } from "./dropdownOptions";
+import { customTheme, customStyles } from "@lib/selectStyles";
 
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
@@ -261,10 +262,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
 	};
 
-	const switchLayer = () => {
-		setLayerType(layerType === "scatterplot" ? "heatmap" : "scatterplot");
-	};
-
 	const resetFilterData = () => {
 		setFilteredData(dataPoints);
 		setFilterValAge([0, 100]);
@@ -282,15 +279,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		setDeckLayers([...deckLayers]);
 		delete layersData[layerId];
 		setActiveLayerId(null);
-	};
-
-	const customStyles = {
-		placeholder: (baseStyles, state) => ({
-			...baseStyles,
-			color: "#dadada",
-			fontSize: "0.875rem",
-			fontStyle: "italic",
-		}),
 	};
 
 	const onBTypeChange = (d) => {
@@ -314,7 +302,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
 			<div
 				key={"layer-" + layerId}
-				className={`relative z-0 overflow-hidden rounded-lg bg-white `}
+				className={`relative z-0 rounded-lg bg-white `}
 			>
 				{loadingFilter ? (
 					<div className=" absolute z-50 h-full w-full text-center opacity-80"></div>
@@ -340,6 +328,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						isClearable={false}
 						isSearchable={false}
 						options={getOptionsMonths()}
+						theme={customTheme}
 					/>
 				</div>
 
@@ -353,6 +342,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						options={getFilterBezirke()}
 						styles={customStyles}
 						placeholder="z.B. Mitte"
+						theme={customTheme}
 					/>
 				</div>
 
@@ -375,6 +365,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						options={getOptionsEmployees()}
 						styles={customStyles}
 						placeholder="z.B. 1-3"
+						theme={customTheme}
 					/>
 				</div>
 
