@@ -1,5 +1,5 @@
 import { FC, useState, useMemo, useEffect, useRef } from "react";
-import { Map, Popup } from "react-map-gl";
+import { Map, Popup, Marker } from "react-map-gl";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import DeckGL from "@deck.gl/react";
@@ -18,6 +18,7 @@ export interface MapType {
 	deckLayers: any;
 	mapZoom: number;
 	setMapZoom: (zoom: number) => void;
+	mapCenter: number[] | null;
 }
 
 const LONGITUDE_RANGE = [13.210754, 13.599154];
@@ -28,6 +29,7 @@ export const MapComponent: FC<MapType> = ({
 	deckLayers,
 	mapZoom,
 	setMapZoom,
+	mapCenter,
 }) => {
 	const [lat, setLat] = useState(52.52); // Initial zoom level
 	const [lng, setLng] = useState(13.405); // Initial zoom level
@@ -65,6 +67,18 @@ export const MapComponent: FC<MapType> = ({
 		}
 	}
 
+	useEffect(() => {
+		if (mapCenter) {
+			initialViewState.longitude = mapCenter[0];
+			initialViewState.latitude = mapCenter[1];
+			initialViewState.zoom = 13;
+			// setLat(mapCenter[0]);
+			// setLng(mapCenter[1]);
+			// setMapZoom(13);
+			// console.log(mapCenter);
+		}
+	}, [mapCenter]);
+
 	return (
 		<>
 			<MapControls
@@ -84,11 +98,21 @@ export const MapComponent: FC<MapType> = ({
 					<Map
 						reuseMaps
 						mapLib={maplibregl}
-						mapStyle={process.env.NEXT_PUBLIC_MAPTILER_STYLE}
+						mapStyle={
+							process.env.NODE_ENV == "development"
+								? mapStyle()
+								: process.env.NEXT_PUBLIC_MAPTILER_STYLE
+						}
 						styleDiffing={true}
 						zoom={mapZoom} // Pass the mapZoom value as the zoom prop
 						attributionControl={false}
-					></Map>
+					>
+						{mapCenter ? (
+							<Marker latitude={mapCenter[1]} longitude={mapCenter[0]}>
+								<div className="h-5 w-5 rounded-full bg-primary opacity-60" />
+							</Marker>
+						) : null}
+					</Map>
 				</DeckGL>
 			</div>
 			<div className="fixed bottom-0 right-0 bg-white/70 text-xs">

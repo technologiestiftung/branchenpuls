@@ -36,6 +36,8 @@ export const App: FC<AppType> = () => {
 
 	const [showHeatmap, setShowHeatmap] = useState<boolean>(false);
 
+	const [mapCenter, setMapCenter] = useState<null | number[]>(null);
+
 	useEffect(() => {
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
 		setLayerCount(layersData[activeLayerId]?.count || 0);
@@ -99,6 +101,7 @@ export const App: FC<AppType> = () => {
 					deckLayers={deckLayers}
 					mapZoom={mapZoom}
 					setMapZoom={setMapZoom}
+					mapCenter={mapCenter}
 				></MapComponent>
 				<BranchenPulsButton
 					setShowWelcome={setShowWelcome}
@@ -147,7 +150,7 @@ export const App: FC<AppType> = () => {
 						</span>
 
 						<span className={navView === "search" ? "" : "hidden"}>
-							<SidebarContentSearch />
+							<SidebarContentSearch setMapCenter={setMapCenter} />
 						</span>
 					</SidebarWrapper>
 					<SidebarNav

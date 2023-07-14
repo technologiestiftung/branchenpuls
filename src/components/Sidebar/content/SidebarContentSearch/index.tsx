@@ -1,7 +1,15 @@
+import { FC } from "react";
 import { SidebarHeader } from "@components/Sidebar/SidebarHeader";
 import { SidebarBody } from "@components/Sidebar/SidebarBody";
+import { Search } from "@components/Search";
 
-export const SidebarContentSearch = () => {
+export interface SidebarContentSearchType {
+	setMapCenter: (center: number[] | null) => void;
+}
+
+export const SidebarContentSearch: FC<SidebarContentSearchType> = ({
+	setMapCenter,
+}) => {
 	return (
 		<>
 			<SidebarHeader text={"Standort Suche"} />
@@ -13,10 +21,7 @@ export const SidebarContentSearch = () => {
 						eines Wirtschaftsstandorts.
 					</p>
 
-					<input
-						className="mt-[24px] rounded border border-solid p-2 text-sm"
-						placeholder="Gib hier deinen Suchbegriff ein"
-					/>
+					<Search setMapCenter={setMapCenter}></Search>
 				</div>
 			</SidebarBody>
 		</>
