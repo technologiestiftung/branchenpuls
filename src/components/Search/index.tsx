@@ -65,7 +65,6 @@ export interface SearchType {
 export const Search: FC<SearchType> = ({
 	viewState,
 	setViewState,
-	searchResult,
 	setSearchResult,
 }) => {
 	const [inputVal, setInputVal] = useState("");

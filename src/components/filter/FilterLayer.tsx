@@ -241,7 +241,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 							getRadius: calculatePointRadius(viewState.zoom - 2),
 							getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
 							getFillColor: [24, 45, 115],
-							opacity: 0.6,
+							opacity: 0.4,
 							transitions: {
 								opacity: 500,
 							},
