@@ -8,20 +8,28 @@ export interface SidebarContentSearchType {
 }
 
 export const SidebarContentSearch: FC<SidebarContentSearchType> = ({
-	setMapCenter,
+	viewState,
+	setViewState,
+	searchResult,
+	setSearchResult,
 }) => {
 	return (
 		<>
 			<SidebarHeader text={"Standort Suche"} />
 			<SidebarBody>
-				<div className="gap- flex w-full flex-col pr-[16px]">
+				<div className="gap- flex w-full flex-col">
 					<p className="text-sm text-dark-grey">
 						Finde dein Unternehmen, die relevante Straße für eine Neugründung
 						oder betrachte deine gewohnte Nachbarschaft aus der Perspektive
 						eines Wirtschaftsstandorts.
 					</p>
 
-					<Search setMapCenter={setMapCenter}></Search>
+					<Search
+						viewState={viewState}
+						setViewState={setViewState}
+						searchResult={searchResult}
+						setSearchResult={setSearchResult}
+					></Search>
 				</div>
 			</SidebarBody>
 		</>

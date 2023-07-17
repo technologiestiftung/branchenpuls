@@ -62,21 +62,30 @@ export interface SearchType {
 	setMapCenter: (center: number[] | null) => void;
 }
 
-export const Search: FC<SearchType> = ({ setMapCenter }) => {
+export const Search: FC<SearchType> = ({
+	viewState,
+	setViewState,
+	searchResult,
+	setSearchResult,
+}) => {
 	const [inputVal, setInputVal] = useState("");
 	const [debouncedInputValue] = useDebounce(inputVal, 700);
 
 	const { results } = useGeocodedPlace(debouncedInputValue);
 
 	const clickHandler = function (d: any) {
-		setMapCenter([Number(d[1]), Number(d[0])]);
+		setViewState({
+			...viewState,
+			zoom: 14,
+			longitude: Number(d[1]),
+			latitude: Number(d[0]),
+		});
+		setSearchResult([Number(d[1]), Number(d[0])]);
 	};
-
-	console.log(debouncedInputValue);
 
 	useEffect(() => {
 		if (!debouncedInputValue) {
-			setMapCenter(null);
+			setSearchResult(false);
 		}
 	}, [debouncedInputValue]);
 

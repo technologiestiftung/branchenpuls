@@ -36,7 +36,16 @@ export const App: FC<AppType> = () => {
 
 	const [showHeatmap, setShowHeatmap] = useState<boolean>(false);
 
-	const [mapCenter, setMapCenter] = useState<null | number[]>(null);
+	const [searchResult, setSearchResult] = useState<boolean>(false);
+
+	const [viewState, setViewState] = useState({
+		longitude: 13.405,
+		latitude: 52.52,
+		zoom: 10,
+		pitch: 0,
+		bearing: 0,
+		transitionDuration: 300,
+	});
 
 	useEffect(() => {
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
@@ -101,7 +110,10 @@ export const App: FC<AppType> = () => {
 					deckLayers={deckLayers}
 					mapZoom={mapZoom}
 					setMapZoom={setMapZoom}
-					mapCenter={mapCenter}
+					viewState={viewState}
+					setViewState={setViewState}
+					searchResult={searchResult}
+					setSearchResult={setSearchResult}
 				></MapComponent>
 				<BranchenPulsButton
 					setShowWelcome={setShowWelcome}
@@ -150,7 +162,12 @@ export const App: FC<AppType> = () => {
 						</span>
 
 						<span className={navView === "search" ? "" : "hidden"}>
-							<SidebarContentSearch setMapCenter={setMapCenter} />
+							<SidebarContentSearch
+								viewState={viewState}
+								setViewState={setViewState}
+								searchResult={searchResult}
+								setSearchResult={setSearchResult}
+							/>
 						</span>
 					</SidebarWrapper>
 					<SidebarNav

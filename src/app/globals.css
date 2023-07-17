@@ -41,7 +41,7 @@
 }
 
 #deckgl-wrapper {
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .scrolling .scroll-shadow {

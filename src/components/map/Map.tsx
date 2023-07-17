@@ -18,7 +18,7 @@ export interface MapType {
 	deckLayers: any;
 	mapZoom: number;
 	setMapZoom: (zoom: number) => void;
-	mapCenter: number[] | null;
+	searchResult: number[] | null;
 }
 
 const LONGITUDE_RANGE = [13.210754, 13.599154];
@@ -29,55 +29,30 @@ export const MapComponent: FC<MapType> = ({
 	deckLayers,
 	mapZoom,
 	setMapZoom,
-	mapCenter,
+	viewState,
+	setViewState,
+	searchResult,
 }) => {
-	const [lat, setLat] = useState(52.52); // Initial zoom level
-	const [lng, setLng] = useState(13.405); // Initial zoom level
 	const [mapPitch, setMapPitch] = useState(false); // Initial zoom level
 
-	const initialViewState = {
-		longitude: lng,
-		latitude: lat,
-		zoom: mapZoom,
-		pitch: mapPitch ? 60 : 0,
-		bearing: 0,
-		transitionDuration: 300,
-	};
-
 	function onViewStateChange(view: any) {
-		view.viewState.longitude = Math.min(
+		const longitude = Math.min(
 			LONGITUDE_RANGE[1],
 			Math.max(LONGITUDE_RANGE[0], view.viewState.longitude)
 		);
-		view.viewState.latitude = Math.min(
+		const latitude = Math.min(
 			LATITUDE_RANGE[1],
 			Math.max(LATITUDE_RANGE[0], view.viewState.latitude)
 		);
+		const zoom = Math.max(MIN_ZOOM, view.viewState.zoom);
 
-		view.viewState.zoom = Math.max(MIN_ZOOM, view.viewState.zoom);
-
-		if (view.oldViewState.zoom !== mapZoom) {
-			setMapZoom(view.viewState.zoom);
-		}
-		if (view.oldViewState.latitude !== lat) {
-			setLat(view.viewState.latitude);
-		}
-		if (view.oldViewState.longitude !== lng) {
-			setLng(view.viewState.longitude);
-		}
+		setViewState({
+			...view.viewState,
+			longitude: longitude,
+			latitude: latitude,
+			zoom: zoom,
+		});
 	}
-
-	useEffect(() => {
-		if (mapCenter) {
-			initialViewState.longitude = mapCenter[0];
-			initialViewState.latitude = mapCenter[1];
-			initialViewState.zoom = 13;
-			// setLat(mapCenter[0]);
-			// setLng(mapCenter[1]);
-			// setMapZoom(13);
-			// console.log(mapCenter);
-		}
-	}, [mapCenter]);
 
 	return (
 		<>
@@ -87,10 +62,12 @@ export const MapComponent: FC<MapType> = ({
 				mapPitch={mapPitch}
 				setMapPitch={setMapPitch}
 				minZoom={MIN_ZOOM}
+				setViewState={setViewState}
+				viewState={viewState}
 			/>
 			<div className="h-screen w-screen">
 				<DeckGL
-					initialViewState={initialViewState}
+					viewState={viewState}
 					layers={deckLayers}
 					onViewStateChange={onViewStateChange}
 					controller={true}
@@ -107,9 +84,9 @@ export const MapComponent: FC<MapType> = ({
 						zoom={mapZoom} // Pass the mapZoom value as the zoom prop
 						attributionControl={false}
 					>
-						{mapCenter ? (
-							<Marker latitude={mapCenter[1]} longitude={mapCenter[0]}>
-								<div className="h-5 w-5 rounded-full bg-primary opacity-60" />
+						{searchResult ? (
+							<Marker latitude={searchResult[1]} longitude={searchResult[0]}>
+								<div className="z-30 h-5 w-5 rounded-full border-2 border-white bg-primary opacity-60" />
 							</Marker>
 						) : null}
 					</Map>
