@@ -36,7 +36,7 @@ export const App: FC<AppType> = () => {
 
 	const [showHeatmap, setShowHeatmap] = useState<boolean>(false);
 
-	const [searchResult, setSearchResult] = useState<boolean>(false);
+	const [searchResult, setSearchResult] = useState<number[] | null>(null);
 
 	const [viewState, setViewState] = useState({
 		longitude: 13.405,

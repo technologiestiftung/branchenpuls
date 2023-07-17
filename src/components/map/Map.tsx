@@ -19,6 +19,7 @@ export interface MapType {
 	mapZoom: number;
 	setMapZoom: (zoom: number) => void;
 	searchResult: number[] | null;
+	setSearchResult: (zoom: number[] | null) => void;
 }
 
 const LONGITUDE_RANGE = [13.210754, 13.599154];

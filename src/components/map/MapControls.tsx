@@ -3,18 +3,12 @@ import classNames from "classnames";
 import { Plus, Minus, Box } from "@components/Icons";
 
 export interface MapControlsType {
-	mapZoom: number;
-	setMapZoom: (zoom: number) => void;
-	mapPitch: boolean;
-	setMapPitch: (pitch: boolean) => void;
+	viewState: any;
+	setViewState: (pitch: any) => void;
 	minZoom: number;
 }
 
 export const MapControls: FC<MapControlsType> = ({
-	mapZoom,
-	setMapZoom,
-	mapPitch,
-	setMapPitch,
 	minZoom,
 	setViewState,
 	viewState,
