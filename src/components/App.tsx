@@ -152,6 +152,7 @@ export const App: FC<AppType> = () => {
 								activeLayerId={activeLayerId}
 								setActiveLayerId={setActiveLayerId}
 								viewState={viewState}
+								searchResult={searchResult}
 							/>
 						</span>
 						<span className={navView === "info" ? "" : "hidden"}>

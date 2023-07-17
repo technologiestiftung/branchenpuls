@@ -76,11 +76,11 @@ export const MapComponent: FC<MapType> = ({
 						styleDiffing={true}
 						attributionControl={false}
 					>
-						{searchResult ? (
+						{/* {searchResult ? (
 							<Marker latitude={searchResult[1]} longitude={searchResult[0]}>
 								<div className="z-30 h-5 w-5 rounded-full border-2 border-white bg-primary opacity-60" />
 							</Marker>
-						) : null}
+						) : null} */}
 					</Map>
 				</DeckGL>
 			</div>

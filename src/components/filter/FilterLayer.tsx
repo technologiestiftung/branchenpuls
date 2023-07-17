@@ -62,6 +62,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	storeDataPoints,
 	setStoreDataPoints,
 	viewState,
+	searchResult,
 }) => {
 	const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
 	const [dataPoints, setDataPoints] = useState([]);
@@ -230,6 +231,23 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						onHover: handleHover,
 					})
 				);
+
+				if (searchResult) {
+					layers.push(
+						new ScatterplotLayer({
+							id: "search-result",
+							data: [{ p: [searchResult[0], searchResult[1]] }],
+							pickable: true,
+							getRadius: calculatePointRadius(viewState.zoom - 2),
+							getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
+							getFillColor: [24, 45, 115],
+							opacity: 0.6,
+							transitions: {
+								opacity: 500,
+							},
+						})
+					);
+				}
 			}
 
 			setDeckLayers([layers]);
@@ -249,6 +267,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		activeLayerId,
 		viewState,
 		layersData,
+		searchResult,
 	]);
 
 	useEffect(() => {
