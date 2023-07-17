@@ -53,6 +53,8 @@ export const MapComponent: FC<MapType> = ({
 			latitude: latitude,
 			zoom: zoom,
 		});
+
+		setMapZoom(zoom);
 	}
 
 	return (
