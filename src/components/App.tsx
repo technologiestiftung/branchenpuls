@@ -24,7 +24,6 @@ export const App: FC<AppType> = () => {
 	const [sidebarMenuOpen, setSidebarMenuOpen] = useState<boolean>(true);
 	const [mobileHeight, setMobileHeight] = useState<"half" | "full">("half");
 	const [navView, setNavView] = useState<NavView>("filter");
-	const [mapZoom, setMapZoom] = useState(10); // Initial zoom level
 
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -108,8 +107,6 @@ export const App: FC<AppType> = () => {
 				<LoadingIndicator loading={loading}></LoadingIndicator>
 				<MapComponent
 					deckLayers={deckLayers}
-					mapZoom={mapZoom}
-					setMapZoom={setMapZoom}
 					viewState={viewState}
 					setViewState={setViewState}
 					searchResult={searchResult}
@@ -152,9 +149,9 @@ export const App: FC<AppType> = () => {
 								loading={loading}
 								setLoading={setLoading}
 								setOpen={setSidebarMenuOpen}
-								mapZoom={mapZoom}
 								activeLayerId={activeLayerId}
 								setActiveLayerId={setActiveLayerId}
+								viewState={viewState}
 							/>
 						</span>
 						<span className={navView === "info" ? "" : "hidden"}>

@@ -61,7 +61,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	setActiveLayerId,
 	storeDataPoints,
 	setStoreDataPoints,
-	mapZoom,
+	viewState,
 }) => {
 	const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
 	const [dataPoints, setDataPoints] = useState([]);
@@ -215,7 +215,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						id: "scatterplot-layer" + layerId,
 						data: filteredData,
 						pickable: true,
-						getRadius: calculatePointRadius(mapZoom),
+						getRadius: calculatePointRadius(viewState.zoom),
 						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
 						getFillColor: layersData[layerId].color, // [86, 189, 102],
 						opacity: layerOpacity,
@@ -247,7 +247,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		filteredData,
 		layerOpacity,
 		activeLayerId,
-		mapZoom,
+		viewState,
 		layersData,
 	]);
 

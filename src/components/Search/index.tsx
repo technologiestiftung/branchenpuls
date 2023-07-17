@@ -76,7 +76,7 @@ export const Search: FC<SearchType> = ({
 	const clickHandler = function (d: any) {
 		setViewState({
 			...viewState,
-			zoom: 14,
+			zoom: 15,
 			longitude: Number(d[1]),
 			latitude: Number(d[0]),
 		});

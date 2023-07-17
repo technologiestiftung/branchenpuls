@@ -16,8 +16,6 @@ export interface PointData {
 
 export interface MapType {
 	deckLayers: any;
-	mapZoom: number;
-	setMapZoom: (zoom: number) => void;
 	searchResult: number[] | null;
 	setSearchResult: (zoom: number[] | null) => void;
 }
@@ -28,8 +26,6 @@ const MIN_ZOOM = 9;
 
 export const MapComponent: FC<MapType> = ({
 	deckLayers,
-	mapZoom,
-	setMapZoom,
 	viewState,
 	setViewState,
 	searchResult,
@@ -53,17 +49,11 @@ export const MapComponent: FC<MapType> = ({
 			latitude: latitude,
 			zoom: zoom,
 		});
-
-		setMapZoom(zoom);
 	}
 
 	return (
 		<>
 			<MapControls
-				mapZoom={mapZoom}
-				setMapZoom={setMapZoom}
-				mapPitch={mapPitch}
-				setMapPitch={setMapPitch}
 				minZoom={MIN_ZOOM}
 				setViewState={setViewState}
 				viewState={viewState}
@@ -84,7 +74,6 @@ export const MapComponent: FC<MapType> = ({
 								: process.env.NEXT_PUBLIC_MAPTILER_STYLE
 						}
 						styleDiffing={true}
-						zoom={mapZoom} // Pass the mapZoom value as the zoom prop
 						attributionControl={false}
 					>
 						{searchResult ? (
