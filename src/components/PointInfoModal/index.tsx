@@ -5,6 +5,7 @@ import {
 	BusinessData,
 } from "../../../pages/api/getsinglepointdata";
 import { Cross, Spinner } from "../Icons";
+import { toFullText } from "@lib/helper";
 
 export interface PointInfoModalType {
 	poinInfoModalOpen: boolean;
@@ -46,11 +47,26 @@ const Section: FC<SectionProps> = ({ index, totalCount, business }) => {
 					title="Branchentyp"
 					content={
 						business.branch_top_level_description
-							? business.branch_top_level_description
+							? toFullText(business.branch_top_level_description)
 							: "keine Angabe"
 					}
 				></Subsection>
-				<Subsection title="NACE" content={business.branch_nace}></Subsection>
+				<Subsection
+					title="NACE"
+					content={
+						business.branch_nace
+							? toFullText(business.branch_nace)
+							: "keine Angabe"
+					}
+				></Subsection>
+				<Subsection
+					title="IHK ID"
+					content={
+						business.branch_description
+							? toFullText(business.branch_description)
+							: "keine Angabe"
+					}
+				></Subsection>
 				<Subsection
 					title="Beschäftigtenanzahl"
 					content={
