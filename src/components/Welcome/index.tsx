@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { MobileWelcome } from "@components/Welcome/MobileWelcome";
 import { DesktopWelcome } from "@components/Welcome/DesktopWelcome";
+import { NavView } from "@components/Sidebar/SidebarNav";
 
 export const Welcome = ({
 	setShowWelcome,
@@ -8,7 +9,7 @@ export const Welcome = ({
 	setSidebarMenuOpen,
 }: {
 	setShowWelcome: Dispatch<SetStateAction<boolean>>;
-	setNavView: Dispatch<SetStateAction<"info" | "filter" | "none">>;
+	setNavView: Dispatch<SetStateAction<NavView>>;
 	setSidebarMenuOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
 	function showInfo() {

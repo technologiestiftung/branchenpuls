@@ -1,21 +1,19 @@
 import { FC } from "react";
 import classNames from "classnames";
 import { Plus, Minus, Box } from "@components/Icons";
+import { ViewStateType } from "@common/interfaces";
 
 export interface MapControlsType {
-	mapZoom: number;
-	setMapZoom: (zoom: number) => void;
-	mapPitch: boolean;
-	setMapPitch: (pitch: boolean) => void;
+	viewState: any;
+	setViewState: (pitch: any) => void;
 	minZoom: number;
+	viewStae: ViewStateType;
 }
 
 export const MapControls: FC<MapControlsType> = ({
-	mapZoom,
-	setMapZoom,
-	mapPitch,
-	setMapPitch,
 	minZoom,
+	setViewState,
+	viewState,
 }) => {
 	const navClasses =
 		"shadow-lg bg-white text-dark-grey hover:bg-dark-grey hover:text-white h-10 w-10 mt-2 cursor-pointer list-none text-center grid place-items-center rounded-full";
@@ -30,14 +28,21 @@ export const MapControls: FC<MapControlsType> = ({
 				<button
 					title="Karte kippen"
 					className={navClasses}
-					onClick={() => setMapPitch(!mapPitch)}
+					onClick={() =>
+						setViewState({
+							...viewState,
+							pitch: viewState.pitch === 60 ? 0 : 60,
+						})
+					}
 				>
 					<Box />
 				</button>
 				<button
 					title="zoom in"
 					className={navClasses}
-					onClick={() => setMapZoom(mapZoom + 1)}
+					onClick={() =>
+						setViewState({ ...viewState, zoom: viewState.zoom + 1 })
+					}
 				>
 					<Plus />
 				</button>
@@ -45,7 +50,10 @@ export const MapControls: FC<MapControlsType> = ({
 					title="zoom out"
 					className={navClasses}
 					onClick={() =>
-						setMapZoom(mapZoom === minZoom ? minZoom : mapZoom - 1)
+						setViewState({
+							...viewState,
+							zoom: viewState.zoom <= minZoom ? minZoom : viewState.zoom - 1,
+						})
 					}
 				>
 					<Minus />

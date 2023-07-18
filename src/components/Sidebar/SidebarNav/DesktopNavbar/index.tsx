@@ -1,9 +1,16 @@
-import { ChevronLeft, ChevronRight, Filter, Info } from "@components/Icons";
+import {
+	ChevronLeft,
+	ChevronRight,
+	Filter,
+	Info,
+	MagnifyingGlass,
+} from "@components/Icons";
 import React from "react";
+import { NavView } from "@components/Sidebar/SidebarNav";
 
 export type DesktopNavbarProps = {
-	onNavClick: (navView: "filter" | "info" | "none") => void;
-	navView: "filter" | "info" | "none";
+	onNavClick: (navView: NavView) => void;
+	navView: NavView;
 	sidebarMenuOpen: boolean;
 	applyPreviousLayer: () => void;
 	applyNextLayer: () => void;
@@ -40,6 +47,23 @@ export const DesktopNavbar = ({
 									`}
 							>
 								<Filter />
+							</button>
+						</li>
+
+						<li className="flex">
+							<button
+								onClick={() => onNavClick("search")}
+								title="Mehr Informationen anzeigen/schließen"
+								className={`p-[8px] shadow-lg duration-300 ease-in-out
+											${
+												navView === "search" && sidebarMenuOpen
+													? "bg-dark-grey text-white hover:bg-white hover:text-dark-grey"
+													: "bg-white text-dark-grey hover:bg-dark-grey hover:text-white"
+											}
+											${sidebarMenuOpen ? "ml-[356px]" : "ml-0"}
+									`}
+							>
+								<MagnifyingGlass />
 							</button>
 						</li>
 

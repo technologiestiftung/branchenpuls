@@ -18,6 +18,7 @@ import {
 	getFilterBezirke,
 } from "./dropdownOptions";
 import { customTheme, customStyles } from "@lib/selectStyles";
+import { ViewStateType } from "@common/interfaces";
 
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
@@ -45,6 +46,8 @@ export interface FilterLayerType {
 	dataPointsIndexed: any;
 	deckLayers: any;
 	setDeckLayers: any;
+	viewState: ViewStateType;
+	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 }
 
 export const FilterLayer: FC<FilterLayerType> = ({
@@ -61,7 +64,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	setActiveLayerId,
 	storeDataPoints,
 	setStoreDataPoints,
-	mapZoom,
+	viewState,
+	searchResult,
 }) => {
 	const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
 	const [dataPoints, setDataPoints] = useState([]);
@@ -215,7 +219,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						id: "scatterplot-layer" + layerId,
 						data: filteredData,
 						pickable: true,
-						getRadius: calculatePointRadius(mapZoom),
+						getRadius: calculatePointRadius(viewState.zoom),
 						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
 						getFillColor: layersData[layerId].color, // [86, 189, 102],
 						opacity: layerOpacity,
@@ -230,6 +234,23 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						onHover: handleHover,
 					})
 				);
+
+				if (searchResult) {
+					layers.push(
+						new ScatterplotLayer({
+							id: "search-result",
+							data: [{ p: [searchResult[0], searchResult[1]] }],
+							pickable: true,
+							getRadius: calculatePointRadius(viewState.zoom - 2),
+							getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
+							getFillColor: [24, 45, 115],
+							opacity: 0.4,
+							transitions: {
+								opacity: 500,
+							},
+						})
+					);
+				}
 			}
 
 			setDeckLayers([layers]);
@@ -247,8 +268,9 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		filteredData,
 		layerOpacity,
 		activeLayerId,
-		mapZoom,
+		viewState,
 		layersData,
+		searchResult,
 	]);
 
 	useEffect(() => {

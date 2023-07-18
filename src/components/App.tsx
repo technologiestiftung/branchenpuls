@@ -4,12 +4,14 @@ import { MapComponent } from "@components/map/Map";
 
 import { SidebarContentFilter } from "@components/Sidebar/content/SidebarContentFilter";
 import { SidebarWrapper } from "@components/Sidebar/SidebarWrapper";
-import { SidebarNav } from "@components/Sidebar/SidebarNav";
+import { NavView, SidebarNav } from "@components/Sidebar/SidebarNav";
 import { Welcome } from "@components/Welcome";
 import { SidebarContentInfo } from "@components/Sidebar/content/SidebarContentInfo";
 import { LoadingIndicator } from "@components/LoadingIndicator";
 import { BranchenPulsButton } from "@components/BranchenPulsButton";
 import { HeatmapToggle } from "@/components/HeatmapToggle";
+import { SidebarContentSearch } from "@components/Sidebar/content/SidebarContentSearch";
+import { ViewStateType } from "@common/interfaces";
 
 export interface AppType {
 	dataPoints: any;
@@ -22,8 +24,7 @@ export const App: FC<AppType> = () => {
 	const [layersData, setLayersData] = useState<object>({});
 	const [sidebarMenuOpen, setSidebarMenuOpen] = useState<boolean>(true);
 	const [mobileHeight, setMobileHeight] = useState<"half" | "full">("half");
-	const [navView, setNavView] = useState<"filter" | "info" | "none">("filter");
-	const [mapZoom, setMapZoom] = useState(10); // Initial zoom level
+	const [navView, setNavView] = useState<NavView>("filter");
 
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -34,6 +35,17 @@ export const App: FC<AppType> = () => {
 	const [layerCount, setLayerCount] = useState<null | number>(0);
 
 	const [showHeatmap, setShowHeatmap] = useState<boolean>(false);
+
+	const [searchResult, setSearchResult] = useState<number[] | null>(null);
+
+	const [viewState, setViewState] = useState<ViewStateType>({
+		longitude: 13.405,
+		latitude: 52.52,
+		zoom: 10,
+		pitch: 0,
+		bearing: 0,
+		transitionDuration: 300,
+	});
 
 	useEffect(() => {
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
@@ -96,8 +108,8 @@ export const App: FC<AppType> = () => {
 				<LoadingIndicator loading={loading}></LoadingIndicator>
 				<MapComponent
 					deckLayers={deckLayers}
-					mapZoom={mapZoom}
-					setMapZoom={setMapZoom}
+					viewState={viewState}
+					setViewState={setViewState}
 				></MapComponent>
 				<BranchenPulsButton
 					setShowWelcome={setShowWelcome}
@@ -136,13 +148,23 @@ export const App: FC<AppType> = () => {
 								loading={loading}
 								setLoading={setLoading}
 								setOpen={setSidebarMenuOpen}
-								mapZoom={mapZoom}
 								activeLayerId={activeLayerId}
 								setActiveLayerId={setActiveLayerId}
+								viewState={viewState}
+								searchResult={searchResult}
 							/>
 						</span>
 						<span className={navView === "info" ? "" : "hidden"}>
 							<SidebarContentInfo />
+						</span>
+
+						<span className={navView === "search" ? "" : "hidden"}>
+							<SidebarContentSearch
+								viewState={viewState}
+								setViewState={setViewState}
+								searchResult={searchResult}
+								setSearchResult={setSearchResult}
+							/>
 						</span>
 					</SidebarWrapper>
 					<SidebarNav

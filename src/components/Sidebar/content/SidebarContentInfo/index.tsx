@@ -15,7 +15,7 @@ export const SidebarContentInfo = () => {
 		<>
 			<SidebarHeader text={"Über das Projekt"} />
 			<SidebarBody>
-				<div className="pr-[16px]">
+				<div className="">
 					<p className="text-sm text-dark-grey">
 						Berlin ist Hauptstadt, Start-Up-Metropole, Exzellenzcluster, Stadt
 						der Kreativen und vorallem eines: immer im Wandel. Entsprechend

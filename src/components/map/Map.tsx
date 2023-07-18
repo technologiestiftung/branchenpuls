@@ -1,10 +1,11 @@
 import { FC, useState, useMemo, useEffect, useRef } from "react";
-import { Map, Popup } from "react-map-gl";
+import { Map, Popup, Marker } from "react-map-gl";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import DeckGL from "@deck.gl/react";
 import mapStyle from "./mapStyle";
 import { MapControls } from "./MapControls";
+import { ViewStateType } from "@common/interfaces";
 
 // const MAP_STYLE =
 // 	"https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
@@ -16,8 +17,8 @@ export interface PointData {
 
 export interface MapType {
 	deckLayers: any;
-	mapZoom: number;
-	setMapZoom: (zoom: number) => void;
+	viewState: ViewStateType;
+	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 }
 
 const LONGITUDE_RANGE = [13.210754, 13.599154];
@@ -26,57 +27,38 @@ const MIN_ZOOM = 9;
 
 export const MapComponent: FC<MapType> = ({
 	deckLayers,
-	mapZoom,
-	setMapZoom,
+	viewState,
+	setViewState,
 }) => {
-	const [lat, setLat] = useState(52.52); // Initial zoom level
-	const [lng, setLng] = useState(13.405); // Initial zoom level
-	const [mapPitch, setMapPitch] = useState(false); // Initial zoom level
-
-	const initialViewState = {
-		longitude: lng,
-		latitude: lat,
-		zoom: mapZoom,
-		pitch: mapPitch ? 60 : 0,
-		bearing: 0,
-		transitionDuration: 300,
-	};
-
 	function onViewStateChange(view: any) {
-		view.viewState.longitude = Math.min(
+		const longitude = Math.min(
 			LONGITUDE_RANGE[1],
 			Math.max(LONGITUDE_RANGE[0], view.viewState.longitude)
 		);
-		view.viewState.latitude = Math.min(
+		const latitude = Math.min(
 			LATITUDE_RANGE[1],
 			Math.max(LATITUDE_RANGE[0], view.viewState.latitude)
 		);
+		const zoom = Math.max(MIN_ZOOM, view.viewState.zoom);
 
-		view.viewState.zoom = Math.max(MIN_ZOOM, view.viewState.zoom);
-
-		if (view.oldViewState.zoom !== mapZoom) {
-			setMapZoom(view.viewState.zoom);
-		}
-		if (view.oldViewState.latitude !== lat) {
-			setLat(view.viewState.latitude);
-		}
-		if (view.oldViewState.longitude !== lng) {
-			setLng(view.viewState.longitude);
-		}
+		setViewState({
+			...view.viewState,
+			longitude: longitude,
+			latitude: latitude,
+			zoom: zoom,
+		});
 	}
 
 	return (
 		<>
 			<MapControls
-				mapZoom={mapZoom}
-				setMapZoom={setMapZoom}
-				mapPitch={mapPitch}
-				setMapPitch={setMapPitch}
 				minZoom={MIN_ZOOM}
+				setViewState={setViewState}
+				viewState={viewState}
 			/>
 			<div className="h-screen w-screen">
 				<DeckGL
-					initialViewState={initialViewState}
+					viewState={viewState}
 					layers={deckLayers}
 					onViewStateChange={onViewStateChange}
 					controller={true}
@@ -84,9 +66,12 @@ export const MapComponent: FC<MapType> = ({
 					<Map
 						reuseMaps
 						mapLib={maplibregl}
-						mapStyle={process.env.NEXT_PUBLIC_MAPTILER_STYLE}
+						mapStyle={
+							process.env.NODE_ENV == "development"
+								? mapStyle()
+								: process.env.NEXT_PUBLIC_MAPTILER_STYLE
+						}
 						styleDiffing={true}
-						zoom={mapZoom} // Pass the mapZoom value as the zoom prop
 						attributionControl={false}
 					></Map>
 				</DeckGL>
