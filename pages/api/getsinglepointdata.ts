@@ -37,8 +37,6 @@ export default async function handler(
 		})
 		.select("*");
 
-	console.log(data);
-
 	if (data && data.length > 0) {
 		const formattedData = {
 			latitude: lat,

@@ -76,7 +76,7 @@ const Section: FC<SectionProps> = ({ index, totalCount, business }) => {
 				<Subsection
 					title="Unternehmensalter"
 					content={
-						business.business_age
+						business.business_age !== undefined
 							? business.business_age?.toString() + " Jahre"
 							: "keine Angabe"
 					}
