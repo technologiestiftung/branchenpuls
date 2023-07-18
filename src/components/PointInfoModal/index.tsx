@@ -44,20 +44,32 @@ const Section: FC<SectionProps> = ({ index, totalCount, business }) => {
 			<div className="text-md col-span-5 grid grid-cols-1 gap-3">
 				<Subsection
 					title="Branchentyp"
-					content={business.branch_top_level_description}
+					content={
+						business.branch_top_level_description
+							? business.branch_top_level_description
+							: "keine Angabe"
+					}
 				></Subsection>
 				<Subsection title="NACE" content={business.branch_nace}></Subsection>
 				<Subsection
 					title="Beschäftigtenanzahl"
-					content={business.employees_range}
+					content={
+						business.employees_range ? business.employees_range : "keine Angabe"
+					}
 				></Subsection>
 				<Subsection
 					title="Unternehmensalter"
-					content={business.business_age.toString() + " Jahre"}
+					content={
+						business.business_age
+							? business.business_age?.toString() + " Jahre"
+							: "keine Angabe"
+					}
 				></Subsection>
 				<Subsection
 					title="Unternehmenstyp"
-					content={business.business_type}
+					content={
+						business.business_type ? business.business_type : "keine Angabe"
+					}
 				></Subsection>
 			</div>
 		</>
