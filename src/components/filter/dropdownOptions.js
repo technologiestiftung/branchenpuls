@@ -1,5 +1,18 @@
 import branchKeys from "@lib/branchKeys.json";
 
+function toFullText(text) {
+	let updatedText = text
+		.replace(/ u\. /g, " und ")
+		.replace(/ v\. /g, " von ")
+		.replace(/ f\. /g, " für ")
+		.replace(/ m\. /g, " mit ")
+		.replace(/H\. von/g, "Herstellung von")
+		.replace('"EH', "EH")
+		.replace("EH ", "Einzelhandel ")
+		.replace("HV ", "Handelsvermittlung ");
+	return updatedText;
+}
+
 export function getFilterBezirke() {
 	return [
 		{
@@ -147,9 +160,11 @@ export function getOptionsBL1() {
 	let optionsBL1 = branchKeys
 		.map(({ branch_top_level_id, branch_top_level_desc }) => ({
 			value: branch_top_level_id,
-			label: `${branch_top_level_desc} <br/><small>ID ${branch_top_level_id}</small>`,
+			label: `${toFullText(
+				branch_top_level_desc
+			)} <br/><small>ID ${branch_top_level_id}</small>`,
 			id: branch_top_level_id,
-			name: branch_top_level_desc,
+			name: toFullText(branch_top_level_desc),
 		}))
 		.sort((a, b) => a.name.localeCompare(b.name));
 	// remove duplicates
@@ -162,9 +177,9 @@ export function getOptionsBL2(filterValBl1) {
 		.filter((b) => b.nace_id !== b.branch_top_level_id)
 		.map(({ nace_id, nace_desc }) => ({
 			value: nace_id,
-			label: `${nace_desc} <br/><small>ID ${nace_id}</small>`,
+			label: `${toFullText(nace_desc)} <br/><small>ID ${nace_id}</small>`,
 			id: nace_id,
-			name: nace_desc,
+			name: toFullText(nace_desc),
 		}))
 		.sort((a, b) => a.name.localeCompare(b.name));
 
@@ -180,9 +195,11 @@ export function getOptionsBL3(filterValBl1, filterValBl2) {
 		.filter((b) => b.ihk_branch_id !== b.nace_id)
 		.map(({ ihk_branch_id, ihk_branch_desc }) => ({
 			value: ihk_branch_id,
-			label: `${ihk_branch_desc} <br/><small>ID ${ihk_branch_id}</small>`,
+			label: `${toFullText(
+				ihk_branch_desc
+			)} <br/><small>ID ${ihk_branch_id}</small>`,
 			id: ihk_branch_id,
-			name: ihk_branch_desc.replace('"EH', "EH"),
+			name: toFullText(ihk_branch_desc),
 		}))
 		.sort((a, b) => a.name.localeCompare(b.name));
 	return optionsBL3;
