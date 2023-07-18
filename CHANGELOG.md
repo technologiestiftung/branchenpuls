@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.6.0...v1.7.0) (2023-07-18)
+
+
+### Features
+
+* added search ui ([266aba5](https://github.com/technologiestiftung/ihk-vis/commit/266aba5826877b1bb2fcba1f272ff0488f04a606))
+
 # [1.6.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.5.0...v1.6.0) (2023-07-13)
 
 
