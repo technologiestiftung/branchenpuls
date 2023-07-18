@@ -72,7 +72,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
 	const [filteredData, setFilteredData] = useState(dataPoints);
 	const [pageLoaded, setPageLoaded] = useState<boolean>(false);
-	const [layerOpacity, setLayerOpacity] = useState<number>(0.5);
 
 	const [layerType, setLayerType] = useState("scatterplot");
 	const [filterValAge, setFilterValAge] = useState<number[]>([0, 100]);
@@ -206,7 +205,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						getWeight: 5,
 						aggregation: "SUM",
 						colorRange: layersData[layerId].heatmapColor,
-						opacity: layerOpacity,
+						opacity: 0.2,
 						// onClick: (info) =>
 						// getSinglePointData(info.object.id, info.object.p),
 					})
@@ -222,7 +221,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						getRadius: calculatePointRadius(viewState.zoom),
 						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
 						getFillColor: layersData[layerId].color, // [86, 189, 102],
-						opacity: layerOpacity,
+						opacity: 0.6,
 						onClick: (info) => {
 							setPoinInfoModalOpen(true);
 							getPointInfo(info);
@@ -266,7 +265,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	}, [
 		layerType,
 		filteredData,
-		layerOpacity,
 		activeLayerId,
 		viewState,
 		layersData,
