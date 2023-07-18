@@ -8,6 +8,7 @@ import {
 } from "@lib/hooks/useGeocodedPlace";
 import { useDebounce } from "use-debounce";
 import { GeoMarker } from "@components/Icons";
+import { ViewStateType } from "@common/interfaces";
 
 interface SearchResultItemPropType extends SearchResultType {
 	searchTerm: string;
@@ -60,6 +61,7 @@ const SearchResultItem: FC<SearchResultItemPropType> = ({
 
 export interface SearchType {
 	setMapCenter: (center: number[] | null) => void;
+	viewSate: ViewStateType;
 }
 
 export const Search: FC<SearchType> = ({

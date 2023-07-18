@@ -5,6 +5,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import DeckGL from "@deck.gl/react";
 import mapStyle from "./mapStyle";
 import { MapControls } from "./MapControls";
+import { ViewStateType } from "@common/interfaces";
 
 // const MAP_STYLE =
 // 	"https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
@@ -16,8 +17,8 @@ export interface PointData {
 
 export interface MapType {
 	deckLayers: any;
-	searchResult: number[] | null;
-	setSearchResult: (zoom: number[] | null) => void;
+	viewState: ViewStateType;
+	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 }
 
 const LONGITUDE_RANGE = [13.210754, 13.599154];
@@ -28,10 +29,7 @@ export const MapComponent: FC<MapType> = ({
 	deckLayers,
 	viewState,
 	setViewState,
-	searchResult,
 }) => {
-	const [mapPitch, setMapPitch] = useState(false); // Initial zoom level
-
 	function onViewStateChange(view: any) {
 		const longitude = Math.min(
 			LONGITUDE_RANGE[1],
@@ -75,13 +73,7 @@ export const MapComponent: FC<MapType> = ({
 						}
 						styleDiffing={true}
 						attributionControl={false}
-					>
-						{/* {searchResult ? (
-							<Marker latitude={searchResult[1]} longitude={searchResult[0]}>
-								<div className="z-30 h-5 w-5 rounded-full border-2 border-white bg-primary opacity-60" />
-							</Marker>
-						) : null} */}
-					</Map>
+					></Map>
 				</DeckGL>
 			</div>
 			<div className="fixed bottom-0 right-0 bg-white/70 text-xs">

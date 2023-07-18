@@ -18,6 +18,7 @@ import {
 	getFilterBezirke,
 } from "./dropdownOptions";
 import { customTheme, customStyles } from "@lib/selectStyles";
+import { ViewStateType } from "@common/interfaces";
 
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
@@ -45,6 +46,8 @@ export interface FilterLayerType {
 	dataPointsIndexed: any;
 	deckLayers: any;
 	setDeckLayers: any;
+	viewState: ViewStateType;
+	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 }
 
 export const FilterLayer: FC<FilterLayerType> = ({

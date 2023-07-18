@@ -2,9 +2,10 @@ import { FC } from "react";
 import { SidebarHeader } from "@components/Sidebar/SidebarHeader";
 import { SidebarBody } from "@components/Sidebar/SidebarBody";
 import { Search } from "@components/Search";
+import { ViewStateType } from "@common/interfaces";
 
 export interface SidebarContentSearchType {
-	setMapCenter: (center: number[] | null) => void;
+	viewState: ViewStateType;
 }
 
 export const SidebarContentSearch: FC<SidebarContentSearchType> = ({

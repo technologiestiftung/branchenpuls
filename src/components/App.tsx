@@ -11,6 +11,7 @@ import { LoadingIndicator } from "@components/LoadingIndicator";
 import { BranchenPulsButton } from "@components/BranchenPulsButton";
 import { HeatmapToggle } from "@/components/HeatmapToggle";
 import { SidebarContentSearch } from "@components/Sidebar/content/SidebarContentSearch";
+import { ViewStateType } from "@common/interfaces";
 
 export interface AppType {
 	dataPoints: any;
@@ -37,7 +38,7 @@ export const App: FC<AppType> = () => {
 
 	const [searchResult, setSearchResult] = useState<number[] | null>(null);
 
-	const [viewState, setViewState] = useState({
+	const [viewState, setViewState] = useState<ViewStateType>({
 		longitude: 13.405,
 		latitude: 52.52,
 		zoom: 10,
@@ -109,8 +110,6 @@ export const App: FC<AppType> = () => {
 					deckLayers={deckLayers}
 					viewState={viewState}
 					setViewState={setViewState}
-					searchResult={searchResult}
-					setSearchResult={setSearchResult}
 				></MapComponent>
 				<BranchenPulsButton
 					setShowWelcome={setShowWelcome}

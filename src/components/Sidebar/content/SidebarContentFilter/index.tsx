@@ -6,10 +6,11 @@ import { FilterLayer } from "@/components/filter/FilterLayer";
 import { FilterLayerSwitcher } from "@/components/filter/FilterLayerSwitcher";
 
 import { getNewLayerData } from "@lib/getNewLayerData.js";
+import { ViewStateType } from "@common/interfaces";
 
 export interface SidebarContentFilterType {
-	// pointData: any
-	// setPointData: (data: any) => void
+	viewState: ViewStateType;
+	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 }
 
 export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
