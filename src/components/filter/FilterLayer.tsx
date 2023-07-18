@@ -376,7 +376,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				></FilterBranches>
 
 				<div className="mt-5">
-					<p className="mb-1 font-bold">Beschäftigenzahl</p>
+					<p className="mb-1 font-bold">Beschäftigtenzahl</p>
 					<Select
 						value={filterValEmployees}
 						onChange={setFilterValEmployees}
