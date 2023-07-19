@@ -68,8 +68,6 @@ export default async function handler(
 	query.then((response) => {
 		const strData = JSON.stringify(response.data?.map((d) => d.opendata_id));
 
-		console.log("strData", strData);
-
 		zlib.gzip(strData, (err: any, buffer: any) => {
 			if (!err) {
 				console.log("sending zipped data");
