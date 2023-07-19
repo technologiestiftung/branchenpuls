@@ -160,8 +160,11 @@ export function getOptionsBL1() {
 }
 
 export function getOptionsBL2(filterValBl1) {
+	const bl1Ids = filterValBl1?.map((d) => d.value);
 	let optionsBL2 = branchKeys
-		.filter((b) => !filterValBl1 || b.branch_top_level_id === filterValBl1)
+		.filter(
+			(b) => !filterValBl1?.length || bl1Ids.includes(b.branch_top_level_id)
+		)
 		.filter((b) => b.nace_id !== b.branch_top_level_id)
 		.map(({ nace_id, nace_desc }) => ({
 			value: nace_id,
@@ -176,9 +179,14 @@ export function getOptionsBL2(filterValBl1) {
 }
 
 export function getOptionsBL3(filterValBl1, filterValBl2) {
+	const bl1Ids = filterValBl1?.map((d) => d.value);
+	const bl2Ids = filterValBl2?.map((d) => d.value);
+
 	let optionsBL3 = branchKeys
-		.filter((b) => !filterValBl1 || b.branch_top_level_id === filterValBl1)
-		.filter((b) => !filterValBl2 || b.nace_id === filterValBl2)
+		.filter(
+			(b) => !filterValBl1?.length || bl1Ids.includes(b.branch_top_level_id)
+		)
+		.filter((b) => !filterValBl2?.length || bl2Ids.includes(b.nace_id))
 		.filter((b) => b.ihk_branch_id !== b.branch_top_level_id)
 		.filter((b) => b.ihk_branch_id !== b.nace_id)
 		.map(({ ihk_branch_id, ihk_branch_desc }) => ({
