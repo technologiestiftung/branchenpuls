@@ -310,6 +310,10 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		}
 	};
 
+	const getOptionLabel = (option) => {
+		return <div dangerouslySetInnerHTML={{ __html: option.label }} />;
+	};
+
 	return (
 		<>
 			<PointInfoModal
@@ -386,6 +390,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						styles={customStyles}
 						placeholder="z.B. 1-3"
 						theme={customTheme}
+						getOptionLabel={getOptionLabel}
 					/>
 				</div>
 
