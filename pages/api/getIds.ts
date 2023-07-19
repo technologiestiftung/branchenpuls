@@ -63,7 +63,8 @@ export default async function handler(
 	}
 
 	if (employees) {
-		query = query.eq("employees_range", employees);
+		const employeesArray = employees.split(",").map(Number);
+		query = query.in("employees_range", employeesArray);
 	}
 
 	if (monthonly) {

@@ -58,64 +58,24 @@ export function getFilterBezirke() {
 export function getOptionsEmployees() {
 	const optionsEmployees = [
 		{
-			value: 0,
-			label: "0",
+			value: [1, 2, 3],
+			label: "Mikrounternehmen<br/><small>weniger als 10 Beschäftigte</small>",
 		},
 		{
-			value: 1,
-			label: "1 - 3",
+			value: [4, 5],
+			label: "Kleine Unternehmen<br/><small>10-49 Beschäftigte</small>",
 		},
 		{
-			value: 2,
-			label: "4 - 6",
+			value: [6, 7],
+			label: "Mittlere Unternehmen<br/><small>50-199 Beschäftigte</small>",
 		},
 		{
-			value: 3,
-			label: "7 - 9",
+			value: [8, 9, 10, 11, 12, 13, 14],
+			label: "Große Unternehmen<br/><small>200 oder mehr Beschäftigte</small>",
 		},
 		{
-			value: 4,
-			label: "10 - 19",
-		},
-		{
-			value: 5,
-			label: "20 - 49",
-		},
-		{
-			value: 6,
-			label: "50 - 99",
-		},
-		{
-			value: 7,
-			label: "100 - 199",
-		},
-		{
-			value: 8,
-			label: "200 - 499",
-		},
-		{
-			value: 9,
-			label: "500 - 999",
-		},
-		{
-			value: 10,
-			label: "1000 - 2499",
-		},
-		{
-			value: 11,
-			label: "2500 - 4999",
-		},
-		{
-			value: 12,
-			label: "5000 - 7499",
-		},
-		{
-			value: 13,
-			label: "7500 - 9999",
-		},
-		{
-			value: 14,
-			label: "10000+",
+			value: [0, 15],
+			label: "Keine Angabe<br/><small>0 oder keine Angabe</small>",
 		},
 	];
 
