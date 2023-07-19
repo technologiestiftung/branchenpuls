@@ -42,15 +42,15 @@ export default async function handler(
 	}
 
 	if (bl1) {
-		query = query.eq("branch_top_level_id", bl1);
+		query = query.in("branch_top_level_id", Array.isArray(bl1) ? bl1 : [bl1]);
 	}
 
 	if (bl2) {
-		query = query.eq("nace_id", bl2);
+		query = query.in("nace_id", Array.isArray(bl2) ? bl2 : [bl2]);
 	}
 
 	if (bl3) {
-		query = query.eq("ihk_branch_id", bl3);
+		query = query.in("ihk_branch_id", Array.isArray(bl3) ? bl3 : [bl3]);
 	}
 
 	if (employees) {
@@ -67,6 +67,8 @@ export default async function handler(
 
 	query.then((response) => {
 		const strData = JSON.stringify(response.data?.map((d) => d.opendata_id));
+
+		console.log("strData", strData);
 
 		zlib.gzip(strData, (err: any, buffer: any) => {
 			if (!err) {

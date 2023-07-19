@@ -5,6 +5,25 @@ export const customStyles = {
 		fontSize: "0.875rem",
 		fontStyle: "italic",
 	}),
+	multiValueRemove: (styles, { data }) => ({
+		...styles,
+		color: "white",
+		":hover": {
+			backgroundColor: "#182D73",
+			color: "white",
+		},
+	}),
+	multiValue: (styles, { data }) => {
+		return {
+			...styles,
+			backgroundColor: "#182D73",
+			// fontSize: "12px",
+		};
+	},
+	multiValueLabel: (styles, { data }) => ({
+		...styles,
+		color: "white",
+	}),
 };
 
 export function customTheme(theme) {
@@ -12,7 +31,7 @@ export function customTheme(theme) {
 		...theme,
 		colors: {
 			...theme.colors,
-			primary25: "#a5dbf8",
+			primary25: "#e4e3ff", // a5dbf8
 			primary: "#182D73",
 		},
 	};
