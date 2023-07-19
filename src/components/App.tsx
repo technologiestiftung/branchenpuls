@@ -12,6 +12,13 @@ import { BranchenPulsButton } from "@components/BranchenPulsButton";
 import { HeatmapToggle } from "@/components/HeatmapToggle";
 import { SidebarContentSearch } from "@components/Sidebar/content/SidebarContentSearch";
 import { ViewStateType } from "@common/interfaces";
+import useLors from "@/lib/hooks/useLors/useLors";
+import { GeoJsonLayer } from "@deck.gl/layers/typed";
+import { Switch } from "@headlessui/react";
+import {
+	MovesTypes,
+	SidebarContentMoves,
+} from "./Sidebar/content/SidebarContentMoves";
 
 export interface AppType {
 	dataPoints: any;
@@ -46,6 +53,10 @@ export const App: FC<AppType> = () => {
 		bearing: 0,
 		transitionDuration: 300,
 	});
+
+	const [selectedMoveType, setSelectedMoveType] = useState<MovesTypes>();
+	const [showMoves, setShowMoves] = useState<boolean>(false);
+	const [movesCount, setMovesCount] = useState<number | undefined>(undefined);
 
 	useEffect(() => {
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
@@ -152,6 +163,10 @@ export const App: FC<AppType> = () => {
 								setActiveLayerId={setActiveLayerId}
 								viewState={viewState}
 								searchResult={searchResult}
+								showMoves={showMoves}
+								selectedMoveType={selectedMoveType}
+								setSelectedMoveType={setSelectedMoveType}
+								setMovesCount={setMovesCount}
 							/>
 						</span>
 						<span className={navView === "info" ? "" : "hidden"}>
@@ -165,6 +180,15 @@ export const App: FC<AppType> = () => {
 								searchResult={searchResult}
 								setSearchResult={setSearchResult}
 							/>
+						</span>
+						<span className={navView === "moves" ? "" : "hidden"}>
+							<SidebarContentMoves
+								selectedMoveType={selectedMoveType}
+								setSelectedMoveType={setSelectedMoveType}
+								showMoves={showMoves}
+								setShowMoves={setShowMoves}
+								movesCount={movesCount}
+							></SidebarContentMoves>
 						</span>
 					</SidebarWrapper>
 					<SidebarNav

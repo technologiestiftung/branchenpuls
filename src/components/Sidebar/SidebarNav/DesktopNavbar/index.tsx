@@ -1,4 +1,5 @@
 import {
+	ArrowRight,
 	ChevronLeft,
 	ChevronRight,
 	Filter,
@@ -53,7 +54,7 @@ export const DesktopNavbar = ({
 						<li className="flex">
 							<button
 								onClick={() => onNavClick("search")}
-								title="Mehr Informationen anzeigen/schließen"
+								title="Standortsuche"
 								className={`p-[8px] shadow-lg duration-300 ease-in-out
 											${
 												navView === "search" && sidebarMenuOpen
@@ -81,6 +82,23 @@ export const DesktopNavbar = ({
 									`}
 							>
 								<Info />
+							</button>
+						</li>
+
+						<li className="flex">
+							<button
+								onClick={() => onNavClick("moves")}
+								title="Umzüge"
+								className={`rounded-b-[4px] p-[8px] shadow-lg duration-300 ease-in-out
+											${
+												navView === "moves" && sidebarMenuOpen
+													? "bg-dark-grey text-white hover:bg-white hover:text-dark-grey"
+													: "bg-white text-dark-grey hover:bg-dark-grey hover:text-white"
+											}
+											${sidebarMenuOpen ? "ml-[356px]" : "ml-0"}
+									`}
+							>
+								<ArrowRight />
 							</button>
 						</li>
 					</ul>

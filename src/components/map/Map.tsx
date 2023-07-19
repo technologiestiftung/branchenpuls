@@ -7,8 +7,8 @@ import mapStyle from "./mapStyle";
 import { MapControls } from "./MapControls";
 import { ViewStateType } from "@common/interfaces";
 
-// const MAP_STYLE =
-// 	"https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
+const MAP_STYLE =
+	"https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
 
 export interface PointData {
 	info: any;
@@ -66,11 +66,7 @@ export const MapComponent: FC<MapType> = ({
 					<Map
 						reuseMaps
 						mapLib={maplibregl}
-						mapStyle={
-							process.env.NODE_ENV == "development"
-								? mapStyle()
-								: process.env.NEXT_PUBLIC_MAPTILER_STYLE
-						}
+						mapStyle={process.env.NEXT_PUBLIC_MAPTILER_STYLE}
 						styleDiffing={true}
 						attributionControl={false}
 					></Map>

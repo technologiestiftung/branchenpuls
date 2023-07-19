@@ -25,6 +25,10 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 	setActiveLayerId,
 	viewState,
 	searchResult,
+	showMoves,
+	selectedMoveType,
+	setSelectedMoveType,
+	setMovesCount,
 }) => {
 	const [storeDataPoints, setStoreDataPoints] = useState({});
 
@@ -86,6 +90,10 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 								setStoreDataPoints={setStoreDataPoints}
 								viewState={viewState}
 								searchResult={searchResult}
+								showMoves={showMoves}
+								selectedMoveType={selectedMoveType}
+								setSelectedMoveType={setSelectedMoveType}
+								setMovesCount={setMovesCount}
 							></FilterLayer>
 						</div>
 					);

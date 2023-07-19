@@ -3,12 +3,16 @@ import { FilterBranches } from "@/components/filter/FilterBranches";
 import { Trash } from "@components/Icons";
 import { PointInfoModal } from "@components/PointInfoModal";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers/typed";
-import { ScatterplotLayer } from "@deck.gl/layers/typed";
+import {
+	ScatterplotLayer,
+	GeoJsonLayer,
+	ArcLayer,
+} from "@deck.gl/layers/typed";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
 import { getSinglePointData } from "@lib/getSinglePointData";
 import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
 import pako from "pako";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import { BusinessAtPointData } from "../../../pages/api/getsinglepointdata";
@@ -19,6 +23,7 @@ import {
 } from "./dropdownOptions";
 import { customTheme, customStyles } from "@lib/selectStyles";
 import { ViewStateType } from "@common/interfaces";
+import * as turf from "@turf/turf";
 
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
@@ -66,6 +71,10 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	setStoreDataPoints,
 	viewState,
 	searchResult,
+	showMoves,
+	selectedMoveType,
+	setSelectedMoveType,
+	setMovesCount,
 }) => {
 	const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
 	const [dataPoints, setDataPoints] = useState([]);
@@ -96,6 +105,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
 	const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
 	const [pointData, setPointData] = useState<BusinessAtPointData>();
+	const [moves, setMoves] = useState<any>();
+	const [ringbahn, setRingbahn] = useState<any>();
 
 	const hasMobileSize = useHasMobileSize();
 
@@ -193,6 +204,76 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		}
 	};
 
+	const filteredMoves = useMemo(() => {
+		console.log(selectedMoveType);
+		if (!moves || !ringbahn || !selectedMoveType) return;
+		const xs = moves.filter((m) => {
+			const poly = turf.polygon(ringbahn.geometry.coordinates);
+			let startMatch,
+				endMatch = false;
+			if (selectedMoveType === "inside_to_outside") {
+				startMatch = turf.booleanPointInPolygon(
+					turf.point(m.from.coordinates),
+					poly
+				);
+				endMatch = !turf.booleanPointInPolygon(
+					turf.point(m.to.coordinates),
+					poly
+				);
+			} else if (selectedMoveType === "outside_to_inside") {
+				startMatch = !turf.booleanPointInPolygon(
+					turf.point(m.from.coordinates),
+					poly
+				);
+				endMatch = turf.booleanPointInPolygon(
+					turf.point(m.to.coordinates),
+					poly
+				);
+			} else if (selectedMoveType === "west_to_east") {
+				startMatch = m.from.coordinates[0] < 13.4134480763675;
+				endMatch = m.to.coordinates[0] > 13.4134480763675;
+			} else if (selectedMoveType === "east_to_west") {
+				startMatch = m.from.coordinates[0] > 13.4134480763675;
+				endMatch = m.to.coordinates[0] < 13.4134480763675;
+			} else if (selectedMoveType === "south_to_north") {
+				startMatch = m.from.coordinates[1] < 52.522011466311916;
+				endMatch = m.to.coordinates[1] > 52.522011466311916;
+			} else if (selectedMoveType === "north_to_south") {
+				startMatch = m.from.coordinates[1] > 52.522011466311916;
+				endMatch = m.to.coordinates[1] < 52.522011466311916;
+			}
+			console.log(startMatch, endMatch);
+			return startMatch && endMatch;
+		});
+		console.log(xs);
+		setMovesCount(xs.length);
+		return xs;
+	}, [moves, ringbahn, selectedMoveType]);
+
+	useEffect(() => {
+		console.log(showMoves);
+		if (showMoves) {
+			fetch(
+				"http://localhost:54321/storage/v1/object/public/data_assets/out.json"
+			)
+				.then((movesResponse) => movesResponse.json())
+				.then((moves) => {
+					setMoves(moves);
+
+					fetch(
+						"https://gist.githubusercontent.com/derhuerst/9a3fca091cb1d48ad0b28743f86676c4/raw/49f58aa9325834b877166afdbf20eff2cc72aaa3/berlin-s-bahn-ring.geojson"
+					)
+						.then((ringbahnResponse) => ringbahnResponse.json())
+						.then((ringbahn) => {
+							console.log(moves);
+							console.log(ringbahn);
+
+							setRingbahn(ringbahn);
+						});
+				});
+		}
+	}, [showMoves]);
+
 	useEffect(() => {
 		if (filteredData && activeLayerId === layerId) {
 			const layers = [];
@@ -250,6 +331,39 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						})
 					);
 				}
+
+				if (
+					selectedMoveType === "inside_to_outside" ||
+					selectedMoveType === "outside_to_inside"
+				) {
+					const ringbahnLayer = new GeoJsonLayer({
+						id: "ringbahn",
+						data: ringbahn,
+						stroked: true,
+						filled: true,
+						getFillColor: (d) => [0, 0, 0, 100],
+						getLineColor: (d) => [0, 0, 0],
+						getLineWidth: 5,
+						onClick: ({ object }) => {},
+						pickable: true,
+					});
+					layers.push(ringbahnLayer);
+				}
+
+				if (showMoves) {
+					const arcLayer = new ArcLayer({
+						id: "moves",
+						data: filteredMoves,
+						getSourceColor: (d) => [0, 255, 0, 255],
+						getSourcePosition: (d) => d.from.coordinates,
+						getTargetColor: (d) => [255, 0, 0, 255],
+						getTargetPosition: (d) => d.to.coordinates,
+						getWidth: 2,
+						pickable: true,
+					});
+
+					layers.push(arcLayer);
+				}
 			}
 
 			setDeckLayers([layers]);
@@ -269,6 +383,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		viewState,
 		layersData,
 		searchResult,
+		showMoves,
+		selectedMoveType,
 	]);
 
 	useEffect(() => {
