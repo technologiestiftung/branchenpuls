@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from "react";
 import Select from "react-select";
 
 import { getOptionsBL1, getOptionsBL2, getOptionsBL3 } from "./dropdownOptions";
-import { customTheme, customStyles } from "@lib/selectStyles";
+import { customTheme, customStyles, noOptionsMessage } from "@lib/selectStyles";
 import { Info } from "@components/Icons";
 
 export interface FilterBranchesType {
@@ -110,6 +110,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					placeholder="z.B. Ausschank ID 5630"
 					styles={customStyles}
 					theme={customTheme}
+					noOptionsMessage={noOptionsMessage}
 					isMulti
 				/>
 			</div>
@@ -138,6 +139,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					placeholder="z.B. Bars ID 56303 "
 					styles={customStyles}
 					theme={customTheme}
+					noOptionsMessage={noOptionsMessage}
 					isMulti
 				/>
 			</div>

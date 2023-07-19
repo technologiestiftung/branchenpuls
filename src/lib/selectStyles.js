@@ -38,3 +38,7 @@ export function customTheme(theme) {
 		},
 	};
 }
+
+export function noOptionsMessage() {
+	return "keine Auswahl verfügbar";
+}
