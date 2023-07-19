@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from "react";
 import Select from "react-select";
 
 import { getOptionsBL1, getOptionsBL2, getOptionsBL3 } from "./dropdownOptions";
-import { customTheme, customStyles } from "@lib/selectStyles";
+import { customTheme, customStyles, noOptionsMessage } from "@lib/selectStyles";
 import { Info } from "@components/Icons";
 
 export interface FilterBranchesType {
@@ -29,15 +29,15 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 	const [optionsBL3, setOptionsBL3] = useState<number[]>(getOptionsBL3());
 
 	useEffect(() => {
-		setOptionsBL2(getOptionsBL2(filterValBl1?.value));
+		setOptionsBL2(getOptionsBL2(filterValBl1));
 	}, [filterValBl1]);
 
 	useEffect(() => {
-		setOptionsBL3(getOptionsBL3(filterValBl1?.value, filterValBl2?.value));
+		setOptionsBL3(getOptionsBL3(filterValBl1, filterValBl2));
 	}, [filterValBl1, filterValBl2]);
 
 	useEffect(() => {
-		if (filterValBl3) {
+		if (filterValBl3?.length) {
 			setBl1Disabled(true);
 			setBl2Disabled(true);
 		} else {
@@ -47,7 +47,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 	}, [filterValBl3]);
 
 	useEffect(() => {
-		if (filterValBl2) {
+		if (filterValBl2?.length) {
 			setBl1Disabled(true);
 		} else {
 			setBl1Disabled(false);
@@ -84,6 +84,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					placeholder="z.B. Gastronomie ID 56"
 					styles={customStyles}
 					theme={customTheme}
+					isMulti
 				/>
 			</div>
 			<div className="mt-3">
@@ -109,6 +110,8 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					placeholder="z.B. Ausschank ID 5630"
 					styles={customStyles}
 					theme={customTheme}
+					noOptionsMessage={noOptionsMessage}
+					isMulti
 				/>
 			</div>
 			{/* suchen… */}
@@ -136,6 +139,8 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					placeholder="z.B. Bars ID 56303 "
 					styles={customStyles}
 					theme={customTheme}
+					noOptionsMessage={noOptionsMessage}
+					isMulti
 				/>
 			</div>
 		</div>

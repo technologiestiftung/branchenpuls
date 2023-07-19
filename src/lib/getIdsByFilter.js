@@ -15,9 +15,9 @@ export async function getIdsByFilter(
 	filterValBezirk
 ) {
 	// make all default val null
-	const sendFilterValBL1 = filterValBL1?.value ? filterValBL1.value : false;
-	const sendFilterValBL2 = filterValBL2?.value ? filterValBL2.value : false;
-	const sendFilterValBL3 = filterValBL3?.value ? filterValBL3.value : false;
+	const sendFilterValBL1 = filterValBL1?.length ? filterValBL1 : false;
+	const sendFilterValBL2 = filterValBL2?.length ? filterValBL2 : false;
+	const sendFilterValBL3 = filterValBL3?.length ? filterValBL3 : false;
 	const sendEmployees = !isNaN(parseFloat(employees?.value))
 		? employees.value
 		: false;
@@ -34,9 +34,15 @@ export async function getIdsByFilter(
 	path += !isNaN(parseFloat(sendEmployees))
 		? `&employees=${sendEmployees}`
 		: "";
-	path += sendFilterValBL1 ? `&bl1=${sendFilterValBL1}` : "";
-	path += sendFilterValBL2 ? `&bl2=${sendFilterValBL2}` : "";
-	path += sendFilterValBL3 ? `&bl3=${sendFilterValBL3}` : "";
+	path += sendFilterValBL1
+		? sendFilterValBL1.map((d) => `&bl1=${d.value}`).join("")
+		: "";
+	path += sendFilterValBL2
+		? sendFilterValBL2.map((d) => `&bl2=${d.value}`).join("")
+		: "";
+	path += sendFilterValBL3
+		? sendFilterValBL3.map((d) => `&bl3=${d.value}`).join("")
+		: "";
 	path += sendBType !== false ? `&bt=${sendBType}` : "";
 	path += `&month=${filterValDateMonth}`;
 	path += `&year=${filterValDateYear}`;
