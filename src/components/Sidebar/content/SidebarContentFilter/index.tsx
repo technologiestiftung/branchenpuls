@@ -29,6 +29,10 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 	selectedMoveType,
 	setSelectedMoveType,
 	setMovesCount,
+	selectedStartBezirksregion,
+	setSelectedStartBezirksregion,
+	selectedEndBezirksregion,
+	setSelectedEndBezirksregion,
 }) => {
 	const [storeDataPoints, setStoreDataPoints] = useState({});
 
@@ -94,6 +98,10 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 								selectedMoveType={selectedMoveType}
 								setSelectedMoveType={setSelectedMoveType}
 								setMovesCount={setMovesCount}
+								selectedStartBezirksregion={selectedStartBezirksregion}
+								setSelectedStartBezirksregion={setSelectedStartBezirksregion}
+								selectedEndBezirksregion={selectedEndBezirksregion}
+								setSelectedEndBezirksregion={setSelectedEndBezirksregion}
 							></FilterLayer>
 						</div>
 					);

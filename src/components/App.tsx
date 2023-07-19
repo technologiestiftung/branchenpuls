@@ -58,6 +58,13 @@ export const App: FC<AppType> = () => {
 	const [showMoves, setShowMoves] = useState<boolean>(false);
 	const [movesCount, setMovesCount] = useState<number | undefined>(undefined);
 
+	const [selectedStartBezirksregion, setSelectedStartBezirksregion] = useState<
+		string | undefined
+	>();
+	const [selectedEndBezirksregion, setSelectedEndBezirksregion] = useState<
+		string | undefined
+	>();
+
 	useEffect(() => {
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
 		setLayerCount(layersData[activeLayerId]?.count || 0);
@@ -188,6 +195,10 @@ export const App: FC<AppType> = () => {
 								showMoves={showMoves}
 								setShowMoves={setShowMoves}
 								movesCount={movesCount}
+								selectedStartBezirksregion={selectedStartBezirksregion}
+								setSelectedStartBezirksregion={setSelectedStartBezirksregion}
+								selectedEndBezirksregion={selectedEndBezirksregion}
+								setSelectedEndBezirksregion={setSelectedEndBezirksregion}
 							></SidebarContentMoves>
 						</span>
 					</SidebarWrapper>

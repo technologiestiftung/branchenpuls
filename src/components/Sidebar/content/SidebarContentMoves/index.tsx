@@ -10,7 +10,10 @@ import {
 	TSBLogo,
 } from "@components/logos";
 import { Switch, Tab } from "@headlessui/react";
-import { FC, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
+import Select from "react-select";
+import { Info } from "@/components/Icons";
+import { customStyles, customTheme } from "@/lib/selectStyles";
 
 export type MovesTypes =
 	| "inside_to_outside"
@@ -26,6 +29,10 @@ interface SidebarContentMovesProps {
 	showMoves: boolean;
 	setShowMoves: (showMoves: boolean) => void;
 	movesCount: number | undefined;
+	selectedStartBezirksregion: string | undefined;
+	setSelectedStartBezirksregion: (bezirksregion: string | undefined) => void;
+	selectedEndBezirksregion: string | undefined;
+	setSelectedEndBezirksregion: (bezirksregion: string | undefined) => void;
 }
 
 export const SidebarContentMoves: FC<SidebarContentMovesProps> = ({
@@ -34,10 +41,15 @@ export const SidebarContentMoves: FC<SidebarContentMovesProps> = ({
 	showMoves,
 	setShowMoves,
 	movesCount,
+	selectedStartBezirksregion,
+	setSelectedStartBezirksregion,
+	selectedEndBezirksregion,
+	setSelectedEndBezirksregion,
 }) => {
 	function classNames(...classes) {
 		return classes.filter(Boolean).join(" ");
 	}
+	const [lors, setLors] = useState<any>();
 	const availableMovesTypes: Array<MovesTypes> = [
 		"inside_to_outside",
 		"outside_to_inside",
@@ -55,6 +67,34 @@ export const SidebarContentMoves: FC<SidebarContentMovesProps> = ({
 		north_to_south: "Von Norden nach Süden",
 		south_to_north: "Von Süden nach Norden",
 	};
+
+	useEffect(() => {
+		fetch(
+			"http://localhost:54321/storage/v1/object/public/data_assets/LOR_Bezirksregionen_-_Berlin.geojson"
+		)
+			.then((lorsResponse) => lorsResponse.json())
+			.then((lors) => {
+				console.log(lors);
+				setLors(lors);
+			});
+	}, []);
+
+	const bezirksRegionen = useMemo(() => {
+		if (!lors) return [];
+		const xs = lors.features
+			.map((f) => f.properties.bezirksregion)
+			.filter((value, index, array) => array.indexOf(value) === index);
+		return xs.map((x) => {
+			return {
+				label: x,
+				value: x,
+			};
+		});
+	}, [lors]);
+
+	useEffect(() => {
+		console.log(selectedStartBezirksregion);
+	}, [selectedStartBezirksregion]);
 
 	return (
 		<>
@@ -87,6 +127,7 @@ export const SidebarContentMoves: FC<SidebarContentMovesProps> = ({
 					</Switch>
 				</div>
 
+				<div className="pb-[10px]">Option 1: Vordefinierte Bereiche</div>
 				<div style={{ position: "relative" }}>
 					<Tab.Group
 						onChange={(index) => {
@@ -119,6 +160,65 @@ export const SidebarContentMoves: FC<SidebarContentMovesProps> = ({
 							))}
 						</Tab.List>
 					</Tab.Group>
+					<div className="pt-[20px]">Option 2: Zwischen Bezirksregionen</div>
+					{lors && (
+						<div className="mt-3">
+							<p className="mb-1 flex gap-2 font-bold">Von Bezirksregion</p>
+							<Select
+								value={
+									selectedStartBezirksregion
+										? {
+												label: selectedStartBezirksregion,
+												value: selectedStartBezirksregion,
+										  }
+										: null
+								}
+								onChange={(opt) => {
+									if (opt) {
+										setSelectedStartBezirksregion(opt.value);
+									} else {
+										setSelectedStartBezirksregion(undefined);
+									}
+								}}
+								isClearable={true}
+								isSearchable={true}
+								isDisabled={false}
+								options={bezirksRegionen}
+								placeholder="Bezirksregion"
+								styles={customStyles}
+								theme={customTheme}
+							/>
+						</div>
+					)}
+					{lors && (
+						<div className="mt-3">
+							<p className="mb-1 flex gap-2 font-bold">Nach Bezirksregion</p>
+							<Select
+								value={
+									selectedEndBezirksregion
+										? {
+												label: selectedEndBezirksregion,
+												value: selectedEndBezirksregion,
+										  }
+										: null
+								}
+								onChange={(opt) => {
+									if (opt) {
+										setSelectedEndBezirksregion(opt.value);
+									} else {
+										setSelectedEndBezirksregion(undefined);
+									}
+								}}
+								isClearable={true}
+								isSearchable={true}
+								isDisabled={false}
+								options={bezirksRegionen}
+								placeholder="Bezirksregion"
+								styles={customStyles}
+								theme={customTheme}
+							/>
+						</div>
+					)}
 					{movesCount && selectedMoveType && (
 						<div className="pb-[20px] pt-[20px] text-lg font-bold">
 							Anzahl der Umzüge: {movesCount}
