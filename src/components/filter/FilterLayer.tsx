@@ -388,7 +388,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						isSearchable={false}
 						options={getOptionsEmployees()}
 						styles={customStyles}
-						placeholder="z.B. 1-3"
+						placeholder="z.B. Mittlere Unternehmen"
 						theme={customTheme}
 						getOptionLabel={getOptionLabel}
 					/>
