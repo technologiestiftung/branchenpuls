@@ -17,6 +17,8 @@ export const customStyles = {
 		return {
 			...styles,
 			backgroundColor: "#182D73",
+			width: "100%",
+			justifyContent: "space-between",
 			// fontSize: "12px",
 		};
 	},
