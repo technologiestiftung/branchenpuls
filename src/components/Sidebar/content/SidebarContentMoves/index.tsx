@@ -52,59 +52,14 @@ export const SidebarContentMoves: FC<SidebarContentMovesProps> = ({
 		outside_to_inside: "Außerhalb des Rings nach innerhalb",
 		east_to_west: "Von Osten nach Westen",
 		west_to_east: "Von Westen nach Osten",
-		north_to_south: "Vom Norden nach Süden",
-		south_to_north: "Vom Süden nach Norden",
+		north_to_south: "Von Norden nach Süden",
+		south_to_north: "Von Süden nach Norden",
 	};
 
 	return (
 		<>
 			<SidebarHeader text={"Umzüge anzeigen"} />
 			<SidebarBody>
-				<Accordion
-					title={"Was sind Umzüge?"}
-					content={
-						<p>
-							Der Umzug eines Unternehmens wird definiert als ein
-							Standortwechsel zwischen März 2023 und Juni 2023.
-						</p>
-					}
-				/>
-				<Accordion
-					title={"Was ist Norden?"}
-					content={
-						<p>
-							In diesem Kontext wird Norden definiert als ein Latitude-Wert von
-							größer als 52.522011466311916.
-						</p>
-					}
-				/>
-				<Accordion
-					title={"Was ist Süden?"}
-					content={
-						<p>
-							In diesem Kontext wird Norden definiert als ein Latitude-Wert von
-							kleiner als 52.522011466311916.
-						</p>
-					}
-				/>
-				<Accordion
-					title={"Was ist Westen?"}
-					content={
-						<p>
-							In diesem Kontext wird Norden definiert als ein Longitude-Wert von
-							kleiner als 13.4134480763675.
-						</p>
-					}
-				/>
-				<Accordion
-					title={"Was ist Osten?"}
-					content={
-						<p>
-							In diesem Kontext wird Norden definiert als ein Longitude-Wert von
-							kleiner als 13.4134480763675.
-						</p>
-					}
-				/>
 				<div
 					className="pb-[20px] pt-[20px]"
 					style={{
@@ -151,8 +106,12 @@ export const SidebarContentMoves: FC<SidebarContentMovesProps> = ({
 										"w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700",
 										"ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2",
 										selectedMoveType === x
-											? "bg-white shadow"
-											: "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+											? showMoves
+												? "bg-white shadow"
+												: "text-gray-100"
+											: showMoves
+											? "text-blue-100 hover:bg-white/[0.12] hover:text-white"
+											: "text-gray-100"
 									)}
 								>
 									{moveTypesNames[x]}
@@ -160,12 +119,67 @@ export const SidebarContentMoves: FC<SidebarContentMovesProps> = ({
 							))}
 						</Tab.List>
 					</Tab.Group>
-					{movesCount && (
-						<div className="pb-[20px] pt-[20px]">
+					{movesCount && selectedMoveType && (
+						<div className="pb-[20px] pt-[20px] text-lg font-bold">
 							Anzahl der Umzüge: {movesCount}
 						</div>
 					)}
 				</div>
+				<Accordion
+					title={"Was sind Umzüge?"}
+					content={
+						<p>
+							Der Umzug eines Unternehmens wird definiert als ein
+							Standortwechsel zwischen März 2023 und Juni 2023.
+						</p>
+					}
+				/>
+				<Accordion
+					title={"Was ist innerhalb / außerhalb des Rings?"}
+					content={
+						<p>
+							Innerhalb / außerhalb des Rings wird definiert als Unternehmen
+							deren Standort sich innerhalb bzw. außerhalb der Strecke des
+							Berliner S-Bahn-Rings befinden.
+						</p>
+					}
+				/>
+				<Accordion
+					title={"Was ist Norden?"}
+					content={
+						<p>
+							In diesem Kontext wird Norden definiert als ein Latitude-Wert von
+							größer als 52.522011466311916.
+						</p>
+					}
+				/>
+				<Accordion
+					title={"Was ist Süden?"}
+					content={
+						<p>
+							In diesem Kontext wird Norden definiert als ein Latitude-Wert von
+							kleiner als 52.522011466311916.
+						</p>
+					}
+				/>
+				<Accordion
+					title={"Was ist Westen?"}
+					content={
+						<p>
+							In diesem Kontext wird Norden definiert als ein Longitude-Wert von
+							kleiner als 13.4134480763675.
+						</p>
+					}
+				/>
+				<Accordion
+					title={"Was ist Osten?"}
+					content={
+						<p>
+							In diesem Kontext wird Norden definiert als ein Longitude-Wert von
+							größer als 13.4134480763675.
+						</p>
+					}
+				/>
 			</SidebarBody>
 		</>
 	);

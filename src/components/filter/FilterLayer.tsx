@@ -333,8 +333,9 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				}
 
 				if (
-					selectedMoveType === "inside_to_outside" ||
-					selectedMoveType === "outside_to_inside"
+					showMoves &&
+					(selectedMoveType === "inside_to_outside" ||
+						selectedMoveType === "outside_to_inside")
 				) {
 					const ringbahnLayer = new GeoJsonLayer({
 						id: "ringbahn",
