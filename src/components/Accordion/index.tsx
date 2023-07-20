@@ -3,6 +3,7 @@ import React, { FC, useState, useEffect } from "react";
 
 interface AccordionPropType {
 	title: string;
+	titleClasses: string;
 	content: React.JSX.Element;
 	active?: boolean;
 	extraClassName?: string;
@@ -10,6 +11,7 @@ interface AccordionPropType {
 
 export const Accordion: FC<AccordionPropType> = ({
 	title,
+	titleClasses,
 	content,
 	active,
 }) => {
@@ -28,7 +30,9 @@ export const Accordion: FC<AccordionPropType> = ({
 				}}
 				tabIndex={isActive ? 1 : 0}
 			>
-				<h2 className="text-left text-sm font-bold">{title}</h2>
+				<h2 className={`${titleClasses} text-left text-sm font-bold`}>
+					{title}
+				</h2>
 				<ChevronDown
 					className={`transform transition-transform
 						 ${isActive ? "rotate-180" : "rotate-0"}

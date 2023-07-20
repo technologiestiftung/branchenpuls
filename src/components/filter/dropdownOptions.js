@@ -1,5 +1,27 @@
 import branchKeys from "@lib/branchKeys.json";
 import { toFullText } from "@lib/helper";
+import planungsraum from "@lib/planungsraum";
+import prognoseraum from "@lib/prognoseraum";
+
+export function getPlanungsraum() {
+	return planungsraum.map((d) => {
+		const obj = {
+			value: d,
+			label: d,
+		};
+		return obj;
+	});
+}
+
+export function getPrognoseraum() {
+	return prognoseraum.map((d) => {
+		const obj = {
+			value: d,
+			label: d,
+		};
+		return obj;
+	});
+}
 
 export function getFilterBezirke() {
 	return [

@@ -65,7 +65,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 
 	return (
 		<div className="">
-			<div className="mt-3">
+			<div className="">
 				<p className="mb-1 flex gap-2 font-bold">
 					Branchentyp
 					<button title="Ein Branchentyp ist z.B. Einzelhandel">
