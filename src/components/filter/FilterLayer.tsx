@@ -375,7 +375,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					title={"Räumliche Filter"}
 					titleClasses={"!text-base"}
 					content={
-						<>
+						<div className="mb-3">
 							<p className="mb-1 font-bold">Bezirk</p>
 							<Select
 								value={filterValBezirk}
@@ -411,7 +411,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 								placeholder="z.B. Ackerstraße"
 								theme={customTheme}
 							/>
-						</>
+						</div>
 					}
 				/>
 
