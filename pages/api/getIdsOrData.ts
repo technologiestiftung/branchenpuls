@@ -32,7 +32,7 @@ export default async function handler(
 
 	let formattedMonth = month?.length === 1 ? `0${month}` : `${month}`;
 	let query;
-	if (csv === "1") {
+	if (csv) {
 		query = supabase.from(`state_${formattedMonth}_${year}`).select();
 	} else {
 		query = supabase.from(`state_${formattedMonth}_${year}`).select(`
@@ -90,14 +90,14 @@ export default async function handler(
 		query = query.eq("prognoseraum", prognoseraum);
 	}
 
-	if (csv === "1") {
+	if (csv) {
 		query = query.csv();
 	}
 
 	query.then((response) => {
 		let strData;
 
-		if (csv === "1") {
+		if (csv) {
 			strData = JSON.stringify(response.data);
 		} else {
 			strData = JSON.stringify(response.data?.map((d) => d.opendata_id));

@@ -60,7 +60,7 @@ export async function getIdsOrData(
 	path += sendPrognoseraum ? `&prognoseraum=${sendPrognoseraum}` : "";
 
 	path += sendMonthOnly === 1 ? `&monthonly=${sendMonthOnly}` : "";
-	path += csv ? `&csv=1` : "";
+	path += csv ? `&csv=true` : "";
 
 	// path += "&ids=1&ids=2&ids=3&ids=4&ids=5";
 
