@@ -186,7 +186,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		setPointData(data as BusinessAtPointData);
 	}
 
-	function calculatePointRadius(zoom) {
+	function calculatePointRadius(zoom: number) {
 		if (zoom <= 10) {
 			return 30;
 		} else if (zoom >= 15) {
@@ -194,6 +194,18 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		} else {
 			const m = (5 - 30) / (15 - 10); // Calculate the slope
 			const b = 30 - m * 10; // Calculate the y-intercept
+			return m * zoom + b; // Apply linear regression equation
+		}
+	}
+
+	function calculateHeatmapOpacity(zoom: number) {
+		if (zoom <= 10) {
+			return 0.6;
+		} else if (zoom >= 15) {
+			return 0;
+		} else {
+			const m = (0 - 0.6) / (15 - 10); // Calculate the slope
+			const b = 0.6 - m * 10; // Calculate the y-intercept
 			return m * zoom + b; // Apply linear regression equation
 		}
 	}
@@ -209,60 +221,56 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	useEffect(() => {
 		if (filteredData && activeLayerId === layerId) {
 			const layers = [];
-			if (layersData[layerId].heatmap) {
-				layers.push(
-					new HeatmapLayer({
-						id: "heatmapLayer" + layerId,
-						data: filteredData,
-						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-						getWeight: 5,
-						aggregation: "SUM",
-						colorRange: layersData[layerId].heatmapColor,
-						opacity: 0.6,
-						// onClick: (info) =>
-						// getSinglePointData(info.object.id, info.object.p),
-					})
-				);
-			}
 
-			if (!layersData[layerId].heatmap) {
+			layers.push(
+				new ScatterplotLayer({
+					id: "scatterplot-layer" + layerId,
+					data: filteredData,
+					pickable: true,
+					getRadius: calculatePointRadius(viewState.zoom),
+					getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
+					getFillColor: layersData[layerId].color, // [86, 189, 102],
+					opacity: 0.1,
+					onClick: (info) => {
+						setPoinInfoModalOpen(true);
+						getPointInfo(info);
+					},
+					transitions: {
+						// transition with a duration of 3000ms
+						opacity: 500,
+					},
+					onHover: handleHover,
+				})
+			);
+
+			layers.push(
+				new HeatmapLayer({
+					id: "heatmapLayer" + layerId,
+					data: filteredData,
+					getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
+					getWeight: 5,
+					aggregation: "SUM",
+					colorRange: layersData[layerId].heatmapColor,
+					opacity: calculateHeatmapOpacity(viewState.zoom),
+					// onClick: (info) =>
+					// getSinglePointData(info.object.id, info.object.p),
+				})
+			);
+			if (searchResult) {
 				layers.push(
 					new ScatterplotLayer({
-						id: "scatterplot-layer" + layerId,
-						data: filteredData,
+						id: "search-result",
+						data: [{ p: [searchResult[0], searchResult[1]] }],
 						pickable: true,
-						getRadius: calculatePointRadius(viewState.zoom),
+						getRadius: calculatePointRadius(viewState.zoom - 2),
 						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-						getFillColor: layersData[layerId].color, // [86, 189, 102],
-						opacity: 0.1,
-						onClick: (info) => {
-							setPoinInfoModalOpen(true);
-							getPointInfo(info);
-						},
+						getFillColor: [24, 45, 115],
+						opacity: 0.4,
 						transitions: {
-							// transition with a duration of 3000ms
 							opacity: 500,
 						},
-						onHover: handleHover,
 					})
 				);
-
-				if (searchResult) {
-					layers.push(
-						new ScatterplotLayer({
-							id: "search-result",
-							data: [{ p: [searchResult[0], searchResult[1]] }],
-							pickable: true,
-							getRadius: calculatePointRadius(viewState.zoom - 2),
-							getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-							getFillColor: [24, 45, 115],
-							opacity: 0.4,
-							transitions: {
-								opacity: 500,
-							},
-						})
-					);
-				}
 			}
 
 			setDeckLayers([layers]);
