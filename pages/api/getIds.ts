@@ -27,13 +27,18 @@ export default async function handler(
 		bezirk,
 		planungsraum,
 		prognoseraum,
+		csv,
 	} = req.query;
 
 	let formattedMonth = month?.length === 1 ? `0${month}` : `${month}`;
-
-	let query = supabase.from(`state_${formattedMonth}_${year}`).select(`
-    opendata_id
-  `);
+	let query;
+	if (csv === "1") {
+		query = supabase.from(`state_${formattedMonth}_${year}`).select();
+	} else {
+		query = supabase.from(`state_${formattedMonth}_${year}`).select(`
+		opendata_id
+	  `);
+	}
 
 	if (start && end) {
 		query = query.gte("business_age", start).lte("business_age", end);
@@ -85,8 +90,18 @@ export default async function handler(
 		query = query.eq("prognoseraum", prognoseraum);
 	}
 
+	if (csv === "1") {
+		query = query.csv();
+	}
+
 	query.then((response) => {
-		const strData = JSON.stringify(response.data?.map((d) => d.opendata_id));
+		let strData;
+
+		if (csv === "1") {
+			strData = JSON.stringify(response.data);
+		} else {
+			strData = JSON.stringify(response.data?.map((d) => d.opendata_id));
+		}
 
 		zlib.gzip(strData, (err: any, buffer: any) => {
 			if (!err) {

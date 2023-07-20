@@ -14,7 +14,8 @@ export async function getIdsByFilter(
 	filterMonthOnly,
 	filterValBezirk,
 	filterValPlanungsraum,
-	filterValPrognoseraum
+	filterValPrognoseraum,
+	csv
 ) {
 	// make all default val null
 	const sendFilterValBL1 = filterValBL1?.length ? filterValBL1 : false;
@@ -59,6 +60,7 @@ export async function getIdsByFilter(
 	path += sendPrognoseraum ? `&prognoseraum=${sendPrognoseraum}` : "";
 
 	path += sendMonthOnly === 1 ? `&monthonly=${sendMonthOnly}` : "";
+	path += csv ? `&csv=1` : "";
 
 	// path += "&ids=1&ids=2&ids=3&ids=4&ids=5";
 
@@ -74,7 +76,8 @@ export async function getIdsByFilter(
 		sendMonthOnly !== 1 &&
 		!sendBezik &&
 		!sendPlanungsraum &&
-		!sendPrognoseraum
+		!sendPrognoseraum &&
+		!csv
 	) {
 		console.log("resetting");
 		const newData = [];
@@ -87,7 +90,7 @@ export async function getIdsByFilter(
 
 	console.log("path : ", path);
 
-	const newData = [];
+	let newData = [];
 	try {
 		let res;
 
@@ -97,18 +100,25 @@ export async function getIdsByFilter(
 				.then((arrayBuffer) => {
 					const decompressedData = pako.inflate(arrayBuffer, { to: "string" });
 					const data = JSON.parse(decompressedData);
-					data.forEach((d) => {
-						newData.push(dataPointsIndexed[d]);
-					});
+					if (csv) {
+						newData = data;
+					} else {
+						data.forEach((d) => {
+							newData.push(dataPointsIndexed[d]);
+						});
+					}
 				});
 		} else {
 			res = await fetch(path);
 			if (res.ok) {
 				const data = await res.json();
-
-				data.forEach((d) => {
-					newData.push(dataPointsIndexed[d]);
-				});
+				if (csv) {
+					newData = data;
+				} else {
+					data.forEach((d) => {
+						newData.push(dataPointsIndexed[d]);
+					});
+				}
 			}
 		}
 	} catch (error) {
