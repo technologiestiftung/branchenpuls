@@ -4,7 +4,7 @@ import { Trash } from "@components/Icons";
 import { PointInfoModal } from "@components/PointInfoModal";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers/typed";
 import { ScatterplotLayer } from "@deck.gl/layers/typed";
-import { getIdsByFilter } from "@lib/getIdsByFilter";
+import { getIdsOrData } from "@lib/getIdsOrData";
 import { getSinglePointData } from "@lib/getSinglePointData";
 import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
 import { Accordion } from "@components/Accordion";
@@ -113,7 +113,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		const month = Number(filterValDateMonth.value);
 		const csv = true;
 
-		const csvData = await getIdsByFilter(
+		const csvData = await getIdsOrData(
 			dataPointsIndexed,
 			filterValAge,
 			filterValEmployees,
@@ -187,7 +187,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				setLoadingFilter(true);
 				const month = Number(filterValDateMonth.value);
 
-				const newFilteredData = await getIdsByFilter(
+				const newFilteredData = await getIdsOrData(
 					dataPointsIndexed,
 					filterValAge,
 					filterValEmployees,

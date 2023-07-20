@@ -1,7 +1,7 @@
 import pako from "pako";
 const devMode = process.env.NODE_ENV === "development";
 
-export async function getIdsByFilter(
+export async function getIdsOrData(
 	dataPointsIndexed,
 	age,
 	employees,
@@ -36,7 +36,7 @@ export async function getIdsByFilter(
 		? filterValPrognoseraum.value
 		: false;
 
-	let path = "/api/getIds/?";
+	let path = "/api/getIdsOrData/?";
 
 	path += sendStart !== false ? `&start=${sendStart}` : "";
 	path += sendEnd !== false ? `&end=${sendEnd}` : "";
