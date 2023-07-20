@@ -7,6 +7,7 @@ import { ScatterplotLayer } from "@deck.gl/layers/typed";
 import { getIdsByFilter } from "@lib/getIdsByFilter";
 import { getSinglePointData } from "@lib/getSinglePointData";
 import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
+import { Accordion } from "@components/Accordion";
 import pako from "pako";
 import { FC, useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
@@ -16,6 +17,8 @@ import {
 	getOptionsEmployees,
 	getOptionsMonths,
 	getFilterBezirke,
+	getPlanungsraum,
+	getPrognoseraum,
 } from "./dropdownOptions";
 import { customTheme, customStyles } from "@lib/selectStyles";
 import { ViewStateType } from "@common/interfaces";
@@ -93,6 +96,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	});
 	const [filterValDateYear, setFilterValDateYear] = useState<number>(2023);
 	const [filterValBezirk, setFilterValBezirk] = useState<string | null>(null);
+	const [filterValPlanungsraum, setFilterValPlanungsraum] = useState<
+		string | null
+	>(null);
+	const [filterValPrognoseraum, setFilterValPrognoseraum] = useState<
+		string | null
+	>(null);
 
 	const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
 	const [pointData, setPointData] = useState<BusinessAtPointData>();
@@ -145,7 +154,9 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					month,
 					filterValDateYear,
 					filterMonthOnly,
-					filterValBezirk
+					filterValBezirk,
+					filterValPlanungsraum,
+					filterValPrognoseraum
 				);
 
 				setFilteredData(newFilteredData);
@@ -164,6 +175,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		filterValBl3,
 		filterMonthOnly,
 		filterValBezirk,
+		filterValPlanungsraum,
+		filterValPrognoseraum,
 	]);
 
 	async function getPointInfo(info) {
@@ -278,9 +291,9 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	}, [filteredData]);
 
 	// a function that replaces a part of the array with a new value
-	const replaceArray = (arr, index, newValue) => {
-		return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-	};
+	// const replaceArray = (arr, index, newValue) => {
+	// 	return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+	// };
 
 	const resetFilterData = () => {
 		setFilteredData(dataPoints);
@@ -292,6 +305,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		setFilterValBl3(null);
 		setFilterMonthOnly(false);
 		setFilterValBezirk(null);
+		setFilterValPlanungsraum(null);
+		setFilterValPrognoseraum(null);
 	};
 
 	const removeLayer = () => {
@@ -356,102 +371,164 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					/>
 				</div>
 
-				<div className="mt-5">
-					<p className="mb-1 font-bold">Bezirk</p>
-					<Select
-						value={filterValBezirk}
-						onChange={setFilterValBezirk}
-						isClearable={true}
-						isSearchable={false}
-						options={getFilterBezirke()}
-						styles={customStyles}
-						placeholder="z.B. Mitte"
-						theme={customTheme}
-					/>
-				</div>
+				<Accordion
+					title={"Räumliche Filter"}
+					titleClasses={"!text-base"}
+					content={
+						<div className="mb-3">
+							<p className="mb-1 font-bold">Bezirk</p>
+							<Select
+								value={filterValBezirk}
+								onChange={setFilterValBezirk}
+								isClearable={true}
+								isSearchable={false}
+								options={getFilterBezirke()}
+								styles={customStyles}
+								placeholder="z.B. Mitte"
+								theme={customTheme}
+							/>
 
-				<FilterBranches
-					filterValBl1={filterValBl1}
-					setFilterValBl1={setFilterValBl1}
-					filterValBl2={filterValBl2}
-					setFilterValBl2={setFilterValBl2}
-					filterValBl3={filterValBl3}
-					setFilterValBl3={setFilterValBl3}
-				></FilterBranches>
+							<p className="mb-1 mt-3 font-bold">Prognoseraum</p>
+							<Select
+								value={filterValPrognoseraum}
+								onChange={setFilterValPrognoseraum}
+								isClearable={true}
+								isSearchable={false}
+								options={getPrognoseraum()}
+								styles={customStyles}
+								placeholder="z.B. Schöneberg Nord"
+								theme={customTheme}
+							/>
 
-				<div className="mt-5">
-					<p className="mb-1 font-bold">Beschäftigtenzahl</p>
-					<Select
-						value={filterValEmployees}
-						onChange={setFilterValEmployees}
-						isClearable={true}
-						isSearchable={false}
-						options={getOptionsEmployees()}
-						styles={customStyles}
-						placeholder="z.B. Mittlere Unternehmen"
-						theme={customTheme}
-						getOptionLabel={getOptionLabel}
-					/>
-				</div>
+							<p className="mb-1 mt-3 font-bold">Planungsraum</p>
+							<Select
+								value={filterValPlanungsraum}
+								onChange={setFilterValPlanungsraum}
+								isClearable={true}
+								isSearchable={false}
+								options={getPlanungsraum()}
+								styles={customStyles}
+								placeholder="z.B. Ackerstraße"
+								theme={customTheme}
+							/>
+						</div>
+					}
+				/>
 
-				<div className="mt-5">
-					<p className="mb-1 font-bold">Unternehmensalter in Jahren</p>
-					<RangeSlider
-						value={filterValAge}
-						setValue={setFilterValAge}
-						minValue={0}
-						maxValue={100}
-						step={1}
-					/>
-				</div>
-				<div className="mt-3">
-					<p className="mb-1 font-bold">Unternehmenstyp</p>
-					<label className="label cursor-pointer px-0  py-1">
-						<span className="text-md label-text">Alle Unternehmenstypen</span>
-						<input
-							type="checkbox"
-							className="checkbox-primary checkbox text-white"
-							checked={filterBType === null}
-							onChange={onBTypeChange}
-							value={-1}
-						/>
-					</label>
-					<label className="label cursor-pointer px-0 py-1">
-						<span className="text-md label-text">Nur Kleingewerbe</span>
-						<input
-							type="checkbox"
-							className="checkbox-primary checkbox text-white"
-							checked={filterBType?.value === "0"}
-							onChange={onBTypeChange}
-							value={0}
-						/>
-					</label>
-					<label className="label cursor-pointer px-0  py-1">
-						<span className="text-md label-text">Nur Handelsregister</span>
-						<input
-							type="checkbox"
-							className="checkbox-primary checkbox text-white"
-							checked={filterBType?.value === "1"}
-							onChange={onBTypeChange}
-							value={1}
-						/>
-					</label>
-				</div>
-				<div className="mt-5">
-					<p className="mb-1 font-bold">Neugründungen</p>
-					<label className="label cursor-pointer px-0">
-						<span className="text-md label-text">
-							Nur Neugründungen anzeigen
-						</span>
-						<input
-							type="checkbox"
-							checked={filterMonthOnly}
-							className="checkbox-primary checkbox text-white"
-							onChange={() => setFilterMonthOnly(!filterMonthOnly)}
-							disabled={filterValDateMonth?.value === 3}
-						/>
-					</label>
-				</div>
+				<Accordion
+					title={"Branchen-Filter"}
+					titleClasses={"!text-base"}
+					content={
+						<div className="mb-3">
+							<FilterBranches
+								filterValBl1={filterValBl1}
+								setFilterValBl1={setFilterValBl1}
+								filterValBl2={filterValBl2}
+								setFilterValBl2={setFilterValBl2}
+								filterValBl3={filterValBl3}
+								setFilterValBl3={setFilterValBl3}
+							></FilterBranches>
+						</div>
+					}
+				/>
+				<Accordion
+					title={"Beschäftigtenzahl"}
+					titleClasses={"!text-base"}
+					content={
+						<div className="mb-3">
+							{/* <p className="mb-1 font-bold">Beschäftigtenzahl</p> */}
+							<Select
+								value={filterValEmployees}
+								onChange={setFilterValEmployees}
+								isClearable={true}
+								isSearchable={false}
+								options={getOptionsEmployees()}
+								styles={customStyles}
+								placeholder="z.B. Mittlere Unternehmen"
+								theme={customTheme}
+								getOptionLabel={getOptionLabel}
+							/>
+						</div>
+					}
+				/>
+				<Accordion
+					title={"Unternehmensalter in Jahren"}
+					titleClasses={"!text-base"}
+					content={
+						<div className="mb-3">
+							{/* <p className="mb-1 font-bold">Unternehmensalter in Jahren</p> */}
+							<RangeSlider
+								value={filterValAge}
+								setValue={setFilterValAge}
+								minValue={0}
+								maxValue={100}
+								step={1}
+							/>
+						</div>
+					}
+				/>
+				<Accordion
+					title={"Unternehmenstyp"}
+					titleClasses={"!text-base"}
+					content={
+						<div className="mb-3">
+							{/* <p className="mb-1 font-bold">Unternehmenstyp</p> */}
+							<label className="label cursor-pointer px-0  py-1">
+								<span className="text-md label-text">
+									Alle Unternehmenstypen
+								</span>
+								<input
+									type="checkbox"
+									className="checkbox-primary checkbox text-white"
+									checked={filterBType === null}
+									onChange={onBTypeChange}
+									value={-1}
+								/>
+							</label>
+							<label className="label cursor-pointer px-0 py-1">
+								<span className="text-md label-text">Nur Kleingewerbe</span>
+								<input
+									type="checkbox"
+									className="checkbox-primary checkbox text-white"
+									checked={filterBType?.value === "0"}
+									onChange={onBTypeChange}
+									value={0}
+								/>
+							</label>
+							<label className="label cursor-pointer px-0  py-1">
+								<span className="text-md label-text">Nur Handelsregister</span>
+								<input
+									type="checkbox"
+									className="checkbox-primary checkbox text-white"
+									checked={filterBType?.value === "1"}
+									onChange={onBTypeChange}
+									value={1}
+								/>
+							</label>
+						</div>
+					}
+				/>
+				<Accordion
+					title={"Neugründungen"}
+					titleClasses={"!text-base"}
+					content={
+						<div className="mb-3">
+							{/* <p className="mb-1 font-bold">Neugründungen</p> */}
+							<label className="label cursor-pointer px-0">
+								<span className="text-md label-text">
+									Nur Neugründungen anzeigen
+								</span>
+								<input
+									type="checkbox"
+									checked={filterMonthOnly}
+									className="checkbox-primary checkbox text-white"
+									onChange={() => setFilterMonthOnly(!filterMonthOnly)}
+									disabled={filterValDateMonth?.value === 3}
+								/>
+							</label>
+						</div>
+					}
+				/>
 
 				<div className="mb-4 mt-6 flex">
 					{hasMobileSize ? (

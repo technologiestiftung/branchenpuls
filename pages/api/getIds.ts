@@ -25,6 +25,8 @@ export default async function handler(
 		year,
 		monthonly,
 		bezirk,
+		planungsraum,
+		prognoseraum,
 	} = req.query;
 
 	let formattedMonth = month?.length === 1 ? `0${month}` : `${month}`;
@@ -73,6 +75,14 @@ export default async function handler(
 
 	if (bezirk) {
 		query = query.eq("bezirk", bezirk);
+	}
+
+	if (planungsraum) {
+		query = query.eq("planungsraum", planungsraum);
+	}
+
+	if (prognoseraum) {
+		query = query.eq("prognoseraum", prognoseraum);
 	}
 
 	query.then((response) => {

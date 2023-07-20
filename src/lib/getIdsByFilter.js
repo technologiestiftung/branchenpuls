@@ -12,7 +12,9 @@ export async function getIdsByFilter(
 	filterValDateMonth,
 	filterValDateYear,
 	filterMonthOnly,
-	filterValBezirk
+	filterValBezirk,
+	filterValPlanungsraum,
+	filterValPrognoseraum
 ) {
 	// make all default val null
 	const sendFilterValBL1 = filterValBL1?.length ? filterValBL1 : false;
@@ -26,6 +28,12 @@ export async function getIdsByFilter(
 	const sendEnd = age[0] === 0 && age[1] === 100 ? false : age[1];
 	const sendMonthOnly = filterMonthOnly === true ? 1 : 0;
 	const sendBezik = filterValBezirk?.value ? filterValBezirk.value : false;
+	const sendPlanungsraum = filterValPlanungsraum?.value
+		? filterValPlanungsraum.value
+		: false;
+	const sendPrognoseraum = filterValPrognoseraum?.value
+		? filterValPrognoseraum.value
+		: false;
 
 	let path = "/api/getIds/?";
 
@@ -47,6 +55,9 @@ export async function getIdsByFilter(
 	path += `&month=${filterValDateMonth}`;
 	path += `&year=${filterValDateYear}`;
 	path += sendBezik ? `&bezirk=${sendBezik}` : "";
+	path += sendPlanungsraum ? `&planungsraum=${sendPlanungsraum}` : "";
+	path += sendPrognoseraum ? `&prognoseraum=${sendPrognoseraum}` : "";
+
 	path += sendMonthOnly === 1 ? `&monthonly=${sendMonthOnly}` : "";
 
 	// path += "&ids=1&ids=2&ids=3&ids=4&ids=5";
@@ -61,7 +72,9 @@ export async function getIdsByFilter(
 		!sendStart &&
 		!sendEnd &&
 		sendMonthOnly !== 1 &&
-		!sendBezik
+		!sendBezik &&
+		!sendPlanungsraum &&
+		!sendPrognoseraum
 	) {
 		console.log("resetting");
 		const newData = [];
