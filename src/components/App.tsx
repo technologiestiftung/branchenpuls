@@ -116,11 +116,11 @@ export const App: FC<AppType> = () => {
 					showWelcome={showWelcome}
 				/>
 
-				<HeatmapToggle
+				{/* <HeatmapToggle
 					color={layersData[activeLayerId]?.colorHex}
 					showHeatmap={showHeatmap}
 					setShowHeatmap={setShowHeatmap}
-				/>
+				/> */}
 
 				{showWelcome ? (
 					<Welcome
