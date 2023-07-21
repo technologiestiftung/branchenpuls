@@ -2,6 +2,7 @@ import { RangeSlider } from "@/components/UI/RangeSlider";
 import { FilterBranches } from "@/components/filter/FilterBranches";
 import { Trash } from "@components/Icons";
 import { PointInfoModal } from "@components/PointInfoModal";
+import { DownloadModal } from "@components/filter/DownloadModal";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers/typed";
 import { ScatterplotLayer } from "@deck.gl/layers/typed";
 import { getIdsOrData } from "@lib/getIdsOrData";
@@ -104,12 +105,17 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	>(null);
 
 	const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
+
 	const [pointData, setPointData] = useState<BusinessAtPointData>();
+
+	const [downloadModalOpen, setDownloadModalOpen] = useState(false);
 
 	const hasMobileSize = useHasMobileSize();
 
 	async function downloadData() {
-		setLoadingFilter(true);
+		setDownloadModalOpen(false);
+
+		setLoading(true);
 		const month = Number(filterValDateMonth.value);
 		const csv = true;
 
@@ -149,7 +155,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			URL.revokeObjectURL(url);
 		}
 
-		setLoadingFilter(false);
+		setLoading(false);
 	}
 
 	useEffect(() => {
@@ -383,6 +389,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				setBusinessAtPoint={setPointData}
 			></PointInfoModal>
 
+			<DownloadModal
+				downloadModalOpen={downloadModalOpen}
+				setDownloadModalOpen={setDownloadModalOpen}
+				confirmed={() => downloadData()}
+			></DownloadModal>
+
 			<div
 				key={"layer-" + layerId}
 				className={`relative z-0 rounded-lg bg-white `}
@@ -584,9 +596,9 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						</button>
 					) : null}
 
-					<div className="mb-4 mt-4 flex">
+					<div className="mb-8 mt-4 flex">
 						<button
-							onClick={downloadData}
+							onClick={() => setDownloadModalOpen(true)}
 							className="btn-outline btn-primary btn-sm btn mr-1 flex-1 font-normal normal-case text-white "
 							// disabled={true}
 						>
