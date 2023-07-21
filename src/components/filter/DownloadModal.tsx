@@ -1,6 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { FC } from "react";
-import { Cross, Spinner } from "../Icons";
+import { Cross } from "../Icons";
 
 export interface DownloadModalType {
 	downloadModalOpen: boolean;

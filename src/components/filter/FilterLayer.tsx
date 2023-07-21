@@ -450,6 +450,9 @@ export const FilterLayer: FC<FilterLayerType> = ({
 								styles={customStyles}
 								placeholder="z.B. Mitte"
 								theme={customTheme}
+								isDisabled={
+									filterValPrognoseraum?.value || filterValPlanungsraum?.value
+								}
 							/>
 
 							<p className="mb-1 mt-3 font-bold">Prognoseraum</p>
@@ -458,10 +461,11 @@ export const FilterLayer: FC<FilterLayerType> = ({
 								onChange={setFilterValPrognoseraum}
 								isClearable={true}
 								isSearchable={true}
-								options={getPrognoseraum()}
+								options={getPrognoseraum(filterValBezirk?.value)}
 								styles={customStyles}
-								placeholder="z.B. Schöneberg Nord"
+								placeholder="z.B. Zentrum"
 								theme={customTheme}
+								isDisabled={filterValPlanungsraum?.value}
 							/>
 
 							<p className="mb-1 mt-3 font-bold">Planungsraum</p>
@@ -470,9 +474,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 								onChange={setFilterValPlanungsraum}
 								isClearable={true}
 								isSearchable={true}
-								options={getPlanungsraum()}
+								options={getPlanungsraum(
+									filterValBezirk?.value,
+									filterValPrognoseraum?.value
+								)}
 								styles={customStyles}
-								placeholder="z.B. Ackerstraße"
+								placeholder="z.B. Unter den Linden"
 								theme={customTheme}
 							/>
 						</div>

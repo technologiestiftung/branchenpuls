@@ -1,10 +1,19 @@
 import branchKeys from "@lib/branchKeys.json";
 import { toFullText } from "@lib/helper";
-import planungsraum from "@lib/planungsraum";
-import prognoseraum from "@lib/prognoseraum";
+import places from "@lib/places";
 
-export function getPlanungsraum() {
-	return planungsraum.map((d) => {
+export function getPlanungsraum(bezirk, prognoseraum) {
+	const planungsraume = [
+		...new Set(
+			places
+				.filter((d) => !bezirk || bezirk === d[2])
+				.filter((d) => !prognoseraum || prognoseraum === d[1])
+				.map((d) => d[0])
+				.sort((a, b) => a.localeCompare(b))
+		),
+	];
+
+	return planungsraume.map((d) => {
 		const obj = {
 			value: d,
 			label: d,
@@ -13,7 +22,16 @@ export function getPlanungsraum() {
 	});
 }
 
-export function getPrognoseraum() {
+export function getPrognoseraum(bezirk) {
+	const prognoseraum = [
+		...new Set(
+			places
+				.filter((d) => !bezirk || bezirk === d[2])
+				.map((d) => d[1])
+				.sort((a, b) => a.localeCompare(b))
+		),
+	];
+
 	return prognoseraum.map((d) => {
 		const obj = {
 			value: d,
