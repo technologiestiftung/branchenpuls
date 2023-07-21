@@ -26,6 +26,9 @@ export const customStyles = {
 		...styles,
 		color: "white",
 	}),
+	indicatorSeparator: () => ({
+		display: "none",
+	}),
 };
 
 export function customTheme(theme) {

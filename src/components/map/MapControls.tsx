@@ -23,6 +23,7 @@ export const MapControls: FC<MapControlsType> = ({
 			className={classNames(
 				"fixed bottom-2 right-3 z-10 mb-3 hidden duration-300 ease-in-out sm:block"
 			)}
+			id="zoom-btns"
 		>
 			<div>
 				<button

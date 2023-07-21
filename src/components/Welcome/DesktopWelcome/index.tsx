@@ -12,11 +12,13 @@ import { CloseIcon } from "next/dist/client/components/react-dev-overlay/interna
 export type DesktopWelcomeProps = {
 	setShowWelcome: Dispatch<SetStateAction<boolean>>;
 	showInfo: Dispatch<SetStateAction<boolean>>;
+	setRunJoyride: Dispatch<SetStateAction<boolean>>;
 };
 
 export const DesktopWelcome = ({
 	setShowWelcome,
 	showInfo,
+	setRunJoyride,
 }: DesktopWelcomeProps) => {
 	return (
 		<div className="hidden h-screen w-screen items-center justify-center py-[18px] sm:flex">
@@ -56,19 +58,12 @@ export const DesktopWelcome = ({
 						Mehr Infos
 					</button>
 
-					{/* <button
-						onClick={() => setShowWelcome(false)}
-						className="mb-[8px] h-[35px] w-[160px] rounded-md border border-primary text-xs text-primary hover:bg-primary hover:text-white "
-					>
-						Bäckereien erkunden
-					</button>
-
 					<button
-						onClick={() => setShowWelcome(false)}
-						className="h-[35px] w-[160px] rounded-md border border-primary text-xs text-primary hover:bg-primary hover:text-white "
+						onClick={() => setRunJoyride(true)}
+						className="h-[35px] w-[160px] rounded-md border-2 border-primary bg-white text-xs text-primary hover:bg-primary hover:text-white"
 					>
-						Hundefrisöre erkunden
-					</button> */}
+						Tour starten
+					</button>
 				</div>
 
 				<p className="mt-[53px] text-xs font-extralight italic text-dark-grey">

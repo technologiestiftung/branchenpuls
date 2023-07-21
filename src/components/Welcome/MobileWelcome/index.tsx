@@ -12,11 +12,13 @@ import { CloseIcon } from "next/dist/client/components/react-dev-overlay/interna
 export type MobileWelcomeProps = {
 	setShowWelcome: Dispatch<SetStateAction<boolean>>;
 	showInfo: Dispatch<SetStateAction<boolean>>;
+	setRunJoyride: Dispatch<SetStateAction<boolean>>;
 };
 
 export const MobileWelcome = ({
 	setShowWelcome,
 	showInfo,
+	setRunJoyride,
 }: MobileWelcomeProps) => {
 	return (
 		<div className="flex h-screen w-screen items-center justify-center py-[18px] sm:hidden">
@@ -50,22 +52,12 @@ export const MobileWelcome = ({
 					>
 						Mehr Infos
 					</button>
-
-					{/* <div className="mb-[16px] flex flex-col">
-						<button
-							onClick={() => setShowWelcome(false)}
-							className="mb-[8px] h-[35px] rounded-md border border-primary text-xs text-primary hover:bg-primary hover:text-white "
-						>
-							Bäckereien erkunden
-						</button>
-
-						<button
-							onClick={() => setShowWelcome(false)}
-							className="h-[35px] rounded-md border border-primary text-xs text-primary hover:bg-primary hover:text-white "
-						>
-							Hundefrisöre erkunden
-						</button>
-					</div> */}
+					<button
+						onClick={() => setRunJoyride(true)}
+						className="mb-[16px] h-[35px] rounded-md border-2 border-primary text-xs text-primary hover:bg-primary hover:text-white"
+					>
+						Tour starten
+					</button>
 				</div>
 
 				<p className="mb-[24px] text-xs font-extralight italic text-dark-grey">

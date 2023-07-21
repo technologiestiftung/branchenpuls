@@ -402,6 +402,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						isSearchable={false}
 						options={getOptionsMonths()}
 						theme={customTheme}
+						styles={customStyles}
 					/>
 				</div>
 
