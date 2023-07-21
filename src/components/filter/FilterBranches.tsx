@@ -2,7 +2,13 @@ import { FC, useState, useEffect } from "react";
 import Select from "react-select";
 
 import { getOptionsBL1, getOptionsBL2, getOptionsBL3 } from "./dropdownOptions";
-import { customTheme, customStyles, noOptionsMessage } from "@lib/selectStyles";
+import {
+	customTheme,
+	customStyles,
+	noOptionsMessage,
+	getOptionLabel,
+	customFilterOption,
+} from "@lib/selectStyles";
 import { Info } from "@components/Icons";
 
 export interface FilterBranchesType {
@@ -53,15 +59,6 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 			setBl1Disabled(false);
 		}
 	}, [filterValBl2]);
-
-	const getOptionLabel = (option) => {
-		return <div dangerouslySetInnerHTML={{ __html: option.label }} />;
-	};
-
-	const customFilterOption = (option, searchText) => {
-		const label = option.data.label.replace(/<\/?[^>]+(>|$)/g, "");
-		return label.toLowerCase().includes(searchText.toLowerCase());
-	};
 
 	return (
 		<div className="">

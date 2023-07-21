@@ -1,5 +1,7 @@
 import { RangeSlider } from "@/components/UI/RangeSlider";
 import { FilterBranches } from "@/components/filter/FilterBranches";
+import { FilterPlaces } from "@/components/filter/FilterPlaces";
+
 import { Trash } from "@components/Icons";
 import { PointInfoModal } from "@components/PointInfoModal";
 import { DownloadModal } from "@components/filter/DownloadModal";
@@ -14,15 +16,12 @@ import { FC, useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import { BusinessAtPointData } from "../../../pages/api/getsinglepointdata";
-import {
-	getOptionsEmployees,
-	getOptionsMonths,
-	getFilterBezirke,
-	getPlanungsraum,
-	getPrognoseraum,
-} from "./dropdownOptions";
-import { customTheme, customStyles } from "@lib/selectStyles";
-import { ViewStateType } from "@common/interfaces";
+import { getOptionsEmployees, getOptionsMonths } from "./dropdownOptions";
+import { customTheme, customStyles, getOptionLabel } from "@lib/selectStyles";
+import { calculatePointRadius } from "@lib/calculatePointRadius";
+import { calculateHeatmapOpacity } from "@lib/calculateHeatmapOpacity";
+
+import { ViewStateType, StringSelection } from "@common/interfaces";
 
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
@@ -96,13 +95,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		label: "Juni 2023",
 	});
 	const [filterValDateYear, setFilterValDateYear] = useState<number>(2023);
-	const [filterValBezirk, setFilterValBezirk] = useState<string | null>(null);
-	const [filterValPlanungsraum, setFilterValPlanungsraum] = useState<
-		string | null
-	>(null);
-	const [filterValPrognoseraum, setFilterValPrognoseraum] = useState<
-		string | null
-	>(null);
+	const [filterValBezirk, setFilterValBezirk] =
+		useState<StringSelection | null>(null);
+	const [filterValPlanungsraum, setFilterValPlanungsraum] =
+		useState<StringSelection | null>(null);
+	const [filterValPrognoseraum, setFilterValPrognoseraum] =
+		useState<StringSelection | null>(null);
 
 	const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
 
@@ -236,30 +234,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		setPointData(data as BusinessAtPointData);
 	}
 
-	function calculatePointRadius(zoom: number) {
-		if (zoom <= 10) {
-			return 30;
-		} else if (zoom >= 15) {
-			return 5;
-		} else {
-			const m = (5 - 30) / (15 - 10); // Calculate the slope
-			const b = 30 - m * 10; // Calculate the y-intercept
-			return m * zoom + b; // Apply linear regression equation
-		}
-	}
-
-	function calculateHeatmapOpacity(zoom: number) {
-		if (zoom <= 10) {
-			return 0.6;
-		} else if (zoom >= 15) {
-			return 0;
-		} else {
-			const m = (0 - 0.6) / (15 - 10); // Calculate the slope
-			const b = 0.6 - m * 10; // Calculate the y-intercept
-			return m * zoom + b; // Apply linear regression equation
-		}
-	}
-
 	const handleHover = ({ x, y, object }) => {
 		if (object) {
 			document.documentElement.classList.add("hovered"); // Add the 'hovered' class to the html element
@@ -383,10 +357,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		}
 	};
 
-	const getOptionLabel = (option) => {
-		return <div dangerouslySetInnerHTML={{ __html: option.label }} />;
-	};
-
 	return (
 		<>
 			<PointInfoModal
@@ -439,50 +409,14 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					title={"Räumliche Filter"}
 					titleClasses={"!text-base"}
 					content={
-						<div className="mb-3">
-							<p className="mb-1 font-bold">Bezirk</p>
-							<Select
-								value={filterValBezirk}
-								onChange={setFilterValBezirk}
-								isClearable={true}
-								isSearchable={true}
-								options={getFilterBezirke()}
-								styles={customStyles}
-								placeholder="z.B. Mitte"
-								theme={customTheme}
-								isDisabled={
-									filterValPrognoseraum?.value || filterValPlanungsraum?.value
-								}
-							/>
-
-							<p className="mb-1 mt-3 font-bold">Prognoseraum</p>
-							<Select
-								value={filterValPrognoseraum}
-								onChange={setFilterValPrognoseraum}
-								isClearable={true}
-								isSearchable={true}
-								options={getPrognoseraum(filterValBezirk?.value)}
-								styles={customStyles}
-								placeholder="z.B. Zentrum"
-								theme={customTheme}
-								isDisabled={filterValPlanungsraum?.value}
-							/>
-
-							<p className="mb-1 mt-3 font-bold">Planungsraum</p>
-							<Select
-								value={filterValPlanungsraum}
-								onChange={setFilterValPlanungsraum}
-								isClearable={true}
-								isSearchable={true}
-								options={getPlanungsraum(
-									filterValBezirk?.value,
-									filterValPrognoseraum?.value
-								)}
-								styles={customStyles}
-								placeholder="z.B. Unter den Linden"
-								theme={customTheme}
-							/>
-						</div>
+						<FilterPlaces
+							filterValBezirk={filterValBezirk}
+							setFilterValBezirk={setFilterValBezirk}
+							filterValPrognoseraum={filterValPrognoseraum}
+							setFilterValPrognoseraum={setFilterValPrognoseraum}
+							filterValPlanungsraum={filterValPlanungsraum}
+							setFilterValPlanungsraum={setFilterValPlanungsraum}
+						></FilterPlaces>
 					}
 				/>
 

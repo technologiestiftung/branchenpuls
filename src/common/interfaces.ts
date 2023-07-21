@@ -6,3 +6,8 @@ export interface ViewStateType {
 	bearing: number;
 	transitionDuration: number;
 }
+
+export interface StringSelection {
+	value: string;
+	label: string;
+}

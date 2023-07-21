@@ -5,7 +5,7 @@ import {
 	BusinessData,
 } from "../../../pages/api/getsinglepointdata";
 import { Cross, Spinner } from "../Icons";
-import { toFullText } from "@lib/helper";
+import { toFullText } from "@lib/toFullText";
 
 export interface PointInfoModalType {
 	poinInfoModalOpen: boolean;

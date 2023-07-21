@@ -1,5 +1,5 @@
 import branchKeys from "@lib/branchKeys.json";
-import { toFullText } from "@lib/helper";
+import { toFullText } from "@/lib/toFullText";
 import places from "@lib/places";
 
 export function getPlanungsraum(bezirk, prognoseraum) {

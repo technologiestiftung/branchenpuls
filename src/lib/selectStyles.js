@@ -42,3 +42,12 @@ export function customTheme(theme) {
 export function noOptionsMessage() {
 	return "keine Auswahl verfügbar";
 }
+
+export function getOptionLabel(option) {
+	return <div dangerouslySetInnerHTML={{ __html: option.label }} />;
+}
+
+export function customFilterOption(option, searchText) {
+	const label = option.data.label.replace(/<\/?[^>]+(>|$)/g, "");
+	return label.toLowerCase().includes(searchText.toLowerCase());
+}
