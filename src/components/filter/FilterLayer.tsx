@@ -89,6 +89,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
 	const [loadingFilter, setLoadingFilter] = useState<boolean>(false);
 
+	const [showPoints, setShowPoints] = useState<boolean>(false);
+
 	// @todo set date
 	const [filterValDateMonth, setFilterValDateMonth] = useState<object>({
 		value: 6,
@@ -246,26 +248,51 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		if (filteredData && activeLayerId === layerId) {
 			const layers = [];
 
-			layers.push(
-				new ScatterplotLayer({
-					id: "scatterplot-layer" + layerId,
-					data: filteredData,
-					pickable: true,
-					getRadius: calculatePointRadius(viewState.zoom),
-					getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-					getFillColor: layersData[layerId].color, // [86, 189, 102],
-					opacity: 0.1,
-					onClick: (info) => {
-						setPoinInfoModalOpen(true);
-						getPointInfo(info);
-					},
-					transitions: {
-						// transition with a duration of 3000ms
-						opacity: 500,
-					},
-					onHover: handleHover,
-				})
-			);
+			if (!showPoints) {
+				layers.push(
+					new ScatterplotLayer({
+						id: "scatterplot-layer" + layerId,
+						data: filteredData,
+						pickable: true,
+						getRadius: calculatePointRadius(viewState.zoom),
+						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
+						getFillColor: layersData[layerId].color, // [86, 189, 102],
+						opacity: 0,
+						onClick: (info) => {
+							setPoinInfoModalOpen(true);
+							getPointInfo(info);
+						},
+						transitions: {
+							// transition with a duration of 3000ms
+							opacity: 500,
+						},
+						onHover: handleHover,
+					})
+				);
+			}
+
+			if (showPoints) {
+				layers.push(
+					new ScatterplotLayer({
+						id: "scatterplot-layer" + layerId,
+						data: filteredData,
+						pickable: true,
+						getRadius: calculatePointRadius(viewState.zoom),
+						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
+						getFillColor: layersData[layerId].color, // [86, 189, 102],
+						opacity: 0.1,
+						onClick: (info) => {
+							setPoinInfoModalOpen(true);
+							getPointInfo(info);
+						},
+						transitions: {
+							// transition with a duration of 3000ms
+							opacity: 500,
+						},
+						onHover: handleHover,
+					})
+				);
+			}
 
 			layers.push(
 				new HeatmapLayer({
@@ -310,6 +337,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	}, [
 		layerType,
 		filteredData,
+		showPoints,
 		activeLayerId,
 		viewState,
 		layersData,
@@ -317,9 +345,20 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	]);
 
 	useEffect(() => {
+		if (showPoints) {
+			return;
+		}
+
+		const id = setTimeout(() => setShowPoints(true), 1000);
+
+		return () => clearTimeout(id);
+	}, [showPoints]);
+
+	useEffect(() => {
 		layersData[layerId].count = filteredData.length;
 		const newLayerData = JSON.parse(JSON.stringify(layersData));
 		setLayersData(newLayerData);
+		setShowPoints(false);
 	}, [filteredData]);
 
 	// a function that replaces a part of the array with a new value
