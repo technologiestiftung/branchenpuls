@@ -2,9 +2,10 @@ import { RangeSlider } from "@/components/UI/RangeSlider";
 import { FilterBranches } from "@/components/filter/FilterBranches";
 import { Trash } from "@components/Icons";
 import { PointInfoModal } from "@components/PointInfoModal";
+import { DownloadModal } from "@components/filter/DownloadModal";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers/typed";
 import { ScatterplotLayer } from "@deck.gl/layers/typed";
-import { getIdsByFilter } from "@lib/getIdsByFilter";
+import { getIdsOrData } from "@lib/getIdsOrData";
 import { getSinglePointData } from "@lib/getSinglePointData";
 import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
 import { Accordion } from "@components/Accordion";
@@ -104,9 +105,58 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	>(null);
 
 	const [poinInfoModalOpen, setPoinInfoModalOpen] = useState(false);
+
 	const [pointData, setPointData] = useState<BusinessAtPointData>();
 
+	const [downloadModalOpen, setDownloadModalOpen] = useState(false);
+
 	const hasMobileSize = useHasMobileSize();
+
+	async function downloadData() {
+		setDownloadModalOpen(false);
+
+		setLoading(true);
+		const month = Number(filterValDateMonth.value);
+		const csv = true;
+
+		const csvData = await getIdsOrData(
+			dataPointsIndexed,
+			filterValAge,
+			filterValEmployees,
+			filterBType,
+			filterValBl1,
+			filterValBl2,
+			filterValBl3,
+			month,
+			filterValDateYear,
+			filterMonthOnly,
+			filterValBezirk,
+			filterValPlanungsraum,
+			filterValPrognoseraum,
+			csv
+		);
+
+		const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+
+		if (navigator.msSaveBlob) {
+			// For Internet Explorer and Microsoft Edge
+			navigator.msSaveBlob(blob, "branchenpuls.csv");
+		} else {
+			// For other browsers
+			const link = document.createElement("a");
+			const url = URL.createObjectURL(blob);
+			link.setAttribute("href", url);
+			link.setAttribute("download", "branchenpuls.csv");
+
+			document.body.appendChild(link);
+			link.click();
+
+			// Clean up the URL object after the download is initiated
+			URL.revokeObjectURL(url);
+		}
+
+		setLoading(false);
+	}
 
 	useEffect(() => {
 		// load the data for a month. the data includes the coordinates and the ids of the points
@@ -143,7 +193,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				setLoadingFilter(true);
 				const month = Number(filterValDateMonth.value);
 
-				const newFilteredData = await getIdsByFilter(
+				const newFilteredData = await getIdsOrData(
 					dataPointsIndexed,
 					filterValAge,
 					filterValEmployees,
@@ -347,6 +397,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				setBusinessAtPoint={setPointData}
 			></PointInfoModal>
 
+			<DownloadModal
+				downloadModalOpen={downloadModalOpen}
+				setDownloadModalOpen={setDownloadModalOpen}
+				confirmed={() => downloadData()}
+			></DownloadModal>
+
 			<div
 				key={"layer-" + layerId}
 				className={`relative z-0 rounded-lg bg-white `}
@@ -389,7 +445,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 								value={filterValBezirk}
 								onChange={setFilterValBezirk}
 								isClearable={true}
-								isSearchable={false}
+								isSearchable={true}
 								options={getFilterBezirke()}
 								styles={customStyles}
 								placeholder="z.B. Mitte"
@@ -401,7 +457,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 								value={filterValPrognoseraum}
 								onChange={setFilterValPrognoseraum}
 								isClearable={true}
-								isSearchable={false}
+								isSearchable={true}
 								options={getPrognoseraum()}
 								styles={customStyles}
 								placeholder="z.B. Schöneberg Nord"
@@ -413,7 +469,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 								value={filterValPlanungsraum}
 								onChange={setFilterValPlanungsraum}
 								isClearable={true}
-								isSearchable={false}
+								isSearchable={true}
 								options={getPlanungsraum()}
 								styles={customStyles}
 								placeholder="z.B. Ackerstraße"
@@ -538,23 +594,33 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					}
 				/>
 
-				<div className="mb-4 mt-6 flex">
+				<div className="mb-4 mt-10">
 					{hasMobileSize ? (
 						<button
 							onClick={() => setOpen(false)}
-							className="btn-primary btn-sm btn  mr-1 flex-1 font-normal normal-case text-white "
+							className="btn-primary btn-sm btn w-full font-normal normal-case text-white"
 						>
 							Ansehen
 						</button>
 					) : null}
 
-					<button
-						onClick={resetFilterData}
-						className="btn-outline btn-primary btn-sm btn ml-1 flex-1 font-normal normal-case text-white "
-						// disabled={true}
-					>
-						Filter zurücksetzen
-					</button>
+					<div className="mb-8 mt-4 flex">
+						<button
+							onClick={() => setDownloadModalOpen(true)}
+							className="btn-outline btn-primary btn-sm btn mr-1 flex-1 font-normal normal-case text-white "
+							// disabled={true}
+						>
+							CSV Download
+						</button>
+
+						<button
+							onClick={resetFilterData}
+							className="btn-outline btn-primary btn-sm btn ml-1 flex-1 font-normal normal-case text-white "
+							// disabled={true}
+						>
+							Filter zurücksetzen
+						</button>
+					</div>
 				</div>
 			</div>
 		</>
