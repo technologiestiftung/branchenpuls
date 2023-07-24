@@ -51,6 +51,8 @@ export interface FilterLayerType {
 	setDeckLayers: any;
 	viewState: ViewStateType;
 	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
+	activeFiltersList: number[];
+	setActiveFiltersList: (x: number[]) => void;
 }
 
 export const FilterLayer: FC<FilterLayerType> = ({
@@ -69,6 +71,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	setStoreDataPoints,
 	viewState,
 	searchResult,
+	activeFiltersList,
+	setActiveFiltersList,
 }) => {
 	const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
 	const [dataPoints, setDataPoints] = useState([]);
@@ -76,7 +80,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [filteredData, setFilteredData] = useState(dataPoints);
 	const [pageLoaded, setPageLoaded] = useState<boolean>(false);
 
-	const [layerType, setLayerType] = useState("scatterplot");
 	const [filterValAge, setFilterValAge] = useState<number[]>([0, 100]);
 	const [filterValEmployees, setFilterValEmployees] = useState<object | null>(
 		null
@@ -155,6 +158,67 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
 		setLoading(false);
 	}
+
+	useEffect(() => {
+		if (activeLayerId !== layerId) return;
+		const activeFilterNames = [];
+		if (filterValBezirk?.value) {
+			activeFilterNames.push(filterValBezirk.value);
+		}
+		if (filterValPrognoseraum?.value) {
+			activeFilterNames.push(filterValPrognoseraum.value);
+		}
+		if (filterValPlanungsraum?.value) {
+			activeFilterNames.push(filterValPlanungsraum.value);
+		}
+		if (filterValBl1?.length) {
+			filterValBl1.forEach((d) => {
+				activeFilterNames.push("Branchentyp " + d.id);
+			});
+		}
+		if (filterValBl2?.length) {
+			filterValBl2.forEach((d) => {
+				activeFilterNames.push("NACE " + d.id);
+			});
+		}
+		if (filterValBl3?.length) {
+			filterValBl3.forEach((d) => {
+				activeFilterNames.push("IHK ID " + d.id);
+			});
+		}
+		if (filterValEmployees?.value) {
+			let label = filterValEmployees.label;
+			label = label.replace("<br/>", "");
+			label = label.replace(/<small>.*?<\/small>/g, "");
+			activeFilterNames.push(label);
+		}
+		if (filterValAge.toString() !== [0, 100].toString()) {
+			activeFilterNames.push(`Alter: ${filterValAge[0]}-${filterValAge[1]}`);
+		}
+		if (filterBType?.value) {
+			activeFilterNames.push(
+				filterBType?.value === "0" ? "Nur Kleingewerbe" : "Nur Handelsregister"
+			);
+		}
+		if (filterMonthOnly) {
+			activeFilterNames.push("Neugründungen");
+		}
+
+		setActiveFiltersList(activeFilterNames);
+	}, [
+		filterValAge,
+		filterValEmployees,
+		filterBType,
+		filterValBl1,
+		filterValBl2,
+		filterValBl3,
+		filterValDateYear,
+		filterMonthOnly,
+		filterValBezirk,
+		filterValPlanungsraum,
+		filterValPrognoseraum,
+		activeLayerId,
+	]);
 
 	useEffect(() => {
 		// load the data for a month. the data includes the coordinates and the ids of the points
@@ -307,14 +371,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			//   setDeckLayers([...deckLayers]);
 			// }
 		}
-	}, [
-		layerType,
-		filteredData,
-		activeLayerId,
-		viewState,
-		layersData,
-		searchResult,
-	]);
+	}, [filteredData, activeLayerId, viewState, layersData, searchResult]);
 
 	useEffect(() => {
 		layersData[layerId].count = filteredData.length;
@@ -558,7 +615,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						<button
 							onClick={resetFilterData}
 							className="btn-outline btn-primary btn-sm btn ml-1 flex-1 font-normal normal-case text-white "
-							// disabled={true}
+							disabled={!activeFiltersList.length}
 						>
 							Filter zurücksetzen
 						</button>

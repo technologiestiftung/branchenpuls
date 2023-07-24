@@ -11,6 +11,8 @@ import { ViewStateType } from "@common/interfaces";
 export interface SidebarContentFilterType {
 	viewState: ViewStateType;
 	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
+	activeFiltersList: number[];
+	setActiveFiltersList: (x: number[]) => void;
 }
 
 export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
@@ -25,6 +27,8 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 	setActiveLayerId,
 	viewState,
 	searchResult,
+	activeFiltersList,
+	setActiveFiltersList,
 }) => {
 	const [storeDataPoints, setStoreDataPoints] = useState({});
 
@@ -86,6 +90,8 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 								setStoreDataPoints={setStoreDataPoints}
 								viewState={viewState}
 								searchResult={searchResult}
+								activeFiltersList={activeFiltersList}
+								setActiveFiltersList={setActiveFiltersList}
 							></FilterLayer>
 						</div>
 					);
