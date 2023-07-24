@@ -4,10 +4,9 @@ import { Plus, Minus, Box } from "@components/Icons";
 import { ViewStateType } from "@common/interfaces";
 
 export interface MapControlsType {
-	viewState: any;
 	setViewState: (pitch: any) => void;
 	minZoom: number;
-	viewStae: ViewStateType;
+	viewState: ViewStateType;
 }
 
 export const MapControls: FC<MapControlsType> = ({
