@@ -81,10 +81,12 @@ export const App = () => {
 					viewState={viewState}
 					setViewState={setViewState}
 				></MapComponent>
-				<FilterIndicator
-					activeFiltersList={activeFiltersList}
-					setActiveFiltersList={setActiveFiltersList}
-				></FilterIndicator>
+				<div className="fixed right-3 top-5 flex flex-col flex-wrap-reverse">
+					<FilterIndicator
+						activeFiltersList={activeFiltersList}
+						badgeClasses="shadow-lg"
+					></FilterIndicator>
+				</div>
 				<div className={showWelcome ? "opacity-0" : ""}>
 					<SidebarWrapper
 						classes="z-20"

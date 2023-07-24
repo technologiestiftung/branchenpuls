@@ -224,12 +224,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		// load the data for a month. the data includes the coordinates and the ids of the points
 		(async () => {
 			setLoading(true);
-			console.log(
-				"loading month data for layer:",
-				layerId,
-				filterValDateMonth.value
-			);
-
 			const month = Number(filterValDateMonth.value);
 			let dataPoints;
 			if (storeDataPoints[month]) {
@@ -428,6 +422,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				downloadModalOpen={downloadModalOpen}
 				setDownloadModalOpen={setDownloadModalOpen}
 				confirmed={() => downloadData()}
+				activeFiltersList={activeFiltersList}
 			></DownloadModal>
 
 			<div
