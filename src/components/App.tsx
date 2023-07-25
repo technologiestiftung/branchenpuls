@@ -1,6 +1,12 @@
 "use client";
 import { FC, useState, useEffect } from "react";
-import { MapComponent } from "@components/map/Map";
+import dynamic from "next/dynamic";
+const MapComponent = dynamic(
+	() => import("@components/map/Map").then((mod) => mod.MapComponent),
+	{
+		ssr: false,
+	}
+);
 import { SidebarContentFilter } from "@components/Sidebar/content/SidebarContentFilter";
 import { SidebarWrapper } from "@components/Sidebar/SidebarWrapper";
 import { NavView, SidebarNav } from "@components/Sidebar/SidebarNav";
