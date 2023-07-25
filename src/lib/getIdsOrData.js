@@ -1,14 +1,16 @@
 import pako from "pako";
 const devMode = process.env.NODE_ENV === "development";
+import { getSendValues } from "./getSendValues";
+import { getPath } from "./getPath";
 
 export async function getIdsOrData(
 	dataPointsIndexed,
-	age,
-	employees,
+	filterValAge,
+	filterValEmployees,
 	filterBType,
-	filterValBL1,
-	filterValBL2,
-	filterValBL3,
+	filterValBl1,
+	filterValBl2,
+	filterValBl3,
 	filterValDateMonth,
 	filterValDateYear,
 	filterMonthOnly,
@@ -17,58 +19,58 @@ export async function getIdsOrData(
 	filterValPrognoseraum,
 	csv
 ) {
-	// make all default val null
-	const sendFilterValBL1 = filterValBL1?.length ? filterValBL1 : false;
-	const sendFilterValBL2 = filterValBL2?.length ? filterValBL2 : false;
-	const sendFilterValBL3 = filterValBL3?.length ? filterValBL3 : false;
-	const sendEmployees = !isNaN(parseFloat(employees?.value))
-		? employees.value
-		: false;
-	const sendBType = filterBType !== null ? filterBType.value : false;
-	const sendStart = age[0] === 0 && age[1] === 100 ? false : age[0];
-	const sendEnd = age[0] === 0 && age[1] === 100 ? false : age[1];
-	const sendMonthOnly = filterMonthOnly === true ? 1 : 0;
-	const sendBezik = filterValBezirk?.value ? filterValBezirk.value : false;
-	const sendPlanungsraum = filterValPlanungsraum?.value
-		? filterValPlanungsraum.value
-		: false;
-	const sendPrognoseraum = filterValPrognoseraum?.value
-		? filterValPrognoseraum.value
-		: false;
+	const {
+		sendFilterValBl1,
+		sendFilterValBl2,
+		sendFilterValBl3,
+		sendEmployees,
+		sendBType,
+		sendStart,
+		sendEnd,
+		sendMonthOnly,
+		sendBezik,
+		sendPlanungsraum,
+		sendPrognoseraum,
+		sendMonth,
+		sendYear,
+	} = getSendValues({
+		filterValBl1,
+		filterValBl2,
+		filterValBl3,
+		filterValEmployees,
+		filterBType,
+		filterValAge,
+		filterMonthOnly,
+		filterValBezirk,
+		filterValPlanungsraum,
+		filterValPrognoseraum,
+		filterValDateMonth,
+		filterValDateYear,
+	});
 
-	let path = "/api/getIdsOrData/?";
-
-	path += sendStart !== false ? `&start=${sendStart}` : "";
-	path += sendEnd !== false ? `&end=${sendEnd}` : "";
-	path += !isNaN(parseFloat(sendEmployees))
-		? `&employees=${sendEmployees}`
-		: "";
-	path += sendFilterValBL1
-		? sendFilterValBL1.map((d) => `&bl1=${d.value}`).join("")
-		: "";
-	path += sendFilterValBL2
-		? sendFilterValBL2.map((d) => `&bl2=${d.value}`).join("")
-		: "";
-	path += sendFilterValBL3
-		? sendFilterValBL3.map((d) => `&bl3=${d.value}`).join("")
-		: "";
-	path += sendBType !== false ? `&bt=${sendBType}` : "";
-	path += `&month=${filterValDateMonth}`;
-	path += `&year=${filterValDateYear}`;
-	path += sendBezik ? `&bezirk=${sendBezik}` : "";
-	path += sendPlanungsraum ? `&planungsraum=${sendPlanungsraum}` : "";
-	path += sendPrognoseraum ? `&prognoseraum=${sendPrognoseraum}` : "";
-
-	path += sendMonthOnly === 1 ? `&monthonly=${sendMonthOnly}` : "";
-	path += csv ? `&csv=true` : "";
-
-	// path += "&ids=1&ids=2&ids=3&ids=4&ids=5";
+	let { path } = getPath({
+		path: "/api/getIdsOrData/?",
+		sendFilterValBl1,
+		sendFilterValBl2,
+		sendFilterValBl3,
+		sendEmployees,
+		sendBType,
+		sendStart,
+		sendEnd,
+		sendMonthOnly,
+		sendBezik,
+		sendPlanungsraum,
+		sendPrognoseraum,
+		sendMonth,
+		sendYear,
+		csv,
+	});
 
 	// when there is no filter set return the data
 	if (
-		!sendFilterValBL1 &&
-		!sendFilterValBL2 &&
-		!sendFilterValBL3 &&
+		!sendFilterValBl1 &&
+		!sendFilterValBl2 &&
+		!sendFilterValBl3 &&
 		!sendEmployees &&
 		sendBType === false &&
 		!sendStart &&
@@ -84,7 +86,6 @@ export async function getIdsOrData(
 		Object.keys(dataPointsIndexed).forEach((d) => {
 			newData.push(dataPointsIndexed[d]);
 		});
-
 		return newData;
 	}
 

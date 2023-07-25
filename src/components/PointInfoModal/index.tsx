@@ -46,31 +46,29 @@ const Section: FC<SectionProps> = ({ index, totalCount, business }) => {
 				<Subsection
 					title="Branchentyp"
 					content={
-						business.branch_top_level_description
-							? toFullText(business.branch_top_level_description)
+						business.business_type_desc
+							? toFullText(business.business_type_desc)
 							: "keine Angabe"
 					}
 				></Subsection>
 				<Subsection
 					title="NACE"
 					content={
-						business.branch_nace
-							? toFullText(business.branch_nace)
-							: "keine Angabe"
+						business.nace_desc ? toFullText(business.nace_desc) : "keine Angabe"
 					}
 				></Subsection>
 				<Subsection
 					title="IHK ID"
 					content={
-						business.branch_description
-							? toFullText(business.branch_description)
+						business.ihk_branch_desc
+							? toFullText(business.ihk_branch_desc)
 							: "keine Angabe"
 					}
 				></Subsection>
 				<Subsection
 					title="Beschäftigtenanzahl"
 					content={
-						business.employees_range ? business.employees_range : "keine Angabe"
+						business.employees_desc ? business.employees_desc : "keine Angabe"
 					}
 				></Subsection>
 				<Subsection
@@ -84,7 +82,9 @@ const Section: FC<SectionProps> = ({ index, totalCount, business }) => {
 				<Subsection
 					title="Unternehmenstyp"
 					content={
-						business.business_type ? business.business_type : "keine Angabe"
+						business.business_type_desc
+							? business.business_type_desc
+							: "keine Angabe"
 					}
 				></Subsection>
 			</div>
