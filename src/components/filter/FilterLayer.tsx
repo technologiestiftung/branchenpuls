@@ -114,7 +114,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		setDownloadModalOpen(false);
 
 		setLoading(true);
-		const month = Number(filterValDateMonth.value);
 		const csv = true;
 
 		const csvData = await getIdsOrData(
@@ -125,7 +124,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			filterValBl1,
 			filterValBl2,
 			filterValBl3,
-			month,
+			filterValDateMonth,
 			filterValDateYear,
 			filterMonthOnly,
 			filterValBezirk,
@@ -189,7 +188,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		if (pageLoaded) {
 			const timer = setTimeout(async () => {
 				setLoadingFilter(true);
-				const month = Number(filterValDateMonth.value);
 
 				const newFilteredData = await getIdsOrData(
 					dataPointsIndexed,
@@ -199,7 +197,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					filterValBl1,
 					filterValBl2,
 					filterValBl3,
-					month,
+					filterValDateMonth,
 					filterValDateYear,
 					filterMonthOnly,
 					filterValBezirk,
@@ -228,7 +226,22 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	]);
 
 	async function getPointInfo(info) {
-		const data = await getSinglePointData(info.object.id, info.object.p);
+		const data = await getSinglePointData({
+			filterValAge,
+			filterValEmployees,
+			filterBType,
+			filterValBl1,
+			filterValBl2,
+			filterValBl3,
+			filterValDateMonth,
+			filterValDateYear,
+			filterMonthOnly,
+			filterValBezirk,
+			filterValPlanungsraum,
+			filterValPrognoseraum,
+			filterId: info.object.id,
+			filterPosition: info.object.p,
+		});
 		// the following line is on purpose to reduce fast jumping elements.
 		await new Promise((resolve) => setTimeout(() => resolve(), 1000));
 		setPointData(data as BusinessAtPointData);
