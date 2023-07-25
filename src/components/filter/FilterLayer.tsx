@@ -162,6 +162,11 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	useEffect(() => {
 		if (activeLayerId !== layerId) return;
 		const activeFilterNames = [];
+
+		if (filterValDateMonth?.value) {
+			activeFilterNames.push(filterValDateMonth?.label);
+		}
+
 		if (filterValBezirk?.value) {
 			activeFilterNames.push(filterValBezirk.value);
 		}
@@ -218,6 +223,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		filterValPlanungsraum,
 		filterValPrognoseraum,
 		activeLayerId,
+		filterValDateMonth,
 	]);
 
 	useEffect(() => {
@@ -610,7 +616,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						<button
 							onClick={resetFilterData}
 							className="btn-outline btn-primary btn-sm btn ml-1 flex-1 font-normal normal-case text-white "
-							disabled={!activeFiltersList.length}
+							disabled={activeFiltersList.length === 1}
 						>
 							Filter zurücksetzen
 						</button>

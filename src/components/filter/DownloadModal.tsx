@@ -73,6 +73,7 @@ export const DownloadModal: FC<DownloadModalType> = ({
 											<div className="flex flex-wrap pb-2 pt-4">
 												<FilterIndicator
 													activeFiltersList={activeFiltersList}
+													badgeClasses=""
 												></FilterIndicator>
 											</div>
 										</>

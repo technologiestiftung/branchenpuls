@@ -13,6 +13,8 @@ import { ViewStateType } from "@common/interfaces";
 import { JoyrideWrapper } from "@components/JoyrideWrapper";
 import { getNextOrPreviousId } from "@lib/getNextOrPreviousId";
 import { FilterIndicator } from "@components/FilterIndicator";
+import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
+import { Filter } from "@components/Icons/Filter";
 
 export const App = () => {
 	const [deckLayers, setDeckLayers] = useState([]);
@@ -37,6 +39,7 @@ export const App = () => {
 		transitionDuration: 300,
 	});
 	const [activeFiltersList, setActiveFiltersList] = useState<number[]>([]);
+	const [showMobileFilter, setShowMobileFilter] = useState<boolean>(false);
 
 	useEffect(() => {
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
@@ -52,6 +55,8 @@ export const App = () => {
 		);
 		setActiveLayerId(nextlayerId);
 	}
+
+	const hasMobileSize = useHasMobileSize();
 
 	return (
 		<>
@@ -81,12 +86,39 @@ export const App = () => {
 					viewState={viewState}
 					setViewState={setViewState}
 				></MapComponent>
-				<div className="fixed right-3 top-5 flex flex-col flex-wrap-reverse">
-					<FilterIndicator
-						activeFiltersList={activeFiltersList}
-						badgeClasses="shadow-lg"
-					></FilterIndicator>
-				</div>
+
+				{!hasMobileSize && (
+					<div className="fixed right-3 top-5 flex flex-col flex-wrap-reverse">
+						<FilterIndicator
+							activeFiltersList={activeFiltersList}
+							badgeClasses="shadow-lg"
+						></FilterIndicator>
+					</div>
+				)}
+
+				{hasMobileSize && activeFiltersList.length != 1 && (
+					<button
+						onClick={() => setShowMobileFilter(!showMobileFilter)}
+						className="fixed right-[28px] top-6 z-10 flex h-[40px] w-[40px] cursor-pointer flex-col flex-wrap-reverse justify-between rounded-[4px] bg-primary p-[8px] text-white shadow-lg hover:bg-darker-primary"
+					>
+						<Filter />
+					</button>
+				)}
+
+				{hasMobileSize && showMobileFilter && (
+					<div
+						onClick={() => setShowMobileFilter(!showMobileFilter)}
+						className="fixed right-0 top-0 z-40 flex h-full w-full flex-col flex-wrap-reverse bg-white/70 pt-20 "
+					>
+						<div className="">
+							<FilterIndicator
+								activeFiltersList={activeFiltersList}
+								badgeClasses="shadow-lg"
+							></FilterIndicator>
+						</div>
+					</div>
+				)}
+
 				<div className={showWelcome ? "opacity-0" : ""}>
 					<SidebarWrapper
 						classes="z-20"
