@@ -61,7 +61,7 @@ export const DownloadModal: FC<DownloadModalType> = ({
 							</Dialog.Title>
 							<Dialog.Panel>
 								<div className="pb-6">
-									{activeFiltersList.length > 0 && (
+									{activeFiltersList.length > 1 && (
 										<>
 											Bitte beachten Sie, dass der Download Ihren
 											Filtereinstellungen entspricht. Wenn Sie alle Daten für
@@ -69,11 +69,13 @@ export const DownloadModal: FC<DownloadModalType> = ({
 											die Filter zurück.
 											<br />
 											<br />
-											Folgende Filter wurden gesetzt:
+											Folgende Filter wurden für den Datensatz vom{" "}
+											{activeFiltersList[0]} gesetzt:
 											<div className="flex flex-wrap pb-2 pt-4">
 												<FilterList
 													activeFiltersList={activeFiltersList}
-													badgeClasses=""
+													badgeClasses="mr-2"
+													hideFirstEntry={true}
 												></FilterList>
 											</div>
 										</>
