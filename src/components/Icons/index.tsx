@@ -52,3 +52,4 @@ export { Square } from "./Square";
 export { ThermometerHalf } from "./ThermometerHalf";
 export { Trash } from "./Trash";
 export { WateringCan } from "./WateringCan";
+export { Pills } from "./Pills";

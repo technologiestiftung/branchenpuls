@@ -1,7 +1,7 @@
 import { Dialog } from "@headlessui/react";
 import { FC } from "react";
 import { Cross } from "../Icons";
-import { FilterIndicator } from "@components/FilterIndicator";
+import { FilterList } from "@/components/FilterIndicator/FilterList";
 
 export interface DownloadModalType {
 	downloadModalOpen: boolean;
@@ -71,10 +71,10 @@ export const DownloadModal: FC<DownloadModalType> = ({
 											<br />
 											Folgende Filter wurden gesetzt:
 											<div className="flex flex-wrap pb-2 pt-4">
-												<FilterIndicator
+												<FilterList
 													activeFiltersList={activeFiltersList}
 													badgeClasses=""
-												></FilterIndicator>
+												></FilterList>
 											</div>
 										</>
 									)}
