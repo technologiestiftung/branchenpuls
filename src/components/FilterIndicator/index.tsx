@@ -53,7 +53,7 @@ export const FilterIndicator: FC<FilterIndicatorType> = ({
 									<Cross />
 								</button>
 								<h1 className="mb-[16px] text-lg font-bold text-dark-grey">
-									Gesetzte Filter für {activeFiltersList[0]}
+									Aktive Filter {activeFiltersList[0]}
 								</h1>
 								<div className="max-h-[50vh] overflow-scroll">
 									<FilterList
