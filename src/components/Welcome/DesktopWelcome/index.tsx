@@ -7,7 +7,7 @@ import {
 	TSBLogo,
 } from "@components/logos";
 import React, { Dispatch, SetStateAction } from "react";
-import { CloseIcon } from "next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon";
+import { Cross } from "@components/Icons";
 
 export type DesktopWelcomeProps = {
 	setShowWelcome: Dispatch<SetStateAction<boolean>>;
@@ -27,7 +27,7 @@ export const DesktopWelcome = ({
 					onClick={() => setShowWelcome(false)}
 					className="flex w-full justify-end text-dark-grey"
 				>
-					<CloseIcon />
+					<Cross />
 				</button>
 
 				<h1 className="text-2xl font-bold text-dark-grey">

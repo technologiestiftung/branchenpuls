@@ -1,17 +1,20 @@
 import { Dialog } from "@headlessui/react";
 import { FC } from "react";
 import { Cross } from "../Icons";
+import { FilterList } from "@/components/FilterIndicator/FilterList";
 
 export interface DownloadModalType {
 	downloadModalOpen: boolean;
 	setDownloadModalOpen: (open: boolean) => void;
 	confirmed: () => void;
+	activeFiltersList: number[];
 }
 
 export const DownloadModal: FC<DownloadModalType> = ({
 	downloadModalOpen,
 	setDownloadModalOpen,
 	confirmed,
+	activeFiltersList,
 }) => {
 	function closeModal() {
 		setDownloadModalOpen(false);
@@ -58,12 +61,25 @@ export const DownloadModal: FC<DownloadModalType> = ({
 							</Dialog.Title>
 							<Dialog.Panel>
 								<div className="pb-6">
-									Bitte beachten Sie, dass der Download Ihren
-									Filtereinstellungen entspricht, falls Sie welche festgelegt
-									haben. Wenn Sie alle Daten für einen Monat herunterladen
-									möchten, setzen Sie bitte zuerst die Filter zurück.
-									<br />
-									<br />
+									{activeFiltersList.length > 1 && (
+										<>
+											Bitte beachten Sie, dass der Download Ihren
+											Filtereinstellungen entspricht. Wenn Sie alle Daten für
+											einen Monat herunterladen möchten, setzen Sie bitte zuerst
+											die Filter zurück.
+											<br />
+											<br />
+											Folgende Filter wurden für den Datensatz vom{" "}
+											{activeFiltersList[0]} gesetzt:
+											<div className="flex flex-wrap pb-2 pt-4">
+												<FilterList
+													activeFiltersList={activeFiltersList}
+													badgeClasses="mr-2"
+													hideFirstEntry={true}
+												></FilterList>
+											</div>
+										</>
+									)}
 									Die Daten werden als{" "}
 									<span className="font-bold">CSV-Datei</span> bereitgestellt.
 									CSV steht für "Comma-separated Values" und ist ein Format, das

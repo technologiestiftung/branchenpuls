@@ -12,6 +12,7 @@ import { SidebarContentSearch } from "@components/Sidebar/content/SidebarContent
 import { ViewStateType } from "@common/interfaces";
 import { JoyrideWrapper } from "@components/JoyrideWrapper";
 import { getNextOrPreviousId } from "@lib/getNextOrPreviousId";
+import { FilterIndicator } from "@components/FilterIndicator";
 
 export const App = () => {
 	const [deckLayers, setDeckLayers] = useState([]);
@@ -35,6 +36,7 @@ export const App = () => {
 		bearing: 0,
 		transitionDuration: 300,
 	});
+	const [activeFiltersList, setActiveFiltersList] = useState<number[]>([]);
 
 	useEffect(() => {
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
@@ -79,6 +81,11 @@ export const App = () => {
 					viewState={viewState}
 					setViewState={setViewState}
 				></MapComponent>
+
+				<FilterIndicator
+					activeFiltersList={activeFiltersList}
+				></FilterIndicator>
+
 				<div className={showWelcome ? "opacity-0" : ""}>
 					<SidebarWrapper
 						classes="z-20"
@@ -101,6 +108,8 @@ export const App = () => {
 								setActiveLayerId={setActiveLayerId}
 								viewState={viewState}
 								searchResult={searchResult}
+								activeFiltersList={activeFiltersList}
+								setActiveFiltersList={setActiveFiltersList}
 							/>
 						</span>
 						<span className={navView === "info" ? "" : "hidden"}>
