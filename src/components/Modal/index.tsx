@@ -18,39 +18,33 @@ export const Modal: FC<ModalType> = ({
 	return (
 		<>
 			<Dialog
-				as="div"
-				className="fixed inset-0"
-				onClose={() => onClose()}
 				open={open}
+				onClose={() => onClose()}
+				className="relative z-50"
 				style={{ zIndex: 70 }}
 			>
-				<div className="">
-					<>
-						<Dialog.Backdrop
-							className="fixed inset-0 bg-primary/90"
-							style={{ zIndex: 60 }}
-							onClick={() => onClose()}
-						/>
+				<div
+					className="fixed inset-0 bg-primary/90"
+					// aria-hidden="true"
+				/>
 
-						<Dialog.Panel>
-							<div className="fixed left-0 top-0" style={{ zIndex: 61 }}>
-								<div className="flex h-screen w-screen items-center justify-center py-[18px] sm:hidden">
-									<div className="flex w-[320px] flex-col rounded-lg bg-white p-5">
-										<button
-											onClick={() => onClose()}
-											className="flex w-full justify-end text-dark-grey"
-										>
-											<Cross />
-										</button>
-										<h1 className="mb-[16px] text-lg font-bold text-dark-grey">
-											{headerName}
-										</h1>
-										{children}
-									</div>
-								</div>
-							</div>{" "}
-						</Dialog.Panel>
-					</>
+				<div className="fixed inset-0 flex items-center justify-center p-4">
+					<Dialog.Panel className="mx-auto max-w-sm rounded bg-white">
+						<div className="flex  items-center justify-center">
+							<div className="flex w-[320px] flex-col rounded-lg bg-white p-5">
+								<button
+									onClick={() => onClose()}
+									className="flex w-full justify-end text-dark-grey"
+								>
+									<Cross />
+								</button>
+								<h1 className="mb-[16px] text-lg font-bold text-dark-grey">
+									{headerName}
+								</h1>
+								{children}
+							</div>
+						</div>
+					</Dialog.Panel>
 				</div>
 			</Dialog>
 		</>
