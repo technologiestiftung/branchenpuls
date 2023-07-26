@@ -5,7 +5,7 @@ import {
 	IHKLogo,
 	OdisLogo,
 	TSBLogo,
-} from "@components/logos";
+} from "@/components/Logos";
 import React, { Dispatch, SetStateAction } from "react";
 import { Cross } from "@components/Icons";
 

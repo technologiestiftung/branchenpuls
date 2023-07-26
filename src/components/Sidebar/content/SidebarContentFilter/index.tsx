@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from "react";
 // import classNames from "classnames";
 import { SidebarHeader } from "@components/Sidebar/SidebarHeader";
 import { SidebarBody } from "@components/Sidebar/SidebarBody";
-import { FilterLayer } from "@/components/filter/FilterLayer";
-import { FilterLayerSwitcher } from "@/components/filter/FilterLayerSwitcher";
+import { FilterLayer } from "@/components/Filter/FilterLayer";
+import { FilterLayerSwitcher } from "@/components/Filter/FilterLayerSwitcher";
 
 import { getNewLayerData } from "@lib/getNewLayerData.js";
 import { ViewStateType } from "@common/interfaces";

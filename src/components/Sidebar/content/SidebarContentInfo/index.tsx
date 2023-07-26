@@ -8,7 +8,7 @@ import {
 	IHKLogo,
 	OdisLogo,
 	TSBLogo,
-} from "@components/logos";
+} from "@/components/Logos";
 
 export const SidebarContentInfo = () => {
 	return (
