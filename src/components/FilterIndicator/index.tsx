@@ -13,10 +13,6 @@ export const FilterIndicator: FC<FilterIndicatorType> = ({
 }) => {
 	const hasMobileSize = useHasMobileSize();
 	const [showMobileFilter, setShowMobileFilter] = useState<boolean>(false);
-	function close(e) {
-		e.stopPropagation();
-		setShowMobileFilter(!showMobileFilter);
-	}
 
 	return (
 		<>
