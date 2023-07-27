@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { FilterList } from "@/components/FilterIndicator/FilterList";
+import { FilterList } from "@components/FilterIndicator/FilterList";
 import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
 import { Pills, Cross } from "@components/Icons";
 import { Modal } from "@components/Modal";

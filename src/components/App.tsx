@@ -1,6 +1,6 @@
 "use client";
 import { FC, useState, useEffect } from "react";
-import { MapComponent } from "@/components/Map/Map";
+import { MapComponent } from "@components/Map/Map";
 import { SidebarContentFilter } from "@components/Sidebar/content/SidebarContentFilter";
 import { SidebarWrapper } from "@components/Sidebar/SidebarWrapper";
 import { NavView, SidebarNav } from "@components/Sidebar/SidebarNav";
