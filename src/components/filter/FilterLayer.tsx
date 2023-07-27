@@ -1,10 +1,10 @@
-import { RangeSlider } from "@/components/UI/RangeSlider";
-import { FilterBranches } from "@/components/Filter/FilterBranches";
-import { FilterPlaces } from "@/components/Filter/FilterPlaces";
+import { RangeSlider } from "@components/UI/RangeSlider";
+import { FilterBranches } from "@components/Filter/FilterBranches";
+import { FilterPlaces } from "@components/Filter/FilterPlaces";
 
 import { Trash } from "@components/Icons";
 import { PointInfoModal } from "@components/PointInfoModal";
-import { DownloadModal } from "@/components/Filter/DownloadModal";
+import { DownloadModal } from "@components/Filter/DownloadModal";
 import { HeatmapLayer } from "@deck.gl/aggregation-layers/typed";
 import { ScatterplotLayer } from "@deck.gl/layers/typed";
 import { getIdsOrData } from "@lib/getIdsOrData";

@@ -121,7 +121,7 @@ export function getOptionsEmployees() {
 
 	return optionsEmployees;
 }
-
+// h
 export function getOptionsMonths() {
 	const optionsMonths = [
 		{
@@ -139,6 +139,10 @@ export function getOptionsMonths() {
 		{
 			value: 6,
 			label: "Juni 2023",
+		},
+		{
+			value: 7,
+			label: "July 2023",
 		},
 	];
 	return optionsMonths;
