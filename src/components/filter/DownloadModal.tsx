@@ -1,7 +1,7 @@
 import { Dialog } from "@headlessui/react";
 import { FC } from "react";
 import { Cross } from "../Icons";
-import { FilterList } from "@/components/FilterIndicator/FilterList";
+import { FilterList } from "@components/FilterIndicator/FilterList";
 import { Modal } from "@components/Modal";
 
 export interface DownloadModalType {

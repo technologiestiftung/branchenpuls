@@ -1,6 +1,6 @@
-import { BranchenPulsLogo } from "@components/Logos/BranchenPulsLogo";
+import { BranchenPulsLogo } from "@components/logos/BranchenPulsLogo";
 import { Dispatch, SetStateAction, useState } from "react";
-import { BranchenPulsLogoInverted } from "@components/Logos/BranchenPulsLogoInverted";
+import { BranchenPulsLogoInverted } from "@components/logos/BranchenPulsLogoInverted";
 
 export type BranchenPulsButton = {
 	showWelcome: boolean;
