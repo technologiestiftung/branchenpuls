@@ -1,4 +1,6 @@
-CREATE OR REPLACE FUNCTION get_state_tablesss()
+DROP FUNCTION IF EXISTS get_state_tables ();
+
+CREATE OR REPLACE FUNCTION get_state_tables()
 RETURNS TABLE(tablename NAME)  -- Use the correct data type: NAME
 AS $$
 BEGIN
