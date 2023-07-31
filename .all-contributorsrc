@@ -1,5 +1,5 @@
 {
-  "projectName": "template-default",
+  "projectName": "ihk-vis",
   "projectOwner": "technologiestiftung",
   "repoType": "github",
   "repoHost": "https://github.com",
@@ -10,7 +10,18 @@
   "commit": true,
   "commitConvention": "angular",
   "contributors": [
+    {
+      "login": "hanshack",
+      "name": "Hans Hack",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8025164?v=4",
+      "profile": "https://hanshack.com/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs"
 }
