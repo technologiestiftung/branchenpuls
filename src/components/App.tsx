@@ -14,6 +14,7 @@ import { JoyrideWrapper } from "@components/JoyrideWrapper";
 import { getNextOrPreviousId } from "@lib/getNextOrPreviousId";
 import { FilterIndicator } from "@components/FilterIndicator";
 import { getOptionsDates } from "@lib/getOptionsDates";
+import { useMatomo } from "@lib/hooks/useMatomo";
 
 export const App = () => {
 	const [deckLayers, setDeckLayers] = useState([]);
@@ -39,6 +40,8 @@ export const App = () => {
 	});
 	const [activeFiltersList, setActiveFiltersList] = useState<number[]>([]);
 	const [optionsDate, setOptionsDate] = useState<any>([]);
+
+	useMatomo();
 
 	useEffect(() => {
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");

@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const MATOMO_URL =
 	process.env.NEXT_PUBLIC_MATOMO_URL || "https://piwik.example.com";
@@ -44,7 +44,7 @@ const replaceNewScript = (newNoscript: HTMLElement): void => {
 };
 
 export const useMatomo = (): void => {
-	const { pathname } = useRouter();
+	const pathname = usePathname();
 
 	useEffect(() => {
 		const newScript = createImageNoscript(pathname);
