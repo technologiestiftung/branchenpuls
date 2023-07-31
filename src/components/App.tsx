@@ -55,33 +55,11 @@ export const App = () => {
 		setActiveLayerId(nextlayerId);
 	}
 
+	// when the app loads, get the data options based on the available tables for each month
 	useEffect(() => {
 		(async () => {
 			const data = await getOptionsDates();
-			console.log("ÖÖÖÖÖ", data);
-
-			setOptionsDate([
-				{
-					value: 3,
-					label: "März 2023",
-				},
-				{
-					value: 4,
-					label: "April 2023",
-				},
-				{
-					value: 5,
-					label: "Mai 2023",
-				},
-				{
-					value: 6,
-					label: "Juni 2023",
-				},
-				{
-					value: 7,
-					label: "July 2023",
-				},
-			]);
+			setOptionsDate(data);
 		})();
 	}, []);
 
@@ -117,59 +95,60 @@ export const App = () => {
 				<FilterIndicator
 					activeFiltersList={activeFiltersList}
 				></FilterIndicator>
+				{optionsDate && (
+					<div className={showWelcome ? "opacity-0" : ""}>
+						<SidebarWrapper
+							classes="z-20"
+							position="left"
+							isOpen={sidebarMenuOpen}
+							setOpen={setSidebarMenuOpen}
+							closeSymbol="cross"
+							mobileHeight={mobileHeight}
+						>
+							<span className={navView === "filter" ? "" : "hidden"}>
+								<SidebarContentFilter
+									setDeckLayers={setDeckLayers}
+									deckLayers={deckLayers}
+									layersData={layersData}
+									setLayersData={setLayersData}
+									loading={loading}
+									setLoading={setLoading}
+									setOpen={setSidebarMenuOpen}
+									activeLayerId={activeLayerId}
+									setActiveLayerId={setActiveLayerId}
+									viewState={viewState}
+									searchResult={searchResult}
+									activeFiltersList={activeFiltersList}
+									setActiveFiltersList={setActiveFiltersList}
+									optionsDate={optionsDate}
+								/>
+							</span>
+							<span className={navView === "info" ? "" : "hidden"}>
+								<SidebarContentInfo />
+							</span>
 
-				<div className={showWelcome ? "opacity-0" : ""}>
-					<SidebarWrapper
-						classes="z-20"
-						position="left"
-						isOpen={sidebarMenuOpen}
-						setOpen={setSidebarMenuOpen}
-						closeSymbol="cross"
-						mobileHeight={mobileHeight}
-					>
-						<span className={navView === "filter" ? "" : "hidden"}>
-							<SidebarContentFilter
-								setDeckLayers={setDeckLayers}
-								deckLayers={deckLayers}
-								layersData={layersData}
-								setLayersData={setLayersData}
-								loading={loading}
-								setLoading={setLoading}
-								setOpen={setSidebarMenuOpen}
-								activeLayerId={activeLayerId}
-								setActiveLayerId={setActiveLayerId}
-								viewState={viewState}
-								searchResult={searchResult}
-								activeFiltersList={activeFiltersList}
-								setActiveFiltersList={setActiveFiltersList}
-								optionsDate={optionsDate}
-							/>
-						</span>
-						<span className={navView === "info" ? "" : "hidden"}>
-							<SidebarContentInfo />
-						</span>
-
-						<span className={navView === "search" ? "" : "hidden"}>
-							<SidebarContentSearch
-								viewState={viewState}
-								setViewState={setViewState}
-								searchResult={searchResult}
-								setSearchResult={setSearchResult}
-							/>
-						</span>
-					</SidebarWrapper>
-					<SidebarNav
-						navView={navView}
-						setNavView={setNavView}
-						sidebarMenuOpen={sidebarMenuOpen}
-						setSidebarMenuOpen={setSidebarMenuOpen}
-						applyPreviousLayer={() => applyNextLayer("previous")}
-						applyNextLayer={() => applyNextLayer("next")}
-						showNextLayer={showNextLayer}
-						layerColor={layerColor}
-						layerCount={layerCount}
-					/>
-				</div>
+							<span className={navView === "search" ? "" : "hidden"}>
+								<SidebarContentSearch
+									viewState={viewState}
+									setViewState={setViewState}
+									searchResult={searchResult}
+									setSearchResult={setSearchResult}
+								/>
+							</span>
+						</SidebarWrapper>
+						<SidebarNav
+							navView={navView}
+							setNavView={setNavView}
+							sidebarMenuOpen={sidebarMenuOpen}
+							setSidebarMenuOpen={setSidebarMenuOpen}
+							applyPreviousLayer={() => applyNextLayer("previous")}
+							applyNextLayer={() => applyNextLayer("next")}
+							showNextLayer={showNextLayer}
+							layerColor={layerColor}
+							layerCount={layerCount}
+						/>
+					</div>
+				)}
 			</main>
 		</>
 	);

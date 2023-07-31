@@ -12,12 +12,10 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-	const { date } = req.query;
-
-	console.log("date", date);
-
+	const { month, year } = req.query;
+	let formattedMonth = month?.length === 1 ? `0${month}` : `${month}`;
 	const { data, error } = await supabase
-		.from(`state_0${date}_2023`)
+		.from(`state_${formattedMonth}_${year}`)
 		.select(`opendata_id, latitude, longitude`);
 	const formattedData = data?.map((d) => {
 		return { id: d.opendata_id, p: [d.longitude, d.latitude] };

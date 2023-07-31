@@ -1,5 +1,20 @@
+const monthLookupTable = {
+	1: "Januar",
+	2: "Februar",
+	3: "März",
+	4: "April",
+	5: "Mai",
+	6: "Juni",
+	7: "Juli",
+	8: "August",
+	9: "September",
+	10: "Oktober",
+	11: "November",
+	12: "Dezember",
+};
+
 export async function getOptionsDates() {
-	let data;
+	let opts = [];
 	try {
 		let res;
 		if (process.env.NODE_ENV === "development") {
@@ -9,16 +24,20 @@ export async function getOptionsDates() {
 		}
 		console.log(res);
 		if (res.ok) {
-			data = await res.json();
+			let data = await res.json();
 			data = data
 				.map((d) => d.tablename.replace("state_", "").split("_"))
 				.map((d) => [Number(d[0]), Number(d[1])]);
-			console.log("datadatadata", data);
+			data.forEach((d) => {
+				opts.push({
+					value: d,
+					label: `${monthLookupTable[d[0]]} ${d[1]}`,
+				});
+			});
 		}
 	} catch (error) {
 		console.error(error);
 	} finally {
-		console.log(data);
-		return data;
+		return opts;
 	}
 }

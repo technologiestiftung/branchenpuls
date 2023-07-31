@@ -25,7 +25,7 @@ import { ViewStateType, StringSelection } from "@common/interfaces";
 
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
-	let path = `/api/month/?&date=${date}`;
+	let path = `/api/month/?&month=${date[0]}&year=${date[1]}`;
 
 	let fetchConfig = {};
 	if (devMode) {
@@ -95,10 +95,9 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [loadingFilter, setLoadingFilter] = useState<boolean>(false);
 
 	// @todo set date
-	const [filterValDate, setFilterValDate] = useState<object>({
-		value: 6,
-		label: "Juni 2023",
-	});
+	const [filterValDate, setFilterValDate] = useState<StringSelection | null>(
+		null
+	);
 	const [filterValBezirk, setFilterValBezirk] =
 		useState<StringSelection | null>(null);
 	const [filterValPlanungsraum, setFilterValPlanungsraum] =
@@ -113,6 +112,10 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [downloadModalOpen, setDownloadModalOpen] = useState(false);
 
 	const hasMobileSize = useHasMobileSize();
+
+	useEffect(() => {
+		setFilterValDate(optionsDate[optionsDate.length - 1]);
+	}, [optionsDate]);
 
 	async function downloadData() {
 		setDownloadModalOpen(false);
@@ -226,16 +229,17 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	]);
 
 	useEffect(() => {
+		if (!filterValDate) return;
 		// load the data for a month. the data includes the coordinates and the ids of the points
 		(async () => {
 			setLoading(true);
-			const month = Number(filterValDate.value);
+			const date = filterValDate.value[0].toString().replace(",", "");
 			let dataPoints;
-			if (storeDataPoints[month]) {
-				dataPoints = storeDataPoints[month];
+			if (storeDataPoints[date]) {
+				dataPoints = storeDataPoints[date];
 			} else {
-				dataPoints = await getPoints(month);
-				storeDataPoints[month] = dataPoints;
+				dataPoints = await getPoints(filterValDate?.value);
+				storeDataPoints[date] = dataPoints;
 				setStoreDataPoints(storeDataPoints);
 			}
 			let dIndexed = {};
