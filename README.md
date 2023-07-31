@@ -6,75 +6,103 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-# {repo-template}
+# Branchen Puls
 
-## TODO (after you generated the repo)
+## Context
 
-- [ ] Review the content of the README.md and adjust to your liking
-- [ ] Read the README.md till the end and adjust the content licensing,
-      logos, etc (I know you stopped at tbd...)
-- [ ] Adjust the file [.github/CODEOWNERS](./.github/CODEOWNERS)
-- [ ] Adjust the files under [.github/ISSUE_TEMPLATE](./.github/ISSUE_TEMPLATE)
-- [ ] If you use staging and main branches use this template for [.github/renovate.json](./.github/renovate.json)
+This application is based on open data. Open data is an important part of Berlin's administrative activities and on top of creating transparency, enables analysis and applications like this. You can find more open data at the [Berlin Open Data Portal](https://daten.berlin.de).
 
-```json
-{
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>technologiestiftung/renovate-config"],
-  "baseBranches": ["staging"]
-}
-```
+## Data
 
-- [ ] Do you want to honor all kinds of contributions? Use [all-contributors](https://allcontributors.org/)
+You can find the raw data on the [IHK Gewerbedaten Github repo](https://github.com/IHKBerlin/IHKBerlin_Gewerbedaten/tree/master)
+
+## Tech stack
+
+This website is a NextJS app configured with:
+
+- [Typescript](https://www.typescriptlang.org/)
+- Linting with [ESLint](https://eslint.org/)
+- Formatting with [Prettier](https://prettier.io/)
+
+## Project structure
+
+Basic Next.js app
+
+## Getting started
+
+### Requirements
+
+#### Node.js
+
+This project is a Next.js app which requires you to have [Node.js](https://nodejs.org/en/) installed.
+
+### Installation
+
+Clone the repository to your local machine:
 
 ```bash
-npx all-contributors-cli check
-npx all-contributors-cli add ff6347 doc
+git clone git@github.com:technologiestiftung/ihk-vis.git
 ```
 
-You can use it on GitHub just by commenting on PRs and issues:
+Move into the repository folder:
 
-```plain
-@all-contributors please add @ff6347 for infrastructure, tests and code
+```bash
+cd ihk-vis
 ```
 
-- [ ] Add your project description
-- [ ] Get fancy shields at https://shields.io
+Make sure you use the Node.js version specified in `.nvmrc`. Find out which Node version you're currently on with:
 
-## Prerequisites
+```bash
+node --version
+```
 
-tbd...
+If this version differs from the one specified in `.nvmrc`, please install the required version, either manually, or using a tool such as [nvm](https://github.com/nvm-sh/nvm), which allows switching to the correct version via:
 
-## Installation
+```bash
+nvm use
+```
 
-tbd...
+With the correct Node version, install the dependencies:
 
-## Usage or Deployment
+```bash
+npm install
+```
 
-tbd...
+Because the map uses a basemap from maptiler (https://www.maptiler.com/), you will need to provide connection details in your environment. In this repository you can find a file `.env.example`. Duplicate this file and name it `.env`.
 
-## Development
+In `.env` you must enter the connection details to the Maptiler style file as suggested in `.env.example`. If you do not know how to obtain the necessary details, please ask a repository maintainer for access. You can also use other basemaps by providing your own style file.
 
-tbd...
+You are now ready to start a local development server on http://localhost:3000 via:
 
-## Tests
+```bash
+npm run dev
+```
 
-tbd...
+## Workflow
 
-## Ideas
+New features, fixes, etc. should always be developed on a separate branch:
 
-use hash maps
-low DB
+- In your local repository, checkout the `main` branch.
+- Run `git checkout -b <name-of-your-branch>` to create a new branch (ideally following [Conventional Commits guidelines](https://www.conventionalcommits.org)).
+- Make your changes
+- Push your changes to the remote: `git push -u origin HEAD`
+- Open a pull request.
 
-let colors = chroma.scale([[86, 189, 102],[255,255,255]]).mode('lch').colors(6);
-let rgbColors = colors.map(color => chroma(color).rgb());
+You can commit using the `npm run cm` command to ensure your commits follow our conventions.
 
-pick points by location not id
+## Deployment
 
-## Libs used
+The app is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
-https://github.com/jedwatson/react-select
-https://daisyui.com/
+## Map
+
+The basemap style was created with maptiler (https://www.maptiler.com/). Please note, that you need to update the MAPKEY with your own project's mapkey. You can also use any other basemap by adapting the code in the _src/Map_ folder.
+
+## Page analytics
+
+We use [Matomo](https://matomo.org/) for website analytics. Matomo is respectful of the users' privacy, the page visits are tracked anonymously.
+
+In the production environment, a `NEXT_PUBLIC_MATOMO_URL` and `NEXT_PUBLIC_MATOMO_SITE_ID` is configured for this purpose.
 
 ## Contributing
 
