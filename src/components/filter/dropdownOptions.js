@@ -121,32 +121,6 @@ export function getOptionsEmployees() {
 
 	return optionsEmployees;
 }
-// h
-export function getOptionsMonths() {
-	const optionsMonths = [
-		{
-			value: 3,
-			label: "März 2023",
-		},
-		{
-			value: 4,
-			label: "April 2023",
-		},
-		{
-			value: 5,
-			label: "Mai 2023",
-		},
-		{
-			value: 6,
-			label: "Juni 2023",
-		},
-		{
-			value: 7,
-			label: "July 2023",
-		},
-	];
-	return optionsMonths;
-}
 
 export function getOptionsBL1() {
 	let optionsBL1 = branchKeys

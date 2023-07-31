@@ -9,8 +9,7 @@ export function getSendValues({
 	filterValBezirk,
 	filterValPlanungsraum,
 	filterValPrognoseraum,
-	filterValDateMonth,
-	filterValDateYear,
+	filterValDate,
 	filterId,
 	filterPosition,
 }) {
@@ -33,10 +32,8 @@ export function getSendValues({
 	const sendPrognoseraum = filterValPrognoseraum?.value
 		? filterValPrognoseraum.value
 		: false;
-	const sendMonth = filterValDateMonth?.value
-		? Number(filterValDateMonth?.value)
-		: false;
-	const sendYear = filterValDateYear ? filterValDateYear : false;
+	const sendMonth = filterValDate?.value ? Number(filterValDate?.value) : false;
+	const sendYear = filterValDate ? "2023" : false;
 	const sendId = filterId ? filterId : false;
 	const sendLat = filterPosition ? filterPosition[1] : false;
 	const sendLon = filterPosition ? filterPosition[0] : false;

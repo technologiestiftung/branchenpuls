@@ -16,7 +16,7 @@ import { FC, useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import { BusinessAtPointData } from "../../../pages/api/getsinglepointdata";
-import { getOptionsEmployees, getOptionsMonths } from "./dropdownOptions";
+import { getOptionsEmployees } from "./dropdownOptions";
 import { customTheme, customStyles, getOptionLabel } from "@lib/selectStyles";
 import { calculatePointRadius } from "@lib/calculatePointRadius";
 import { calculateHeatmapOpacity } from "@lib/calculateHeatmapOpacity";
@@ -53,6 +53,7 @@ export interface FilterLayerType {
 	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 	activeFiltersList: number[];
 	setActiveFiltersList: (x: number[]) => void;
+	optionsDate: any;
 }
 
 export const FilterLayer: FC<FilterLayerType> = ({
@@ -73,6 +74,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	searchResult,
 	activeFiltersList,
 	setActiveFiltersList,
+	optionsDate,
 }) => {
 	const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
 	const [dataPoints, setDataPoints] = useState([]);
@@ -93,11 +95,10 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [loadingFilter, setLoadingFilter] = useState<boolean>(false);
 
 	// @todo set date
-	const [filterValDateMonth, setFilterValDateMonth] = useState<object>({
+	const [filterValDate, setFilterValDate] = useState<object>({
 		value: 6,
 		label: "Juni 2023",
 	});
-	const [filterValDateYear, setFilterValDateYear] = useState<number>(2023);
 	const [filterValBezirk, setFilterValBezirk] =
 		useState<StringSelection | null>(null);
 	const [filterValPlanungsraum, setFilterValPlanungsraum] =
@@ -127,8 +128,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			filterValBl1,
 			filterValBl2,
 			filterValBl3,
-			filterValDateMonth,
-			filterValDateYear,
+			filterValDate,
 			filterMonthOnly,
 			filterValBezirk,
 			filterValPlanungsraum,
@@ -158,12 +158,13 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		setLoading(false);
 	}
 
+	// Sets an array of filter names
 	useEffect(() => {
 		if (activeLayerId !== layerId) return;
 		const activeFilterNames = [];
 
-		if (filterValDateMonth?.value) {
-			activeFilterNames.push(filterValDateMonth?.label);
+		if (filterValDate?.value) {
+			activeFilterNames.push(filterValDate?.label);
 		}
 
 		if (filterValBezirk?.value) {
@@ -216,20 +217,19 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		filterValBl1,
 		filterValBl2,
 		filterValBl3,
-		filterValDateYear,
 		filterMonthOnly,
 		filterValBezirk,
 		filterValPlanungsraum,
 		filterValPrognoseraum,
 		activeLayerId,
-		filterValDateMonth,
+		filterValDate,
 	]);
 
 	useEffect(() => {
 		// load the data for a month. the data includes the coordinates and the ids of the points
 		(async () => {
 			setLoading(true);
-			const month = Number(filterValDateMonth.value);
+			const month = Number(filterValDate.value);
 			let dataPoints;
 			if (storeDataPoints[month]) {
 				dataPoints = storeDataPoints[month];
@@ -246,7 +246,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			setDataPoints(dataPoints);
 			setLoading(false);
 		})();
-	}, [filterValDateMonth]);
+	}, [filterValDate]);
 
 	useEffect(() => {
 		if (pageLoaded) {
@@ -261,8 +261,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					filterValBl1,
 					filterValBl2,
 					filterValBl3,
-					filterValDateMonth,
-					filterValDateYear,
+					filterValDate,
 					filterMonthOnly,
 					filterValBezirk,
 					filterValPlanungsraum,
@@ -297,8 +296,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			filterValBl1,
 			filterValBl2,
 			filterValBl3,
-			filterValDateMonth,
-			filterValDateYear,
+			filterValDate,
 			filterMonthOnly,
 			filterValBezirk,
 			filterValPlanungsraum,
@@ -467,11 +465,11 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				<div className="mt-5">
 					<p className="mb-1 font-bold">Zeitraum</p>
 					<Select
-						value={filterValDateMonth}
-						onChange={setFilterValDateMonth}
+						value={filterValDate}
+						onChange={setFilterValDate}
 						isClearable={false}
 						isSearchable={false}
-						options={getOptionsMonths()}
+						options={optionsDate}
 						theme={customTheme}
 						styles={customStyles}
 					/>
@@ -600,7 +598,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 									checked={filterMonthOnly}
 									className="checkbox-primary checkbox text-white"
 									onChange={() => setFilterMonthOnly(!filterMonthOnly)}
-									disabled={filterValDateMonth?.value === 3}
+									disabled={filterValDate?.value === 3}
 								/>
 							</label>
 						</div>

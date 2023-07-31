@@ -13,6 +13,7 @@ import { ViewStateType } from "@common/interfaces";
 import { JoyrideWrapper } from "@components/JoyrideWrapper";
 import { getNextOrPreviousId } from "@lib/getNextOrPreviousId";
 import { FilterIndicator } from "@components/FilterIndicator";
+import { getOptionsDates } from "@lib/getOptionsDates";
 
 export const App = () => {
 	const [deckLayers, setDeckLayers] = useState([]);
@@ -37,6 +38,7 @@ export const App = () => {
 		transitionDuration: 300,
 	});
 	const [activeFiltersList, setActiveFiltersList] = useState<number[]>([]);
+	const [optionsDate, setOptionsDate] = useState<any>([]);
 
 	useEffect(() => {
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
@@ -52,6 +54,36 @@ export const App = () => {
 		);
 		setActiveLayerId(nextlayerId);
 	}
+
+	useEffect(() => {
+		(async () => {
+			const data = await getOptionsDates();
+			console.log("ÖÖÖÖÖ", data);
+
+			setOptionsDate([
+				{
+					value: 3,
+					label: "März 2023",
+				},
+				{
+					value: 4,
+					label: "April 2023",
+				},
+				{
+					value: 5,
+					label: "Mai 2023",
+				},
+				{
+					value: 6,
+					label: "Juni 2023",
+				},
+				{
+					value: 7,
+					label: "July 2023",
+				},
+			]);
+		})();
+	}, []);
 
 	return (
 		<>
@@ -110,6 +142,7 @@ export const App = () => {
 								searchResult={searchResult}
 								activeFiltersList={activeFiltersList}
 								setActiveFiltersList={setActiveFiltersList}
+								optionsDate={optionsDate}
 							/>
 						</span>
 						<span className={navView === "info" ? "" : "hidden"}>

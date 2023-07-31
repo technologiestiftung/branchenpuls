@@ -11,8 +11,7 @@ export async function getIdsOrData(
 	filterValBl1,
 	filterValBl2,
 	filterValBl3,
-	filterValDateMonth,
-	filterValDateYear,
+	filterValDate,
 	filterMonthOnly,
 	filterValBezirk,
 	filterValPlanungsraum,
@@ -44,8 +43,7 @@ export async function getIdsOrData(
 		filterValBezirk,
 		filterValPlanungsraum,
 		filterValPrognoseraum,
-		filterValDateMonth,
-		filterValDateYear,
+		filterValDate,
 	});
 
 	let { path } = getPath({

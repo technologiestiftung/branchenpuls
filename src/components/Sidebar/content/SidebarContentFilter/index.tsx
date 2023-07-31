@@ -13,6 +13,7 @@ export interface SidebarContentFilterType {
 	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 	activeFiltersList: number[];
 	setActiveFiltersList: (x: number[]) => void;
+	optionsDate: any;
 }
 
 export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
@@ -29,6 +30,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 	searchResult,
 	activeFiltersList,
 	setActiveFiltersList,
+	optionsDate,
 }) => {
 	const [storeDataPoints, setStoreDataPoints] = useState({});
 
@@ -92,6 +94,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 								searchResult={searchResult}
 								activeFiltersList={activeFiltersList}
 								setActiveFiltersList={setActiveFiltersList}
+								optionsDate={optionsDate}
 							></FilterLayer>
 						</div>
 					);
