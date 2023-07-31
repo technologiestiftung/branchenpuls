@@ -11,6 +11,65 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "hanshack",
+      "name": "Hans Hack",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8025164?v=4",
+      "profile": "https://hanshack.com/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "Lisa-Stubert",
+      "name": "Lisa-Stubert",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61182572?v=4",
+      "profile": "https://github.com/Lisa-Stubert",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "ff6347",
+      "name": "Fabian Morón Zirfas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/315106?v=4",
+      "profile": "https://fabianmoronzirfas.me",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "annameide",
+      "name": "anna",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46717848?v=4",
+      "profile": "https://fhp.incom.org/profile/9200/projects",
+      "contributions": [
+        "design"
+      ]
+    },
+    {
+      "login": "KlemensM",
+      "name": "Klemens",
+      "avatar_url": "https://avatars.githubusercontent.com/u/98896505?v=4",
+      "profile": "https://github.com/KlemensM",
+      "contributions": [
+        "ideas",
+        "data"
+      ]
+    },
+    { 
+      "login": "raphael-arce",
+      "name": "Raphael.A",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8709861?v=4",
+      "profile": "https://github.com/raphael-arce",
+      "contributions": [
+        "code",
+        "review"
+      ]
+    },
+    {
       "login": "Jaszkowic",
       "name": "Jonas Jaszkowic",
       "avatar_url": "https://avatars.githubusercontent.com/u/10830180?v=4",
@@ -19,7 +78,7 @@
         "code",
         "review"
       ]
-    }
+    },
   ],
   "contributorsPerLine": 7,
   "skipCi": true,
