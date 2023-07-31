@@ -120,7 +120,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Jaszkowic"><img src="https://avatars.githubusercontent.com/u/10830180?v=4?s=64" width="64px;" alt="Jonas Jaszkowic"/><br /><sub><b>Jonas Jaszkowic</b></sub></a><br /><a href="https://github.com/technologiestiftung/ihk-vis/commits?author=Jaszkowic" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Jaszkowic"><img src="https://avatars.githubusercontent.com/u/10830180?v=4?s=64" width="64px;" alt="Jonas Jaszkowic"/><br /><sub><b>Jonas Jaszkowic</b></sub></a><br /><a href="https://github.com/technologiestiftung/ihk-vis/commits?author=Jaszkowic" title="Code">💻</a> <a href="https://github.com/technologiestiftung/ihk-vis/pulls?q=is%3Apr+reviewed-by%3AJaszkowic" title="Reviewed Pull Requests">👀</a></td>
     </tr>
   </tbody>
 </table>
