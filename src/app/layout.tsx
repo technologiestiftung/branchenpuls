@@ -21,7 +21,7 @@ export const metadata = {
 		title: "Berlins Branchenpuls",
 		description:
 			"Die Berliner Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Gewerbelandschaft und die verschiedenen Branchen ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
-		url: "https://nextjs.org",
+		url: "https://branchenpuls.odis-berlin.de",
 		siteName: "branchenpuls.odis-berlin.de",
 		images: [
 			{
