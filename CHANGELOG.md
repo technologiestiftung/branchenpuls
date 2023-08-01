@@ -1,3 +1,12 @@
+# [1.8.0](https://github.com/technologiestiftung/branchenpuls/compare/v1.7.0...v1.8.0) (2023-08-01)
+
+
+### Features
+
+* add metadata description and title for social media ([d0f32aa](https://github.com/technologiestiftung/branchenpuls/commit/d0f32aa1f25de17664760192395153f9f0ea0ede))
+* add url to metadata ([f902062](https://github.com/technologiestiftung/branchenpuls/commit/f9020623e57610cea10134c8283cbcc4729b21d4))
+* add url to metadata for social media ([ece9251](https://github.com/technologiestiftung/branchenpuls/commit/ece9251aab77f141cbf80298a7cb9256ea819057))
+
 # [1.7.0](https://github.com/technologiestiftung/ihk-vis/compare/v1.6.0...v1.7.0) (2023-07-18)
 
 
