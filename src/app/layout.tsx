@@ -2,24 +2,27 @@ import "./globals.css";
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields
 export const metadata = {
-	title: "Branchen Puls",
-	description: "Gewerbedaten von Berlin erkunden",
+	title: "Berlins Branchenpuls",
+	description:
+		"Die Berliner Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Gewerbelandschaft und die verschiedenen Branchen ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
 	keywords: ["ODIS", "Technologiestiftung Berlin", "CityLAB", "IHK Berlin"],
 	locale: "de_DE",
 	type: "website",
 	themeColor: "#1e398f",
 	twitter: {
 		card: "summary_large_image",
-		title: "Branchen Puls",
-		description: "Gewerbedaten von Berlin erkunden",
+		title: "Berlins Branchenpuls",
+		description:
+			"Die Berliner Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Gewerbelandschaft und die verschiedenen Branchen ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
 		// creator: "@nextjs",
 		images: ["https://nextjs.org/og.png"],
 	},
 	openGraph: {
-		title: "Branchen Puls",
-		description: "Gewerbedaten von Berlin erkunden",
-		url: "https://nextjs.org",
-		siteName: "Next.js",
+		title: "Berlins Branchenpuls",
+		description:
+			"Die Berliner Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Gewerbelandschaft und die verschiedenen Branchen ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
+		url: "https://branchenpuls.odis-berlin.de",
+		siteName: "branchenpuls.odis-berlin.de",
 		images: [
 			{
 				url: "https://nextjs.org/og.png",
@@ -30,7 +33,7 @@ export const metadata = {
 				url: "https://nextjs.org/og-alt.png",
 				width: 1800,
 				height: 1600,
-				alt: "My custom alt",
+				alt: "Vorschau vom Berliner Branchenpuls",
 			},
 		],
 		locale: "de_DE",
