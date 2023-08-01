@@ -46,8 +46,8 @@ const Section: FC<SectionProps> = ({ index, totalCount, business }) => {
 				<Subsection
 					title="Branchentyp"
 					content={
-						business.business_type_desc
-							? toFullText(business.business_type_desc)
+						business.branch_top_level_desc
+							? toFullText(business.branch_top_level_desc)
 							: "keine Angabe"
 					}
 				></Subsection>
@@ -153,10 +153,13 @@ export const PointInfoModal: FC<PointInfoModalType> = ({
 														Für den Standort: {businessAtPointData.latitude},{" "}
 														{businessAtPointData.longitude}
 													</div>
-													<div>
-														Planungsraum:{" "}
-														{businessAtPointData.businesses[0].planungsraum}
-													</div>
+													{businessAtPointData.businesses[0].planungsraum !==
+														"null" && (
+														<div>
+															Planungsraum:{" "}
+															{businessAtPointData.businesses[0].planungsraum}
+														</div>
+													)}
 												</>
 											)}
 										</div>
