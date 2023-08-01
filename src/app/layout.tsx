@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata = {
 	title: "Berlins Branchenpuls",
 	description:
-		"Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
+		"Die Berliner Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Gewerbelandschaft und die verschiedenen Branchen ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
 	keywords: ["ODIS", "Technologiestiftung Berlin", "CityLAB", "IHK Berlin"],
 	locale: "de_DE",
 	type: "website",
@@ -13,16 +13,16 @@ export const metadata = {
 		card: "summary_large_image",
 		title: "Berlins Branchenpuls",
 		description:
-			"Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
+			"Die Berliner Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Gewerbelandschaft und die verschiedenen Branchen ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
 		// creator: "@nextjs",
 		images: ["https://nextjs.org/og.png"],
 	},
 	openGraph: {
 		title: "Berlins Branchenpuls",
 		description:
-			"Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
+			"Die Berliner Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Gewerbelandschaft und die verschiedenen Branchen ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
 		url: "https://nextjs.org",
-		siteName: "Next.js",
+		siteName: "branchenpuls.odis-berlin.de",
 		images: [
 			{
 				url: "https://nextjs.org/og.png",
@@ -33,7 +33,7 @@ export const metadata = {
 				url: "https://nextjs.org/og-alt.png",
 				width: 1800,
 				height: 1600,
-				alt: "My custom alt",
+				alt: "Vorschau vom Berliner Branchenpuls",
 			},
 		],
 		locale: "de_DE",
