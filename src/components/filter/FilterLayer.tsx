@@ -602,7 +602,10 @@ export const FilterLayer: FC<FilterLayerType> = ({
 									checked={filterMonthOnly}
 									className="checkbox-primary checkbox text-white"
 									onChange={() => setFilterMonthOnly(!filterMonthOnly)}
-									disabled={filterValDate?.value === 3}
+									disabled={
+										filterValDate?.value[0] === 3 &&
+										filterValDate?.value[1] === 2023
+									}
 								/>
 							</label>
 						</div>
