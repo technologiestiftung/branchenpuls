@@ -12,6 +12,8 @@
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat ratione, fuga earum obcaecati consectetur quisquam non architecto accusamus qui exercitationem tenetur. Nihil fugit nobis eius itaque ratione blanditiis sed. Doloribus.
 
+![screenshot](/public/screenshot.png)
+
 ## Context
 
 This application is based on open data. Open data is an important part of Berlin's administrative activities and on top of creating transparency, enables analysis and applications like this. You can find more open data at the [Berlin Open Data Portal](https://daten.berlin.de).
