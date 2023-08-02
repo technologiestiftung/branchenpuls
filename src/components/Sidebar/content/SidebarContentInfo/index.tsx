@@ -67,7 +67,7 @@ export const SidebarContentInfo = () => {
 								gerne im{" "}
 								<a
 									className="font-medium text-primary"
-									href="https://github.com/technologiestiftung/ihk-vis"
+									href="https://github.com/technologiestiftung/branchenpuls"
 								>
 									GitHub-Repository
 								</a>{" "}
@@ -195,7 +195,7 @@ export const SidebarContentInfo = () => {
 						. Den Quellcode des Projekts findest du auf{" "}
 						<a
 							className="font-medium text-primary"
-							href="https://github.com/technologiestiftung/ihk-vis"
+							href="https://github.com/technologiestiftung/branchenpuls"
 						>
 							GitHub
 						</a>
