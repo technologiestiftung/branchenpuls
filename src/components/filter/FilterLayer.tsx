@@ -169,71 +169,76 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	}
 
 	// Sets an array of filter names
-	useEffect(() => {
-		if (activeLayerId !== layerId) return;
-		const activeFilterNames = [];
+	useEffect(
+		() => {
+			if (activeLayerId !== layerId) return;
+			const activeFilterNames = [];
 
-		if (filterValDate?.value) {
-			activeFilterNames.push(filterValDate?.label);
-		}
+			if (filterValDate?.value) {
+				activeFilterNames.push(filterValDate?.label);
+			}
 
-		if (filterValBezirk?.value) {
-			activeFilterNames.push(filterValBezirk.value);
-		}
-		if (filterValPrognoseraum?.value) {
-			activeFilterNames.push(filterValPrognoseraum.value);
-		}
-		if (filterValPlanungsraum?.value) {
-			activeFilterNames.push(filterValPlanungsraum.value);
-		}
-		if (filterValBl1?.length) {
-			filterValBl1.forEach((d) => {
-				activeFilterNames.push("Branchentyp " + d.id);
-			});
-		}
-		if (filterValBl2?.length) {
-			filterValBl2.forEach((d) => {
-				activeFilterNames.push("NACE " + d.id);
-			});
-		}
-		if (filterValBl3?.length) {
-			filterValBl3.forEach((d) => {
-				activeFilterNames.push("IHK ID " + d.id);
-			});
-		}
-		if (filterValEmployees?.value) {
-			let label = filterValEmployees.label;
-			label = label.replace("<br/>", "");
-			label = label.replace(/<small>.*?<\/small>/g, "");
-			activeFilterNames.push(label);
-		}
-		if (filterValAge.toString() !== [0, 100].toString()) {
-			activeFilterNames.push(`Alter: ${filterValAge[0]}-${filterValAge[1]}`);
-		}
-		if (filterBType?.value) {
-			activeFilterNames.push(
-				filterBType?.value === "0" ? "Nur Kleingewerbe" : "Nur Handelsregister"
-			);
-		}
-		if (filterMonthOnly) {
-			activeFilterNames.push("Neugründungen");
-		}
-
-		setActiveFiltersList(activeFilterNames);
-	}, [
-		filterValAge,
-		filterValEmployees,
-		filterBType,
-		filterValBl1,
-		filterValBl2,
-		filterValBl3,
-		filterMonthOnly,
-		filterValBezirk,
-		filterValPlanungsraum,
-		filterValPrognoseraum,
-		activeLayerId,
-		filterValDate,
-	]);
+			if (filterValBezirk?.value) {
+				activeFilterNames.push(filterValBezirk.value);
+			}
+			if (filterValPrognoseraum?.value) {
+				activeFilterNames.push(filterValPrognoseraum.value);
+			}
+			if (filterValPlanungsraum?.value) {
+				activeFilterNames.push(filterValPlanungsraum.value);
+			}
+			if (filterValBl1?.length) {
+				filterValBl1.forEach((d) => {
+					activeFilterNames.push("Branchentyp " + d.id);
+				});
+			}
+			if (filterValBl2?.length) {
+				filterValBl2.forEach((d) => {
+					activeFilterNames.push("NACE " + d.id);
+				});
+			}
+			if (filterValBl3?.length) {
+				filterValBl3.forEach((d) => {
+					activeFilterNames.push("IHK ID " + d.id);
+				});
+			}
+			if (filterValEmployees?.value) {
+				let label = filterValEmployees.label;
+				label = label.replace("<br/>", "");
+				label = label.replace(/<small>.*?<\/small>/g, "");
+				activeFilterNames.push(label);
+			}
+			if (filterValAge.toString() !== [0, 100].toString()) {
+				activeFilterNames.push(`Alter: ${filterValAge[0]}-${filterValAge[1]}`);
+			}
+			if (filterBType?.value) {
+				activeFilterNames.push(
+					filterBType?.value === "0"
+						? "Nur Kleingewerbe"
+						: "Nur Handelsregister"
+				);
+			}
+			if (filterMonthOnly) {
+				activeFilterNames.push("Neugründungen");
+			}
+			setActiveFiltersList(activeFilterNames);
+		},
+		// eslint-disable-next-line
+		[
+			filterValAge,
+			filterValEmployees,
+			filterBType,
+			filterValBl1,
+			filterValBl2,
+			filterValBl3,
+			filterMonthOnly,
+			filterValBezirk,
+			filterValPlanungsraum,
+			filterValPrognoseraum,
+			activeLayerId,
+			filterValDate,
+		]
+	);
 
 	useEffect(() => {
 		if (!filterValDate) return;
@@ -257,6 +262,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			setDataPoints(dataPoints);
 			setLoading(false);
 		})();
+		// eslint-disable-next-line
 	}, [filterValDate]);
 
 	useEffect(() => {
@@ -285,6 +291,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			return () => clearTimeout(timer);
 		}
 		setPageLoaded(true);
+		// eslint-disable-next-line
 	}, [
 		dataPointsIndexed,
 		filterValAge,
@@ -393,12 +400,14 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			//   setDeckLayers([...deckLayers]);
 			// }
 		}
+		// eslint-disable-next-line
 	}, [filteredData, activeLayerId, viewState, layersData, searchResult]);
 
 	useEffect(() => {
 		layersData[layerId].count = filteredData.length;
 		const newLayerData = JSON.parse(JSON.stringify(layersData));
 		setLayersData(newLayerData);
+		// eslint-disable-next-line
 	}, [filteredData]);
 
 	// a function that replaces a part of the array with a new value

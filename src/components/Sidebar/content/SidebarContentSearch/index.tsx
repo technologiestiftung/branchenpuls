@@ -6,6 +6,7 @@ import { ViewStateType } from "@common/interfaces";
 
 export interface SidebarContentSearchType {
 	viewState: ViewStateType;
+	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 	setSearchResult: (center: number[] | null) => void;
 	searchResult: number[] | null;
 }

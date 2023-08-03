@@ -60,8 +60,8 @@ const SearchResultItem: FC<SearchResultItemPropType> = ({
 };
 
 export interface SearchType {
-	// setViewState: (center: number[] | null) => void;
 	viewState: ViewStateType;
+	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 	setSearchResult: (center: number[] | null) => void;
 }
 
@@ -89,7 +89,7 @@ export const Search: FC<SearchType> = ({
 		if (!debouncedInputValue) {
 			setSearchResult(null);
 		}
-	}, [debouncedInputValue]);
+	}, [debouncedInputValue, setSearchResult]);
 
 	return (
 		<>

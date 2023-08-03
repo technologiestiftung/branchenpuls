@@ -48,6 +48,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 		if (layersData && !Object.keys(layersData).length) {
 			addNewLayer(layersData);
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -55,9 +56,8 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 		if (activeLayerId === null && layerIds.length) {
 			setActiveLayerId(layerIds[0]);
 		}
+		// eslint-disable-next-line
 	}, [activeLayerId]);
-
-	activeLayerId;
 
 	return (
 		<>
