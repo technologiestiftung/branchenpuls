@@ -45,15 +45,23 @@ async function getPoints(date) {
 }
 
 export interface FilterLayerType {
-	dataPoints: any;
-	dataPointsIndexed: any;
-	deckLayers: any;
 	setDeckLayers: any;
+	deckLayers: any;
+	layersData: any;
+	setLayersData: (d: any) => void;
+	layerId: string;
+	index: number;
+	setLoading: (loading: boolean) => void;
+	setOpen: (open: boolean) => void;
+	activeLayerId: string | null;
+	setActiveLayerId: (id: string | null) => void;
+	storeDataPoints: any;
+	setStoreDataPoints: (d: any) => void;
 	viewState: ViewStateType;
-	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
+	searchResult: number[] | null;
 	activeFiltersList: number[];
 	setActiveFiltersList: (x: number[]) => void;
-	optionsDate: any;
+	optionsDate: number[];
 }
 
 export const FilterLayer: FC<FilterLayerType> = ({
@@ -63,7 +71,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	setLayersData,
 	layerId,
 	index,
-	loading,
 	setLoading,
 	setOpen,
 	activeLayerId,
@@ -228,69 +235,69 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		filterValDate,
 	]);
 
-	useEffect(() => {
-		if (!filterValDate) return;
-		// load the data for a month. the data includes the coordinates and the ids of the points
-		(async () => {
-			setLoading(true);
-			const date = filterValDate.value[0].toString().replace(",", "");
-			let dataPoints;
-			if (storeDataPoints[date]) {
-				dataPoints = storeDataPoints[date];
-			} else {
-				dataPoints = await getPoints(filterValDate?.value);
-				storeDataPoints[date] = dataPoints;
-				setStoreDataPoints(storeDataPoints);
-			}
-			let dIndexed = {};
-			dataPoints.forEach((d) => {
-				dIndexed[d.id] = d;
-			});
-			setDataPointsIndexed(dIndexed);
-			setDataPoints(dataPoints);
-			setLoading(false);
-		})();
-	}, [filterValDate]);
+	// useEffect(() => {
+	// 	if (!filterValDate) return;
+	// 	// load the data for a month. the data includes the coordinates and the ids of the points
+	// 	(async () => {
+	// 		setLoading(true);
+	// 		const date = filterValDate.value[0].toString().replace(",", "");
+	// 		let dataPoints;
+	// 		if (storeDataPoints[date]) {
+	// 			dataPoints = storeDataPoints[date];
+	// 		} else {
+	// 			dataPoints = await getPoints(filterValDate?.value);
+	// 			storeDataPoints[date] = dataPoints;
+	// 			setStoreDataPoints(storeDataPoints);
+	// 		}
+	// 		let dIndexed = {};
+	// 		dataPoints.forEach((d) => {
+	// 			dIndexed[d.id] = d;
+	// 		});
+	// 		setDataPointsIndexed(dIndexed);
+	// 		setDataPoints(dataPoints);
+	// 		setLoading(false);
+	// 	})();
+	// }, [filterValDate]);
 
-	useEffect(() => {
-		if (pageLoaded) {
-			const timer = setTimeout(async () => {
-				setLoadingFilter(true);
+	// useEffect(() => {
+	// 	if (pageLoaded) {
+	// 		const timer = setTimeout(async () => {
+	// 			setLoadingFilter(true);
 
-				const newFilteredData = await getIdsOrData(
-					dataPointsIndexed,
-					filterValAge,
-					filterValEmployees,
-					filterBType,
-					filterValBl1,
-					filterValBl2,
-					filterValBl3,
-					filterValDate,
-					filterMonthOnly,
-					filterValBezirk,
-					filterValPlanungsraum,
-					filterValPrognoseraum
-				);
+	// 			const newFilteredData = await getIdsOrData(
+	// 				dataPointsIndexed,
+	// 				filterValAge,
+	// 				filterValEmployees,
+	// 				filterBType,
+	// 				filterValBl1,
+	// 				filterValBl2,
+	// 				filterValBl3,
+	// 				filterValDate,
+	// 				filterMonthOnly,
+	// 				filterValBezirk,
+	// 				filterValPlanungsraum,
+	// 				filterValPrognoseraum
+	// 			);
 
-				setFilteredData(newFilteredData);
-				setLoadingFilter(false);
-			}, 500);
-			return () => clearTimeout(timer);
-		}
-		setPageLoaded(true);
-	}, [
-		dataPointsIndexed,
-		filterValAge,
-		filterValEmployees,
-		filterBType,
-		filterValBl1,
-		filterValBl2,
-		filterValBl3,
-		filterMonthOnly,
-		filterValBezirk,
-		filterValPlanungsraum,
-		filterValPrognoseraum,
-	]);
+	// 			setFilteredData(newFilteredData);
+	// 			setLoadingFilter(false);
+	// 		}, 500);
+	// 		return () => clearTimeout(timer);
+	// 	}
+	// 	setPageLoaded(true);
+	// }, [
+	// 	dataPointsIndexed,
+	// 	filterValAge,
+	// 	filterValEmployees,
+	// 	filterBType,
+	// 	filterValBl1,
+	// 	filterValBl2,
+	// 	filterValBl3,
+	// 	filterMonthOnly,
+	// 	filterValBezirk,
+	// 	filterValPlanungsraum,
+	// 	filterValPrognoseraum,
+	// ]);
 
 	async function getPointInfo(info) {
 		const data = await getSinglePointData({

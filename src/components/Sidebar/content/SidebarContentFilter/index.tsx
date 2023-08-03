@@ -14,6 +14,7 @@ export interface SidebarContentFilterType {
 	activeFiltersList: number[];
 	setActiveFiltersList: (x: number[]) => void;
 	optionsDate: any;
+	searchResult: number[] | null;
 }
 
 export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
@@ -82,7 +83,6 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 								layersData={layersData}
 								setLayersData={setLayersData}
 								index={i}
-								key={i}
 								loading={loading}
 								setLoading={setLoading}
 								setOpen={setOpen}

@@ -48,9 +48,9 @@ export const DownloadModal: FC<DownloadModalType> = ({
 						</>
 					)}
 					Die Daten werden als <span className="font-bold">CSV-Datei</span>{" "}
-					bereitgestellt. CSV steht für "Comma-separated Values" und ist ein
-					Format, das sich gut zum Austausch von Tabellen und Listen zwischen
-					verschiedenen Programmen und Plattformen eignet.
+					bereitgestellt. CSV steht für &quot;Comma-separated Values&quot; und
+					ist ein Format, das sich gut zum Austausch von Tabellen und Listen
+					zwischen verschiedenen Programmen und Plattformen eignet.
 				</div>
 				<div className="flex pb-6">
 					<button

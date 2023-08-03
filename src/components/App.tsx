@@ -39,7 +39,7 @@ export const App = () => {
 		transitionDuration: 300,
 	});
 	const [activeFiltersList, setActiveFiltersList] = useState<number[]>([]);
-	const [optionsDate, setOptionsDate] = useState<any>([]);
+	const [optionsDate, setOptionsDate] = useState<number[]>([]);
 
 	useMatomo();
 

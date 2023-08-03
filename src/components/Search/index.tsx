@@ -60,8 +60,9 @@ const SearchResultItem: FC<SearchResultItemPropType> = ({
 };
 
 export interface SearchType {
-	setMapCenter: (center: number[] | null) => void;
-	viewSate: ViewStateType;
+	// setViewState: (center: number[] | null) => void;
+	viewState: ViewStateType;
+	setSearchResult: (center: number[] | null) => void;
 }
 
 export const Search: FC<SearchType> = ({
@@ -86,7 +87,7 @@ export const Search: FC<SearchType> = ({
 
 	useEffect(() => {
 		if (!debouncedInputValue) {
-			setSearchResult(false);
+			setSearchResult(null);
 		}
 	}, [debouncedInputValue]);
 

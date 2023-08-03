@@ -6,6 +6,8 @@ import { ViewStateType } from "@common/interfaces";
 
 export interface SidebarContentSearchType {
 	viewState: ViewStateType;
+	setSearchResult: (center: number[] | null) => void;
+	searchResult: number[] | null;
 }
 
 export const SidebarContentSearch: FC<SidebarContentSearchType> = ({
