@@ -21,8 +21,8 @@ export interface MapType {
 	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 }
 
-const LONGITUDE_RANGE = [13.210754, 13.599154];
-const LATITUDE_RANGE = [52.384558, 52.655458];
+const LONGITUDE_RANGE = [12.97468, 13.88752];
+const LATITUDE_RANGE = [52.29039, 52.76441];
 const MIN_ZOOM = 9;
 
 export const MapComponent: FC<MapType> = ({
