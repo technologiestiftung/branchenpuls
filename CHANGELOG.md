@@ -1,3 +1,15 @@
+# [1.9.0](https://github.com/technologiestiftung/branchenpuls/compare/v1.8.0...v1.9.0) (2023-08-03)
+
+
+### Bug Fixes
+
+* path for social images ([48f6a27](https://github.com/technologiestiftung/branchenpuls/commit/48f6a275226f52f7213411516e17c4ee42311c6d))
+
+
+### Features
+
+* add social images ([3f2e25f](https://github.com/technologiestiftung/branchenpuls/commit/3f2e25f9a8d3e0341fce834eb83dc1a91df5388f))
+
 # [1.8.0](https://github.com/technologiestiftung/branchenpuls/compare/v1.7.0...v1.8.0) (2023-08-01)
 
 
