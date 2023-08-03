@@ -15,7 +15,7 @@ export const metadata = {
 		description:
 			"Die Berliner Wirtschaft ist so bunt wie die Stadt selbst. Mit dem Branchenpuls tauchst du in die dynamische Gewerbelandschaft und die verschiedenen Branchen ein. Exploriere und vergleiche Berlins Gewerbe vom Bezirk bis zum Kiez.",
 		// creator: "@nextjs",
-		images: ["/social-image-1280x640.png"],
+		images: ["https://branchenpuls.odis-berlin.de/social-image-1280x640.png"],
 	},
 	openGraph: {
 		title: "Berlins Branchenpuls",
@@ -25,12 +25,12 @@ export const metadata = {
 		siteName: "branchenpuls.odis-berlin.de",
 		images: [
 			{
-				url: "/open-graph-800x600.png",
+				url: "https://branchenpuls.odis-berlin.de/open-graph-800x600.png",
 				width: 800,
 				height: 600,
 			},
 			{
-				url: "/open-graph-1800x1600.png",
+				url: "https://branchenpuls.odis-berlin.de/open-graph-1800x1600.png",
 				width: 1800,
 				height: 1600,
 				alt: "Vorschau vom Berliner Branchenpuls",
