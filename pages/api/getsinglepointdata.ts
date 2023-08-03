@@ -44,9 +44,9 @@ export default async function handler(
 		month,
 		year,
 		monthonly,
-		bezirk,
-		planungsraum,
-		prognoseraum,
+		// bezirk,
+		// planungsraum,
+		// prognoseraum,
 		lat,
 		lng,
 	} = req.query;
@@ -65,28 +65,28 @@ export default async function handler(
 	}
 
 	if (bl1) {
-		if (bl1.includes(",")) {
-			bl1 = bl1?.split(",").map((d) => Number(d.trim()));
+		if (typeof bl1 === "string" && bl1.includes(",")) {
+			bl1 = bl1?.split(",").map((d) => d.trim());
 		}
 		query = query.in("branch_top_level_id", Array.isArray(bl1) ? bl1 : [bl1]);
 	}
 
 	if (bl2) {
-		if (bl2.includes(",")) {
-			bl2 = bl2?.split(",").map((d) => Number(d.trim()));
+		if (typeof bl2 === "string" && bl2.includes(",")) {
+			bl2 = bl2?.split(",").map((d) => d.trim());
 		}
 		query = query.in("nace_id", Array.isArray(bl2) ? bl2 : [bl2]);
 	}
 
 	if (bl3) {
-		if (bl3.includes(",")) {
-			bl3 = bl3?.split(",").map((d) => Number(d.trim()));
+		if (typeof bl3 === "string" && bl3.includes(",")) {
+			bl3 = bl3?.split(",").map((d) => d.trim());
 		}
 		query = query.in("ihk_branch_id", Array.isArray(bl3) ? bl3 : [bl3]);
 	}
 
-	if (employees) {
-		const employeesArray = employees.split(",").map(Number);
+	if (typeof employees === "string" && employees) {
+		const employeesArray = employees.split(",").map((d) => d);
 		query = query.in("employees_range", employeesArray);
 	}
 

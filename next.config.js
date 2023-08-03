@@ -9,7 +9,7 @@ const nextConfig = {
 		tsconfigPath: "./tsconfig.next.json",
 	},
 	typescript: {
-		ignoreBuildErrors: true,
+		// ignoreBuildErrors: true,
 	},
 	api: {
 		responseLimit: false,
