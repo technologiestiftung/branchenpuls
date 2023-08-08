@@ -641,7 +641,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					<div className="mb-8 mt-4 flex">
 						<button
 							onClick={() => setDownloadModalOpen(true)}
-							className="btn-outline btn-primary btn-sm btn mr-1 flex-1 font-normal normal-case text-white "
+							className="btn-primary btn-sm btn mr-1 flex-1 font-normal normal-case text-white "
 							// disabled={true}
 						>
 							CSV Download
