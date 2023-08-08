@@ -27,7 +27,7 @@ export const FilterPlaces: FC<FilterPlacesType> = ({
 }) => {
 	return (
 		<div className="mb-3">
-			<p className="mb-1 font-bold">Bezirk</p>
+			<p className="mb-1 font-normal">Bezirk</p>
 			<Select
 				value={filterValBezirk}
 				onChange={setFilterValBezirk}
