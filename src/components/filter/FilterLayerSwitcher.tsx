@@ -43,7 +43,7 @@ export const FilterLayerSwitcher: FC<FilterLayerSwitcherType> = ({
 					className="grid h-12 w-1/3 cursor-pointer items-center rounded bg-gray-200 text-center font-normal leading-4 text-gray-400 hover:bg-light-grey hover:text-white"
 					title="Neue Ansicht mit anderen Filtern erstellen"
 				>
-					neue
+					+ neue
 					<br />
 					Ansicht
 				</button>
