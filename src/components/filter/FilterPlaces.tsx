@@ -27,7 +27,7 @@ export const FilterPlaces: FC<FilterPlacesType> = ({
 }) => {
 	return (
 		<div className="mb-3">
-			<p className="mb-1 font-bold">Bezirk</p>
+			<p className="mb-1 font-medium">Bezirk</p>
 			<Select
 				value={filterValBezirk}
 				onChange={setFilterValBezirk}
@@ -43,7 +43,7 @@ export const FilterPlaces: FC<FilterPlacesType> = ({
 				}
 			/>
 
-			<p className="mb-1 mt-3 font-bold">Prognoseraum</p>
+			<p className="mb-1 mt-3 font-medium">Prognoseraum</p>
 			<Select
 				value={filterValPrognoseraum}
 				onChange={setFilterValPrognoseraum}
@@ -56,7 +56,7 @@ export const FilterPlaces: FC<FilterPlacesType> = ({
 				isDisabled={Boolean(filterValPlanungsraum?.value)}
 			/>
 
-			<p className="mb-1 mt-3 font-bold">Planungsraum</p>
+			<p className="mb-1 mt-3 font-medium">Planungsraum</p>
 			<Select
 				value={filterValPlanungsraum}
 				onChange={setFilterValPlanungsraum}

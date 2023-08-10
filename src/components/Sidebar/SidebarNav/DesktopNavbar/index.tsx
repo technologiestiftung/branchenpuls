@@ -53,7 +53,7 @@ export const DesktopNavbar = ({
 						<li className="flex">
 							<button
 								onClick={() => onNavClick("search")}
-								title="Mehr Informationen anzeigen/schließen"
+								title="Suche anzeigen/schließen"
 								className={`p-[8px] shadow-lg duration-300 ease-in-out
 											${
 												navView === "search" && sidebarMenuOpen

@@ -26,6 +26,7 @@ module.exports = {
 				sidebar: SIDEBARWIDTH,
 			},
 			colors: {
+				"grey": "#CCCCCC",
 				"dark-grey": "#3B3B3A",
 				"darker-primary": "#182D73",
 				"light-grey": "#B1B2B3",

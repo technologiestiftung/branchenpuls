@@ -95,7 +95,7 @@ export const Search: FC<SearchType> = ({
 		<>
 			<input
 				type="text"
-				placeholder="Gib hier einen Ort an"
+				placeholder="Gib hier einen Ort ein"
 				value={inputVal}
 				onChange={(evt) => setInputVal(evt.target.value)}
 				className={classNames(

@@ -63,7 +63,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 	return (
 		<div className="">
 			<div className="">
-				<p className="mb-1 flex gap-2 font-bold">
+				<p className="mb-1 flex gap-2 font-medium">
 					Branchentyp
 					<button title="Ein Branchentyp ist z.B. Einzelhandel">
 						<Info className="h-4 w-4" />
@@ -85,7 +85,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 				/>
 			</div>
 			<div className="mt-3">
-				<p className="mb-1 flex items-center gap-2 text-sm font-bold">
+				<p className="mb-1 flex items-center gap-2 text-sm font-medium">
 					NACE
 					<span className="text-xs font-normal">
 						{filterValBl1 ? ` basierend auf Branchentyp` : ""}
@@ -113,7 +113,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 			</div>
 			{/* suchen… */}
 			<div className="mt-3">
-				<p className="mb-1 flex items-center gap-2 text-sm font-bold">
+				<p className="mb-1 flex items-center gap-2 text-sm font-medium">
 					IHK ID{" "}
 					<span className="text-xs font-normal">
 						{filterValBl1 || filterValBl2

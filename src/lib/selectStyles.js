@@ -36,7 +36,7 @@ export function customTheme(theme) {
 		...theme,
 		colors: {
 			...theme.colors,
-			primary25: "#e4e3ff", // a5dbf8
+			primary25: "#CAD3F2", // a5dbf8
 			primary: "#182D73",
 		},
 	};
