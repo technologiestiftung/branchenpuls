@@ -22,6 +22,7 @@ import { calculatePointRadius } from "@lib/calculatePointRadius";
 import { calculateHeatmapOpacity } from "@lib/calculateHeatmapOpacity";
 
 import { ViewStateType, StringSelection } from "@common/interfaces";
+import { Info } from "@components/Icons";
 
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
@@ -481,40 +482,53 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				) : (
 					<div className="mt-2 h-[20px]"></div>
 				)}
-
-				<div className="mt-5">
-					<p className="mb-1 font-bold">Zeitraum</p>
-					<Select
-						value={filterValDate}
-						onChange={setFilterValDate}
-						isClearable={false}
-						isSearchable={false}
-						options={optionsDate}
-						theme={customTheme}
-						styles={customStyles}
-					/>
-				</div>
-				<div className="mb-3 ml-3 pt-2">
-					{/* <p className="mb-1 font-bold">Neugründungen</p> */}
-					<label className="label cursor-pointer px-0">
-						<span className="text-md label-text">
-							Nur Neugründungen anzeigen
-						</span>
-						<input
-							type="checkbox"
-							checked={filterMonthOnly}
-							className="checkbox-primary checkbox text-white"
-							onChange={() => setFilterMonthOnly(!filterMonthOnly)}
-							disabled={
-								filterValDate?.value[0] === 3 &&
-								filterValDate?.value[1] === 2023
-							}
-						/>
-					</label>
-				</div>
+				<Accordion
+					title={"Zeitraum"}
+					titleClasses={"!text-base"}
+					active={true} // Zustand des geöffneten Accordion setzen
+					content={
+						<div className="mb-2">
+							<div>
+								<p className="mb-1 font-medium">
+									Datenstand
+									<button title="Ein Branchentyp ist z.B. Einzelhandel">
+										<Info className="ml-2 flex h-4 w-4 items-center" />
+									</button>
+								</p>
+								<Select
+									value={filterValDate}
+									onChange={setFilterValDate}
+									isClearable={false}
+									isSearchable={false}
+									options={optionsDate}
+									theme={customTheme}
+									styles={customStyles}
+								/>
+							</div>
+							<div className="ml-3 pt-2">
+								{/* <p className="mb-1 font-bold">Neugründungen</p> */}
+								<label className="label cursor-pointer px-0">
+									<span className="text-md label-text">
+										Nur Neugründungen anzeigen
+									</span>
+									<input
+										type="checkbox"
+										checked={filterMonthOnly}
+										className="checkbox-primary checkbox text-white"
+										onChange={() => setFilterMonthOnly(!filterMonthOnly)}
+										disabled={
+											filterValDate?.value[0] === 3 &&
+											filterValDate?.value[1] === 2023
+										}
+									/>
+								</label>
+							</div>
+						</div>
+					}
+				/>
 
 				<Accordion
-					title={"Branchen"}
+					title={"Branche"}
 					titleClasses={"!text-base"}
 					content={
 						<div className="mb-3">
@@ -530,7 +544,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					}
 				/>
 				<Accordion
-					title={"Standorte"}
+					title={"Standort"}
 					titleClasses={"!text-base"}
 					content={
 						<FilterPlaces
@@ -631,15 +645,15 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					<div className="mb-8 mt-4 flex">
 						<button
 							onClick={() => setDownloadModalOpen(true)}
-							className="btn-primary btn-sm btn mr-1 flex-1 font-normal normal-case text-white "
+							className="btn-primary btn-md btn mr-1 flex-1 font-normal normal-case text-white "
 							// disabled={true}
 						>
-							CSV Download
+							Daten herunterladen
 						</button>
 
 						<button
 							onClick={resetFilterData}
-							className="btn-outline btn-primary btn-sm btn ml-1 flex-1 font-normal normal-case text-white "
+							className="btn-outline btn-primary btn-md btn ml-1 flex-1 font-normal normal-case text-white"
 							disabled={activeFiltersList.length === 1}
 						>
 							Filter zurücksetzen
