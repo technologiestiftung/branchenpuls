@@ -61,7 +61,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 
 	return (
 		<>
-			<SidebarHeader text="Gewerbe erkunden" />
+			<SidebarHeader text="Gewerbe filtern" />
 			<SidebarBody>
 				<FilterLayerSwitcher
 					layersData={layersData}

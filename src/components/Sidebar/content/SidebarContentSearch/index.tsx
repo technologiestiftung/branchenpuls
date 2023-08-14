@@ -23,7 +23,7 @@ export const SidebarContentSearch: FC<SidebarContentSearchType> = ({
 			<SidebarBody>
 				<div className="gap- flex w-full flex-col">
 					<p className="text-sm text-dark-grey">
-						Finde deinen Bezirke, deine Straße oder einen anderen Ort in Berlin.
+						Finde einen Bezirke, eine Straße oder einen anderen Ort in Berlin.
 					</p>
 
 					<Search

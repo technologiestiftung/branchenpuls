@@ -494,24 +494,27 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						styles={customStyles}
 					/>
 				</div>
+				<div className="mb-3 ml-3 pt-2">
+					{/* <p className="mb-1 font-bold">Neugründungen</p> */}
+					<label className="label cursor-pointer px-0">
+						<span className="text-md label-text">
+							Nur Neugründungen anzeigen
+						</span>
+						<input
+							type="checkbox"
+							checked={filterMonthOnly}
+							className="checkbox-primary checkbox text-white"
+							onChange={() => setFilterMonthOnly(!filterMonthOnly)}
+							disabled={
+								filterValDate?.value[0] === 3 &&
+								filterValDate?.value[1] === 2023
+							}
+						/>
+					</label>
+				</div>
 
 				<Accordion
-					title={"Räumliche Filter"}
-					titleClasses={"!text-base"}
-					content={
-						<FilterPlaces
-							filterValBezirk={filterValBezirk}
-							setFilterValBezirk={setFilterValBezirk}
-							filterValPrognoseraum={filterValPrognoseraum}
-							setFilterValPrognoseraum={setFilterValPrognoseraum}
-							filterValPlanungsraum={filterValPlanungsraum}
-							setFilterValPlanungsraum={setFilterValPlanungsraum}
-						></FilterPlaces>
-					}
-				/>
-
-				<Accordion
-					title={"Branchen-Filter"}
+					title={"Branchen"}
 					titleClasses={"!text-base"}
 					content={
 						<div className="mb-3">
@@ -527,103 +530,90 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					}
 				/>
 				<Accordion
-					title={"Beschäftigtenzahl"}
+					title={"Standorte"}
 					titleClasses={"!text-base"}
 					content={
-						<div className="mb-3">
-							{/* <p className="mb-1 font-bold">Beschäftigtenzahl</p> */}
-							<Select
-								value={filterValEmployees}
-								onChange={setFilterValEmployees}
-								isClearable={true}
-								isSearchable={false}
-								options={getOptionsEmployees()}
-								styles={customStyles}
-								placeholder="z.B. Mittlere Unternehmen"
-								theme={customTheme}
-								getOptionLabel={getOptionLabel}
-							/>
-						</div>
+						<FilterPlaces
+							filterValBezirk={filterValBezirk}
+							setFilterValBezirk={setFilterValBezirk}
+							filterValPrognoseraum={filterValPrognoseraum}
+							setFilterValPrognoseraum={setFilterValPrognoseraum}
+							filterValPlanungsraum={filterValPlanungsraum}
+							setFilterValPlanungsraum={setFilterValPlanungsraum}
+						></FilterPlaces>
 					}
 				/>
+
 				<Accordion
-					title={"Unternehmensalter in Jahren"}
+					title={"Unternehmensdetails"}
 					titleClasses={"!text-base"}
 					content={
-						<div className="mb-3">
-							{/* <p className="mb-1 font-bold">Unternehmensalter in Jahren</p> */}
-							<RangeSlider
-								value={filterValAge}
-								setValue={setFilterValAge}
-								minValue={0}
-								maxValue={100}
-								step={1}
-							/>
-						</div>
-					}
-				/>
-				<Accordion
-					title={"Unternehmenstyp"}
-					titleClasses={"!text-base"}
-					content={
-						<div className="mb-3">
-							{/* <p className="mb-1 font-bold">Unternehmenstyp</p> */}
-							<label className="label cursor-pointer px-0  py-1">
-								<span className="text-md label-text">
-									Alle Unternehmenstypen
-								</span>
-								<input
-									type="checkbox"
-									className="checkbox-primary checkbox text-white"
-									checked={filterBType === null}
-									onChange={onBTypeChange}
-									value={-1}
+						<div>
+							<div className="mb-6">
+								<p className="mb-1 font-medium">Beschäftigtenzahl</p>
+								<Select
+									value={filterValEmployees}
+									onChange={setFilterValEmployees}
+									isClearable={true}
+									isSearchable={false}
+									options={getOptionsEmployees()}
+									styles={customStyles}
+									placeholder="z.B. Mittlere Unternehmen"
+									theme={customTheme}
+									getOptionLabel={getOptionLabel}
 								/>
-							</label>
-							<label className="label cursor-pointer px-0 py-1">
-								<span className="text-md label-text">Nur Kleingewerbe</span>
-								<input
-									type="checkbox"
-									className="checkbox-primary checkbox text-white"
-									checked={filterBType?.value === "0"}
-									onChange={onBTypeChange}
-									value={0}
+							</div>
+
+							<div className="mb-10">
+								<p className="mb-1 mt-3 font-medium">
+									Unternehmensalter in Jahren
+								</p>
+								<RangeSlider
+									value={filterValAge}
+									setValue={setFilterValAge}
+									minValue={0}
+									maxValue={100}
+									step={1}
 								/>
-							</label>
-							<label className="label cursor-pointer px-0  py-1">
-								<span className="text-md label-text">Nur Handelsregister</span>
-								<input
-									type="checkbox"
-									className="checkbox-primary checkbox text-white"
-									checked={filterBType?.value === "1"}
-									onChange={onBTypeChange}
-									value={1}
-								/>
-							</label>
-						</div>
-					}
-				/>
-				<Accordion
-					title={"Neugründungen"}
-					titleClasses={"!text-base"}
-					content={
-						<div className="mb-3">
-							{/* <p className="mb-1 font-bold">Neugründungen</p> */}
-							<label className="label cursor-pointer px-0">
-								<span className="text-md label-text">
-									Nur Neugründungen anzeigen
-								</span>
-								<input
-									type="checkbox"
-									checked={filterMonthOnly}
-									className="checkbox-primary checkbox text-white"
-									onChange={() => setFilterMonthOnly(!filterMonthOnly)}
-									disabled={
-										filterValDate?.value[0] === 3 &&
-										filterValDate?.value[1] === 2023
-									}
-								/>
-							</label>
+							</div>
+
+							<div className="mb-3">
+								<p className="mb-1 font-medium">Unternehmenstyp</p>
+								<label className="label cursor-pointer px-0  py-1">
+									<span className="text-md label-text">
+										Alle Unternehmenstypen
+									</span>
+									<input
+										type="checkbox"
+										className="checkbox-primary checkbox text-white"
+										checked={filterBType === null}
+										onChange={onBTypeChange}
+										value={-1}
+									/>
+								</label>
+								<label className="label cursor-pointer px-0 py-1">
+									<span className="text-md label-text">Nur Kleingewerbe</span>
+									<input
+										type="checkbox"
+										className="checkbox-primary checkbox text-white"
+										checked={filterBType?.value === "0"}
+										onChange={onBTypeChange}
+										value={0}
+									/>
+								</label>
+								<label className="label cursor-pointer px-0  py-1">
+									<span className="text-md label-text">
+										Nur Handelsregister
+									</span>
+									<input
+										type="checkbox"
+										className="checkbox-primary checkbox text-white"
+										checked={filterBType?.value === "1"}
+										onChange={onBTypeChange}
+										value={1}
+									/>
+								</label>
+							</div>
 						</div>
 					}
 				/>
