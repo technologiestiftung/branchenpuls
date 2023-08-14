@@ -20,7 +20,7 @@ export const FilterList: FC<FilterListType> = ({
 				return (
 					<div
 						key={`key-${filterName?.replace(" ", "")}`}
-						className={`${badgeClasses} mb-2 w-fit rounded-xl bg-primary p-1 px-4 text-sm text-white`}
+						className={`${badgeClasses} mb-2 w-fit rounded-3xl bg-primary p-1 px-4 text-sm text-white`}
 					>
 						{filterName}
 					</div>

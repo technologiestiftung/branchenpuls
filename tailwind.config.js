@@ -53,7 +53,7 @@ module.exports = {
 					error: "#F87272",
 					".btn-outline.btn-primary:hover": {
 						color: "white",
-						"background-color": "#182D737",
+						"background-color": "#182D73",
 					},
 				},
 			},

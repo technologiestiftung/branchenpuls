@@ -16,8 +16,11 @@ export const customStyles = {
 	multiValue: (styles, { data }) => {
 		return {
 			...styles,
-			backgroundColor: "#182D73",
+			backgroundColor: "#1E398F",
 			width: "100%",
+			":hover": {
+				backgroundColor: "#182D73",
+			},
 			justifyContent: "space-between",
 			// fontSize: "12px",
 		};
