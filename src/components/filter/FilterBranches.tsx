@@ -65,7 +65,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 			<div className="">
 				<p className="mb-1 flex gap-2 font-medium">
 					Branchentyp
-					<button title="Ein Branchentyp ist z.B. Einzelhandel">
+					<button title="Der Branchentyp ist eine übergeordnete, recht grobe Klassifizierung der Geschäftstätigkeit eines Unternehmens. Jeder Branchentyp kann auch über seine zweistellige ID gefunden werden.">
 						<Info className="h-4 w-4" />
 					</button>
 				</p>
@@ -85,12 +85,12 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 				/>
 			</div>
 			<div className="mt-3">
-				<p className="mb-1 flex items-center gap-2 text-sm font-medium">
-					NACE
+				<p className="mb-1 flex items-center gap-1 text-sm font-medium">
+					NACE Code
 					<span className="text-xs font-normal">
 						{filterValBl1 ? ` basierend auf Branchentyp` : ""}
 					</span>
-					<button title="NACE ist ein System zur Klassifizierung von Wirtschaftszweigen">
+					<button title="Die NACE (Nomenklatur der Wirtschaftstätigkeiten) ist die europäische Klassifikation der Geschäftstätigkeiten von Unternehmen. Sie ist detaillierter als der Branchentyp und zu jeder Klasse existiert eine offizielle Definition (https://nacev2.com/de).">
 						<Info className="h-4 w-4" />
 					</button>
 				</p>
@@ -113,14 +113,14 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 			</div>
 			{/* suchen… */}
 			<div className="mt-3">
-				<p className="mb-1 flex items-center gap-2 text-sm font-medium">
+				<p className="mb-1 flex items-center gap-1 text-sm font-medium">
 					IHK ID{" "}
 					<span className="text-xs font-normal">
 						{filterValBl1 || filterValBl2
 							? ` basierend auf ${filterValBl2 ? "NACE" : "Branchentyp"}`
 							: ""}
 					</span>
-					<button title="Diese ID ist eine Kategorisierung der IHK">
+					<button title="Die IHK ID ist eine Klassifizierung der Geschäftstätigkeiten, die spezifisch von der IHK Berlin für die bei ihr gemeldeten Unternehmen verwendet wird. Sie ist noch detaillierter als der NACE Code.">
 						<Info className="h-4 w-4" />
 					</button>
 				</p>

@@ -19,13 +19,11 @@ export const SidebarContentSearch: FC<SidebarContentSearchType> = ({
 }) => {
 	return (
 		<>
-			<SidebarHeader text={"Standort Suche"} />
+			<SidebarHeader text={"Adresssuche"} />
 			<SidebarBody>
 				<div className="gap- flex w-full flex-col">
 					<p className="text-sm text-dark-grey">
-						Finde dein Unternehmen, die relevante Straße für eine Neugründung
-						oder betrachte deine gewohnte Nachbarschaft aus der Perspektive
-						eines Wirtschaftsstandorts.
+						Finde einen Bezirke, eine Straße oder einen anderen Ort in Berlin.
 					</p>
 
 					<Search
