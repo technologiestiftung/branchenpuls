@@ -485,13 +485,13 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				<Accordion
 					title={"Zeitraum"}
 					titleClasses={"!text-base"}
-					active={true} // Zustand des geöffneten Accordion setzen
+					active={true}
 					content={
 						<div className="mb-2">
 							<div>
 								<p className="mb-1 font-medium">
 									Datenstand
-									<button title="Ein Branchentyp ist z.B. Einzelhandel">
+									<button title="Der Datensatz wird monatlich aktualisiert und zum Ende jeden Monats seit März 2022 veröffentlicht. Unter Neugründungen werden die seit dem vergangenen Monat neu hinzugekommenden Unternehmen gezählt.">
 										<Info className="ml-2 flex h-4 w-4 items-center" />
 									</button>
 								</p>
@@ -564,7 +564,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					content={
 						<div>
 							<div className="mb-6">
-								<p className="mb-1 font-medium">Beschäftigtenzahl</p>
+								<p className="mb-1 flex items-center gap-2 font-medium">
+									Beschäftigtenzahl
+									<button title="Die Klassen der Beschäftigtenzahl sind angelehnt an die Definition der Europäischen Kommission für Unternehmensgrößen. '0 oder keine Angabe' kann sowohl Selbstständige ohne Mitarbeiter:innen, wie auch eine fehlende Angabe bedeuten.">
+										<Info className="h-4 w-4" />
+									</button>
+								</p>
 								<Select
 									value={filterValEmployees}
 									onChange={setFilterValEmployees}
@@ -592,7 +597,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 							</div>
 
 							<div className="mb-3">
-								<p className="mb-1 font-medium">Unternehmenstyp</p>
+								<p className="item-center mb-1 flex gap-2 font-medium">
+									Unternehmenstyp
+									<button title="Kleingewerbetreibende sind aufgrund der geringen Größe und Umfangs ihres Betriebs nicht dazu verpflichtet, sich ins Handelsregister eintragen zu lassen, können sich aber für eine freiwillige Eintragung entscheiden. Entsprechend können auch unter 'Nur Handelsregister' Kleingewerbetreibende vertreten sein. Kaufleute und Handelsgesellschaften müssen sich zwingend im Handelsregister eintragen.">
+										<Info className="h-4 w-4" />
+									</button>
+								</p>
 								<label className="label cursor-pointer px-0  py-1">
 									<span className="text-md label-text">
 										Alle Unternehmenstypen

@@ -7,6 +7,7 @@ import {
 } from "./dropdownOptions";
 import { customTheme, customStyles } from "@lib/selectStyles";
 import { StringSelection } from "@common/interfaces";
+import { Info } from "@components/Icons";
 
 export interface FilterPlacesType {
 	filterValBezirk: StringSelection | null;
@@ -43,7 +44,12 @@ export const FilterPlaces: FC<FilterPlacesType> = ({
 				}
 			/>
 
-			<p className="mb-1 mt-3 font-medium">Prognoseraum</p>
+			<p className="mb-1 mt-3 flex items-center gap-2 font-medium">
+				Prognoseraum
+				<button title="Der Prognoseraum ist eine Raumabgrenzung innerhalb des jeweiligen Bezirks. Es gibt berlinweit 60 Prognoseräume mit durchschnittlich 55.000 bis 60.000 Einwohner:innen.">
+					<Info className="h-4 w-4" />
+				</button>
+			</p>
 			<Select
 				value={filterValPrognoseraum}
 				onChange={setFilterValPrognoseraum}
@@ -56,7 +62,12 @@ export const FilterPlaces: FC<FilterPlacesType> = ({
 				isDisabled={Boolean(filterValPlanungsraum?.value)}
 			/>
 
-			<p className="mb-1 mt-3 font-medium">Planungsraum</p>
+			<p className="mb-1 mt-3 flex items-center gap-2 font-medium">
+				Planungsraum
+				<button title="Der Planungsraum ist eine Raumabgrenzung innerhalb des jeweiligen Bezirks, der Quartiere beschreibt – er ist die kleinräumigste Ebene der Lebensweltlich orientierten Räume (LOR). Es gibt berlinweit 447 Planungsräume mit durchschnittlich 7.500 Einwohner:innen.">
+					<Info className="h-4 w-4" />
+				</button>
+			</p>
 			<Select
 				value={filterValPlanungsraum}
 				onChange={setFilterValPlanungsraum}
