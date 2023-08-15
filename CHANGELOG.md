@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/technologiestiftung/branchenpuls/compare/v1.9.0...v1.10.0) (2023-08-15)
+
+
+### Features
+
+* add infobox texts ([2126a23](https://github.com/technologiestiftung/branchenpuls/commit/2126a23549ced23d4ea3dcb1f84a7b90358c3532))
+
 # [1.9.0](https://github.com/technologiestiftung/branchenpuls/compare/v1.8.0...v1.9.0) (2023-08-03)
 
 
