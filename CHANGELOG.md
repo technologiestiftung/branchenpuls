@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/technologiestiftung/branchenpuls/compare/v1.10.0...v1.11.0) (2023-08-16)
+
+
+### Features
+
+* update info texts ([958413f](https://github.com/technologiestiftung/branchenpuls/commit/958413f77f365def20c2bfea06916d167e03d5f6))
+
 # [1.10.0](https://github.com/technologiestiftung/branchenpuls/compare/v1.9.0...v1.10.0) (2023-08-15)
 
 
