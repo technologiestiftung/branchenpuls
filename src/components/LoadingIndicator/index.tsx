@@ -11,9 +11,12 @@ export const LoadingIndicator: FC<LoadingIndicatorType> = ({ loading }) => {
 				<div
 					className={`duration-600 absolute z-40 h-full w-full bg-primary text-center opacity-80`}
 				>
-					<span className="fixed bottom-10 right-10 ">
+					<span className="flex h-screen items-center justify-center">
 						<span className="flex ">
-							<p className="text-md mr-4 text-white"> Daten werden geladen</p>{" "}
+							<p className="text-md mr-6 pt-1 text-white">
+								{" "}
+								Daten werden geladen
+							</p>{" "}
 							<svg
 								aria-hidden="true"
 								className="mr-2 h-8 w-8 animate-spin fill-primary text-gray-200 dark:text-gray-600"

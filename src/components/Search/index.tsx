@@ -99,9 +99,9 @@ export const Search: FC<SearchType> = ({
 				value={inputVal}
 				onChange={(evt) => setInputVal(evt.target.value)}
 				className={classNames(
-					"block w-full rounded border border-gray-400 px-3 py-2",
+					"block w-full rounded border border-grey px-3 py-2",
 					"my-4 focus:outline-none focus:ring-2 focus:ring-primary",
-					"focus:ring-offset-2 focus:ring-offset-white"
+					"text-sm placeholder:italic focus:border-none"
 				)}
 			/>
 
