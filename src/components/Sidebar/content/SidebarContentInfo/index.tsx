@@ -19,23 +19,20 @@ export const SidebarContentInfo = () => {
 					<p className="text-sm text-dark-grey">
 						Berlin ist Hauptstadt, Start-Up-Metropole, Exzellenzcluster, Stadt
 						der Kreativen und vorallem eines: immer im Wandel. Entsprechend
-						vielfältig und dynamisch ist auch die Berliner Wirtschaft. Mit dem
-						<span className="italic"> Branchenpuls</span> wird eine Betrachtung
-						und Analyse der Berliner Gewerbelandschaft erstmalig möglich. In
+						vielfältig und dynamisch ist auch die Berliner Wirtschaft. Doch in
 						welchen Kiezen konzentrieren sich bestimmte Branchen? Wo dominieren
-						ältere Unternehmen, wo siedeln sich neue Unternehmen an? Und wie
-						entwickelt sich die Berliner Gewerbelandschaft im Lauf der Zeit?
-						<br />
-						<br />
-						Mit dem <span className="italic"> Branchenpuls</span> haben
-						Verwaltung, Wirtschaft, Wissenschaft und Zivilgesellschaft ein Tool
-						zur Hand, um einen tiefen Einblick in die Berliner Gewerbelandschaft
-						zu gewinnen, Veränderungen zu erkennen und datenbasierte Analysen
-						durchzuführen.
+						ältere Unternehmen, wo siedeln sich neue an? Wie entwickelt sich die
+						Gewerbelandschaft im Lauf der Zeit?
+						{/* <br />
+						<br /> */}
+						{/* Der
+						<span className="italic"> Branchenpuls</span> macht eine
+						datenbasierte Betrachtung und Analyse der Berliner Gewerbelandschaft
+						erstmalig möglich. */}
 					</p>
 
 					<Accordion
-						title={"Was ist der Branchenpuls?"}
+						title={"Was zeigt der Branchenpuls?"}
 						content={
 							<p>
 								Der <span className="italic">Branchenpuls</span> ist ein auf
@@ -46,17 +43,37 @@ export const SidebarContentInfo = () => {
 								zeitlichen Entwicklung der Gewerbelandschaft.
 								<br />
 								<br />
-								Die Standorte, als Punkte dargestellt, entsprechen dem Sitz des
-								Mitgliedsunternehmes der IHK Berlin. Neben der Punktdarstellung
-								ist eine Heatmapdarstellung auswählbar, um
-								Branchenkonzentrationen zu visualisieren. Die Unternehmen können
-								nach Informationen wie Branchen- und Gewerbetyp,
-								Neueintragungen, Beschäftigtenzahl oder Unternehmensalter
-								gefiltert werden. Außerdem ist eine räumliche Differenzierung
-								auf Bezirksebene möglich. Durch die Zeitraumauswahl ist darüber
-								hinaus eine zeitliche Entwicklung erkundbar, wie z.B.
-								Neuansiedlungen, Umzüge oder Geschäftsaufgaben. Dazu können
-								mehrere Ansichten geöffnet und miteinander verglichen werden.
+								Die Standorte, als Punkte bzw. bei kleiner Zoomstufe als Heatmap
+								dargestellt, entsprechen dem Sitz des Mitgliedsunternehmes der
+								IHK Berlin. Die Unternehmen können nach Informationen wie
+								Branchen- und Gewerbetyp, Neueintragungen, Beschäftigtenzahl
+								oder Unternehmensalter gefiltert werden. Außerdem ist eine
+								räumliche Differenzierung auf Ebene der verschiedenen
+								Lebensweltlich orientierten Räume (offizielle in Berlin
+								verwendete Raumeinheiten) möglich. Durch die Zeitraumauswahl ist
+								darüber hinaus eine zeitliche Entwicklung erkundbar, wie z.B.
+								Neuansiedlungen und Geschäftsaufgaben. Dazu können mehrere
+								Ansichten geöffnet und miteinander verglichen werden.
+							</p>
+						}
+					/>
+
+					<Accordion
+						title={"Wem nutzt der Branchenpuls?"}
+						content={
+							<p>
+								Mit dem <span className="italic"> Branchenpuls</span> haben
+								Verwaltung, Wirtschaft, Wissenschaft und Zivilgesellschaft ein
+								Tool zur Hand, um einen tiefen Einblick in die Berliner
+								Gewerbelandschaft zu gewinnen, Veränderungen zu erkennen und
+								datenbasierte Analysen durchzuführen.
+								<br /> Das Tool ermöglichst es, sich durch die Filterfunktionen
+								die für die eigenen Fragestellungen relevanten Teil-Datensätze
+								zusammenzustellen und über den Download-Button zu exportieren.
+								Somit dient die Anwendung zum einen dazu, eine erste
+								unkomplizierte Exploration zu ermöglichen, zum anderern stellt
+								sie die Dateien für weitere, datengestützte Analysen
+								leichtzugänglich zur Verfügung.
 								<br />
 								<br />
 								Der <span className="italic">Branchenpuls</span> ist ein
@@ -77,7 +94,7 @@ export const SidebarContentInfo = () => {
 					/>
 
 					<Accordion
-						title={"Woher kommen die Daten?"}
+						title={"Woher stammen die Daten?"}
 						content={
 							<p>
 								Die dem Branchenpuls zugrundeliegenden Daten werden von der IHK
@@ -105,6 +122,11 @@ export const SidebarContentInfo = () => {
 					/>
 
 					<Accordion
+						title={"Wie zuverlässig sind die Daten?"}
+						content={<p>tbd</p>}
+					/>
+
+					<Accordion
 						title={"Was ist Open Data?"}
 						content={
 							<p>
@@ -118,7 +140,7 @@ export const SidebarContentInfo = () => {
 								Open Data ist heute ein wichtiger Bestandteil im Berliner
 								Verwaltungshandeln und schafft nicht nur Transparenz und
 								Offenheit, sondern ermöglicht auch datenbasierte Tools wie den
-								<span className="italic">Branchenpuls</span>. Auch Akteur:innen
+								<span className="italic"> Branchenpuls</span>. Auch Akteur:innen
 								aus Wirtschaft, Wissenschaft und Zivilgesellschaft profitieren
 								von offenen Daten und veröffentlichen zunehmend selbst offene
 								Daten. Die{" "}
@@ -245,7 +267,7 @@ export const SidebarContentInfo = () => {
 									<BerlinLogo />
 								</a>
 							</div>
-							<div className="-mr-[12px] h-[33px] w-[120px]">
+							<div className="-mr-[12px] h-auto w-auto">
 								<a
 									href="https://www.ibb.de/de/startseite/startseite.html"
 									target="_blank"
