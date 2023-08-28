@@ -244,15 +244,16 @@ export const SidebarContentInfo = () => {
 							</a>
 						</div>
 					</div>
+
 					<div className="flex flex-col gap-[16px]">
 						<div>in Zusammenarbeit mit</div>
 						<div className="flex gap-[16px]">
-							<div className="h-[34px] w-[160px]">
+							<div className="h-[34px] w-[140px]">
 								<a href="https://citylab-berlin.org/de/start/" target="_blank">
 									<CityLabLogo />
 								</a>
 							</div>
-							<div className="-mr-[12px] h-[37px] w-[120px] ">
+							<div className="mr-[12px] h-[20px] w-[100px] ">
 								<a href="https://www.ihk.de/berlin/" target="_blank">
 									<IHKLogo />
 								</a>

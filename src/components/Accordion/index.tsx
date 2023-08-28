@@ -11,7 +11,7 @@ interface AccordionPropType {
 
 export const Accordion: FC<AccordionPropType> = ({
 	title,
-	titleClasses,
+	titleClasses = "",
 	content,
 	active,
 }) => {
