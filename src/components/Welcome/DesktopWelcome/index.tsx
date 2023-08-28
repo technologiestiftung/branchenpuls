@@ -1,5 +1,5 @@
 import {
-	BerlinLogo,
+	BerlinLogoHorizontal,
 	CityLabLogo,
 	IBBLogo,
 	IHKLogo,
@@ -101,9 +101,9 @@ export const DesktopWelcome = ({
 								<IHKLogo />
 							</a>
 						</div>
-						<div className="w-[120px] pl-[26px]">
+						<div className="w-[280px] pl-[26px]">
 							<a href="https://www.berlin.de/rbmskzl/" target="_blank">
-								<BerlinLogo />
+								<BerlinLogoHorizontal />
 							</a>
 						</div>
 						<div className="w-[120px] pl-[21px]">
