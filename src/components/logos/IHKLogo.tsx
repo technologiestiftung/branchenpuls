@@ -7,7 +7,7 @@ export const IHKLogo = () => {
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
-			<g clip-path="url(#clip0_347_316)">
+			<g clipPath="url(#clip0_347_316)">
 				<path
 					d="M40 -0.00146484C42.1494 6.27068 43.3182 12.9977 43.3182 19.9984C43.3182 26.9992 42.1494 33.7264 40 39.9983H79.9847V-0.00146484H40Z"
 					fill="#1E398F"
