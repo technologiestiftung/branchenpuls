@@ -5,7 +5,7 @@ import { Pills, Cross } from "@components/Icons";
 import { Modal } from "@components/Modal";
 
 export interface FilterIndicatorType {
-	activeFiltersList: number[];
+	activeFiltersList: string[];
 }
 
 export const FilterIndicator: FC<FilterIndicatorType> = ({

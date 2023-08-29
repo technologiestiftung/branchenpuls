@@ -21,16 +21,20 @@ import { customTheme, customStyles, getOptionLabel } from "@lib/selectStyles";
 import { calculatePointRadius } from "@lib/calculatePointRadius";
 import { calculateHeatmapOpacity } from "@lib/calculateHeatmapOpacity";
 
-import { ViewStateType, StringSelection } from "@common/interfaces";
+import {
+	ViewStateType,
+	StringSelection,
+	ArraySelection,
+} from "@common/interfaces";
 import { Info } from "@components/Icons";
 
 import { LayerDataType } from "@common/interfaces";
 
-async function getPoints(date) {
+async function getPoints(date: Number[]) {
 	const devMode = process.env.NODE_ENV === "development";
 	let path = `/api/month/?&month=${date[0]}&year=${date[1]}`;
 
-	let fetchConfig = {};
+	let fetchConfig: RequestInit = {};
 	if (devMode) {
 		fetchConfig.cache = "no-store";
 	}
@@ -62,9 +66,9 @@ export interface FilterLayerType {
 	setStoreDataPoints: (d: any) => void;
 	viewState: ViewStateType;
 	searchResult: number[] | null;
-	activeFiltersList: number[];
-	setActiveFiltersList: (x: number[]) => void;
-	optionsDate: number[];
+	activeFiltersList: string[];
+	setActiveFiltersList: (x: string[]) => void;
+	optionsDate: ArraySelection[];
 }
 
 export const FilterLayer: FC<FilterLayerType> = ({
@@ -93,19 +97,24 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [pageLoaded, setPageLoaded] = useState<boolean>(false);
 
 	const [filterValAge, setFilterValAge] = useState<number[]>([0, 100]);
-	const [filterValEmployees, setFilterValEmployees] = useState<object | null>(
+	const [filterValEmployees, setFilterValEmployees] =
+		useState<ArraySelection | null>(null);
+	const [filterBType, setFilterBType] = useState<StringSelection | null>(null);
+	const [filterValBl1, setFilterValBl1] = useState<StringSelection[] | null>(
 		null
 	);
-	const [filterBType, setFilterBType] = useState<object | null>(null);
-	const [filterValBl1, setFilterValBl1] = useState<object | null>(null);
-	const [filterValBl2, setFilterValBl2] = useState<object | null>(null);
-	const [filterValBl3, setFilterValBl3] = useState<object | null>(null);
+	const [filterValBl2, setFilterValBl2] = useState<StringSelection[] | null>(
+		null
+	);
+	const [filterValBl3, setFilterValBl3] = useState<StringSelection[] | null>(
+		null
+	);
 	const [filterMonthOnly, setFilterMonthOnly] = useState<boolean>(false);
 
 	const [loadingFilter, setLoadingFilter] = useState<boolean>(false);
 
 	// @todo set date
-	const [filterValDate, setFilterValDate] = useState<StringSelection | null>(
+	const [filterValDate, setFilterValDate] = useState<ArraySelection | null>(
 		null
 	);
 	const [filterValBezirk, setFilterValBezirk] =
@@ -151,9 +160,9 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
 		const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
 
-		if (navigator.msSaveBlob) {
+		if ("msSaveBlob" in navigator) {
 			// For Internet Explorer and Microsoft Edge
-			navigator.msSaveBlob(blob, "branchenpuls.csv");
+			(navigator as any).msSaveBlob(blob, "branchenpuls.csv");
 		} else {
 			// For other browsers
 			const link = document.createElement("a");
@@ -172,23 +181,32 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	}
 
 	// Sets an array of filter names
+	// useEffect(
+	// 	() => {
+	// 		console.log("filterValBl1", filterValBl1);
+	// 	},
+	// 	// eslint-disable-next-line
+	// 	[filterValBl1]
+	// );
+
+	// Sets an array of filter names
 	useEffect(
 		() => {
 			if (activeLayerId !== layerId) return;
 			const activeFilterNames = [];
 
 			if (filterValDate?.value) {
-				activeFilterNames.push(filterValDate?.label);
+				activeFilterNames.push(String(filterValDate?.label));
 			}
 
 			if (filterValBezirk?.value) {
-				activeFilterNames.push(filterValBezirk.value);
+				activeFilterNames.push(String(filterValBezirk.value));
 			}
 			if (filterValPrognoseraum?.value) {
-				activeFilterNames.push(filterValPrognoseraum.value);
+				activeFilterNames.push(String(filterValPrognoseraum.value));
 			}
 			if (filterValPlanungsraum?.value) {
-				activeFilterNames.push(filterValPlanungsraum.value);
+				activeFilterNames.push(String(filterValPlanungsraum.value));
 			}
 			if (filterValBl1?.length) {
 				filterValBl1.forEach((d) => {
@@ -253,12 +271,14 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			if (storeDataPoints[date]) {
 				dataPoints = storeDataPoints[date];
 			} else {
-				dataPoints = await getPoints(filterValDate?.value);
-				storeDataPoints[date] = dataPoints;
-				setStoreDataPoints(storeDataPoints);
+				if (Array.isArray(filterValDate.value)) {
+					dataPoints = await getPoints(filterValDate?.value);
+					storeDataPoints[date] = dataPoints;
+					setStoreDataPoints(storeDataPoints);
+				}
 			}
-			let dIndexed = {};
-			dataPoints.forEach((d) => {
+			let dIndexed: any = {};
+			dataPoints.forEach((d: any) => {
 				dIndexed[d.id] = d;
 			});
 			setDataPointsIndexed(dIndexed);
@@ -309,7 +329,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		filterValPrognoseraum,
 	]);
 
-	async function getPointInfo(info) {
+	async function getPointInfo(info: any) {
 		const data = await getSinglePointData({
 			filterValAge,
 			filterValEmployees,
@@ -326,11 +346,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			filterPosition: info.object.p,
 		});
 		// the following line is on purpose to reduce fast jumping elements.
+		// @ts-ignore
 		await new Promise((resolve) => setTimeout(() => resolve(), 1000));
 		setPointData(data as BusinessAtPointData);
 	}
 
-	const handleHover = ({ x, y, object }) => {
+	const handleHover = ({ object }: { object: any }): void => {
 		if (object) {
 			document.documentElement.classList.add("hovered"); // Add the 'hovered' class to the html element
 		} else {
@@ -348,8 +369,9 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					data: filteredData,
 					pickable: true,
 					getRadius: calculatePointRadius(viewState.zoom),
+					// @ts-ignore
 					getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
-					getFillColor: layersData[layerId].color, // [86, 189, 102],
+					getFillColor: layersData[layerId]?.color || [0, 0, 0], // [86, 189, 102],
 					opacity: 0.1,
 					onClick: (info) => {
 						setPoinInfoModalOpen(true);
@@ -359,6 +381,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						// transition with a duration of 3000ms
 						opacity: 500,
 					},
+					// @ts-ignore
 					onHover: handleHover,
 				})
 			);
@@ -367,6 +390,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				new HeatmapLayer({
 					id: "heatmapLayer" + layerId,
 					data: filteredData,
+					// @ts-ignore
 					getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
 					getWeight: 5,
 					aggregation: "SUM",
@@ -383,6 +407,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 						data: [{ p: [searchResult[0], searchResult[1]] }],
 						pickable: true,
 						getRadius: calculatePointRadius(viewState.zoom - 2),
+						// @ts-ignore
 						getPosition: (d: number) => [Number(d.p[0]), Number(d.p[1])],
 						getFillColor: [24, 45, 115],
 						opacity: 0.4,
@@ -439,11 +464,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 		setActiveLayerId(null);
 	};
 
-	const onBTypeChange = (d) => {
+	const onBTypeChange = (d: any) => {
 		const checkboxValue = d.target.value;
 		if (checkboxValue == -1) {
 			setFilterBType(null);
 		} else {
+			// @ts-ignore
 			setFilterBType({ value: checkboxValue });
 		}
 	};
@@ -577,10 +603,12 @@ export const FilterLayer: FC<FilterLayerType> = ({
 									onChange={setFilterValEmployees}
 									isClearable={true}
 									isSearchable={false}
+									// @ts-ignore
 									options={getOptionsEmployees()}
 									styles={customStyles}
 									placeholder="z.B. Mittlere Unternehmen"
 									theme={customTheme}
+									// @ts-ignore
 									getOptionLabel={getOptionLabel}
 								/>
 							</div>

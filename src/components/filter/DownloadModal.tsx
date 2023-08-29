@@ -8,7 +8,7 @@ export interface DownloadModalType {
 	downloadModalOpen: boolean;
 	setDownloadModalOpen: (open: boolean) => void;
 	confirmed: () => void;
-	activeFiltersList: number[];
+	activeFiltersList: string[];
 }
 
 export const DownloadModal: FC<DownloadModalType> = ({

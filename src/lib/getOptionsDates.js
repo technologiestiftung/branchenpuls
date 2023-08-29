@@ -22,7 +22,6 @@ export async function getOptionsDates() {
 		} else {
 			res = await fetch("/api/getexistingmonths/?");
 		}
-		console.log(res);
 		if (res.ok) {
 			let data = await res.json();
 			data = data

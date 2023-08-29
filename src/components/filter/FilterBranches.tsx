@@ -10,14 +10,19 @@ import {
 	customFilterOption,
 } from "@lib/selectStyles";
 import { Info } from "@components/Icons";
+import {
+	ViewStateType,
+	StringSelection,
+	ArraySelection,
+} from "@common/interfaces";
 
 export interface FilterBranchesType {
-	filterValBl1: object;
-	setFilterValBl1: (val: object) => void;
-	filterValBl2: object;
-	setFilterValBl2: (val: object) => void;
-	filterValBl3: object;
-	setFilterValBl3: (val: object) => void;
+	filterValBl1: StringSelection[] | null;
+	setFilterValBl1: (val: StringSelection[] | null) => void;
+	filterValBl2: StringSelection[] | null;
+	setFilterValBl2: (val: StringSelection[] | null) => void;
+	filterValBl3: StringSelection[] | null;
+	setFilterValBl3: (val: StringSelection[] | null) => void;
 }
 
 interface DropdownOption {

@@ -6,7 +6,11 @@ import { FilterLayer } from "@components/filter/FilterLayer";
 import { FilterLayerSwitcher } from "@components/filter/FilterLayerSwitcher";
 
 import { getNewLayerData } from "@lib/getNewLayerData.js";
-import { ViewStateType, LayerDataType } from "@common/interfaces";
+import {
+	ViewStateType,
+	LayerDataType,
+	StringSelection,
+} from "@common/interfaces";
 
 export interface SidebarContentFilterType {
 	setDeckLayers: (x: number[]) => void;
@@ -20,9 +24,9 @@ export interface SidebarContentFilterType {
 	setActiveLayerId: (x: string | null) => void;
 	viewState: ViewStateType;
 	searchResult: number[] | null;
-	activeFiltersList: number[];
-	setActiveFiltersList: (x: number[]) => void;
-	optionsDate: any;
+	activeFiltersList: string[];
+	setActiveFiltersList: (x: string[]) => void;
+	optionsDate: StringSelection[];
 }
 
 export const SidebarContentFilter: FC<SidebarContentFilterType> = ({

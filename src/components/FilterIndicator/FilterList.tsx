@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 export interface FilterListType {
-	activeFiltersList: number[];
+	activeFiltersList: string[];
 	badgeClasses: string;
 	hideFirstEntry: boolean;
 }

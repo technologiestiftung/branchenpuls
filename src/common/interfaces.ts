@@ -8,17 +8,26 @@ export interface ViewStateType {
 }
 
 export interface StringSelection {
-	value: string;
+	value: string | number;
 	label: string;
+	id: number;
+	name: string;
+}
+
+export interface ArraySelection {
+	value: any;
+	label: string;
+	id: number;
+	name: number[];
 }
 
 export interface LayerDataType {
 	[key: string]: {
 		id?: string;
-		color?: string;
+		color?: any;
 		colorHex?: string;
 		count?: number;
-		heatmapColor?: string;
+		heatmapColor?: any;
 		heatmap?: boolean;
 	};
 }
