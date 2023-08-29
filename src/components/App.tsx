@@ -15,7 +15,7 @@ import { getNextOrPreviousId } from "@lib/getNextOrPreviousId";
 import { FilterIndicator } from "@components/FilterIndicator";
 import { getOptionsDates } from "@lib/getOptionsDates";
 import { useMatomo } from "@lib/hooks/useMatomo";
-import { LayerDataType, StringSelection } from "@common/interfaces";
+import { LayerDataType, ArraySelection } from "@common/interfaces";
 
 export const App = () => {
 	const [deckLayers, setDeckLayers] = useState<number[]>([]);
@@ -40,7 +40,7 @@ export const App = () => {
 		transitionDuration: 300,
 	});
 	const [activeFiltersList, setActiveFiltersList] = useState<string[]>([]);
-	const [optionsDate, setOptionsDate] = useState<StringSelection[]>([]);
+	const [optionsDate, setOptionsDate] = useState<ArraySelection[]>([]);
 
 	useMatomo();
 
@@ -116,7 +116,6 @@ export const App = () => {
 									deckLayers={deckLayers}
 									layersData={layersData}
 									setLayersData={setLayersData}
-									loading={loading}
 									setLoading={setLoading}
 									setOpen={setSidebarMenuOpen}
 									activeLayerId={activeLayerId}

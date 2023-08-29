@@ -2,6 +2,7 @@ import { FC, useState, useMemo, useEffect, useRef } from "react";
 import { Map, Popup, Marker } from "react-map-gl";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
+// @ts-ignore
 import DeckGL from "@deck.gl/react";
 import mapStyle from "./mapStyle";
 import { MapControls } from "./MapControls";
@@ -66,6 +67,7 @@ export const MapComponent: FC<MapType> = ({
 					<Map
 						reuseMaps
 						mapLib={maplibregl}
+						// @ts-ignore
 						mapStyle={
 							process.env.NODE_ENV == "development"
 								? mapStyle()

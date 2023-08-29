@@ -9,7 +9,7 @@ import { getNewLayerData } from "@lib/getNewLayerData.js";
 import {
 	ViewStateType,
 	LayerDataType,
-	StringSelection,
+	ArraySelection,
 } from "@common/interfaces";
 
 export interface SidebarContentFilterType {
@@ -17,7 +17,6 @@ export interface SidebarContentFilterType {
 	deckLayers: number[];
 	layersData: LayerDataType;
 	setLayersData: (x: LayerDataType) => void;
-	loading: boolean;
 	setLoading: (x: boolean) => void;
 	setOpen: (x: boolean) => void;
 	activeLayerId: string | null;
@@ -26,7 +25,7 @@ export interface SidebarContentFilterType {
 	searchResult: number[] | null;
 	activeFiltersList: string[];
 	setActiveFiltersList: (x: string[]) => void;
-	optionsDate: StringSelection[];
+	optionsDate: ArraySelection[];
 }
 
 export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
@@ -34,7 +33,6 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 	deckLayers,
 	layersData,
 	setLayersData,
-	loading,
 	setLoading,
 	setOpen,
 	activeLayerId,
@@ -47,7 +45,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 }) => {
 	const [storeDataPoints, setStoreDataPoints] = useState({});
 
-	function addNewLayer(layersData) {
+	function addNewLayer(layersData: LayerDataType) {
 		const newLayer = getNewLayerData(layersData);
 		layersData[newLayer.id] = newLayer;
 		layersData = JSON.parse(JSON.stringify(layersData));
@@ -84,31 +82,32 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 				{Object.keys(layersData).map((layerId, i) => {
 					const layer = layersData[layerId];
 					return (
-						<div
-							className={`${layerId === activeLayerId ? "" : "hidden"}`}
-							key={`filterlayer-${layerId}`}
-						>
-							<FilterLayer
-								setDeckLayers={setDeckLayers}
-								deckLayers={deckLayers}
-								layerId={layer.id}
-								layersData={layersData}
-								setLayersData={setLayersData}
-								index={i}
-								loading={loading}
-								setLoading={setLoading}
-								setOpen={setOpen}
-								activeLayerId={activeLayerId}
-								setActiveLayerId={setActiveLayerId}
-								storeDataPoints={storeDataPoints}
-								setStoreDataPoints={setStoreDataPoints}
-								viewState={viewState}
-								searchResult={searchResult}
-								activeFiltersList={activeFiltersList}
-								setActiveFiltersList={setActiveFiltersList}
-								optionsDate={optionsDate}
-							></FilterLayer>
-						</div>
+						layer.id && (
+							<div
+								className={`${layerId === activeLayerId ? "" : "hidden"}`}
+								key={`filterlayer-${layerId}`}
+							>
+								<FilterLayer
+									setDeckLayers={setDeckLayers}
+									deckLayers={deckLayers}
+									layerId={layer.id}
+									layersData={layersData}
+									setLayersData={setLayersData}
+									index={i}
+									setLoading={setLoading}
+									setOpen={setOpen}
+									activeLayerId={activeLayerId}
+									setActiveLayerId={setActiveLayerId}
+									storeDataPoints={storeDataPoints}
+									setStoreDataPoints={setStoreDataPoints}
+									viewState={viewState}
+									searchResult={searchResult}
+									activeFiltersList={activeFiltersList}
+									setActiveFiltersList={setActiveFiltersList}
+									optionsDate={optionsDate}
+								></FilterLayer>
+							</div>
+						)
 					);
 				})}
 			</SidebarBody>

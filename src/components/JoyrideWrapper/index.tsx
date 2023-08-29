@@ -95,6 +95,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 			showSkipButton
 			continuous
 			stepIndex={joyrideIndex}
+			// @ts-ignore
 			scrollToSteps={true}
 			locale={{
 				back: "Zurück",

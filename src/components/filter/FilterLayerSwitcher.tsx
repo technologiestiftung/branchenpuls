@@ -3,7 +3,7 @@ import { LayerDataType } from "@common/interfaces";
 
 export interface FilterLayerSwitcherType {
 	layersData: LayerDataType;
-	activeLayerId: string;
+	activeLayerId: string | null;
 	setActiveLayerId: (val: string) => void;
 	addNewLayer: (val: any) => void;
 }
