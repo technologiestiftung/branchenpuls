@@ -20,6 +20,13 @@ export interface FilterBranchesType {
 	setFilterValBl3: (val: object) => void;
 }
 
+interface DropdownOption {
+	value: number;
+	label: string;
+	id: number;
+	name: string;
+}
+
 export const FilterBranches: FC<FilterBranchesType> = ({
 	filterValBl1,
 	setFilterValBl1,
@@ -31,8 +38,12 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 	const [bl1Disabled, setBl1Disabled] = useState<boolean>(false);
 	const [bl2Disabled, setBl2Disabled] = useState<boolean>(false);
 
-	const [optionsBL2, setOptionsBL2] = useState<number[]>(getOptionsBL2());
-	const [optionsBL3, setOptionsBL3] = useState<number[]>(getOptionsBL3());
+	const [optionsBL2, setOptionsBL2] = useState<DropdownOption[]>(
+		getOptionsBL2()
+	);
+	const [optionsBL3, setOptionsBL3] = useState<DropdownOption[]>(
+		getOptionsBL3()
+	);
 
 	useEffect(() => {
 		setOptionsBL2(getOptionsBL2(filterValBl1));
@@ -43,7 +54,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 	}, [filterValBl1, filterValBl2]);
 
 	useEffect(() => {
-		if (filterValBl3?.length) {
+		if (Array.isArray(filterValBl3) && filterValBl3?.length) {
 			setBl1Disabled(true);
 			setBl2Disabled(true);
 		} else {
@@ -53,7 +64,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 	}, [filterValBl3]);
 
 	useEffect(() => {
-		if (filterValBl2?.length) {
+		if (Array.isArray(filterValBl2) && filterValBl2?.length) {
 			setBl1Disabled(true);
 		} else {
 			setBl1Disabled(false);
@@ -76,6 +87,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					isSearchable={true}
 					isDisabled={bl1Disabled}
 					options={getOptionsBL1()}
+					// @ts-ignore
 					getOptionLabel={getOptionLabel}
 					filterOption={customFilterOption}
 					placeholder="z.B. Gastronomie ID 56"
@@ -102,6 +114,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					isSearchable={true}
 					isDisabled={bl2Disabled}
 					options={optionsBL2}
+					// @ts-ignore
 					getOptionLabel={getOptionLabel}
 					filterOption={customFilterOption}
 					placeholder="z.B. Ausschank ID 5630"
@@ -131,6 +144,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					isClearable={true}
 					isSearchable={true}
 					options={optionsBL3}
+					// @ts-ignore
 					getOptionLabel={getOptionLabel}
 					filterOption={customFilterOption}
 					placeholder="z.B. Bars ID 56303 "
