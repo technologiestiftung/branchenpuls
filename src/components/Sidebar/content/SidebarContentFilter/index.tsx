@@ -6,15 +6,23 @@ import { FilterLayer } from "@components/filter/FilterLayer";
 import { FilterLayerSwitcher } from "@components/filter/FilterLayerSwitcher";
 
 import { getNewLayerData } from "@lib/getNewLayerData.js";
-import { ViewStateType } from "@common/interfaces";
+import { ViewStateType, LayerDataType } from "@common/interfaces";
 
 export interface SidebarContentFilterType {
+	setDeckLayers: (x: number[]) => void;
+	deckLayers: number[];
+	layersData: LayerDataType;
+	setLayersData: (x: LayerDataType) => void;
+	loading: boolean;
+	setLoading: (x: boolean) => void;
+	setOpen: (x: boolean) => void;
+	activeLayerId: string | null;
+	setActiveLayerId: (x: string | null) => void;
 	viewState: ViewStateType;
-	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
+	searchResult: number[] | null;
 	activeFiltersList: number[];
 	setActiveFiltersList: (x: number[]) => void;
 	optionsDate: any;
-	searchResult: number[] | null;
 }
 
 export const SidebarContentFilter: FC<SidebarContentFilterType> = ({

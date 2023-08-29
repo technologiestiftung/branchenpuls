@@ -24,6 +24,8 @@ import { calculateHeatmapOpacity } from "@lib/calculateHeatmapOpacity";
 import { ViewStateType, StringSelection } from "@common/interfaces";
 import { Info } from "@components/Icons";
 
+import { LayerDataType } from "@common/interfaces";
+
 async function getPoints(date) {
 	const devMode = process.env.NODE_ENV === "development";
 	let path = `/api/month/?&month=${date[0]}&year=${date[1]}`;
@@ -48,7 +50,7 @@ async function getPoints(date) {
 export interface FilterLayerType {
 	setDeckLayers: any;
 	deckLayers: any;
-	layersData: any;
+	layersData: LayerDataType;
 	setLayersData: (d: any) => void;
 	layerId: string;
 	index: number;

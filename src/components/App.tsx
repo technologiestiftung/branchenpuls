@@ -15,11 +15,12 @@ import { getNextOrPreviousId } from "@lib/getNextOrPreviousId";
 import { FilterIndicator } from "@components/FilterIndicator";
 import { getOptionsDates } from "@lib/getOptionsDates";
 import { useMatomo } from "@lib/hooks/useMatomo";
+import { LayerDataType } from "@common/interfaces";
 
 export const App = () => {
-	const [deckLayers, setDeckLayers] = useState([]);
+	const [deckLayers, setDeckLayers] = useState<number[]>([]);
 	const [activeLayerId, setActiveLayerId] = useState<string | null>(null);
-	const [layersData, setLayersData] = useState<object>({});
+	const [layersData, setLayersData] = useState<LayerDataType>({});
 	const [sidebarMenuOpen, setSidebarMenuOpen] = useState<boolean>(true);
 	const [mobileHeight, setMobileHeight] = useState<"half" | "full">("half");
 	const [navView, setNavView] = useState<NavView>("filter");
@@ -44,6 +45,7 @@ export const App = () => {
 	useMatomo();
 
 	useEffect(() => {
+		if (activeLayerId === null) return;
 		setLayerColor(layersData[activeLayerId]?.colorHex || "#e5e7eb");
 		setLayerCount(layersData[activeLayerId]?.count || 0);
 		setShowNextLayer(Object.keys(layersData).length > 1);

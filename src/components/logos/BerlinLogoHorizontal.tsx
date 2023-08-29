@@ -8,7 +8,7 @@ export const BerlinLogoHorizontal = () => {
 			xmlns="http://www.w3.org/2000/svg"
 			className="h-full w-full"
 		>
-			<g clip-path="url(#clip0_1_368)">
+			<g clipPath="url(#clip0_1_368)">
 				<path
 					d="M-6.10352e-05 0.0032959V377.949H2267.72V0.0032959H-6.10352e-05ZM1133.85 370.403H7.55993V7.56328H1133.85V370.403ZM1889.76 370.403H1141.41V7.56328H1889.76V370.403ZM2260.16 370.403H1897.33V7.56328H2260.17L2260.16 370.403Z"
 					fill="#1E398F"

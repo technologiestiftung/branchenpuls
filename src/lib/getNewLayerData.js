@@ -49,7 +49,6 @@ export function getNewLayerData(layersData) {
 	const newLayer = {};
 	newLayer.id = generateUUID();
 	newLayer.color = getNewColor(layersData);
-	// newLayer.color = generateRandomColor();
 	newLayer.colorHex = chroma(JSON.parse(JSON.stringify(newLayer.color))).hex();
 	newLayer.heatmapColor = generateHeatmapColor(newLayer.color);
 	newLayer.heatmap = false;

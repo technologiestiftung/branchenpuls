@@ -8,7 +8,7 @@ export const BerlinLogo = () => {
 			xmlns="http://www.w3.org/2000/svg"
 			className="h-full w-full"
 		>
-			<g clip-path="url(#clip0_1_472)">
+			<g clipPath="url(#clip0_1_472)">
 				<path
 					d="M0.0032959 0V755.906H1133.85V0H0.0032959ZM7.56328 7.55999H755.909V370.399H7.56328V7.55999ZM1126.29 748.346H7.56328V377.946H1126.29V748.346ZM1126.29 370.399H763.469V7.55999H1126.29V370.399Z"
 					fill="#1E398F"

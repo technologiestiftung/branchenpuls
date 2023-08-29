@@ -11,3 +11,14 @@ export interface StringSelection {
 	value: string;
 	label: string;
 }
+
+export interface LayerDataType {
+	[key: string]: {
+		id?: string;
+		color?: string;
+		colorHex?: string;
+		count?: number;
+		heatmapColor?: string;
+		heatmap?: boolean;
+	};
+}
