@@ -34,6 +34,7 @@ export const FilterPlaces: FC<FilterPlacesType> = ({
 				onChange={setFilterValBezirk}
 				isClearable={true}
 				isSearchable={true}
+				// @ts-ignore
 				options={getFilterBezirke()}
 				styles={customStyles}
 				placeholder="z.B. Mitte"
@@ -55,6 +56,7 @@ export const FilterPlaces: FC<FilterPlacesType> = ({
 				onChange={setFilterValPrognoseraum}
 				isClearable={true}
 				isSearchable={true}
+				// @ts-ignore
 				options={getPrognoseraum(filterValBezirk?.value)}
 				styles={customStyles}
 				placeholder="z.B. Zentrum"
@@ -73,6 +75,7 @@ export const FilterPlaces: FC<FilterPlacesType> = ({
 				onChange={setFilterValPlanungsraum}
 				isClearable={true}
 				isSearchable={true}
+				// @ts-ignore
 				options={getPlanungsraum(
 					filterValBezirk?.value,
 					filterValPrognoseraum?.value

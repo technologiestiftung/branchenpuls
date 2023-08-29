@@ -1,6 +1,12 @@
 import { FC, useState, useEffect } from "react";
+import { LayerDataType } from "@common/interfaces";
 
-export interface FilterLayerSwitcherType {}
+export interface FilterLayerSwitcherType {
+	layersData: LayerDataType;
+	activeLayerId: string;
+	setActiveLayerId: (val: string) => void;
+	addNewLayer: (val: any) => void;
+}
 
 const colors = {
 	"#00727c": "bg-emerald hover:bg-darker-emerald",
@@ -21,6 +27,7 @@ export const FilterLayerSwitcher: FC<FilterLayerSwitcherType> = ({
 				return (
 					<button
 						className={`mr-1 grid h-12 w-1/3 cursor-pointer items-center rounded text-center text-white ${
+							// @ts-ignore
 							colors[layer.colorHex]
 						} ${
 							layerId !== activeLayerId ? "opacity-40 hover:opacity-100" : ""

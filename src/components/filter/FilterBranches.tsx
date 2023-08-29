@@ -10,11 +10,7 @@ import {
 	customFilterOption,
 } from "@lib/selectStyles";
 import { Info } from "@components/Icons";
-import {
-	ViewStateType,
-	StringSelection,
-	ArraySelection,
-} from "@common/interfaces";
+import { StringSelection } from "@common/interfaces";
 
 export interface FilterBranchesType {
 	filterValBl1: StringSelection[] | null;
@@ -87,6 +83,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 				</p>
 				<Select
 					value={filterValBl1}
+					// @ts-ignore
 					onChange={setFilterValBl1}
 					isClearable={true}
 					isSearchable={true}
@@ -113,6 +110,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 				</p>
 				<Select
 					value={filterValBl2}
+					// @ts-ignore
 					onChange={setFilterValBl2}
 					className={""}
 					isClearable={true}
@@ -144,6 +142,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 				</p>
 				<Select
 					value={filterValBl3}
+					// @ts-ignore
 					onChange={setFilterValBl3}
 					className={""}
 					isClearable={true}
