@@ -181,15 +181,6 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	}
 
 	// Sets an array of filter names
-	// useEffect(
-	// 	() => {
-	// 		console.log("filterValBl1", filterValBl1);
-	// 	},
-	// 	// eslint-disable-next-line
-	// 	[filterValBl1]
-	// );
-
-	// Sets an array of filter names
 	useEffect(
 		() => {
 			if (activeLayerId !== layerId) return;
