@@ -135,7 +135,6 @@ export const App = () => {
 								<SidebarContentSearch
 									viewState={viewState}
 									setViewState={setViewState}
-									searchResult={searchResult}
 									setSearchResult={setSearchResult}
 								/>
 							</span>

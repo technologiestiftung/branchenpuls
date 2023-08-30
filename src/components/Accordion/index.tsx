@@ -3,10 +3,9 @@ import React, { FC, useState, useEffect } from "react";
 
 interface AccordionPropType {
 	title: string;
-	titleClasses: string;
+	titleClasses?: string;
 	content: React.JSX.Element;
 	active?: boolean;
-	extraClassName?: string;
 }
 
 export const Accordion: FC<AccordionPropType> = ({

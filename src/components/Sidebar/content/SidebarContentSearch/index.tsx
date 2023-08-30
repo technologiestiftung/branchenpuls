@@ -8,13 +8,11 @@ export interface SidebarContentSearchType {
 	viewState: ViewStateType;
 	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 	setSearchResult: (center: number[] | null) => void;
-	searchResult: number[] | null;
 }
 
 export const SidebarContentSearch: FC<SidebarContentSearchType> = ({
 	viewState,
 	setViewState,
-	searchResult,
 	setSearchResult,
 }) => {
 	return (
@@ -29,7 +27,6 @@ export const SidebarContentSearch: FC<SidebarContentSearchType> = ({
 					<Search
 						viewState={viewState}
 						setViewState={setViewState}
-						searchResult={searchResult}
 						setSearchResult={setSearchResult}
 					></Search>
 				</div>

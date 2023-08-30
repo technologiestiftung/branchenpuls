@@ -47,6 +47,7 @@ export const useMatomo = (): void => {
 	const pathname = usePathname();
 
 	useEffect(() => {
+		// @ts-ignore
 		const newScript = createImageNoscript(pathname);
 		replaceNewScript(newScript);
 	}, [pathname]);

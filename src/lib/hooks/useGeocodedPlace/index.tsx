@@ -1,18 +1,17 @@
 import useSWR from "swr";
 
 interface RawSearchResultType {
-	id: string;
-	place_name_de: string;
-	geometry: {
-		coordinates: [latitude: number, longitude: number];
-	};
+	osm_id: number;
+	display_name: string;
+	lat: number;
+	lon: number;
 }
 
 export interface SearchResultType {
-	id: string;
+	id: number;
 	name: string;
-	latitude: string;
-	longitude: string;
+	latitude: number;
+	longitude: number;
 }
 
 const mapRawResults = (rawResults: RawSearchResultType[]): SearchResultType[] =>
@@ -31,7 +30,7 @@ const fetchSearch = async (searchTerm: string): Promise<SearchResultType[]> => {
 	if (!res.ok) return [];
 
 	const json = (await res.json()) as { features: RawSearchResultType[] };
-
+	// @ts-ignore
 	return mapRawResults(json);
 };
 
