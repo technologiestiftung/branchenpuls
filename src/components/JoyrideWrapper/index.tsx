@@ -87,7 +87,6 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 		<Joyride
 			callback={handleJoyrideCallback}
 			run={runJoyride}
-			// @ts-ignore
 			steps={steps}
 			showProgress
 			disableScrolling={false}

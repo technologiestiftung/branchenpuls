@@ -55,9 +55,7 @@ export const SidebarWrapper: FC<SidebarWrapperType> = ({
 				setHasScrolled(false);
 			}
 		};
-		// @ts-ignore
 		scrollContainer.addEventListener("scroll", onScroll);
-		// @ts-ignore
 		return () => scrollContainer.removeEventListener("scroll", onScroll);
 	}, [hasScrolled]);
 	const scrolling = hasScrolled ? "scrolling" : "";

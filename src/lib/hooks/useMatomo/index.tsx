@@ -5,7 +5,7 @@ const MATOMO_URL =
 	process.env.NEXT_PUBLIC_MATOMO_URL || "https://piwik.example.com";
 const MATOMO_SITE_ID = process.env.NEXT_PUBLIC_MATOMO_SITE_ID || "1";
 
-const createImageNoscript = (pathname = ""): HTMLElement => {
+const createImageNoscript = (pathname: string | null = ""): HTMLElement => {
 	const newNoscript = document.createElement("noscript");
 	const newParagraph = document.createElement("p");
 	const newImage = document.createElement("img");
@@ -14,7 +14,7 @@ const createImageNoscript = (pathname = ""): HTMLElement => {
 		`${MATOMO_URL}/matomo.php?idsite=${MATOMO_SITE_ID}`,
 		`rec=1`,
 		`action_name=${encodeURIComponent(
-			`pageview/${pathname.replace("/", "") || "splashscreen"}`
+			`pageview/${(pathname ?? "splashscreen").replace("/", "")}`
 		)}`,
 		`url=${encodeURIComponent(`${window.location.origin}${pathname}`)}`,
 		`rand=${Date.now()}`,
@@ -47,7 +47,6 @@ export const useMatomo = (): void => {
 	const pathname = usePathname();
 
 	useEffect(() => {
-		// @ts-ignore
 		const newScript = createImageNoscript(pathname);
 		replaceNewScript(newScript);
 	}, [pathname]);
