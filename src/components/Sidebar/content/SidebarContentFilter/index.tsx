@@ -10,6 +10,7 @@ import {
 	ViewStateType,
 	LayerDataType,
 	ArraySelection,
+	MixedArray,
 } from "@common/interfaces";
 
 export interface SidebarContentFilterType {
@@ -26,6 +27,8 @@ export interface SidebarContentFilterType {
 	activeFiltersList: string[];
 	setActiveFiltersList: (x: string[]) => void;
 	optionsDate: ArraySelection[];
+	allFilter: MixedArray;
+	setAllFilter: (x: MixedArray) => void;
 }
 
 export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
@@ -42,6 +45,8 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 	activeFiltersList,
 	setActiveFiltersList,
 	optionsDate,
+	allFilter,
+	setAllFilter,
 }) => {
 	const [storeDataPoints, setStoreDataPoints] = useState({});
 
@@ -105,6 +110,8 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 									activeFiltersList={activeFiltersList}
 									setActiveFiltersList={setActiveFiltersList}
 									optionsDate={optionsDate}
+									allFilter={allFilter}
+									setAllFilter={setAllFilter}
 								></FilterLayer>
 							</div>
 						)

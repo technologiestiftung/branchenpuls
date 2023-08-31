@@ -25,6 +25,7 @@ import {
 	ViewStateType,
 	StringSelection,
 	ArraySelection,
+	MixedArray,
 } from "@common/interfaces";
 import { Info } from "@components/Icons";
 
@@ -69,6 +70,8 @@ export interface FilterLayerType {
 	activeFiltersList: string[];
 	setActiveFiltersList: (x: string[]) => void;
 	optionsDate: ArraySelection[];
+	allFilter: MixedArray;
+	setAllFilter: (x: MixedArray) => void;
 }
 
 export const FilterLayer: FC<FilterLayerType> = ({
@@ -89,6 +92,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	activeFiltersList,
 	setActiveFiltersList,
 	optionsDate,
+	allFilter,
+	setAllFilter,
 }) => {
 	const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
 	const [dataPoints, setDataPoints] = useState([]);
@@ -298,6 +303,21 @@ export const FilterLayer: FC<FilterLayerType> = ({
 					filterValPlanungsraum,
 					filterValPrognoseraum
 				);
+
+				setAllFilter([
+					dataPointsIndexed,
+					filterValAge,
+					filterValEmployees,
+					filterBType,
+					filterValBl1,
+					filterValBl2,
+					filterValBl3,
+					filterValDate,
+					filterMonthOnly,
+					filterValBezirk,
+					filterValPlanungsraum,
+					filterValPrognoseraum,
+				]);
 
 				setFilteredData(newFilteredData);
 				setLoadingFilter(false);

@@ -31,3 +31,13 @@ export interface LayerDataType {
 		heatmap?: boolean;
 	};
 }
+
+export type MixedArray = (
+	| StringSelection
+	| ArraySelection
+	| null
+	| number
+	| string
+	| boolean
+	| any[]
+)[];

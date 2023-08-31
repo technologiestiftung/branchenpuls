@@ -2,7 +2,7 @@ import React, { Dispatch, FC, SetStateAction } from "react";
 import { MobileNavbar } from "@components/Sidebar/SidebarNav/MobileNavbar";
 import { DesktopNavbar } from "@components/Sidebar/SidebarNav/DesktopNavbar";
 
-export type NavView = "info" | "filter" | "search" | "none";
+export type NavView = "info" | "filter" | "search" | "charts" | "none";
 
 export interface SidebarNavType {
 	navView: NavView;

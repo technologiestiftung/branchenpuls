@@ -6,16 +6,21 @@ import { SidebarWrapper } from "@components/Sidebar/SidebarWrapper";
 import { NavView, SidebarNav } from "@components/Sidebar/SidebarNav";
 import { Welcome } from "@components/Welcome";
 import { SidebarContentInfo } from "@components/Sidebar/content/SidebarContentInfo";
+import { SidebarContentCharts } from "@components/Sidebar/content/SidebarContentCharts";
 import { LoadingIndicator } from "@components/LoadingIndicator";
 import { BranchenPulsButton } from "@components/BranchenPulsButton";
 import { SidebarContentSearch } from "@components/Sidebar/content/SidebarContentSearch";
-import { ViewStateType } from "@common/interfaces";
 import { JoyrideWrapper } from "@components/JoyrideWrapper";
 import { getNextOrPreviousId } from "@lib/getNextOrPreviousId";
 import { FilterIndicator } from "@components/FilterIndicator";
 import { getOptionsDates } from "@lib/getOptionsDates";
 import { useMatomo } from "@lib/hooks/useMatomo";
-import { LayerDataType, ArraySelection } from "@common/interfaces";
+import {
+	LayerDataType,
+	ArraySelection,
+	MixedArray,
+	ViewStateType,
+} from "@common/interfaces";
 
 export const App = () => {
 	const [deckLayers, setDeckLayers] = useState<number[]>([]);
@@ -41,6 +46,7 @@ export const App = () => {
 	});
 	const [activeFiltersList, setActiveFiltersList] = useState<string[]>([]);
 	const [optionsDate, setOptionsDate] = useState<ArraySelection[]>([]);
+	const [allFilter, setAllFilter] = useState<MixedArray>([]);
 
 	useMatomo();
 
@@ -125,7 +131,12 @@ export const App = () => {
 									activeFiltersList={activeFiltersList}
 									setActiveFiltersList={setActiveFiltersList}
 									optionsDate={optionsDate}
+									allFilter={allFilter}
+									setAllFilter={setAllFilter}
 								/>
+							</span>
+							<span className={navView === "charts" ? "" : "hidden"}>
+								<SidebarContentCharts allFilter={allFilter} />
 							</span>
 							<span className={navView === "info" ? "" : "hidden"}>
 								<SidebarContentInfo />

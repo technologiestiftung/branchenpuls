@@ -4,6 +4,7 @@ import {
 	Filter,
 	Info,
 	MagnifyingGlass,
+	BarChart,
 } from "@components/Icons";
 import React from "react";
 import { NavView } from "@components/Sidebar/SidebarNav";
@@ -71,6 +72,22 @@ export const MobileNavbar = ({
 									`}
 							>
 								<Filter />
+							</button>
+						</li>
+
+						<li className="flex grow">
+							<button
+								onClick={() => onNavClick("charts")}
+								title="Statistiken anzeigen/schließen"
+								className={`flex grow justify-center p-[8px]
+										${
+											navView === "charts" && sidebarMenuOpen
+												? "bg-dark-grey text-white hover:bg-white hover:text-dark-grey"
+												: "bg-white text-dark-grey hover:bg-dark-grey hover:text-white"
+										}
+									`}
+							>
+								<BarChart />
 							</button>
 						</li>
 
