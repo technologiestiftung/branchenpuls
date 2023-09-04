@@ -87,31 +87,29 @@ export const DesktopNavbar = ({
 				</nav>
 			</div>
 
-			<div className="fixed bottom-0 hidden sm:block">
-				<div className="flex w-screen justify-center px-[28px] pb-[21px]">
-					<div
-						style={{ backgroundColor: layerColor }}
-						className="flex w-full max-w-[226px] justify-between rounded-[4px] p-[8px] text-dark-grey text-white shadow-lg"
-					>
-						{showNextLayer && (
-							<button
-								title="Vorherige Ansicht"
-								onClick={() => applyPreviousLayer()}
-							>
-								<ChevronLeft />
-							</button>
-						)}
+			<div className="fixed bottom-0 left-2/4 z-40  mx-[28px] mb-[21px] -translate-x-2/4 transform sm:block">
+				<div
+					style={{ backgroundColor: layerColor }}
+					className=" px-[28px mt-[22px] flex w-full max-w-[226px] justify-between rounded-[4px] p-[8px] text-white shadow-lg"
+				>
+					{showNextLayer && (
+						<button
+							title="Vorherige Ansicht"
+							onClick={() => applyPreviousLayer()}
+						>
+							<ChevronLeft />
+						</button>
+					)}
 
-						<p className="w-full text-center text-lg font-medium">
-							{layerCount?.toLocaleString("de-DE")} Unternehmen
-						</p>
+					<p className="w-full text-center text-lg font-medium">
+						{layerCount?.toLocaleString("de-DE")} Unternehmen
+					</p>
 
-						{showNextLayer && (
-							<button title="Nächste Ansicht" onClick={() => applyNextLayer()}>
-								<ChevronRight />
-							</button>
-						)}
-					</div>
+					{showNextLayer && (
+						<button title="Nächste Ansicht" onClick={() => applyNextLayer()}>
+							<ChevronRight />
+						</button>
+					)}
 				</div>
 			</div>
 		</>
