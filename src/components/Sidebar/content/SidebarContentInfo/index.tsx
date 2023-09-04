@@ -123,7 +123,20 @@ export const SidebarContentInfo = () => {
 
 					<Accordion
 						title={"Wie zuverlässig sind die Daten?"}
-						content={<p>tbd</p>}
+						content={
+							<p>
+								Der Datensatz beinhaltet Standort- und Strukturinformationen von
+								den über 350.000 Mitgliedsunternehmen inklusive deren
+								Betriebsstätten der IHK Berlin. Darin enthalten sind neben den
+								Geokoordinaten, auch Angaben zur Branche, Größe und Alter des
+								Unternehmens, wie sie der IHK gemeldet wurden. Aufgrund
+								unregelmäßiger Aktualisierungsintervalle einzelner Daten, können
+								Informationen vereinzelt nicht mehr aktuell sein. Aggregiert
+								geben die Daten dennoch ein zuverlässiges Bild der Berliner
+								Gewerbewirtschaft sowie über die Entwicklung einzelner Branchen
+								und deren Standorte wieder.
+							</p>
+						}
 					/>
 
 					<Accordion

@@ -104,7 +104,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 					<span className="text-xs font-normal">
 						{filterValBl1 ? ` basierend auf Branchentyp` : ""}
 					</span>
-					<button title="Die NACE (Nomenklatur der Wirtschaftstätigkeiten) ist die europäische Klassifikation der Geschäftstätigkeiten von Unternehmen. Sie ist detaillierter als der Branchentyp und zu jeder Klasse existiert eine offizielle Definition (https://nacev2.com/de).">
+					<button title="Der NACE-Code (Nomenklatur der Wirtschaftstätigkeiten) ist die europäische Klassifikation der Geschäftstätigkeiten von Unternehmen. Dieser vierstellige Nummerncode ist detaillierter als der Branchentyp. Zu jeder Klasse existiert eine offizielle Definition.">
 						<Info className="h-4 w-4" />
 					</button>
 				</p>
@@ -136,7 +136,7 @@ export const FilterBranches: FC<FilterBranchesType> = ({
 							? ` basierend auf ${filterValBl2 ? "NACE" : "Branchentyp"}`
 							: ""}
 					</span>
-					<button title="Die IHK ID ist eine Klassifizierung der Geschäftstätigkeiten, die spezifisch von der IHK Berlin für die bei ihr gemeldeten Unternehmen verwendet wird. Sie ist noch detaillierter als der NACE Code.">
+					<button title="Die IHK ID ist die nummerische Klassifizierung der Geschäftstätigkeiten, die spezifisch von der IHK Berlin für die bei ihr gemeldeten Unternehmen verwendet wird. Diese Klassifizierung ist in ihrer maximalen Ausprägung siebenstellig. Sie ist noch detaillierter als der NACE Code.">
 						<Info className="h-4 w-4" />
 					</button>
 				</p>
