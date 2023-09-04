@@ -16,17 +16,15 @@ export const BranchenPulsButton = ({
 	return (
 		<>
 			<div className="fixed top-0 z-10">
-				<div className="flex w-screen justify-center pt-[22px]">
-					<button
-						onClick={() => setShowWelcome(!showWelcome)}
-						onMouseEnter={() => setIsHovering(true)}
-						onMouseLeave={() => setIsHovering(false)}
-						title="Startbildschirm öffnen"
-						className="shadow-lg"
-					>
-						{isHovering ? <BranchenPulsLogoInverted /> : <BranchenPulsLogo />}
-					</button>
-				</div>
+				<button
+					onClick={() => setShowWelcome(!showWelcome)}
+					onMouseEnter={() => setIsHovering(true)}
+					onMouseLeave={() => setIsHovering(false)}
+					title="Startbildschirm öffnen"
+					className="fixed left-2/4 z-40 mt-[22px] -translate-x-2/4 transform shadow-lg"
+				>
+					{isHovering ? <BranchenPulsLogoInverted /> : <BranchenPulsLogo />}
+				</button>
 			</div>
 		</>
 	);
