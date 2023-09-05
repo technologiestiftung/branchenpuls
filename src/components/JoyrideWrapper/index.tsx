@@ -103,7 +103,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 			target: "#joyride-views",
 			title: "Ansichten",
 			content:
-				"Der BranchenPuls bietet die Möglichkeit Daten miteinander zu vergleichen. Dafür können maximal drei Ansichten aktiviert werden. Jede Ansicht beinhaltet dir gleichen Filteroptionen, die jedoch jeweils unterschiedlich eingestellt werden können. So können beispielsweise verschiedenen Branchen gegenübergestellt werden.",
+				"Der BranchenPuls bietet die Möglichkeit Daten miteinander zu vergleichen. Dafür können maximal drei Ansichten aktiviert werden. Jede Ansicht beinhaltet die gleichen Filteroptionen, die jedoch jeweils unterschiedlich eingestellt werden können. So können beispielsweise verschiedene Branchen gegenübergestellt werden.",
 			disableBeacon: true,
 			spotlightPadding: 10,
 			offset: 0,
