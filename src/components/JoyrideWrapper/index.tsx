@@ -48,7 +48,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 			target: "#joyride-marker-center",
 			title: "Gewerbekonzentration in ganz Berlin",
 			content:
-				"Die Punkte auf der Karte repräsentieren die Vetrteilung der Unternehmen in Berlin. Die Heatmap unterstützt dabei, besonders hohe Unternehmenskonzentration auf der Karte ausfindig zu machen.",
+				"Die Punkte auf der Karte repräsentieren die Vetrteilung der Unternehmen in Berlin. Die Heatmap unterstützt dabei, besonders hohe Unternehmenskonzentrationen auf der Karte ausfindig zu machen.",
 			disableBeacon: true,
 			spotlightPadding: 75,
 			offset: 0,
@@ -75,7 +75,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 			target: "#joyride-branch-dropdown",
 			title: "Branchen Filter",
 			content:
-				"Der Datensatz ist in mehrere Branchentypen unterteilt. Jedes Unternehemen ist einer Unternehmen-ID zugeordnet (z.B. Gastronomie = ID 56). Basierend auf dem Branchentyp lassen sich weitere Unterkategorien wie NACE und IHK ID auswählen. Es können mehrere Branchentypen gleichzeitig ausgewählt werden. Außerdem kann nach Branchen im Freitextfeld gesucht werden.",
+				"Der Datensatz ist in mehrere Branchentypen unterteilt. Jedes Unternehemen ist einer Unternehmens-ID zugeordnet (z.B. Gastronomie = ID 56). Basierend auf dem Branchentyp lassen sich weitere Unterkategorien wie NACE und IHK ID auswählen. Es können mehrere Branchentypen gleichzeitig ausgewählt werden. Außerdem kann nach Branchen im Freitextfeld gesucht werden.",
 			disableBeacon: true,
 			spotlightPadding: 10,
 			offset: 0,
@@ -84,7 +84,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 			target: "#joyride-space-dropdown",
 			title: "Räumliche Filter",
 			content:
-				"Die Daten können räumlich gefiltert werden, z.B. nach den 12 Berliner Bezirken. Innerhalb des ausgewählten Bezirks lassen sich detailierte stadtplanerische Raumeinheiten wie der Prognose- und Planungsraum auswahlen.",
+				"Die Daten können räumlich gefiltert werden, z.B. nach den 12 Berliner Bezirken. Innerhalb des ausgewählten Bezirks lassen sich detaillierte stadtplanerische Raumeinheiten wie der Prognose- und Planungsraum auswählen.",
 			disableBeacon: true,
 			spotlightPadding: 10,
 			offset: 0,
