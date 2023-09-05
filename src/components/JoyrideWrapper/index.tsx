@@ -46,7 +46,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 	const steps = [
 		{
 			target: "#joyride-marker-center",
-			title: "Gewerbekonzentration in ganz Berlin",
+			title: "Wo konzentrieren sich Gewerbe in Berlin?",
 			content:
 				"Die Punkte auf der Karte repräsentieren die Vetrteilung der Unternehmen in Berlin. Die Heatmap unterstützt dabei, besonders hohe Unternehmenskonzentrationen auf der Karte ausfindig zu machen.",
 			disableBeacon: true,
@@ -55,7 +55,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 		},
 		{
 			target: hasMobileSize ? "#joyride-counter-mob" : "#joyride-counter",
-			title: "Anzahl der Unternehmen",
+			title: "Wie viele Unternehmen gibt es?",
 			content:
 				"Hier (unten) wird die Zahl der Unternehmen angezeigt, die den gesetzten Filtereinstellungen entsprechen.",
 			disableBeacon: true,
@@ -64,16 +64,16 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 		},
 		{
 			target: "#joyride-timespan-dropdown",
-			title: "Zeitraum",
+			title: "Geh auf Zeitreise",
 			content:
-				"Der im Branchenpuls abgebildete Datensatz wird monatlich aktualisiert. Standardmäßig ist immer der aktuelle Monat ausgewählt. Es können aber auch frühere Monate ausgewählt werden. So wird ein zeitlicher Vergleich der Daten möglich.",
+				"Der im Branchenpuls abgebildete Datensatz wird ab Juli 2023 monatlich aktualisiert. Standardmäßig ist immer der aktuelle Monat ausgewählt. Es können aber auch frühere Monate ausgewählt werden. So wird ein zeitlicher Vergleich der Daten möglich.",
 			disableBeacon: true,
 			spotlightPadding: 10,
 			offset: 0,
 		},
 		{
 			target: "#joyride-branch-dropdown",
-			title: "Branchen Filter",
+			title: "Wähle verschiedende Branchen aus",
 			content:
 				"Der Datensatz ist in mehrere Branchentypen unterteilt. Jedes Unternehmen ist einer Unternehmens-ID zugeordnet (z.B. Gastronomie = ID 56). Basierend auf dem Branchentyp lassen sich weitere Unterkategorien wie NACE und IHK ID auswählen. Es können mehrere Branchentypen gleichzeitig ausgewählt werden. Außerdem kann nach Branchen im Freitextfeld gesucht werden.",
 			disableBeacon: true,
@@ -82,7 +82,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 		},
 		{
 			target: "#joyride-space-dropdown",
-			title: "Räumliche Filter",
+			title: "Erkunde deinen Kiez",
 			content:
 				"Die Daten können räumlich gefiltert werden, z.B. nach den 12 Berliner Bezirken. Innerhalb des ausgewählten Bezirks lassen sich detaillierte stadtplanerische Raumeinheiten wie der Prognose- und Planungsraum auswählen.",
 			disableBeacon: true,
@@ -92,7 +92,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 
 		{
 			target: "#joyride-details-dropdown",
-			title: "Detail Filter",
+			title: "Entdecke die Unternehemensstruktur",
 			content:
 				"Die Detail-Filter beinhalten weitere Informationen zu den Unternehmen und bieten Explorationsmöglichkeiten zu Beschäftigtenzahl, Unternehmensalter und Unternehmenstyp.",
 			disableBeacon: true,
@@ -101,7 +101,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 		},
 		{
 			target: "#joyride-views",
-			title: "Ansichten",
+			title: "Wähle weitere Ansichten",
 			content:
 				"Der BranchenPuls bietet die Möglichkeit Daten miteinander zu vergleichen. Dafür können maximal drei Ansichten aktiviert werden. Jede Ansicht beinhaltet die gleichen Filteroptionen, die jedoch jeweils unterschiedlich eingestellt werden können. So können beispielsweise verschiedene Branchen gegenübergestellt werden.",
 			disableBeacon: true,
@@ -110,7 +110,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 		},
 		{
 			target: "#joyride-csv-download",
-			title: "Download",
+			title: "Lade deine Ergebnisse herunter",
 			content:
 				"Der gefilterte Datensatz kann abschließend als CSV-Datei heruntergeladen werden. Die Daten können dann eigenständig weiterverarbeitet werden.",
 			disableBeacon: true,
@@ -119,7 +119,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 		},
 		{
 			target: hasMobileSize ? "#joyride-search-nav-mob" : "#joyride-search-nav",
-			title: "Suche",
+			title: "Such nach Adressen",
 			content:
 				"Über die Ortssuche können Adressen innerhalb Berlins durchsucht werden. Mit einem Klick auf die ausgewählte Adresse navigiert der Kartenausschnitt zum gewünschten Ort.",
 			disableBeacon: true,
@@ -128,7 +128,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 		},
 		{
 			target: "#joyride-marker-center",
-			title: "Unternehmen",
+			title: "Durchleute die Unternehmensstandorte",
 			content:
 				"Unternehmensstandorte werden durch Punkte auf der Karte visualisiert. Ein Punkt kann entweder ein Unternehmen oder mehrere Unternehmen repräsentieren. Je mehr Unternehmen sich an einem Standort befinden, umso dunkler ist die Punktfarbe. Durch einen Klick auf den Punkt lassen sich alle dort eingetragenen Unternehmen einsehen.",
 			disableBeacon: true,
