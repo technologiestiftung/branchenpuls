@@ -9,7 +9,7 @@ export interface JoyrideWrapper {
 	setShowWelcome: (x: boolean) => void;
 	setViewState: React.Dispatch<React.SetStateAction<ViewStateType>>;
 	setSidebarMenuOpen: (open: boolean) => void;
-	setOpenFilterDropdowns: (x: boolean | null) => void;
+	setOpenFilterDropdowns: (x: boolean) => void;
 }
 
 export const JoyrideWrapper: FC<JoyrideWrapper> = ({
