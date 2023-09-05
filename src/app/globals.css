@@ -23,6 +23,7 @@
 	#__next {
 		font-family: "Clan Book", sans-serif;
 		color: #3b3b3a;
+		overflow: hidden;
 	}
 }
 

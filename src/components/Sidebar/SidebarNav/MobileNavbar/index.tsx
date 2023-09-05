@@ -30,7 +30,7 @@ export const MobileNavbar = ({
 	layerCount,
 }: MobileNavbarProps) => {
 	return (
-		<div className="fixed bottom-0 z-30 block sm:hidden">
+		<div className="counter fixed bottom-0 z-30 block sm:hidden">
 			<div className="flex w-screen flex-col items-center gap-[7px] px-[28px] pb-[21px]">
 				<div
 					style={{ backgroundColor: layerColor }}
@@ -45,7 +45,10 @@ export const MobileNavbar = ({
 						</button>
 					)}
 
-					<p className="w-full text-center text-lg font-bold">
+					<p
+						id="joyride-counter-mob"
+						className="w-full text-center text-lg font-bold"
+					>
 						{layerCount?.toLocaleString("de-DE")}
 					</p>
 
@@ -86,7 +89,9 @@ export const MobileNavbar = ({
 										}
 									`}
 							>
-								<MagnifyingGlass />
+								<span id="joyride-search-nav-mob">
+									<MagnifyingGlass />
+								</span>
 							</button>
 						</li>
 

@@ -21,7 +21,7 @@ export const FilterLayerSwitcher: FC<FilterLayerSwitcherType> = ({
 	addNewLayer,
 }) => {
 	return (
-		<div className="mt-2 flex">
+		<div className="mt-2 flex" id="joyride-views">
 			{Object.keys(layersData).map((layerId, i) => {
 				const layer = layersData[layerId];
 				return (

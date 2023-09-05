@@ -63,7 +63,9 @@ export const DesktopNavbar = ({
 											${sidebarMenuOpen ? "ml-[356px]" : "ml-0"}
 									`}
 							>
-								<MagnifyingGlass />
+								<span id="joyride-search-nav">
+									<MagnifyingGlass />
+								</span>
 							</button>
 						</li>
 
@@ -87,10 +89,13 @@ export const DesktopNavbar = ({
 				</nav>
 			</div>
 
-			<div className="fixed bottom-0 left-2/4 z-40  mx-[28px] mb-[21px] -translate-x-2/4 transform sm:block">
+			<div
+				id="joyride-counter"
+				className="fixed bottom-0 left-2/4 z-40 mx-[28px] mb-[21px]  hidden -translate-x-2/4 transform sm:block sm:block"
+			>
 				<div
 					style={{ backgroundColor: layerColor }}
-					className=" px-[28px mt-[22px] flex w-full max-w-[226px] justify-between rounded-[4px] p-[8px] text-white shadow-lg"
+					className="flex w-full max-w-[226px] justify-between rounded-[4px] p-[8px] text-white shadow-lg"
 				>
 					{showNextLayer && (
 						<button
