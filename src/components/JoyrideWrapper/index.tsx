@@ -92,7 +92,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 
 		{
 			target: "#joyride-details-dropdown",
-			title: "Entdecke die Unternehemensstruktur",
+			title: "Entdecke die Unternehmensstruktur",
 			content:
 				"Die Detail-Filter beinhalten weitere Informationen zu den Unternehmen und bieten Explorationsmöglichkeiten zu Beschäftigtenzahl, Unternehmensalter und Unternehmenstyp.",
 			disableBeacon: true,
