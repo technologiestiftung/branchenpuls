@@ -26,6 +26,7 @@ export interface SidebarContentFilterType {
 	activeFiltersList: string[];
 	setActiveFiltersList: (x: string[]) => void;
 	optionsDate: ArraySelection[];
+	openFilterDropdowns: boolean;
 }
 
 export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
@@ -42,6 +43,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 	activeFiltersList,
 	setActiveFiltersList,
 	optionsDate,
+	openFilterDropdowns,
 }) => {
 	const [storeDataPoints, setStoreDataPoints] = useState({});
 
@@ -105,6 +107,7 @@ export const SidebarContentFilter: FC<SidebarContentFilterType> = ({
 									activeFiltersList={activeFiltersList}
 									setActiveFiltersList={setActiveFiltersList}
 									optionsDate={optionsDate}
+									openFilterDropdowns={openFilterDropdowns}
 								></FilterLayer>
 							</div>
 						)

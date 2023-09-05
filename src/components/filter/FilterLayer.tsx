@@ -69,6 +69,7 @@ export interface FilterLayerType {
 	activeFiltersList: string[];
 	setActiveFiltersList: (x: string[]) => void;
 	optionsDate: ArraySelection[];
+	openFilterDropdowns: boolean;
 }
 
 export const FilterLayer: FC<FilterLayerType> = ({
@@ -89,6 +90,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	activeFiltersList,
 	setActiveFiltersList,
 	optionsDate,
+	openFilterDropdowns,
 }) => {
 	const [dataPointsIndexed, setDataPointsIndexed] = useState([]);
 	const [dataPoints, setDataPoints] = useState([]);
@@ -501,167 +503,179 @@ export const FilterLayer: FC<FilterLayerType> = ({
 				) : (
 					<div className="mt-2 h-[20px]"></div>
 				)}
-				<Accordion
-					title={"Zeitraum"}
-					titleClasses={"!text-base"}
-					active={true}
-					content={
-						<div className="mb-2">
-							<div>
-								<p className="mb-1 font-medium">
-									Datenstand
-									<button title="Der Datensatz wird monatlich aktualisiert und zum Ende jeden Monats seit März 2022 veröffentlicht. Unter Neugründungen werden die seit dem vergangenen Monat neu hinzugekommenden Unternehmen gezählt.">
-										<Info className="ml-2 flex h-4 w-4 items-center" />
-									</button>
-								</p>
-								<Select
-									value={filterValDate}
-									onChange={setFilterValDate}
-									isClearable={false}
-									isSearchable={false}
-									options={optionsDate}
-									theme={customTheme}
-									styles={customStyles}
-								/>
-							</div>
-							<div className="ml-3 pt-2">
-								{/* <p className="mb-1 font-bold">Neugründungen</p> */}
-								<label className="label cursor-pointer px-0">
-									<span className="text-md label-text">
-										Nur Neugründungen anzeigen
-									</span>
-									<input
-										type="checkbox"
-										checked={filterMonthOnly}
-										className="checkbox-primary checkbox text-white"
-										onChange={() => setFilterMonthOnly(!filterMonthOnly)}
-										disabled={
-											filterValDate?.value[0] === 3 &&
-											filterValDate?.value[1] === 2023
-										}
+
+				<span id="joyride-timespan-dropdown">
+					<Accordion
+						title={"Zeitraum"}
+						titleClasses={"!text-base"}
+						active={!openFilterDropdowns ? true : true}
+						content={
+							<div className="mb-2">
+								<div>
+									<p className="mb-1 font-medium">
+										Datenstand
+										<button title="Der Datensatz wird monatlich aktualisiert und zum Ende jeden Monats seit März 2022 veröffentlicht. Unter Neugründungen werden die seit dem vergangenen Monat neu hinzugekommenden Unternehmen gezählt.">
+											<Info className="ml-2 flex h-4 w-4 items-center" />
+										</button>
+									</p>
+									<Select
+										value={filterValDate}
+										onChange={setFilterValDate}
+										isClearable={false}
+										isSearchable={false}
+										options={optionsDate}
+										theme={customTheme}
+										styles={customStyles}
 									/>
-								</label>
+								</div>
+								<div className="ml-3 pt-2">
+									{/* <p className="mb-1 font-bold">Neugründungen</p> */}
+									<label className="label cursor-pointer px-0">
+										<span className="text-md label-text">
+											Nur Neugründungen anzeigen
+										</span>
+										<input
+											type="checkbox"
+											checked={filterMonthOnly}
+											className="checkbox-primary checkbox text-white"
+											onChange={() => setFilterMonthOnly(!filterMonthOnly)}
+											disabled={
+												filterValDate?.value[0] === 3 &&
+												filterValDate?.value[1] === 2023
+											}
+										/>
+									</label>
+								</div>
 							</div>
-						</div>
-					}
-				/>
+						}
+					/>
+				</span>
 
-				<Accordion
-					title={"Branche"}
-					titleClasses={"!text-base"}
-					content={
-						<div className="mb-3">
-							<FilterBranches
-								filterValBl1={filterValBl1}
-								setFilterValBl1={setFilterValBl1}
-								filterValBl2={filterValBl2}
-								setFilterValBl2={setFilterValBl2}
-								filterValBl3={filterValBl3}
-								setFilterValBl3={setFilterValBl3}
-							></FilterBranches>
-						</div>
-					}
-				/>
-				<Accordion
-					title={"Standort"}
-					titleClasses={"!text-base"}
-					content={
-						<FilterPlaces
-							filterValBezirk={filterValBezirk}
-							setFilterValBezirk={setFilterValBezirk}
-							filterValPrognoseraum={filterValPrognoseraum}
-							setFilterValPrognoseraum={setFilterValPrognoseraum}
-							filterValPlanungsraum={filterValPlanungsraum}
-							setFilterValPlanungsraum={setFilterValPlanungsraum}
-						></FilterPlaces>
-					}
-				/>
-
-				<Accordion
-					title={"Unternehmensdetails"}
-					titleClasses={"!text-base"}
-					content={
-						<div>
-							<div className="mb-6">
-								<p className="mb-1 flex items-center gap-2 font-medium">
-									Beschäftigtenzahl
-									<button title="Die Klassen der Beschäftigtenzahl sind angelehnt an die Definition der Europäischen Kommission für Unternehmensgrößen. '0 oder keine Angabe' kann sowohl Selbstständige ohne Mitarbeiter:innen, wie auch eine fehlende Angabe bedeuten.">
-										<Info className="h-4 w-4" />
-									</button>
-								</p>
-								<Select
-									value={filterValEmployees}
-									onChange={setFilterValEmployees}
-									isClearable={true}
-									isSearchable={false}
-									// @ts-ignore
-									options={getOptionsEmployees()}
-									styles={customStyles}
-									placeholder="z.B. Mittlere Unternehmen"
-									theme={customTheme}
-									// @ts-ignore
-									getOptionLabel={getOptionLabel}
-								/>
-							</div>
-
-							<div className="mb-10">
-								<p className="mb-1 mt-3 font-medium">
-									Unternehmensalter in Jahren
-								</p>
-								<RangeSlider
-									value={filterValAge}
-									setValue={setFilterValAge}
-									minValue={0}
-									maxValue={100}
-									step={1}
-								/>
-							</div>
-
+				<span id="joyride-branch-dropdown">
+					<Accordion
+						title={"Branche"}
+						titleClasses={"!text-base"}
+						active={openFilterDropdowns}
+						content={
 							<div className="mb-3">
-								<p className="item-center mb-1 flex gap-2 font-medium">
-									Unternehmenstyp
-									<button title="Kleingewerbetreibende sind aufgrund der geringen Größe und Umfangs ihres Betriebs nicht dazu verpflichtet, sich ins Handelsregister eintragen zu lassen, können sich aber für eine freiwillige Eintragung entscheiden. Entsprechend können auch unter 'Nur Handelsregister' Kleingewerbetreibende vertreten sein. Kaufleute und Handelsgesellschaften müssen sich zwingend im Handelsregister eintragen.">
-										<Info className="h-4 w-4" />
-									</button>
-								</p>
-								<label className="label cursor-pointer px-0  py-1">
-									<span className="text-md label-text">
-										Alle Unternehmenstypen
-									</span>
-									<input
-										type="checkbox"
-										className="checkbox-primary checkbox text-white"
-										checked={filterBType === null}
-										onChange={onBTypeChange}
-										value={-1}
-									/>
-								</label>
-								<label className="label cursor-pointer px-0 py-1">
-									<span className="text-md label-text">Nur Kleingewerbe</span>
-									<input
-										type="checkbox"
-										className="checkbox-primary checkbox text-white"
-										checked={filterBType?.value === "0"}
-										onChange={onBTypeChange}
-										value={0}
-									/>
-								</label>
-								<label className="label cursor-pointer px-0  py-1">
-									<span className="text-md label-text">
-										Nur Handelsregister
-									</span>
-									<input
-										type="checkbox"
-										className="checkbox-primary checkbox text-white"
-										checked={filterBType?.value === "1"}
-										onChange={onBTypeChange}
-										value={1}
-									/>
-								</label>
+								<FilterBranches
+									filterValBl1={filterValBl1}
+									setFilterValBl1={setFilterValBl1}
+									filterValBl2={filterValBl2}
+									setFilterValBl2={setFilterValBl2}
+									filterValBl3={filterValBl3}
+									setFilterValBl3={setFilterValBl3}
+								></FilterBranches>
 							</div>
-						</div>
-					}
-				/>
+						}
+					/>
+				</span>
+
+				<span id="joyride-space-dropdown">
+					<Accordion
+						title={"Standort"}
+						titleClasses={"!text-base"}
+						active={openFilterDropdowns}
+						content={
+							<FilterPlaces
+								filterValBezirk={filterValBezirk}
+								setFilterValBezirk={setFilterValBezirk}
+								filterValPrognoseraum={filterValPrognoseraum}
+								setFilterValPrognoseraum={setFilterValPrognoseraum}
+								filterValPlanungsraum={filterValPlanungsraum}
+								setFilterValPlanungsraum={setFilterValPlanungsraum}
+							></FilterPlaces>
+						}
+					/>
+				</span>
+				<span id="joyride-details-dropdown">
+					<Accordion
+						title={"Unternehmensdetails"}
+						titleClasses={"!text-base"}
+						active={openFilterDropdowns}
+						content={
+							<div>
+								<div className="mb-6">
+									<p className="mb-1 flex items-center gap-2 font-medium">
+										Beschäftigtenzahl
+										<button title="Die Klassen der Beschäftigtenzahl sind angelehnt an die Definition der Europäischen Kommission für Unternehmensgrößen. '0 oder keine Angabe' kann sowohl Selbstständige ohne Mitarbeiter:innen, wie auch eine fehlende Angabe bedeuten.">
+											<Info className="h-4 w-4" />
+										</button>
+									</p>
+									<Select
+										value={filterValEmployees}
+										onChange={setFilterValEmployees}
+										isClearable={true}
+										isSearchable={false}
+										// @ts-ignore
+										options={getOptionsEmployees()}
+										styles={customStyles}
+										placeholder="z.B. Mittlere Unternehmen"
+										theme={customTheme}
+										// @ts-ignore
+										getOptionLabel={getOptionLabel}
+									/>
+								</div>
+
+								<div className="mb-10">
+									<p className="mb-1 mt-3 font-medium">
+										Unternehmensalter in Jahren
+									</p>
+									<RangeSlider
+										value={filterValAge}
+										setValue={setFilterValAge}
+										minValue={0}
+										maxValue={100}
+										step={1}
+									/>
+								</div>
+
+								<div className="mb-3">
+									<p className="item-center mb-1 flex gap-2 font-medium">
+										Unternehmenstyp
+										<button title="Kleingewerbetreibende sind aufgrund der geringen Größe und Umfangs ihres Betriebs nicht dazu verpflichtet, sich ins Handelsregister eintragen zu lassen, können sich aber für eine freiwillige Eintragung entscheiden. Entsprechend können auch unter 'Nur Handelsregister' Kleingewerbetreibende vertreten sein. Kaufleute und Handelsgesellschaften müssen sich zwingend im Handelsregister eintragen.">
+											<Info className="h-4 w-4" />
+										</button>
+									</p>
+									<label className="label cursor-pointer px-0  py-1">
+										<span className="text-md label-text">
+											Alle Unternehmenstypen
+										</span>
+										<input
+											type="checkbox"
+											className="checkbox-primary checkbox text-white"
+											checked={filterBType === null}
+											onChange={onBTypeChange}
+											value={-1}
+										/>
+									</label>
+									<label className="label cursor-pointer px-0 py-1">
+										<span className="text-md label-text">Nur Kleingewerbe</span>
+										<input
+											type="checkbox"
+											className="checkbox-primary checkbox text-white"
+											checked={filterBType?.value === "0"}
+											onChange={onBTypeChange}
+											value={0}
+										/>
+									</label>
+									<label className="label cursor-pointer px-0  py-1">
+										<span className="text-md label-text">
+											Nur Handelsregister
+										</span>
+										<input
+											type="checkbox"
+											className="checkbox-primary checkbox text-white"
+											checked={filterBType?.value === "1"}
+											onChange={onBTypeChange}
+											value={1}
+										/>
+									</label>
+								</div>
+							</div>
+						}
+					/>
+				</span>
 
 				<div className="mb-4 mt-10">
 					{hasMobileSize ? (
@@ -678,6 +692,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 							onClick={() => setDownloadModalOpen(true)}
 							className="btn-primary btn-md btn mr-1 flex-1 font-normal normal-case text-white "
 							// disabled={true}
+							id="joyride-csv-download"
 						>
 							Daten herunterladen
 						</button>

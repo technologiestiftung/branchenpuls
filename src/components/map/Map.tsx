@@ -75,7 +75,11 @@ export const MapComponent: FC<MapType> = ({
 						}
 						styleDiffing={true}
 						attributionControl={false}
-					></Map>
+					>
+						<Marker longitude={13.40474} latitude={52.52053} anchor="bottom">
+							<div id="joyride-marker-center"></div>
+						</Marker>
+					</Map>
 				</DeckGL>
 			</div>
 			<div className="fixed bottom-0 right-0 bg-white/70 text-xs">

@@ -41,6 +41,8 @@ export const App = () => {
 	});
 	const [activeFiltersList, setActiveFiltersList] = useState<string[]>([]);
 	const [optionsDate, setOptionsDate] = useState<ArraySelection[]>([]);
+	const [openFilterDropdowns, setOpenFilterDropdowns] =
+		useState<boolean>(false);
 
 	useMatomo();
 
@@ -77,6 +79,9 @@ export const App = () => {
 						runJoyride={runJoyride}
 						setRunJoyride={setRunJoyride}
 						setShowWelcome={setShowWelcome}
+						setViewState={setViewState}
+						setSidebarMenuOpen={setSidebarMenuOpen}
+						setOpenFilterDropdowns={setOpenFilterDropdowns}
 					/>
 				)}
 				<BranchenPulsButton
@@ -125,6 +130,7 @@ export const App = () => {
 									activeFiltersList={activeFiltersList}
 									setActiveFiltersList={setActiveFiltersList}
 									optionsDate={optionsDate}
+									openFilterDropdowns={openFilterDropdowns}
 								/>
 							</span>
 							<span className={navView === "info" ? "" : "hidden"}>
