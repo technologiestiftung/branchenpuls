@@ -75,7 +75,7 @@ export const JoyrideWrapper: FC<JoyrideWrapper> = ({
 			target: "#joyride-branch-dropdown",
 			title: "Branchen Filter",
 			content:
-				"Der Datensatz ist in mehrere Branchentypen unterteilt. Jedes Unternehemen ist einer Unternehmens-ID zugeordnet (z.B. Gastronomie = ID 56). Basierend auf dem Branchentyp lassen sich weitere Unterkategorien wie NACE und IHK ID auswählen. Es können mehrere Branchentypen gleichzeitig ausgewählt werden. Außerdem kann nach Branchen im Freitextfeld gesucht werden.",
+				"Der Datensatz ist in mehrere Branchentypen unterteilt. Jedes Unternehmen ist einer Unternehmens-ID zugeordnet (z.B. Gastronomie = ID 56). Basierend auf dem Branchentyp lassen sich weitere Unterkategorien wie NACE und IHK ID auswählen. Es können mehrere Branchentypen gleichzeitig ausgewählt werden. Außerdem kann nach Branchen im Freitextfeld gesucht werden.",
 			disableBeacon: true,
 			spotlightPadding: 10,
 			offset: 0,
