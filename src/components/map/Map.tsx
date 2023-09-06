@@ -32,7 +32,7 @@ export const MapComponent: FC<MapType> = ({
 	viewState,
 	setViewState,
 }) => {
-	const [debouncedViewState] = useDebounce(viewState, 10);
+	const [debouncedViewState] = useDebounce(viewState, 5);
 
 	function onViewStateChange(view: any) {
 		const longitude = Math.min(
