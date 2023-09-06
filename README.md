@@ -10,17 +10,13 @@
 
 **This application is a prototype. It may contain errors and small bugs. If you notice something you can report an Issue. Thank you!**
 
-BranchenPuls is based on open data from the Berlin Chamber of Commerce and Industry (IHK Berlin) and contains information about around 350.000 member companies like the business geolocation, the specific business field, founding date or the approximate number of employees. With the help of BranchenPuls you can not only see the business concentration in Berlin but also explore the data set by setting different filters. For example you can filter all companies in a specific business field in a spatial unit like the berlin districts. The data set will be updated monthly starting in july 2023 which allows you to follow the development of Berlins business over time. 
+BranchenPuls is based on open data from the Berlin Chamber of Commerce and Industry (IHK Berlin) and contains information about around 350.000 member companies like the business geolocation, the specific business field, founding date or the approximate number of employees. With the help of BranchenPuls you can not only see the business concentration in Berlin but also explore the data set by setting different filters. For example you can filter all companies in a specific business field in a spatial unit like the berlin districts. The data set will be updated monthly starting in july 2023 which allows you to follow the development of Berlins business over time.
 
 ![screenshot](/public/screenshot.png)
 
 ## Context
 
 This application is based on open data. Open data is an important part of Berlin's administrative activities and on top of creating transparency, enables analysis and applications like this. You can find more open data at the [Berlin Open Data Portal](https://daten.berlin.de). The Berlin Chamber of Commerce and Industry as an important stakeholder in the berlin open data ecosystem and is committed to puplish open data also to convince other stakeholder to open their data as a benefit for everyone. If you are interested to learn more about the activities or if you have any questions you can contact directly the [data management team](https://www.ihk.de/berlin/service-und-beratung/digitalisierung/open-data-5691102).
-
-## Data
-
-You can find the raw data on the [IHK Gewerbedaten Github repo](https://github.com/IHKBerlin/IHKBerlin_Gewerbedaten/tree/master)
 
 ## Tech stack
 
@@ -74,15 +70,23 @@ With the correct Node version, install the dependencies:
 npm install
 ```
 
-Because the map uses a basemap from maptiler (https://www.maptiler.com/), you will need to provide connection details in your environment. In this repository you can find a file `.env.example`. Duplicate this file and name it `.env`.
+Because the map uses a basemap from maptiler (https://www.maptiler.com/) and data via [Supabase](https://www.supabase.com/), you will need to provide connection details in your environment. In this repository you can find a file `.env.example`. Duplicate this file and name it `.env`.
 
-In `.env` you must enter the connection details to the Maptiler style file as suggested in `.env.example`. If you do not know how to obtain the necessary details, please ask a repository maintainer for access. You can also use other basemaps by providing your own style file.
+In `.env` you must enter the connection details suggested in `.env.example`. If you do not know how to obtain the necessary details, please ask a repository maintainer for access. You can also use other basemaps by providing your own style file.
 
 You are now ready to start a local development server on http://localhost:3000 via:
 
 ```bash
 npm run dev
 ```
+
+## Data
+
+You can find the raw data on the [IHK Gewerbedaten Github repo](https://github.com/IHKBerlin/IHKBerlin_Gewerbedaten/tree/master)
+
+## Backend
+
+The data displayed is hosted on [Supabase](https://www.supabase.com/) - a service that allows you to host a PostgreSQL database and query it via an API. More information on how to import the raw data into a PostgreSQL database can be found in this (repository)[https://github.com/technologiestiftung/ihk-db].
 
 ## Workflow
 
@@ -102,7 +106,7 @@ The app is deployed to the cloud with [Netlify](https://www.netlify.com/).
 
 ## Map
 
-The basemap style was created with maptiler (https://www.maptiler.com/). Please note, that you need to update the MAPKEY with your own project's mapkey. You can also use any other basemap by adapting the code in the _src/Map_ folder.
+The basemap style was created with maptiler (https://www.maptiler.com/). Please note, that you need to update the MAPKEY with your own project's mapkey. You can also use any other basemap by adapting the code in the Map component.
 
 ## Page analytics
 
