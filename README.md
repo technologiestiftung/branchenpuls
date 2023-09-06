@@ -10,7 +10,7 @@
 
 **This application is a prototype. It may contain errors and small bugs. If you notice something you can report an Issue. Thank you!**
 
-BranchenPuls is based on open data from the Berlin Chamber of Commerce and Industry and contains information about around 350.000 member companies like the geolocation, the specific business field, founding date or the approximate number of employees. With the help of BranchenPuls you can explore the data set by setting different filters. For example you can filter all companies in a specific business field in a spatial unit like the berlin districts. The data set will be updated monthly starting in july 2023 which allows you to follow the development of Berlins business over time. 
+BranchenPuls is based on open data from the Berlin Chamber of Commerce and Industry (IHK Berlin) and contains information about around 350.000 member companies like the business geolocation, the specific business field, founding date or the approximate number of employees. With the help of BranchenPuls you can not only see the business concentration in Berlin but also explore the data set by setting different filters. For example you can filter all companies in a specific business field in a spatial unit like the berlin districts. The data set will be updated monthly starting in july 2023 which allows you to follow the development of Berlins business over time. 
 
 ![screenshot](/public/screenshot.png)
 
