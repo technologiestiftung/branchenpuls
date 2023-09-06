@@ -20,6 +20,7 @@ import { getOptionsEmployees } from "./dropdownOptions";
 import { customTheme, customStyles, getOptionLabel } from "@lib/selectStyles";
 import { calculatePointRadius } from "@lib/calculatePointRadius";
 import { calculateHeatmapOpacity } from "@lib/calculateHeatmapOpacity";
+import { useDebounce } from "use-debounce";
 
 import {
 	ViewStateType,
@@ -133,6 +134,8 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [downloadModalOpen, setDownloadModalOpen] = useState(false);
 
 	const hasMobileSize = useHasMobileSize();
+
+	const [debouncedViewState] = useDebounce(viewState, 500);
 
 	useEffect(() => {
 		setFilterValDate(optionsDate[optionsDate.length - 1]);
@@ -422,7 +425,13 @@ export const FilterLayer: FC<FilterLayerType> = ({
 			// }
 		}
 		// eslint-disable-next-line
-	}, [filteredData, activeLayerId, viewState, layersData, searchResult]);
+	}, [
+		filteredData,
+		activeLayerId,
+		debouncedViewState,
+		layersData,
+		searchResult,
+	]);
 
 	useEffect(() => {
 		layersData[layerId].count = filteredData.length;
