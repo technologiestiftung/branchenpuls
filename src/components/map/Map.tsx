@@ -7,6 +7,7 @@ import DeckGL from "@deck.gl/react";
 import mapStyle from "./mapStyle";
 import { MapControls } from "./MapControls";
 import { ViewStateType } from "@common/interfaces";
+import { useDebounce } from "use-debounce";
 
 // const MAP_STYLE =
 // 	"https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json";
@@ -31,6 +32,8 @@ export const MapComponent: FC<MapType> = ({
 	viewState,
 	setViewState,
 }) => {
+	const [debouncedViewState] = useDebounce(viewState, 10);
+
 	function onViewStateChange(view: any) {
 		const longitude = Math.min(
 			LONGITUDE_RANGE[1],
@@ -59,7 +62,7 @@ export const MapComponent: FC<MapType> = ({
 			/>
 			<div className="h-screen w-screen">
 				<DeckGL
-					viewState={viewState}
+					viewState={debouncedViewState}
 					layers={deckLayers}
 					onViewStateChange={onViewStateChange}
 					controller={true}
