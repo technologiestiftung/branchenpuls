@@ -10,13 +10,13 @@
 
 **This application is a prototype. It may contain errors and small bugs. If you notice something you can report an Issue. Thank you!**
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat ratione, fuga earum obcaecati consectetur quisquam non architecto accusamus qui exercitationem tenetur. Nihil fugit nobis eius itaque ratione blanditiis sed. Doloribus.
+BranchenPuls is based on open data from the Berlin Chamber of Commerce and Industry and contains information about around 350.000 member companies like the geolocation, the specific business field, founding date or the approximate number of employees. With the help of BranchenPuls you can explore the data set by setting different filters. For example you can filter all companies in a specific business field in a spatial unit like the berlin districts. The data set will be updated monthly starting in july 2023 which allows you to follow the development of Berlins business over time. 
 
 ![screenshot](/public/screenshot.png)
 
 ## Context
 
-This application is based on open data. Open data is an important part of Berlin's administrative activities and on top of creating transparency, enables analysis and applications like this. You can find more open data at the [Berlin Open Data Portal](https://daten.berlin.de).
+This application is based on open data. Open data is an important part of Berlin's administrative activities and on top of creating transparency, enables analysis and applications like this. You can find more open data at the [Berlin Open Data Portal](https://daten.berlin.de). The Berlin Chamber of Commerce and Industry as an important stakeholder in the berlin open data ecosystem and is committed to puplish open data also to convince other stakeholder to open their data as a benefit for everyone. If you are interested to learn more about the activities or if you have any questions you can contact directly the [data management team]([https://daten.berlin.de](https://www.ihk.de/berlin/service-und-beratung/digitalisierung/open-data-5691102))
 
 ## Data
 
