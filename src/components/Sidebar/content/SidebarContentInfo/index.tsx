@@ -128,13 +128,11 @@ export const SidebarContentInfo = () => {
 								Der Datensatz beinhaltet Standort- und Strukturinformationen von
 								den über 350.000 Mitgliedsunternehmen inklusive deren
 								Betriebsstätten der IHK Berlin. Darin enthalten sind neben den
-								Geokoordinaten, auch Angaben zur Branche, Größe und Alter des
-								Unternehmens, wie sie der IHK gemeldet wurden. Aufgrund
+								Geokoordinaten, auch Angaben zur Branche, Beschäftigtengröße und Alter des
+								Unternehmens, wie sie der IHK bei der Anmeldung der Unternehmens gemeldet wurden. Aufgrund
 								unregelmäßiger Aktualisierungsintervalle einzelner Daten, können
-								Informationen vereinzelt nicht mehr aktuell sein. Aggregiert
-								geben die Daten dennoch ein zuverlässiges Bild der Berliner
-								Gewerbewirtschaft sowie über die Entwicklung einzelner Branchen
-								und deren Standorte wieder.
+								Informationen vereinzelt nicht mehr aktuell oder veraltet sein.
+								Die IHK Berlin hat ein FAQ geschrieben, in dem detaillierter auf die Datenqualität eingegangen wird.
 							</p>
 						}
 					/>
