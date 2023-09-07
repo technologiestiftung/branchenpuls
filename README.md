@@ -16,7 +16,7 @@ BranchenPuls is based on open data from the Berlin Chamber of Commerce and Indus
 
 ## Context
 
-This application is based on open data. Open data is an important part of Berlin's administrative activities and on top of creating transparency, enables analysis and applications like this. You can find more open data at the [Berlin Open Data Portal](https://daten.berlin.de). The Berlin Chamber of Commerce and Industry as an important stakeholder in the berlin open data ecosystem and is committed to puplish open data also to convince other stakeholder to open their data as a benefit for everyone. If you are interested to learn more about the activities or if you have any questions you can contact directly the [data management team](https://www.ihk.de/berlin/service-und-beratung/digitalisierung/open-data-5691102).
+This application is based on open data. Open data is an important part of Berlin's administrative activities and on top of creating transparency, enables analysis and applications like this. You can find more open data at the [Berlin Open Data Portal](https://daten.berlin.de). The Berlin Chamber of Commerce and Industry as an important stakeholder in the berlin open data ecosystem and is committed to publish open data also to convince other stakeholder to open their data as a benefit for everyone. If you are interested to learn more about the activities or if you have any questions you can contact directly the [data management team](https://www.ihk.de/berlin/service-und-beratung/digitalisierung/open-data-5691102).
 
 ## Tech stack
 
