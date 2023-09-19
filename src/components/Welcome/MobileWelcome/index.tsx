@@ -36,7 +36,7 @@ export const MobileWelcome = ({
 				<p className="mb-[24px] text-sm font-extralight  text-dark-grey">
 					Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem
 					Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft
-					ein. Exploriere Berlins Gewerbe vom Bezirk bis zum Kiez.
+					ein und explorierst Berlins Gewerbe vom Bezirk bis zum Kiez.
 				</p>
 
 				<div className="flex flex-col font-medium">
