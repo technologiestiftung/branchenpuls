@@ -38,7 +38,7 @@ export const DesktopWelcome = ({
 					Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem
 					Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft
 					ein und explorierst Berlins Gewerbe vom Bezirk bis zum Kiez.
-					Hinweis: Der Branchenpuls ist eine protypische Anwendung in der Beta-Version und wird im Austausch mit interessierten Akteuren stetig weiterentwickelt. 
+					<I>Hinweis: Der Branchenpuls ist eine protypische Anwendung in der Beta-Version und wird im Austausch mit interessierten Akteuren stetig weiterentwickelt.</I> 
 				</p>
 
 				<div className="mt-[24px] flex gap-[8px] font-medium">
