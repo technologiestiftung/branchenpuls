@@ -153,7 +153,7 @@ export const SidebarContentInfo = () => {
 									FAQs
 								</a>{" "}
 								
-								gesammelt, in dem detaillierter auf die Datenqualität eingegangen wird.
+								erstellt, in dem detaillierter auf die Datenqualität eingegangen wird.
 							</p>
 						}
 					/>
