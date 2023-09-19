@@ -17,12 +17,22 @@ export const SidebarContentInfo = () => {
 			<SidebarBody>
 				<div className="">
 					<p className="text-sm text-dark-grey">
-						Berlin ist Hauptstadt, Start-Up-Metropole, Exzellenzcluster, Stadt
-						der Kreativen und vorallem eines: immer im Wandel. Entsprechend
+						Berlin ist Hauptstadt, Startup-Metropole, Exzellenzcluster, Stadt
+						der Kreativen und vor allem eines: immer im Wandel. Entsprechend
 						vielfältig und dynamisch ist auch die Berliner Wirtschaft. Doch in
 						welchen Kiezen konzentrieren sich bestimmte Branchen? Wo dominieren
 						ältere Unternehmen, wo siedeln sich neue an? Wie entwickelt sich die
 						Gewerbelandschaft im Lauf der Zeit?
+						Mit dem Branchenpuls hat die Open Data Informationsstelle Berlin ein prototypisches 
+						Tool entwickelt, dass eine Erkundung und Filterung von Strukturdaten von Berliner 
+						Unternehmen zum Beispiel nach Standort, Branche oder Unternehmensalter ermöglicht.
+						Damit wollen wir dazu beitragen, die Stadt besser zu verstehen und
+						datenbasierte Entscheidungen zu treffen. Gemeinsam mit der IHK Berlin laden wir interessierte 
+						Akteur:innen ein das Tool auszuprobieren sowie über mögliche konkrete Anwendungsfälle
+						und eine gute Weiterentwicklung der Datengrundlage und des Prototypen zu diskutieren.
+						
+
+
 						{/* <br />
 						<br /> */}
 						{/* Der
@@ -64,7 +74,7 @@ export const SidebarContentInfo = () => {
 							<p>
 								Mit dem <span className="italic"> Branchenpuls</span> haben
 								Verwaltung, Wirtschaft, Wissenschaft und Zivilgesellschaft ein
-								Tool zur Hand, um einen tiefen Einblick in die Berliner
+								Tool zur Hand, um perspektivisch einen tiefen Einblick in die Berliner
 								Gewerbelandschaft zu gewinnen, Veränderungen zu erkennen und
 								datenbasierte Analysen durchzuführen.
 								<br /> Das Tool ermöglichst es, sich durch die Filterfunktionen
@@ -98,7 +108,7 @@ export const SidebarContentInfo = () => {
 						content={
 							<p>
 								Die dem Branchenpuls zugrundeliegenden Daten werden von der IHK
-								Berlin seit April 2023 als offene Daten veröffentlicht. Die
+								Berlin seit Juli 2023 als offene Daten veröffentlicht. Die
 								Daten können über das zentrale{" "}
 								<a
 									className="font-medium text-primary"
@@ -130,9 +140,18 @@ export const SidebarContentInfo = () => {
 								Betriebsstätten der IHK Berlin. Darin enthalten sind neben den
 								Geokoordinaten, auch Angaben zur Branche, Beschäftigtengröße und Alter des
 								Unternehmens, wie sie der IHK bei der Anmeldung der Unternehmens gemeldet wurden. Aufgrund
-								unregelmäßiger Aktualisierungsintervalle einzelner Daten, können
+								unregelmäßiger Aktualisierungsintervalle einzelner Daten können
 								Informationen vereinzelt nicht mehr aktuell oder veraltet sein.
-								Die IHK Berlin hat ein FAQ geschrieben, in dem detaillierter auf die Datenqualität eingegangen wird.
+								Die IHK Berlin hat ein 
+								{" "}
+								<a
+									className="font-medium text-primary"
+									href="https://www.ihk.de/berlin/service-und-beratung/digitalisierung/open-data-5691102"
+								>
+									FAQ
+								</a>{" "}
+								
+								geschrieben, in dem detaillierter auf die Datenqualität eingegangen wird.
 							</p>
 						}
 					/>
