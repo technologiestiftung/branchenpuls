@@ -23,6 +23,8 @@ export const SidebarContentInfo = () => {
 						welchen Kiezen konzentrieren sich bestimmte Branchen? Wo dominieren
 						ältere Unternehmen, wo siedeln sich neue an? Wie entwickelt sich die
 						Gewerbelandschaft im Lauf der Zeit?
+						<br />
+						<br />
 						Mit dem Branchenpuls hat die Open Data Informationsstelle Berlin ein prototypisches 
 						Tool entwickelt, dass eine Erkundung und Filterung von Strukturdaten von Berliner 
 						Unternehmen zum Beispiel nach Standort, Branche oder Unternehmensalter ermöglicht.
@@ -142,16 +144,16 @@ export const SidebarContentInfo = () => {
 								Unternehmens, wie sie der IHK bei der Anmeldung der Unternehmens gemeldet wurden. Aufgrund
 								unregelmäßiger Aktualisierungsintervalle einzelner Daten können
 								Informationen vereinzelt nicht mehr aktuell oder veraltet sein.
-								Die IHK Berlin hat ein 
+								Die IHK Berlin hat einige 
 								{" "}
 								<a
 									className="font-medium text-primary"
 									href="https://www.ihk.de/berlin/service-und-beratung/digitalisierung/open-data-5691102"
 								>
-									FAQ
+									FAQs
 								</a>{" "}
 								
-								geschrieben, in dem detaillierter auf die Datenqualität eingegangen wird.
+								gesammelt, in dem detaillierter auf die Datenqualität eingegangen wird.
 							</p>
 						}
 					/>
