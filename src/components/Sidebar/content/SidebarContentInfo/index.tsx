@@ -30,7 +30,7 @@ export const SidebarContentInfo = () => {
 						Unternehmen zum Beispiel nach Standort, Branche oder Unternehmensalter ermöglicht.
 						Damit wollen wir dazu beitragen, die Stadt besser zu verstehen und
 						datenbasierte Entscheidungen zu treffen. Gemeinsam mit der IHK Berlin laden wir interessierte 
-						Akteur:innen ein das Tool auszuprobieren sowie über mögliche konkrete Anwendungsfälle
+						Akteur:innen ein, das Tool auszuprobieren sowie über mögliche konkrete Anwendungsfälle
 						und eine gute Weiterentwicklung der Datengrundlage und des Prototypen zu diskutieren.
 						
 
