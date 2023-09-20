@@ -41,7 +41,7 @@ export const MobileWelcome = ({
 
 				<p className="mb-[24px] mt-2 text-xs font-extralight italic">
 					Hinweis: Der Branchenpuls befindet sich in der Beta-Version und wird
-					im Austausch mit interessierten Akteur:innen stetig weiterentwickelt.
+					im Austausch mit interessierten Akteur:innen weiterentwickelt.
 				</p>
 
 				<div className="flex flex-col font-medium">
