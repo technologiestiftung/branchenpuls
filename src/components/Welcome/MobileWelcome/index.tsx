@@ -33,10 +33,15 @@ export const MobileWelcome = ({
 					Willkommen am Puls der Berliner Wirtschaft
 				</h1>
 
-				<p className="mb-[24px] text-sm font-extralight  text-dark-grey">
+				<p className="text-sm font-extralight  text-dark-grey">
 					Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem
 					Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft
 					ein und explorierst Berlins Gewerbe vom Bezirk bis zum Kiez.
+				</p>
+
+				<p className="mb-[24px] mt-2 text-xs font-extralight italic">
+					Hinweis: Der Branchenpuls befindet sich in der Beta-Version und wird
+					im Austausch mit interessierten Akteur:innen stetig weiterentwickelt.
 				</p>
 
 				<div className="flex flex-col font-medium">

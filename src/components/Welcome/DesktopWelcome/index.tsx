@@ -22,7 +22,7 @@ export const DesktopWelcome = ({
 }: DesktopWelcomeProps) => {
 	return (
 		<div className="hidden h-screen w-screen items-center justify-center py-[18px] sm:flex">
-			<div className="flex h-[465px] w-[754px] flex-col rounded-lg bg-white pl-[48px] pr-[20px] pt-[20px]">
+			<div className="flex h-[465px] w-[780px] flex-col rounded-lg bg-white pb-[20px] pl-[48px] pr-[20px] pt-[20px]">
 				<button
 					onClick={() => setShowWelcome(false)}
 					className="flex w-full justify-end text-dark-grey"
@@ -38,11 +38,11 @@ export const DesktopWelcome = ({
 					Berlins Wirtschaft ist so bunt wie die Stadt selbst. Mit dem
 					Branchenpuls tauchst du in die dynamische Berliner Gewerbelandschaft
 					ein und explorierst Berlins Gewerbe vom Bezirk bis zum Kiez.
-					<i>
-						Hinweis: Der Branchenpuls befindet sich in der Beta-Version und wird
-						im Austausch mit interessierten Akteur:innen stetig
-						weiterentwickelt.
-					</i>
+				</p>
+
+				<p className="mt-2 text-xs font-extralight italic">
+					Hinweis: Der Branchenpuls befindet sich in der Beta-Version und wird
+					im Austausch mit interessierten Akteur:innen stetig weiterentwickelt.
 				</p>
 
 				<div className="mt-[24px] flex gap-[8px] font-medium">
