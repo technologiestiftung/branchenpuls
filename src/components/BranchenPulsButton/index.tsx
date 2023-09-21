@@ -1,6 +1,7 @@
 import { BranchenPulsLogo } from "@components/logos/BranchenPulsLogo";
 import { Dispatch, SetStateAction, useState } from "react";
 import { BranchenPulsLogoInverted } from "@components/logos/BranchenPulsLogoInverted";
+import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
 
 export type BranchenPulsButton = {
 	showWelcome: boolean;
@@ -12,6 +13,7 @@ export const BranchenPulsButton = ({
 	setShowWelcome,
 }: BranchenPulsButton) => {
 	const [isHovering, setIsHovering] = useState(false);
+	const hasMobileSize = useHasMobileSize();
 
 	return (
 		<>
@@ -21,7 +23,9 @@ export const BranchenPulsButton = ({
 					onMouseEnter={() => setIsHovering(true)}
 					onMouseLeave={() => setIsHovering(false)}
 					title="Startbildschirm öffnen"
-					className="fixed right-3 z-40 mt-[22px] shadow-lg"
+					className={`fixed right-3 z-40 mt-[22px] shadow-lg ${
+						hasMobileSize ? "left-2/4 -translate-x-2/4 transform" : ""
+					}`}
 				>
 					{isHovering ? <BranchenPulsLogoInverted /> : <BranchenPulsLogo />}
 				</button>

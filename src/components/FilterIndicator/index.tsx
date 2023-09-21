@@ -42,7 +42,7 @@ export const FilterIndicator: FC<FilterIndicatorType> = ({
 				}}
 				open={hasMobileSize && showMobileFilter}
 			>
-				<div className="max-h-[50vh] overflow-scroll">
+				<div className="max-h-[50vh] overflow-auto">
 					<FilterList
 						activeFiltersList={activeFiltersList}
 						badgeClasses=""
