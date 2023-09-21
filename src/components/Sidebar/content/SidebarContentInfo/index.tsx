@@ -124,7 +124,7 @@ export const SidebarContentInfo = () => {
 								Datenmanagement bei der{" "}
 								<a
 									className="font-medium text-primary"
-									href="https://www.ihk.de/berlin/berliner-wirtschaft/anzeige-nach-ausgaben/bw-2023-april/bw-2023-04-fokus-wer-teilt-gewinnt-5770438"
+									href="https://www.ihk.de/berlin/service-und-beratung/digitalisierung/opendata-branchenpuls?shortUrl=%2Fbranchenpuls"
 								>
 									IHK Berlin
 								</a>
@@ -148,7 +148,7 @@ export const SidebarContentInfo = () => {
 								{" "}
 								<a
 									className="font-medium text-primary"
-									href="https://www.ihk.de/berlin/service-und-beratung/digitalisierung/open-data-5691102"
+									href="https://www.ihk.de/berlin/service-und-beratung/digitalisierung/faqs-gewerbedatensatz-5927056"
 								>
 									FAQs
 								</a>{" "}
