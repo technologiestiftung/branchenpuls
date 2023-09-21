@@ -39,6 +39,11 @@ export const metadata = {
 		locale: "de_DE",
 		type: "website",
 	},
+	viewport: {
+		width: "device-width",
+		initialScale: 1,
+		maximumScale: 1,
+	},
 };
 
 export default function RootLayout({
