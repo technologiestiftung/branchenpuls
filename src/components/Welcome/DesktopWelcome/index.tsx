@@ -41,7 +41,7 @@ export const DesktopWelcome = ({
 				</p>
 
 				<p className="mt-2 text-xs font-extralight italic">
-					Hinweis: Der Branchenpuls befindet sich in der Beta-Version und wird
+					Hinweis: Der Branchenpuls ist ein erster Prototyp und wird
 					im Austausch mit interessierten Akteur:innen weiterentwickelt.
 				</p>
 
