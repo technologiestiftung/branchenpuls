@@ -1,8 +1,8 @@
 import { FC, useState } from "react";
 import { FilterList } from "@components/FilterIndicator/FilterList";
 import { useHasMobileSize } from "@lib/hooks/useHasMobileSize";
-import { Pills, Cross } from "@components/Icons";
-import { Modal } from "@components/Modal";
+// import { Pills } from "@components/Icons";
+// import { Modal } from "@components/Modal";
 
 export interface FilterIndicatorType {
 	activeFiltersList: string[];
@@ -12,7 +12,7 @@ export const FilterIndicator: FC<FilterIndicatorType> = ({
 	activeFiltersList,
 }) => {
 	const hasMobileSize = useHasMobileSize();
-	const [showMobileFilter, setShowMobileFilter] = useState<boolean>(false);
+	// const [showMobileFilter, setShowMobileFilter] = useState<boolean>(false);
 
 	return (
 		<>
@@ -25,7 +25,8 @@ export const FilterIndicator: FC<FilterIndicatorType> = ({
 					></FilterList>
 				</div>
 			)}
-
+			{/* No filter list on mobile */}
+			{/* 
 			{hasMobileSize && activeFiltersList?.length != 1 && (
 				<button
 					onClick={() => setShowMobileFilter(!showMobileFilter)}
@@ -49,7 +50,7 @@ export const FilterIndicator: FC<FilterIndicatorType> = ({
 						hideFirstEntry={true}
 					></FilterList>
 				</div>
-			</Modal>
+			</Modal> */}
 		</>
 	);
 };
