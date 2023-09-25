@@ -95,7 +95,7 @@ export const DesktopNavbar = ({
 			>
 				<div
 					style={{ backgroundColor: layerColor }}
-					className="flex w-full max-w-[226px] justify-between rounded-[4px] p-[8px] text-white shadow-lg"
+					className="flex w-full max-w-[260px] justify-between  p-[4px]"
 				>
 					{showNextLayer && (
 						<button
@@ -106,7 +106,7 @@ export const DesktopNavbar = ({
 						</button>
 					)}
 
-					<p className="w-full text-center text-lg font-medium">
+					<p className="w-full border border-white border-opacity-70 px-4 py-1 text-center text-lg font-medium text-white">
 						{layerCount?.toLocaleString("de-DE")} Unternehmen
 					</p>
 

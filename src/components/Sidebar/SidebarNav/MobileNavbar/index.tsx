@@ -34,7 +34,7 @@ export const MobileNavbar = ({
 			<div className="flex w-screen flex-col items-center gap-[7px] px-[28px] pb-[21px]">
 				<div
 					style={{ backgroundColor: layerColor }}
-					className="flex w-full justify-between rounded-[4px] p-[8px] text-white shadow-lg"
+					className="flex w-full justify-between p-[4px] text-white shadow-lg"
 				>
 					{showNextLayer && (
 						<button
@@ -47,7 +47,7 @@ export const MobileNavbar = ({
 
 					<p
 						id="joyride-counter-mob"
-						className="w-full text-center text-lg font-bold"
+						className="w-full border border-white border-opacity-70 py-1 text-center text-lg font-bold"
 					>
 						{layerCount?.toLocaleString("de-DE")}
 					</p>
