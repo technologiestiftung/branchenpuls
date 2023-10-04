@@ -86,7 +86,7 @@ You can find the raw data on the [IHK Gewerbedaten Github repo](https://github.c
 
 ## Backend
 
-The data displayed is hosted on [Supabase](https://www.supabase.com/) - a service that allows you to host a PostgreSQL database and query it via an API. More information on how to import the raw data into a PostgreSQL database can be found in this [repository](https://github.com/technologiestiftung/ihk-db).
+The data displayed is hosted on [Supabase](https://www.supabase.com/) - a service that allows you to host a PostgreSQL database and query it via an API. More information on how to import the raw data into a PostgreSQL database can be found in this [repository](https://github.com/technologiestiftung/branchenpuls-db).
 
 ## Workflow
 
