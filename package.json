@@ -17,7 +17,7 @@
     "autoprefixer": "10.4.14",
     "chroma-js": "^2.4.2",
     "classnames": "^2.3.2",
-    "daisyui": "^2.51.6",
+    "daisyui": "^4.0.0",
     "deck.gl": "^8.9.15",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
