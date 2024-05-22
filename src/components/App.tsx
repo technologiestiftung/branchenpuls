@@ -66,7 +66,17 @@ export const App = () => {
 	useEffect(() => {
 		(async () => {
 			const data = await getOptionsDates();
-			setOptionsDate(data);
+			const dataSorted = data.sort((a, b) => {
+				const [monthA, yearA] = a.value;
+				const [monthB, yearB] = b.value;
+
+				if (yearA === yearB) {
+					return monthA - monthB;
+				} else {
+					return yearA - yearB;
+				}
+			});
+			setOptionsDate(dataSorted.reverse());
 		})();
 	}, []);
 

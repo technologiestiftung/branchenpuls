@@ -138,7 +138,10 @@ export const FilterLayer: FC<FilterLayerType> = ({
 	const [debouncedViewState] = useDebounce(viewState, 500);
 
 	useEffect(() => {
-		setFilterValDate(optionsDate[optionsDate.length - 1]);
+		// const latestDate = getLatestDate(optionsDate);
+		setFilterValDate(optionsDate[0]);
+
+		// setFilterValDate(latestDate);
 	}, [optionsDate]);
 
 	async function downloadData() {
