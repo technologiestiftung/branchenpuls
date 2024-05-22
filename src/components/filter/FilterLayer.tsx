@@ -552,7 +552,7 @@ export const FilterLayer: FC<FilterLayerType> = ({
 											className="checkbox-primary checkbox text-white"
 											onChange={() => setFilterMonthOnly(!filterMonthOnly)}
 											disabled={
-												filterValDate?.value[0] === 3 &&
+												filterValDate?.value[0] === 7 &&
 												filterValDate?.value[1] === 2023
 											}
 										/>
