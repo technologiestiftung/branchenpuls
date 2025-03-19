@@ -262,10 +262,11 @@ export const FilterLayer: FC<FilterLayerType> = ({
 
 	useEffect(() => {
 		if (!filterValDate) return;
+
 		// load the data for a month. the data includes the coordinates and the ids of the points
 		(async () => {
 			setLoading(true);
-			const date = filterValDate.value[0].toString().replace(",", "");
+			const date = filterValDate.label;
 			let dataPoints;
 			if (storeDataPoints[date]) {
 				dataPoints = storeDataPoints[date];
