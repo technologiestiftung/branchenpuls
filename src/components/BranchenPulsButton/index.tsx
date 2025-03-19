@@ -23,9 +23,10 @@ export const BranchenPulsButton = ({
 					onMouseEnter={() => setIsHovering(true)}
 					onMouseLeave={() => setIsHovering(false)}
 					title="Startbildschirm öffnen"
-					className={`fixed right-3 z-40 mt-[22px] w-max shadow-lg xl:left-2/4 xl:-translate-x-2/4 xl:transform${
-						hasMobileSize ? "left-2/4 -translate-x-2/4 transform" : ""
-					}`}
+					className={`fixed left-2/4 right-3 z-40 mt-[22px] w-max 
+					-translate-x-2/4 transform shadow-lg
+					sm:left-auto sm:translate-x-0 sm:transform-none
+					xl:left-2/4 xl:-translate-x-2/4 xl:transform`}
 				>
 					{isHovering ? <BranchenPulsLogoInverted /> : <BranchenPulsLogo />}
 				</button>

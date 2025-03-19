@@ -17,7 +17,7 @@ export const FilterIndicator: FC<FilterIndicatorType> = ({
 	return (
 		<>
 			{!hasMobileSize && (
-				<div className="pointer-events-none fixed right-3 top-24 flex flex-col flex-wrap-reverse">
+				<div className="pointer-events-none fixed right-3 top-24 flex flex-col flex-wrap-reverse xl:top-6">
 					<FilterList
 						activeFiltersList={activeFiltersList}
 						badgeClasses="shadow-lg"
